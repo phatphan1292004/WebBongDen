@@ -1,3 +1,8 @@
+.navbar-brand img {
+    width: 70px;  /* Thay đổi kích thước theo nhu cầu */
+    height: auto; /* Giữ tỉ lệ chiều cao và chiều rộng */
+}
+
 .shop_grid_product_area {
     font-family: Arial, sans-serif; /* Thay đổi kiểu chữ cho toàn bộ khu vực */
 }
