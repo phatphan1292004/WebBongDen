@@ -1,0 +1,163 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  font-family: Poppins, sans-serif;
+}
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+input,
+select,
+textarea {
+  background-color: transparent;
+  outline: none;
+}
+button {
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+}
+body {
+  min-height: 100vh;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.wrapper .header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
+.wrapper .header .header-top {
+  width: 1340px;
+  background-color: red;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .header-top {
+  background-color: #d0021b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.header .header-left {
+  display: flex;
+  align-items: center;
+}
+.header .header-top .logo {
+  margin-right: 36px;
+}
+
+.header .header-top .menu {
+  background-color: #b00015;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+.header .header-top .menu i {
+  margin-right: 10px;
+}
+.header .header-top .search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 360px;
+  cursor: pointer;
+}
+.header .header-top .search-bar input {
+  border: none;
+  outline: none;
+  padding: 5px;
+}
+.header .header-top .search-bar i {
+  color: #888;
+}
+.header .header-top .info {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.header .header-top .info div {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+.header .header-top .info div i {
+  margin-right: 5px;
+}
+.header .header-top .info .login {
+  background-color: #b00015;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.header .navbar {
+  width: 1340px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.header .navbar .navbar-list {
+  list-style: none;
+  display: flex; 
+  align-items: center; 
+}
+
+.header .navbar .navbar-list li {
+  padding: 14px 26px;
+  font-size: 14px;
+}
+
+.header .navbar .navbar-list li:hover {
+  background-color: red;
+}
+
+
+.navbar {
+  background-color: #f8f9fa; 
+  padding: 10px; 
+  position: relative; 
+}
+
+.navbar-list {
+  list-style: none;
+  margin: 0; 
+  padding: 0; 
+  display: flex; 
+  align-items: center; 
+}
+
+.navbar-list a:hover {
+  background-color: red; 
+  color: #fff; 
+}
+
+.submenu {
+  display: none;
+}
