@@ -45,10 +45,9 @@ window.addEventListener("load", function() {
             }
         }
 
-        positionX = -1 * index * sliderItemWidth; // Cập nhật vị trí slide
+        positionX = -1 * index * sliderItemWidth; 
         sliderMain.style.transform = `translateX(${positionX}px)`;
 
-        // Cập nhật dot
         [...dotItems].forEach((el) => el.classList.remove("active"));
         dotItems[index].classList.add("active");
     }

@@ -30,9 +30,13 @@
               <img src="./img/image.png" alt="Logo" />
             </a>
             <div class="search-bar">
-              <input placeholder="Bạn cần tìm gì?" type="text" />
-              <i class="fas fa-search"></i>
-            </div>
+              <form action="/search" method="GET"> 
+                <input placeholder="Bạn cần tìm gì?" type="text" name="query" />
+                <button type="submit" aria-label="Search">
+                  <i class="fas fa-search"></i>
+                </button>
+              </form>
+            </div>            
           </div>
 
           <div class="header-right">
@@ -209,7 +213,7 @@
             </div>
 
             <div class="box">
-              <i class="fas fa-gem"></i>
+              <i class="fa-solid fa-truck-fast"></i>
               <div class="box-desc">
                 <div class="title">Shipcode toàn quốc</div>
                 <p>Vận chuyển giá rẻ, nhanh chóng, tiết kiệm</p>
@@ -217,7 +221,7 @@
             </div>
 
             <div class="box">
-              <i class="fas fa-gem"></i>
+              <i class="fa-solid fa-wrench"></i>
               <div class="box-desc">
                 <div class="title">Tư vấn mua hàng và lắp đặt 24/7</div>
                 <p>Nhận đặt làm các mẫu theo thiết kế</p>
@@ -225,7 +229,7 @@
             </div>
 
             <div class="box">
-              <i class="fas fa-gem"></i>
+              <i class="fa-solid fa-money-bill-transfer"></i>
               <div class="box-desc">
                 <div class="title">Hoàn trả 100%</div>
                 <p>Một đổi một trong vòng 7 ngày</p>

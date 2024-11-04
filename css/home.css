@@ -53,7 +53,7 @@ ul li {
 
 .wrapper {
   min-height: 100vh;
-  padding-top: 142px;
+  padding-top: 110px;
 }
 
 /* Header */
@@ -96,7 +96,7 @@ ul li {
 .header .header-top .menu i {
   margin-right: 10px;
 }
-.header .header-top .search-bar {
+.header .header-top .search-bar form{
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -149,7 +149,7 @@ ul li {
 
 .header .navbar .navbar-list li > a {
   display: block;
-  padding: 14px 26px;
+  padding: 10px 26px;
   font-size: 14px;
   text-decoration: none;
   text-align: left;
