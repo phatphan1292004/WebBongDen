@@ -5,7 +5,7 @@ window.addEventListener("load", function() {
     const prevBtn = document.querySelector(".slider-left");
     const dotItems = document.querySelectorAll(".slider-dot-item");
     let positionX = 0;
-    const sliderItemWidth = sliderItems[0].offsetWidth;
+    const sliderItemWidth = sliderMain.offsetWidth;
     const sliderLength = sliderItems.length;
     let index = 0;
 
