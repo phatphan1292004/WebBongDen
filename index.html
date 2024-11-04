@@ -1,154 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/home.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trang chủ</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="./css/home.css" />
-</head>
+  <body>
+    <div class="wrapper">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-top">
+          <div class="header-left">
+            <a href="#" class="logo">
+              <img src="./img/image.png" alt="Logo" />
+            </a>
+            <div class="search-bar">
+              <input placeholder="Bạn cần tìm gì?" type="text" />
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
 
-<body>
-  <div class="wrapper">
-    <!-- Header -->
-    <header class="header">
-      <div class="header-top">
-        <div class="header-left">
-          <a href="#" class="logo">
-            <img src="./img/image.png" alt="Logo" />
-          </a>
-          <div class="search-bar">
-            <input placeholder="Bạn cần tìm gì?" type="text" />
-            <i class="fas fa-search"></i>
+          <div class="header-right">
+            <div class="info">
+              <div class="info-item">
+                <i class="fas fa-headphones-alt"></i>
+                <span>Hotline 1900.5301</span>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Giỏ hàng</span>
+              </div>
+              <button class="login">
+                <i class="fas fa-user"></i>
+                <span>Đăng nhập</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="header-right">
-          <div class="info">
-            <div class="info-item">
-              <i class="fas fa-headphones-alt"></i>
-              <span>Hotline 1900.5301</span>
+        <nav class="navbar">
+          <ul class="navbar-list">
+            <li><a href="#">Trang Chủ</a></li>
+            <li class="dropdown">
+              <a href="#"
+                >Danh Mục
+                <i class="fa-solid fa-caret-down"></i>
+              </a>
+              <div class="submenu">
+                <ul>
+                  <li class="category">
+                    <p class="category-header">Đèn chùm</p>
+                    <ul class="category-products">
+                      <li class="category-item">Đèn chùm cổ điển</li>
+                      <li class="category-item">Đèn chùm hiện đại</li>
+                      <li class="category-item">Đèn chùm pha lê</li>
+                      <li class="category-item">Đèn chùm nến</li>
+                    </ul>
+                  </li>
+
+                  <li class="category">
+                    <p class="category-header">Đèn thả</p>
+                    <ul class="category-products">
+                      <li class="category-item">Đèn thả cổ điển</li>
+                      <li class="category-item">Đèn thả hiện đại</li>
+                      <li class="category-item">Đèn thả pha lê</li>
+                      <li class="category-item">Đèn thông tầng</li>
+                    </ul>
+                  </li>
+
+                  <li class="category">
+                    <p class="category-header">Đèn quạt</p>
+                    <ul class="category-products">
+                      <li class="category-item">Đèn quạt cổ điển</li>
+                      <li class="category-item">Đèn quạt hiện đại</li>
+                      <li class="category-item">Đèn quạt pha lê</li>
+                      <li class="category-item">Đèn quạt giấu cánh</li>
+                    </ul>
+                  </li>
+
+                  <li class="category">
+                    <p class="category-header">Đèn quạt</p>
+                    <ul class="category-products">
+                      <li class="category-item">Đèn quạt cổ điển</li>
+                      <li class="category-item">Đèn quạt hiện đại</li>
+                      <li class="category-item">Đèn quạt pha lê</li>
+                      <li class="category-item">Đèn quạt giấu cánh</li>
+                    </ul>
+                  </li>
+
+                  <li class="category">
+                    <p class="category-header">Đèn chùm</p>
+                    <ul class="category-products">
+                      <li class="category-item">Đèn chùm cổ điển</li>
+                      <li class="category-item">Đèn chùm hiện đại</li>
+                      <li class="category-item">Đèn chùm pha lê</li>
+                      <li class="category-item">Đèn chùm nến</li>
+                    </ul>
+                  </li>
+
+                  <li class="category">
+                    <p class="category-header">Đèn thả</p>
+                    <ul class="category-products">
+                      <li class="category-item">Đèn thả cổ điển</li>
+                      <li class="category-item">Đèn thả hiện đại</li>
+                      <li class="category-item">Đèn thả pha lê</li>
+                      <li class="category-item">Đèn thông tầng</li>
+                    </ul>
+                  </li>
+
+                  <li class="category">
+                    <p class="category-header">Đèn quạt</p>
+                    <ul class="category-products">
+                      <li class="category-item">Đèn quạt cổ điển</li>
+                      <li class="category-item">Đèn quạt hiện đại</li>
+                      <li class="category-item">Đèn quạt pha lê</li>
+                      <li class="category-item">Đèn quạt giấu cánh</li>
+                    </ul>
+                  </li>
+
+                  <li class="category">
+                    <p class="category-header">Đèn quạt</p>
+                    <ul class="category-products">
+                      <li class="category-item">Đèn quạt cổ điển</li>
+                      <li class="category-item">Đèn quạt hiện đại</li>
+                      <li class="category-item">Đèn quạt pha lê</li>
+                      <li class="category-item">Đèn quạt giấu cánh</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li><a href="#">Tin Tức</a></li>
+            <li><a href="#">Liên Hệ</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- Slider -->
+      <div class="container">
+        <div class="slider">
+          <i class="fa-solid fa-angle-left slider-left"></i>
+          <ul class="slider-dots">
+            <li class="slider-dot-item"></li>
+            <li class="slider-dot-item"></li>
+            <li class="slider-dot-item"></li>
+            <li class="slider-dot-item"></li>
+          </ul>
+          <div class="slider-main">
+            <div class="slider-item">
+              <img
+                src="https://denhoamy.vn/upload/partner/9303the-gioi-den-nghe-thuat.png"
+                alt=""
+              />
             </div>
-            <div class="info-item">
-              <i class="fas fa-shopping-cart"></i>
-              <span>Giỏ hàng</span>
+
+            <div class="slider-item">
+              <img
+                src="https://denhoamy.vn/upload/partner/3103noi-that-thong-minh.png"
+                alt=""
+              />
             </div>
-            <button class="login">
-              <i class="fas fa-user"></i>
-              <span>Đăng nhập</span>
-            </button>
+
+            <div class="slider-item">
+              <img
+                src="https://denhoamy.vn/upload/partner/2247banner-the-gioi-den-nghe-thuat-va-noi-that-trang-tri.png"
+                alt=""
+              />
+            </div>
+
+            <div class="slider-item">
+              <img
+                src="https://denhoamy.vn/upload/partner/3470benner-the-gioi-den-nghe-thuat-va-noi-that-trang-tri-den-hoa-my-vn-1.png"
+                alt=""
+              />
+            </div>
           </div>
+          <i class="fa-solid fa-angle-right slider-right"></i>
         </div>
       </div>
-
-      <nav class="navbar">
-        <ul class="navbar-list">
-          <li><a href="#">Trang Chủ</a></li>
-          <li class="dropdown">
-            <a href="#">Danh Mục
-              <i class="fa-solid fa-caret-down"></i>
-            </a>
-            <div class="submenu">
-              <ul>
-                <li class="category">
-                  <p class="category-header">Đèn chùm</p>
-                  <ul class="category-products">
-                    <li class="category-item">Đèn chùm cổ điển</li>
-                    <li class="category-item">Đèn chùm hiện đại</li>
-                    <li class="category-item">Đèn chùm pha lê</li>
-                    <li class="category-item">Đèn chùm nến</li>
-                  </ul>
-                </li>
-
-                <li class="category">
-                  <p class="category-header">Đèn thả</p>
-                  <ul class="category-products">
-                    <li class="category-item">Đèn thả cổ điển</li>
-                    <li class="category-item">Đèn thả hiện đại</li>
-                    <li class="category-item">Đèn thả pha lê</li>
-                    <li class="category-item">Đèn thông tầng</li>
-                  </ul>
-                </li>
-
-                <li class="category">
-                  <p class="category-header">Đèn quạt</p>
-                  <ul class="category-products">
-                    <li class="category-item">Đèn quạt cổ điển</li>
-                    <li class="category-item">Đèn quạt hiện đại</li>
-                    <li class="category-item">Đèn quạt pha lê</li>
-                    <li class="category-item">Đèn quạt giấu cánh</li>
-                  </ul>
-                </li>
-
-                <li class="category">
-                  <p class="category-header">Đèn quạt</p>
-                  <ul class="category-products">
-                    <li class="category-item">Đèn quạt cổ điển</li>
-                    <li class="category-item">Đèn quạt hiện đại</li>
-                    <li class="category-item">Đèn quạt pha lê</li>
-                    <li class="category-item">Đèn quạt giấu cánh</li>
-                  </ul>
-                </li>
-                
-                <li class="category">
-                  <p class="category-header">Đèn chùm</p>
-                  <ul class="category-products">
-                    <li class="category-item">Đèn chùm cổ điển</li>
-                    <li class="category-item">Đèn chùm hiện đại</li>
-                    <li class="category-item">Đèn chùm pha lê</li>
-                    <li class="category-item">Đèn chùm nến</li>
-                  </ul>
-                </li>
-
-                <li class="category">
-                  <p class="category-header">Đèn thả</p>
-                  <ul class="category-products">
-                    <li class="category-item">Đèn thả cổ điển</li>
-                    <li class="category-item">Đèn thả hiện đại</li>
-                    <li class="category-item">Đèn thả pha lê</li>
-                    <li class="category-item">Đèn thông tầng</li>
-                  </ul>
-                </li>
-
-                <li class="category">
-                  <p class="category-header">Đèn quạt</p>
-                  <ul class="category-products">
-                    <li class="category-item">Đèn quạt cổ điển</li>
-                    <li class="category-item">Đèn quạt hiện đại</li>
-                    <li class="category-item">Đèn quạt pha lê</li>
-                    <li class="category-item">Đèn quạt giấu cánh</li>
-                  </ul>
-                </li>
-
-                <li class="category">
-                  <p class="category-header">Đèn quạt</p>
-                  <ul class="category-products">
-                    <li class="category-item">Đèn quạt cổ điển</li>
-                    <li class="category-item">Đèn quạt hiện đại</li>
-                    <li class="category-item">Đèn quạt pha lê</li>
-                    <li class="category-item">Đèn quạt giấu cánh</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
-          </li>
-          <li><a href="#">Tin Tức</a></li>
-          <li><a href="#">Liên Hệ</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <!-- Slider -->
-  </div>
-</body>
-
+    </div>
+  </body>
 </html>
