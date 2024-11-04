@@ -221,31 +221,13 @@ ul li {
 /* Slider */
 
 /* Định kiểu cho slider */
-.wrapper .container {
-  height: 1000px;
-  width: 1340px;
-  margin: 0 auto;
-  background-color: skyblue;
-  position: relative; 
-}
-
-.wrapper .container .slider {
+.slider {
   position: relative; 
   width: 900px; 
   height: 470px; 
-}
-
-.wrapper .container .slider-main {
-  height: 100%;
-  background-color: red;
-  overflow: hidden;
-  display: flex;
-}
-
-.wrapper .container .slider-main .slider-item {
-  width: 100%;
-  height: 100%;
-  flex: 1 0 100%;
+  overflow: hidden; 
+  margin: 0 auto; 
+  background-color: skyblue; 
 }
 
 .slider-left,
@@ -255,20 +237,36 @@ ul li {
   transform: translateY(-50%); 
   font-size: 2rem; 
   color: white; 
-  cursor: pointer; 
-  z-index: 10; 
+  cursor: pointer;
+  z-index: 10;
 }
 
-.container .slider-left {
-  left: 10px; 
+.slider-left {
+  left: 10px;
 }
 
-.container .slider-right {
+.slider-right {
   right: 10px; 
 }
 
+.slider-wrapper {
+  width: 100%; 
+  height: 100%;
+}
 
-.container .slider-dots {
+.slider-main {
+  position: relative;
+  display: flex;
+  transition: transform 0.5s ease; 
+}
+
+.slider-item {
+  width: 100%; 
+  height: 100%; 
+  flex: 1 0 100%;
+}
+
+.slider-dots {
   position: absolute;
   bottom: 10px; 
   left: 50%;
@@ -277,13 +275,18 @@ ul li {
   gap: 5px; 
 }
 
-.container .slider-dots .slider-dot-item {
-  width: 5px;
-  height: 5px;
+.slider-dot-item {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
 }
+
+.slider-dot-item.active {
+  background-color: blue; /* Màu cho dot hiện tại */
+}
+
 
 
 
