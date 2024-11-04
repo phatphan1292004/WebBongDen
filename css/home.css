@@ -1,3 +1,14 @@
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-yellow: #ffe31a;
+  --color-yellow-dark: #ffd900;
+  --color-gray-light: #f8f9fa;
+  --color-gray-dark: #ddd;
+  --color-gray-mid: #555;
+  --color-gray-darkest: #333;
+}
+
 *,
 *:before,
 *:after {
@@ -6,8 +17,8 @@
 * {
   margin: 0;
   padding: 0;
-  font: inherit;
-  font-family: Poppins, sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px; 
 }
 img,
 picture,
@@ -33,31 +44,31 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 1;
+  background-color: var(--color-gray-light);
 }
 
+ul li {
+  list-style: none;
+}
+
+/* Header */
 .wrapper .header {
   width: 100%;
   top: 0;
   left: 0;
   position: fixed;
+  background-color: var(--color-black);
 }
 
 .wrapper .header .header-top {
   width: 1340px;
-  background-color: red;
   margin-right: auto;
   margin-left: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.header .header-top {
-  background-color: #d0021b;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
+  background-color: var(--color-black);
+  padding: 20px 0;
 }
 
 .header .header-left {
@@ -69,8 +80,7 @@ body {
 }
 
 .header .header-top .menu {
-  background-color: #b00015;
-  color: white;
+  color: var(--color-white);
   padding: 10px 20px;
   border-radius: 5px;
   margin-right: 20px;
@@ -84,7 +94,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: var(--color-white);
   border-radius: 5px;
   padding: 5px 10px;
   width: 360px;
@@ -96,12 +106,12 @@ body {
   padding: 5px;
 }
 .header .header-top .search-bar i {
-  color: #888;
+  color: #888; /* Bạn có thể thay đổi nếu cần */
 }
 .header .header-top .info {
   display: flex;
   align-items: center;
-  color: white;
+  color: var(--color-white);
 }
 .header .header-top .info div {
   margin-right: 20px;
@@ -112,52 +122,94 @@ body {
   margin-right: 5px;
 }
 .header .header-top .info .login {
-  background-color: #b00015;
+  background-color: var(--color-yellow);
   padding: 10px 20px;
   border-radius: 5px;
 }
 
 .header .navbar {
-  width: 1340px;
-  margin-right: auto;
-  margin-left: auto;
+  background-color: var(--color-yellow);
+  width: 100%;
 }
 
 .header .navbar .navbar-list {
   list-style: none;
   display: flex; 
   align-items: center; 
+  width: 1340px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.header .navbar .navbar-list li {
+.header .navbar .navbar-list li > a {
+  display: block;
   padding: 14px 26px;
   font-size: 14px;
+  text-decoration: none;
+  text-align: left;
+  color: var(--color-black);
+  font-weight: 600;
 }
 
-.header .navbar .navbar-list li:hover {
-  background-color: red;
+.header .navbar .navbar-list > li > a:hover {
+  background-color: var(--color-yellow-dark);
 }
 
-
-.navbar {
-  background-color: #f8f9fa; 
-  padding: 10px; 
-  position: relative; 
+.header .navbar .navbar-list .dropdown:hover .submenu {
+  display: block;
 }
 
-.navbar-list {
-  list-style: none;
-  margin: 0; 
-  padding: 0; 
-  display: flex; 
-  align-items: center; 
-}
-
-.navbar-list a:hover {
-  background-color: red; 
-  color: #fff; 
-}
-
-.submenu {
+.header .navbar .navbar-list .dropdown .submenu {
   display: none;
+  position: absolute;
 }
+
+.header .navbar .navbar-list .dropdown .submenu > ul {
+  width: 1000px;
+  height: 600px;
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  background-color: var(--color-gray-light);
+  padding: 20px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.header .navbar-list .dropdown .submenu > ul .category {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-dark);
+  padding: 15px;
+}
+
+.header .navbar-list .dropdown .category-header {
+  font-size: 16px;
+  padding-bottom: 4px;
+  color: var(--color-black);
+  text-align: left;
+  border-bottom: 1px solid var(--color-gray-dark);
+}
+
+.header .navbar-list .dropdown .category-products {
+  margin-top: 10px;
+  list-style: none;
+  padding-left: 6px;
+}
+
+.header .navbar-list .dropdown .category-item {
+  padding: 8px 6px;
+  font-size: 14px;
+  color: var(--color-gray-mid);
+  text-align: left;
+}
+
+.header .navbar-list .dropdown .category-item:hover {
+  background-color: #f0f0f0;
+  color: var(--color-gray-darkest);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* End Header */
+
+/* Slider */
