@@ -1,0 +1,70 @@
+.shop_grid_product_area {
+    font-family: Arial, sans-serif; /* Thay đổi kiểu chữ cho toàn bộ khu vực */
+}
+
+.product-topbar {
+    font-size: 16px; /* Kích thước font chữ cho thanh sản phẩm */
+    color: #333; /* Màu sắc chữ */
+}
+
+.total-products p {
+    margin: 0; /* Xóa margin để tạo khoảng cách hợp lý */
+    font-weight: bold; /* Làm đậm chữ */
+}
+
+.product-sorting p {
+    margin-right: 10px; /* Thêm khoảng cách giữa các phần tử */
+}
+
+#sortByselect {
+    font-size: 14px; /* Kích thước font chữ cho dropdown */
+    padding: 5px; /* Thêm padding để tạo không gian cho chữ */
+}
+
+.single-product-wrapper .product-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.single-product-wrapper .product-img img {
+    width: 100%;
+    transition: opacity 0.5s ease;
+}
+
+.single-product-wrapper .product-img .hover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.single-product-wrapper .product-img:hover .hover-img {
+    opacity: 1;
+}
+
+.single-product-wrapper .product-img:hover img {
+    opacity: 0;
+}
+.product-badge {
+    background-color: red; /* Đặt màu nền thành màu đỏ */
+    color: white; /* Đặt màu chữ thành trắng để dễ đọc trên nền đỏ */
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 5px 10px;
+    position: absolute;
+    top: 10px; /* Điều chỉnh khoảng cách từ phía trên */
+    left: 10px; /* Điều chỉnh khoảng cách từ bên trái */
+    z-index: 10;
+    border-radius: 3px; /* Tùy chọn, tạo góc bo tròn nhẹ */
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
