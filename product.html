@@ -4,30 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/header-footer.css"> 
-    <link rel="stylesheet" href="./css/reset.css">
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
     href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet"
-  />
+    />
+    <link rel="stylesheet" href="./css/header-footer.css"> 
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/product.css">
 </head>
 <body>
     <div class="wrapper">
         <div id="header"></div>
         <div class="main">
-            <h3>Xin chào, đây là nội dung chính!</h3>
+          <div class="container">
+            <div class="breadcrumb">
+              <a href="index.html">Trang chủ</a>
+              <span class="separator">›</span>
+              <a href="#">Sản phẩm</a>
+              <span class="separator">›</span>
+              <span>ĐÈN CHÙM CỔ ĐIỂN</span>
+            </div>
+
+            <div class="product-info">
+              <div class="left-container">
+                <div class="product-image">
+                  <img src="https://denhoamy.vn/upload/attachment/3433den-chum-trang-tri-noi-that-phong-cach-my-dc03780-01.jpg" alt="">
+                </div>
+
+                <div class="product-detail">
+                  <div class="product-name">
+                    Đèn chùm trang trí nội thất phong cách Mỹ DC03780
+                  </div>
+                  <p class="product-price">
+                    3,000,000 VND
+                  </p>
+
+                  <div class="product-desc">
+                    Đèn chùm trang trí nội thất phong cách Mỹ DC03780 <br>
+                    Không gian lắp đặt: trang trí phòng khách, phòng ngủ, phòng ăn, nhà hàng, quán cafe, văn phòng, khách sạn, ..... <br>
+                    Tình trạng: Mới 100%, Full box <br>
+                    Bóng Led ánh sáng : vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V. <br>
+                    Chất liệu: Hợp kim + gỗ <br>
+                    Mã sản phẩm:  DC03780
+                  </div>
+                </div>
+              </div>
+  
+              <div class="right-container">
+                <div class="category-container">
+                  <div class="category-header">
+                    <i class="fa-solid fa-list"></i>
+                    <h3>Danh mục</h3>
+                  </div>
+                  <ul class="category-list">
+                      <li>
+                          <strong>Đèn Chùm</strong>
+                          <ul class="subcategory-list">
+                              <li>Đèn chùm cổ điển</li>
+                              <li>Đèn chùm hiện đại</li>
+                              <li>Đèn chùm pha lê</li>
+                              <li>Đèn chùm nến</li>
+                          </ul>
+                      </li>
+                      <li>
+                          <strong>Đèn LED</strong>
+                          <ul class="subcategory-list">
+                              <li>Đèn LED âm trần</li>
+                              <li>Đèn LED dây</li>
+                              <li>Đèn LED panel</li>
+                          </ul>
+                      </li>
+                      <li>
+                          <strong>Đèn Tường</strong>
+                          <ul class="subcategory-list">
+                              <li>Đèn tường cổ điển</li>
+                              <li>Đèn tường hiện đại</li>
+                          </ul>
+                      </li>
+                  </ul>
+              </div>
+            </div>
+          </div>
         </div>
-        <footer id="footer"></footer> <!-- Footer sẽ được tải vào đây -->
+    
+        <footer id="footer"></footer> 
     </div>
-    <script type="module" src="./js/script.js"></script> <!-- Liên kết file JavaScript -->
+    <script type="module" src="./js/script.js"></script> 
 </body>
 </html>

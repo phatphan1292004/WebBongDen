@@ -237,7 +237,15 @@
   .wrapper .container {
     width: 1240px;
     margin: 10px auto;
-    display: flex;
     gap: 20px;
   }
   
+  .main .right-container {
+    padding: 10px;
+  }
+
+  .main .right-container .category-header {
+    display: flex;
+    gap: 10px;
+    
+  }
