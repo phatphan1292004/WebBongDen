@@ -86,7 +86,7 @@
     color: #333;
     font-weight: bold;
     margin-bottom: 15px;
-    border-bottom: 2px solid #007bff;
+    
     padding-bottom: 8px;
     padding-top: 20px;
 }
@@ -117,12 +117,12 @@
 }
 
 
-/* Phong cách bộ lọc giá */
-.price .range-price {
-    font-size: 14px;
-    color: #555;
+.slider-range-price {
+    margin: 10px 0;
+}
+.range-price {
+    font-weight: bold;
     margin-top: 10px;
-    font-weight: 500;
 }
 
 .slider-range .ui-slider-range {
@@ -186,6 +186,17 @@
 
 .brands ul li a:hover {
     color: #007bff;
+}
+
+/* Ẩn các sub-menu */
+.sub-menu {
+    display: none;
+    padding-left: 15px;
+}
+
+/* Kiểu cho mục đã mở */
+.category-item.active .sub-menu {
+    display: block;
 }
 
 
