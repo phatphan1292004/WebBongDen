@@ -1,3 +1,11 @@
+/*import google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppíns", sans-serif;
+}
 
 body{
   width: 100%;
@@ -26,36 +34,82 @@ font-weight: 600;
     margin: 0 auto;
     justify-content: space-between;
 }
-.form-content{
-    position:absolute;
+.form_popup{
+    position: absolute;
+    max-width: 320px;
+    width: 100%;
     top: 50%;
     left: 50%;
-    max-width: 600 px;
-    width: 100%;
-    background:  rgb(138, 172, 58);
-    border: 2px solid chocolate;
+    background: #fff;
+    border:  2px solid #fff;
     transform: translate(-50%, -50%);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: rgba(0 ,0 ,0, 0.1);
 
 }
-.form-content h2{
-    text-align: center;
-    margin-bottom: 10px;
-}
-.form-content a:hover{
-    text-decoration: underline;
-    color: aliceblue;
-}
-form button{
-    width: 100%;
-    outline: none;
-    border: none;
-    font-size: 1rem;    
-    font-weight: 500;
-    padding: 14px 0;
-    border-radius:  3px;
-    margin:  25px 0;
-    color: #fff;
+.form_close{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #0b0217;
+    font-size: 22px;
+    opacity: 0.7;
     cursor: pointer;
-    background: #00bcd4;
+}
+.form_popup h2{
+    text-align: center;
+    font-size: 22px;
+    color: #0b0217;
+}
+.input_box{
+    position: relative;
+    margin-top: 30px;
+    width: 100%;
+    height: 40px; 
+}
+.input_box input{
+height: 100%;
+width: 100%;
+outline: none;
+border: none;
+color: #333;
+transition: all 0.2s ease;
+padding: 0 30px;
+border-bottom: 1.5px solid #aaaaaa;
+}
+.input_box input:focus{
+    border-color: #7d2ae8 
+}
+.input_box i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+.input_box  i.email,
+.input_box  i.password{
+left: 0;
+color: #707070;
+}
+.input_box input:focus ~ i.email,
+.input_box input:focus ~ i.password
+{
+    color: #7d2ae8 
+}
+.input_box  i.pw_hide{
+    right: 0;
+    font-size: 18px;
 }
 
+.option_field{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.checkbox{
+    display: flex;
+    column-gap:  8px;
+    white-space: nowrap;
+    font-size: 12px;
+}
