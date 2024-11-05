@@ -72,4 +72,120 @@
     padding: 0;
     margin: 0;
 }
+/* Phong cách chung cho sidebar */
+.shop_sidebar_area {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Phong cách tiêu đề của widget */
+ .widget-title1 {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 8px;
+    padding-top: 20px;
+}
+
+/* Danh mục chính */
+.catagory .catagories-menu ul li a {
+    color: #333;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+    border: none; /* Bỏ đường viền xanh */
+}
+
+.catagory .catagories-menu ul li a:hover {
+    color: #007bff;
+    
+}
+
+.catagory .sub-menu {
+    padding-left: 20px;
+    
+    margin-top: 10px;
+}
+
+/* Hiệu ứng hover cho sub-menu */
+.catagory .sub-menu li a:hover {
+    color: #ff6f61;
+}
+
+
+/* Phong cách bộ lọc giá */
+.price .range-price {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.slider-range .ui-slider-range {
+    background-color: #007bff;
+}
+
+.slider-range .ui-slider-handle {
+    background-color: #007bff;
+    border: 2px solid #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+/* Phong cách màu sắc */
+.color ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 100%;
+    padding: 0;
+    list-style: none;
+}
+
+.color ul li a {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    transition: border 0.3s;
+}
+
+.color ul li a:hover {
+    border: 2px solid #007bff;
+}
+
+/* Màu sắc cho từng ô */
+.color1 { background-color: #ff6347; }
+.color2 { background-color: #ff4500; }
+.color3 { background-color: #ffd700; }
+.color4 { background-color: #32cd32; }
+.color5 { background-color: #1e90ff; }
+.color6 { background-color: #ff69b4; }
+.color7 { background-color: #8a2be2; }
+.color8 { background-color: #4682b4; }
+.color9 { background-color: #d2691e; }
+.color10 { background-color: #dc143c; }
+
+/* Phong cách thương hiệu */
+.brands ul li {
+    margin-bottom: 10px;
+}
+
+.brands ul li a {
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+    text-decoration: none;
+}
+
+.brands ul li a:hover {
+    color: #007bff;
+}
+
 
