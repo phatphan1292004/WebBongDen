@@ -68,3 +68,46 @@
     padding: 10px;
 }
 
+.main .product-info .right-container .category-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #dee2d6;
+    font-weight: 500;
+}
+
+.main .product-info .right-container .category-header p {
+    font-size: 18px;
+}
+
+.category-list>li {
+    padding: 12px 4px;
+    border-bottom: 1px solid #dee2d6;
+}
+
+.cate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subcategory-list {
+    max-height: 0;
+    margin-top: 10px;
+    overflow: hidden;
+    transition: max-height 0.5s ease; /* Thời gian và kiểu của hiệu ứng */
+}
+
+.subcategory-list.show {
+    max-height: 200px; /* Giá trị đủ lớn để bao gồm tất cả các mục, điều chỉnh theo nhu cầu */
+}
+
+.subcategory-list>li {
+    padding: 8px 10px;
+    border-radius: 2px;
+    font-size: 13px;
+}
+
+.subcategory-list>li:hover {
+    background-color: #fafafa;
+}
