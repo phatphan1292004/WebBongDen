@@ -103,13 +103,46 @@ color: #707070;
 }
 
 .option_field{
+    margin-top: 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.form_popup a{
+    color: #7d2ae8;
+    font-size: 12px;
+}
+.form_popup a:hover{
+text-decoration: underline;
+
 }
 .checkbox{
     display: flex;
     column-gap:  8px;
     white-space: nowrap;
     font-size: 12px;
+}
+.checkbox label{
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+    color: #0b0217;
+}
+.form_popup .submit{
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
+    background: #7d2ae8;
+    color: #fff;
+
+}
+.login_signup{
+font-size: 12px;
+text-align: center;
+margin-top: 15px;
+}
+.signup_form{
+    display: none;
 }

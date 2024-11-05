@@ -13,7 +13,7 @@
 <!-- form đăng nhập-->  
 <div class="form_popup">
     <i class="uil uil-times form_close"></i>
-<div class="form login_form">
+        <div class="form login_form">
             <form action="#">
             <h2>Đăng nhập </h2>
                 <div class="input_box">
@@ -30,17 +30,42 @@
                         <input type="checkbox" id = "check">
                         <label for="check">Lưu tài khoản</label>   
                     </span>
+                    <a href="#" class="forgot-pw">Quên mật khẩu?</a>
                 </div>
-                <a href="#" class="forgot-pass">Quên mật khẩu</a>
-                <button type=" summit ">Đăng nhập</button>
-            </form>
-            <div class="bottom_link">
-                Bạn chưa có tài khoản?
-                <a href="#">Đăng kí</a>
+            <button class=" submit ">Đăng nhập</button>
+            <div class="login_signup">
+                            Bạn chưa có tài khoản?
+                            <a href="#">Đăng kí</a>
             </div>
+        </form>
         </div>
-    </div>
+        <!-- form đăng kí   -->
+        <div class="form signup_form">
+            <form action="#">
+            <h2>Đăng kí </h2>
+                <div class="input_box">
+                    <input type="email " placeholder="nhập email" required>
+                    <i class="uil uil-envelope-alt email"></i>
+                </div>
+                <div class="input_box">
+                    <input type="password " placeholder="Tạo mật khẩu" required>
+                    <i class="uil uil-lock password"></i>
+                    <i class="uil uil-eye-slash pw-hide"></i>
+                </div>
+                <div class="input_box">
+                    <input type="password " placeholder="Nhập lại mật khẩu" required>
+                    <i class="uil uil-lock password"></i>
+                    <i class="uil uil-eye-slash pw-hide"></i>
+                </div>
+
+            <button class=" submit ">Đăng kí</button>
+            <div class="login_signup">
+                            Bạn chưa có tài khoản?
+                            <a href="#" id="singup" >Đăng kí</a>
+            </div>
+        </form>
+        </div>
  </div>
- 
+ <script src = "dangnhap.js"></script>
     </body>
 </html>
