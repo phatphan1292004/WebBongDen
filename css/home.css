@@ -171,13 +171,11 @@ ul li {
 }
 
 .header .navbar .navbar-list .dropdown .submenu > ul {
-  width: 1000px;
-  height: 600px;
   display: flex;
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
-  background-color: var(--color-gray-light);
-  padding: 20px;
+  background-color: #fff;
+  padding: 12px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   text-align: left;
 }
@@ -190,16 +188,15 @@ ul li {
 
 .header .navbar-list .dropdown .category-header {
   font-size: 16px;
-  padding-bottom: 4px;
+  font-weight: 500;
   color: var(--color-black);
   text-align: left;
-  border-bottom: 1px solid var(--color-gray-dark);
+  color: red;
 }
 
 .header .navbar-list .dropdown .category-products {
   margin-top: 10px;
   list-style: none;
-  padding-left: 6px;
 }
 
 .header .navbar-list .dropdown .category-item {
@@ -207,6 +204,7 @@ ul li {
   font-size: 14px;
   color: var(--color-gray-mid);
   text-align: left;
+  
 }
 
 .header .navbar-list .dropdown .category-item:hover {
@@ -583,5 +581,9 @@ ul li {
 
 .footer-bottom .social-icon:hover {
   color: var(--color-yellow-dark);
+}
+
+.footer-wrapper {
+  width: 100%;
 }
 
