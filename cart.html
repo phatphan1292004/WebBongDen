@@ -24,7 +24,29 @@
 <body>
     <div class="wrapper">
         <div id="header"></div>
-        <div class="main"></div>
+        <div class="main">
+            <div class="nav">
+                <div class="nav-item" data-tab="cart">Giỏ hàng</div>
+                <div class="nav-item" data-tab="order-info">Thông tin đặt hàng</div>
+                <div class="nav-item" data-tab="payment">Thanh toán</div>
+                <div class="nav-item" data-tab="finish">Hoàn tất</div>
+              </div>
+              
+              <div class="tab-container">
+                  <div class="tab-content" id="cart">
+                    <p>Giỏ hàng</p>
+                  </div>
+                  <div class="tab-content" id="order-info">
+                    <p>Thông tin đặt hàng</p>
+                  </div>
+                  <div class="tab-content" id="payment">
+                    <p>Thanh toán</p>
+                  </div>
+                  <div class="tab-content" id="finish">
+                    <p>Hoàn tất</p>
+                  </div>              
+              </div>
+        </div>
         <footer id="footer"></footer>
     </div>
     <script type="module" src="./js/script.js"></script>
