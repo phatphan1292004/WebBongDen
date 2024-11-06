@@ -38,20 +38,21 @@
               <!-- form đăng nhập -->
                 <div class="container d-flex justify-content-center align-items-center">
                     <div class="form register_form">
-                        <form>
+                        <form id="formRegister">
                         <h3 class="text-center">Đăng kí</h3>
                         <div class="mb-3">
                             <div class="input_box">
-                             <input type="email" placeholder="nhập email" required>
+                             <input type="email" id="email" placeholder="nhập email" required>
                                 <i class="uil uil-envelope-alt email"></i>
                             </div>
                             <div class="input_box">
-                                <input type="password" placeholder="Tạo mật khẩu" required>
+                                <input type="password" id="password" placeholder="Tạo mật khẩu" required>
                                 <i class="uil uil-lock password"></i>
                             </div>
                             <div class="input_box">
-                                <input type="password" placeholder="Nhập lại mật khẩu" required>
+                                <input type="password" id="rePassword" placeholder="Nhập lại mật khẩu" required>
                                 <i class="uil uil-lock password"></i>
+                                <div id="rePasswordError" style="color: red;">Mật khẩu không được để trống</div>   
                             </div>
                             <button class="submit">Đăng kí</button>
                             <div class="login_signup">
@@ -62,6 +63,8 @@
                         </form>
                     </div>
                  </div>
+                 <!-- script -->
+                  <script src="js/register.js"></script>
     </body>
 
 </html>
