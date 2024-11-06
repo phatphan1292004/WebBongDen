@@ -54,7 +54,6 @@
 
 .tab-container {
     width: 600px;
-    height: 700px;
     background-color: #fff;
     margin: 20px auto;
     border-radius: 4px;
@@ -66,6 +65,10 @@
   justify-content: center;
   padding: 10px;
   margin-bottom: 10px;
+}
+
+.wrapper .main .product {
+  border-bottom: 1px solid #cfcfcf;
 }
 
 .wrapper .main .product-item .box {
@@ -100,6 +103,7 @@
 
 .wrapper .main .product-item .product-detail .product-note {
   font-size: 12px;
+  color: #6d6e72;
 }
 
 .wrapper .main .product-item .product-qp .product-price{
@@ -148,8 +152,31 @@
   margin: 0;
 }
 
-.a {
-  min-height: 1px;
-  color: #333;
-  z-index: 1000;
+.wrapper .tab-container .result {
+  margin-top: 50px;
+}
+
+.wrapper .tab-container .result .b {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: #000;
+  font-weight: 500;
+}
+
+
+.wrapper .tab-container .result .total-price {
+  color: red;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.wrapper .tab-container .buy-btn {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  background-color: #e30019;
+  color: white;
+  border-radius: 4px;
 }
