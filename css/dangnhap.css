@@ -260,15 +260,7 @@
     
   }
 
-/* Home*/
-.home{
-    height: 100%;
-    width: 100%;
-
-}
-
 /* dang nhap- dang ki */
-
 .form_container{
     position: absolute ;
     max-width: 400px;
@@ -277,11 +269,18 @@
     left: 50%;
     background: #fff;
     border:  2px solid #7d2ae8;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1.2); 
     padding: 25px;
     border-radius: 12px;
     box-shadow: rgba(0 ,0 ,0, 0.1);
+    opacity: 0;
+    pointer-events: none;
 
+}
+.show .form_container{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1.2);
 }
 .form_close{
     position: absolute;
