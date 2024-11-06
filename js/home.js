@@ -1,4 +1,3 @@
-
 window.addEventListener("load", function() {
     const sliderMain = document.querySelector(".slider-main");
     const sliderItems = document.querySelectorAll(".slider-item");
@@ -6,7 +5,7 @@ window.addEventListener("load", function() {
     const prevBtn = document.querySelector(".slider-left");
     const dotItems = document.querySelectorAll(".slider-dot-item");
     let positionX = 0;
-    const sliderItemWidth = sliderItems[0].offsetWidth;
+    const sliderItemWidth = sliderMain.offsetWidth;
     const sliderLength = sliderItems.length;
     let index = 0;
 
@@ -46,10 +45,9 @@ window.addEventListener("load", function() {
             }
         }
 
-        positionX = -1 * index * sliderItemWidth; // Cập nhật vị trí slide
+        positionX = -1 * index * sliderItemWidth; 
         sliderMain.style.transform = `translateX(${positionX}px)`;
 
-        // Cập nhật dot
         [...dotItems].forEach((el) => el.classList.remove("active"));
         dotItems[index].classList.add("active");
     }
