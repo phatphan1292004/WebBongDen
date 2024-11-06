@@ -30,17 +30,16 @@ $(".range-price").text("Giá từ: " + $(".slider-range-price").slider("values",
 });
 
 
-function sortProductsByPrice() {
-    const productList = document.querySelector('.product-list');
-    const products = Array.from(productList.children);
+function increaseQuantity(){
+    let quantityInput = document.getElementById('quantity');
+    let currentValue = parseInt(quantityInput.value);
+    quantityInput.value = currentValue + 1;
+}
 
-    products.sort((a, b) => {
-        const priceA = parseInt(a.getAttribute('data-price'));
-        const priceB = parseInt(b.getAttribute('data-price'));
-        return priceB - priceA;
-    });
-
-    // Clear existing products and re-append in sorted order
-    productList.innerHTML = '';
-    products.forEach(product => productList.appendChild(product));
+function decreaseQuantity(){
+    let quantityInput = document.getElementById('quantity');
+    let currentValue = parseInt(quantityInput.value);
+    if(currentValue > 1){
+        quantityInput.value = currentValue -1;
+    }
 }

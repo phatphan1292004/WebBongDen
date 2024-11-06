@@ -13,7 +13,7 @@
 <!-- jQuery UI -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
@@ -21,137 +21,8 @@
 </head>
 <body>
      <!-- Header -->
-     <header class="header">
-        <div class="header-top">
-          <div class="header-left">
-            <a href="#" class="logo">
-              <img src="./img/image.png" alt="Logo" />
-            </a>
-            <div class="search-bar">
-              <form action="/search" method="GET">
-                <input placeholder="Bạn cần tìm gì?" type="text" name="query" />
-                <button type="submit" aria-label="Search">
-                  <i class="fas fa-search"></i>
-                </button>
-              </form>
-            </div>
-          </div>
-
-          <div class="header-right">
-            <div class="info">
-              <div class="info-item">
-                <i class="fas fa-headphones-alt"></i>
-                <span>Hotline 1900.5301</span>
-              </div>
-              <div class="info-item">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Giỏ hàng</span>
-              </div>
-              <button class="login">
-                <i class="fas fa-user"></i>
-                <span>Đăng nhập</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <nav class="navbar">
-          <ul class="navbar-list">
-            <li><a href="#">TRANG CHỦ</a></li>
-            <li class="dropdown">
-              <a href="#"
-                >DANH MỤC
-                <i class="fa-solid fa-caret-down"></i>
-              </a>
-              <div class="submenu">
-                <ul>
-                  <li class="category">
-                    <p class="category-header">Đèn chùm</p>
-                    <ul class="category-products">
-                      <li class="category-item">Đèn chùm cổ điển</li>
-                      <li class="category-item">Đèn chùm hiện đại</li>
-                      <li class="category-item">Đèn chùm pha lê</li>
-                      <li class="category-item">Đèn chùm nến</li>
-                    </ul>
-                  </li>
-
-                  <li class="category">
-                    <p class="category-header">Đèn thả</p>
-                    <ul class="category-products">
-                      <li class="category-item">Đèn thả cổ điển</li>
-                      <li class="category-item">Đèn thả hiện đại</li>
-                      <li class="category-item">Đèn thả pha lê</li>
-                      <li class="category-item">Đèn thông tầng</li>
-                    </ul>
-                  </li>
-
-                  <li class="category">
-                    <p class="category-header">Đèn quạt</p>
-                    <ul class="category-products">
-                      <li class="category-item">Đèn quạt cổ điển</li>
-                      <li class="category-item">Đèn quạt hiện đại</li>
-                      <li class="category-item">Đèn quạt pha lê</li>
-                      <li class="category-item">Đèn quạt giấu cánh</li>
-                    </ul>
-                  </li>
-
-                  <li class="category">
-                    <p class="category-header">Đèn quạt</p>
-                    <ul class="category-products">
-                      <li class="category-item">Đèn quạt cổ điển</li>
-                      <li class="category-item">Đèn quạt hiện đại</li>
-                      <li class="category-item">Đèn quạt pha lê</li>
-                      <li class="category-item">Đèn quạt giấu cánh</li>
-                    </ul>
-                  </li>
-
-                  <li class="category">
-                    <p class="category-header">Đèn chùm</p>
-                    <ul class="category-products">
-                      <li class="category-item">Đèn chùm cổ điển</li>
-                      <li class="category-item">Đèn chùm hiện đại</li>
-                      <li class="category-item">Đèn chùm pha lê</li>
-                      <li class="category-item">Đèn chùm nến</li>
-                    </ul>
-                  </li>
-
-                  <li class="category">
-                    <p class="category-header">Đèn thả</p>
-                    <ul class="category-products">
-                      <li class="category-item">Đèn thả cổ điển</li>
-                      <li class="category-item">Đèn thả hiện đại</li>
-                      <li class="category-item">Đèn thả pha lê</li>
-                      <li class="category-item">Đèn thông tầng</li>
-                    </ul>
-                  </li>
-
-                  <li class="category">
-                    <p class="category-header">Đèn quạt</p>
-                    <ul class="category-products">
-                      <li class="category-item">Đèn quạt cổ điển</li>
-                      <li class="category-item">Đèn quạt hiện đại</li>
-                      <li class="category-item">Đèn quạt pha lê</li>
-                      <li class="category-item">Đèn quạt giấu cánh</li>
-                    </ul>
-                  </li>
-
-                  <li class="category">
-                    <p class="category-header">Đèn quạt</p>
-                    <ul class="category-products">
-                      <li class="category-item">Đèn quạt cổ điển</li>
-                      <li class="category-item">Đèn quạt hiện đại</li>
-                      <li class="category-item">Đèn quạt pha lê</li>
-                      <li class="category-item">Đèn quạt giấu cánh</li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li><a href="#">TIN TỨC</a></li>
-            <li><a href="#">LIÊN HỆ</a></li>
-          </ul>
-        </nav>
-      </header>
+     
+      
         <section class="shop_grid_area section-padding-80">
     <div class="container">
         <div class="row">   
@@ -321,7 +192,7 @@
             <!-- ##### Single Widget ##### -->
             <div class="widget brands mb-50">
                 <!-- Widget Title 2 -->
-                <h4 class="widget-title3 mb-30">Thương Hiệu</h4>
+                <h4 class="widget-title3 mb-30">Thương Hiệu Nổi Tiếng</h4>
                 <div class="widget-desc">
                     <ul>
                         <li><a href="#">Bóng đèn Điện Quang</a></li>
@@ -333,6 +204,67 @@
                 </div>
             </div>
         </div>
+        <div class="news-latest box-layer mb-3">
+            <div class="sidebarblog-title title_block">Tin tức mới</div>
+            <div class="list-news-latest">
+                <div class="item-article clearfix">
+                    <div class="post-image">
+                        <a href="#">
+                            <img class="lazyload" src="https://denhoamy.vn/upload/news/3018den-aeon-mall-le-chan-hai-phong-1.jpg" alt="Đèn Hoa Mỹ cung cấp đèn trang trí cho Trung tâm thương mại Aeon Mall Lê Chân Hải Phòng">
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <div class="title max">
+                            <a href="/tin-tuc/den-hoa-my-thi-cong-den-trang-tri-cho-trung-tam-thuong-mai-aeon-mall-le-chan-hai-phong-n87.html">
+                                Đèn Hoa Mỹ cung cấp đèn trang trí cho Trung tâm thương mại Aeon Mall Lê Chân Hải Phòng
+                            </a>
+                        </div>
+                        <div class="date">
+                            <i class="fa fa-calendar-alt"></i> 09/01/2021
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-news-latest">
+                <div class="item-article clearfix">
+                    <div class="post-image">
+                        <a href="#">
+                            <img class="lazyload" src="https://denhoamy.vn/upload/news/3018den-aeon-mall-le-chan-hai-phong-1.jpg" alt="Đèn Hoa Mỹ cung cấp đèn trang trí cho Trung tâm thương mại Aeon Mall Lê Chân Hải Phòng">
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <div class="title max">
+                            <a href="/tin-tuc/den-hoa-my-thi-cong-den-trang-tri-cho-trung-tam-thuong-mai-aeon-mall-le-chan-hai-phong-n87.html">
+                                Đèn Hoa Mỹ cung cấp đèn trang trí cho Trung tâm thương mại Aeon Mall Lê Chân Hải Phòng
+                            </a>
+                        </div>
+                        <div class="date">
+                            <i class="fa fa-calendar-alt"></i> 09/01/2021
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-news-latest">
+                <div class="item-article clearfix">
+                    <div class="post-image">
+                        <a href="#">
+                            <img class="lazyload" src="https://denhoamy.vn/upload/news/3018den-aeon-mall-le-chan-hai-phong-1.jpg" alt="Đèn Hoa Mỹ cung cấp đèn trang trí cho Trung tâm thương mại Aeon Mall Lê Chân Hải Phòng">
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <div class="title max">
+                            <a href="/tin-tuc/den-hoa-my-thi-cong-den-trang-tri-cho-trung-tam-thuong-mai-aeon-mall-le-chan-hai-phong-n87.html">
+                                Đèn Hoa Mỹ cung cấp đèn trang trí cho Trung tâm thương mại Aeon Mall Lê Chân Hải Phòng
+                            </a>
+                        </div>
+                        <div class="date">
+                            <i class="fa fa-calendar-alt"></i> 09/01/2021
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
     <div class="col-12 col-md-8 col-lg-9">
         <div class="shop_grid_product_area">
@@ -390,7 +322,13 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <!-- Tăng giảm số lượng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
+                               
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -408,10 +346,7 @@
                             <!-- Hover Thumb -->
                             <img class="hover-img" src="https://denhoamy.vn/den-chum-trang-tri-noi-that-phong-cach-my-dc03780-p14023.html" alt="">
 
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
+                           
                         </div>
 
                         <!-- Product Description -->
@@ -424,7 +359,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -458,7 +397,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -487,7 +430,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -510,10 +457,7 @@
                                 <span>-30%</span>
                             </div>
 
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
+                           
                         </div>
 
                         <!-- Product Description -->
@@ -526,7 +470,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -544,10 +492,7 @@
                             <!-- Hover Thumb -->
                             <img class="hover-img" src="img/product-img/product-7.jpg" alt="">
 
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
+                           
                         </div>
 
                         <!-- Product Description -->
@@ -560,7 +505,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -583,10 +532,7 @@
                                 <span>New</span>
                             </div>
 
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
+                           
                         </div>
 
                         <!-- Product Description -->
@@ -599,7 +545,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -616,6 +566,9 @@
                             <img src="https://denhoamy.vn/upload/attachment/thumb/2051den-chum-trang-tri-noi-that-phong-cach-my-hien-dai-dc03782-02.jpg" alt="">
                             <!-- Hover Thumb -->
                             <img class="hover-img" src="img/product-img/product-9.jpg" alt="">
+                            <div class="product-badge offer-badge">
+                                <span>-30%</span>
+                            </div>
                         </div>
 
                         <!-- Product Description -->
@@ -628,7 +581,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -645,11 +602,10 @@
                             <img src="https://denhoamy.vn/upload/attachment/thumb/2051den-chum-trang-tri-noi-that-phong-cach-my-hien-dai-dc03782-02.jpg" alt="">
                             <!-- Hover Thumb -->
                             <img class="hover-img" src="img/product-img/product-1.jpg" alt="">
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
+                            <div class="product-badge offer-badge">
+                                <span>-30%</span>
                             </div>
+                           
                         </div>
 
                         <!-- Product Description -->
@@ -662,7 +618,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -678,10 +638,7 @@
                             <!-- Hover Thumb -->
                             <img class="hover-img" src="img/product-img/product-1.jpg" alt="">
 
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
+                           
                         </div>
 
                         <!-- Product Description -->
@@ -694,7 +651,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -710,10 +671,7 @@
                             <!-- Hover Thumb -->
                             <img class="hover-img" src="img/product-img/product-1.jpg" alt="">
 
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
+                           
                         </div>
 
                         <!-- Product Description -->
@@ -726,7 +684,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -741,11 +703,10 @@
                             <img src="https://denhoamy.vn/upload/attachment/thumb/2051den-chum-trang-tri-noi-that-phong-cach-my-hien-dai-dc03782-02.jpg" alt="">
                             <!-- Hover Thumb -->
                             <img class="hover-img" src="img/product-img/product-1.jpg" alt="">
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
+                            <div class="product-badge offer-badge">
+                                <span>-30%</span>
                             </div>
+                           
                         </div>
 
                         <!-- Product Description -->
@@ -758,7 +719,11 @@
 
                             <!-- Hover Content -->
                             <div class="hover-content">
-                                <!-- Thêm vào giỏ hàng -->
+                                <div class="quantity-selector d-flex align-items-center">
+                                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" value="1" readonly>
+                                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -771,20 +736,22 @@
         <!-- Pagination -->
         <nav aria-label="navigation">
             <ul class="pagination mt-50 mb-70">
-                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
+                <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i>
+                </a></li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">...</a></li>
                 <li class="page-item"><a class="page-link" href="#">21</a></li>
-                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
             </ul>
         </nav>
     </div>
     </div>
         </div>
         </section>
-       
+      <!-- footer -->
+        
 
 
 <script src="main.js"></script>
