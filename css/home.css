@@ -516,11 +516,17 @@
   font-size: 16px;
 }
 
+.footer .footer-top .list-ship {
+  display: flex;
+  gap: 20px;
+}
+
 .footer .footer-top .footer-top-contact,
-.footer .footer-top .footer-policy {
+.footer .footer-top .footer-item {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 200px;
 }
 
 .footer .footer-bottom {
