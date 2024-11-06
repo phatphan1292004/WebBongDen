@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     categoryItems.forEach(item => {
         item.addEventListener('click', function() {
-            console.log("1"); // Kiểm tra sự kiện click
+            console.log("1");
             const subcategoryList = this.nextElementSibling;
 
             // Thêm hoặc gỡ bỏ class `show` để điều khiển hiệu ứng
