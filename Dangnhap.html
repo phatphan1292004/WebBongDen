@@ -3,13 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!--unicode -->
-    <link rel="stylesheet" href="http://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>Trang chủ</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      />
+      <!-- font chữ -->
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"
+      />
+      <!--unicode -->
+      <link rel="stylesheet" href="http://unicons.iconscout.com/release/v4.0.0/css/line.css">
+      <link rel="stylesheet" href="./css/dangnhap.css">
 </head>
 <body>
+     <div class="wrapper">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-top">
+          <div class="header-left">
+            <a href="#" class="logo">
+              <img src="./img/image.png" alt="Logo" />
+            </a>
+            <div class="search-bar">
+              <form action="/search" method="GET">
+                <input placeholder="Bạn cần tìm gì?" type="text" name="query" />
+                <button type="submit" aria-label="Search">
+                  <i class="fas fa-search"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="header-right">
+            <div class="info">
+              <div class="info-item">
+                <i class="fas fa-headphones-alt"></i>
+                <span>Hotline 1900.5301</span>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Giỏ hàng</span>
+              </div>
+              <button class="login">
+                <i class="fas fa-user"></i>
+                <span>Đăng nhập</span>
+              </button>
+            </div>
+          </div>
+        </div>
 <!-- form đăng nhập-->  
 <div class="form_popup">
     <i class="uil uil-times form_close"></i>
