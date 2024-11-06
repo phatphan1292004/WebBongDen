@@ -1,0 +1,113 @@
+.main .breadcrumb {
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 40px;
+}
+.main .breadcrumb a {
+    text-decoration: none;
+    color: #000;
+}
+
+.main .breadcrumb a:hover {
+    color: red;
+}
+.main .breadcrumb .separator {
+    margin: 0 5px;
+}
+
+.main .product-info {
+    border-radius: 2px;
+    display: flex;
+    gap: 30px;
+}
+
+.main .product-info .left-container{
+    width: 75%;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    gap: 30px;
+}
+
+.main .product-info .product-image {
+    min-width: 400px;
+    height: 400px;
+}
+
+.main .product-info .product-image img {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.main .product-detail .product-name {
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 20px;
+}
+
+.main .product-detail .product-price {
+    color: red;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.main .product-detail .product-desc {
+ 
+    line-height: 1.8; 
+    margin: 20px 0;
+    font-size: 14px; 
+    color: #333; 
+}
+
+.main .product-info .right-container {
+    background-color: #fff;
+    width: 25%;
+    padding: 10px;
+}
+
+.main .product-info .right-container .category-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #dee2d6;
+    font-weight: 500;
+}
+
+.main .product-info .right-container .category-header p {
+    font-size: 18px;
+}
+
+.category-list>li {
+    padding: 12px 4px;
+    border-bottom: 1px solid #dee2d6;
+}
+
+.cate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subcategory-list {
+    max-height: 0;
+    margin-top: 10px;
+    overflow: hidden;
+    transition: max-height 0.5s ease; /* Thời gian và kiểu của hiệu ứng */
+}
+
+.subcategory-list.show {
+    max-height: 200px; /* Giá trị đủ lớn để bao gồm tất cả các mục, điều chỉnh theo nhu cầu */
+}
+
+.subcategory-list>li {
+    padding: 8px 10px;
+    border-radius: 2px;
+    font-size: 13px;
+}
+
+.subcategory-list>li:hover {
+    background-color: #fafafa;
+}
