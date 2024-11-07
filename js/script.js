@@ -36,3 +36,13 @@ window.addEventListener('load', function() {
         });
     });
 });
+
+      // Tải tệp header
+      fetch('header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header').innerHTML = data);
+
+  // Tải tệp footer
+  fetch('footer.html')
+      .then(response => response.text())
+      .then
