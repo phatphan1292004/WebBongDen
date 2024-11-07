@@ -87,11 +87,7 @@ function decreaseQuantity(){
                             </a>
                             <p class="product-price"><span class="old-price">${product.oldPrice}</span> ${product.newPrice}</p>
                             <div class="hover-content">
-                                <div class="quantity-selector d-flex align-items-center">
-                                    <button class="quantity-btn" onclick="decreaseQuantity(${index})">-</button>
-                                    <input type="text" id="quantity${index}" value="1" readonly>
-                                    <button class="quantity-btn" onclick="increaseQuantity(${index})">+</button>
-                                </div>
+                                
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="btn essence-btn">Thêm vào giỏ hàng</a>
                                 </div>
@@ -103,18 +99,7 @@ function decreaseQuantity(){
         });
     });
 
-    // Hàm tăng giảm số lượng (tùy chọn)
-    function decreaseQuantity(index) {
-        let quantityInput = document.getElementById(`quantity${index}`);
-        if (parseInt(quantityInput.value) > 1) {
-            quantityInput.value = parseInt(quantityInput.value) - 1;
-        }
-    }
 
-    function increaseQuantity(index) {
-        let quantityInput = document.getElementById(`quantity${index}`);
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-    }
 
 
 
