@@ -14,7 +14,7 @@
 }
 
 .wrapper .header .header-top {
-  width: 1240px;
+  max-width: 1240px;
   margin-right: auto;
   margin-left: auto;
   display: flex;
@@ -139,16 +139,16 @@
 
 .header .navbar-list .dropdown .submenu > ul .category {
   background-color: var(--color-white);
-  border: 1px solid var(--color-gray-dark);
-  padding: 15px;
+  padding: 10px 0 30px 0;
 }
 
 .header .navbar-list .dropdown .category-header {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
   color: var(--color-black);
   text-align: left;
-  color: red;
+  color: #e30019;
 }
 
 .header .navbar-list .dropdown .category-products {
@@ -157,16 +157,14 @@
 }
 
 .header .navbar-list .dropdown .category-item {
-  padding: 8px 6px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--color-gray-mid);
   text-align: left;
-  
+  margin: 10px 0;
 }
 
 .header .navbar-list .dropdown .category-item:hover {
-  background-color: #f0f0f0;
-  color: var(--color-gray-darkest);
+  color: #e30019;
   cursor: pointer;
   border-radius: 4px;
 }
