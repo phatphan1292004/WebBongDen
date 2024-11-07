@@ -1,154 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="./css/header-footer.css" />
-  <link rel="stylesheet" href="./css/reset.css" />
-  <link rel="stylesheet" href="./css/cart.css">
-</head>
-<body>
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/header-footer.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/cart.css" />
+  </head>
+  <body>
     <div class="wrapper">
-        <div id="header"></div>
-        <div class="main">
-            <div class="nav">
-                <div class="nav-item" data-tab="cart">Giỏ hàng</div>
-                <div class="nav-item" data-tab="order-info">Thông tin đặt hàng</div>
-                <div class="nav-item" data-tab="payment">Thanh toán</div>
-                <div class="nav-item" data-tab="finish">Hoàn tất</div>
-              </div>
-              
-              <div class="tab-container">
-                  <div class="tab-content" id="cart">
-                    <div class="product">
-                        <ul class="list-product">
-                            <li class="product-item">
-                                <div class="box">
-                                    <div class="product-img">
-                                        <img src="https://product.hstatic.net/200000722513/product/acer-nitro-5-an515-46-r6qr_76527b5f7ffc4b1ba85be70a47091c25_1024x1024_8a2f0281efa040adb268338bcae8933c.png" alt="">
-                                    </div>
-                                    <div class="delete-item">
-                                        Xóa
-                                    </div>
-                                </div>
-
-                                <div class="product-detail">
-                                    <div class="product-name">Laptop gaming Acer Nitro 5 AN515 46 R6QR</div>
-                                    <p class="product-note">Tặng: 2 x Đế Tản Nhiệt Cooler Master Notepal C3 Trị giá: 230.000₫</p>
-                                </div>
-
-                                <div class="product-qp">
-                                    <div class="product-price">
-                                        22.990.000₫
-                                    </div>
-                                    <div class="quantity-selector">
-                                        <button class="quantity-btn decrease">-</button>
-                                        <input type="number" class="quantity-input" value="1" min="1" />
-                                        <button class="quantity-btn increase">+</button>
-                                      </div>
-                                </div>
-                            </li>
-
-                            <li class="product-item">
-                                <div class="box">
-                                    <div class="product-img">
-                                        <img src="https://product.hstatic.net/200000722513/product/acer-nitro-5-an515-46-r6qr_76527b5f7ffc4b1ba85be70a47091c25_1024x1024_8a2f0281efa040adb268338bcae8933c.png" alt="">
-                                    </div>
-                                    <div class="delete-item">
-                                        Xóa
-                                    </div>
-                                </div>
-
-                                <div class="product-detail">
-                                    <div class="product-name">Laptop gaming Acer Nitro 5 AN515 46 R6QR</div>
-                                    <p class="product-note">Tặng: 2 x Đế Tản Nhiệt Cooler Master Notepal C3 Trị giá: 230.000₫</p>
-                                </div>
-
-                                <div class="product-qp">
-                                    <div class="product-price">
-                                        22.990.000₫
-                                    </div>
-                                    <div class="quantity-selector">
-                                        <button class="quantity-btn decrease">-</button>
-                                        <input type="number" class="quantity-input" value="1" min="1" />
-                                        <button class="quantity-btn increase">+</button>
-                                      </div>
-                                </div>
-                            </li>
-
-                            <li class="product-item">
-                                <div class="box">
-                                    <div class="product-img">
-                                        <img src="https://product.hstatic.net/200000722513/product/acer-nitro-5-an515-46-r6qr_76527b5f7ffc4b1ba85be70a47091c25_1024x1024_8a2f0281efa040adb268338bcae8933c.png" alt="">
-                                    </div>
-                                    <div class="delete-item">
-                                        Xóa
-                                    </div>
-                                </div>
-
-                                <div class="product-detail">
-                                    <div class="product-name">Laptop gaming Acer Nitro 5 AN515 46 R6QR</div>
-                                    <p class="product-note">Tặng: 2 x Đế Tản Nhiệt Cooler Master Notepal C3 Trị giá: 230.000₫</p>
-                                </div>
-
-                                <div class="product-qp">
-                                    <div class="product-price">
-                                        22.990.000₫
-                                    </div>
-                                    <div class="quantity-selector">
-                                        <button class="quantity-btn decrease">-</button>
-                                        <input type="number" class="quantity-input" value="1" min="1" />
-                                        <button class="quantity-btn increase">+</button>
-                                      </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="a"></div>
-                    </div>
-
-                    <div class="result">
-                        <div class="b">
-                            <p>Phí vận chuyển: </p>
-                            <p>Miễn phí</p>
-                        </div>
-                        <div class="b">
-                            <p>Tổng tiền:</p>
-                            <p class="total-price">3.652.000 V  ND</p>
-                        </div>
-                    </div>
-
-                    <button class="buy-btn">
-                        ĐẶT HÀNG NGAY
-                    </button>
-                  </div>
-                  <div class="tab-content" id="order-info">
-                    <p>Thông tin đặt hàng</p>
-                  </div>
-                  <div class="tab-content" id="payment">
-                    <p>Thanh toán</p>
-                  </div>
-                  <div class="tab-content" id="finish">
-                    <p>Hoàn tất</p>
-                  </div>              
-              </div>
+      <div id="header"></div>
+      <div class="main">
+        <div class="nav">
+          <div class="nav-item" data-tab="cart">Giỏ hàng</div>
+          <div class="nav-item" data-tab="order-info">Thông tin đặt hàng</div>
+          <div class="nav-item" data-tab="payment">Thanh toán</div>
+          <div class="nav-item" data-tab="finish">Hoàn tất</div>
         </div>
-        <footer id="footer"></footer>
+
+        <div class="tab-container">
+          <div class="tab-content" id="cart">
+            <div class="container-top">
+                <div class="product">
+                  <ul class="list-product">
+                    <li class="product-item">
+                      <div class="box">
+                        <div class="product-img">
+                          <img
+                            src="https://product.hstatic.net/200000722513/product/acer-nitro-5-an515-46-r6qr_76527b5f7ffc4b1ba85be70a47091c25_1024x1024_8a2f0281efa040adb268338bcae8933c.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="delete-item">Xóa</div>
+                      </div>
+    
+                      <div class="product-detail">
+                        <div class="product-name">
+                          Laptop gaming Acer Nitro 5 AN515 46 R6QR
+                        </div>
+                        <p class="product-note">
+                          Tặng: 2 x Đế Tản Nhiệt Cooler Master Notepal C3 Trị giá:
+                          230.000₫
+                        </p>
+                      </div>
+    
+                      <div class="product-qp">
+                        <div class="product-price">22.990.000₫</div>
+                        <div class="quantity-selector">
+                          <button class="quantity-btn decrease">-</button>
+                          <input
+                            type="number"
+                            class="quantity-input"
+                            value="1"
+                            min="1"
+                          />
+                          <button class="quantity-btn increase">+</button>
+                        </div>
+                      </div>
+                    </li>
+    
+                    <li class="product-item">
+                      <div class="box">
+                        <div class="product-img">
+                          <img
+                            src="https://product.hstatic.net/200000722513/product/acer-nitro-5-an515-46-r6qr_76527b5f7ffc4b1ba85be70a47091c25_1024x1024_8a2f0281efa040adb268338bcae8933c.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="delete-item">Xóa</div>
+                      </div>
+    
+                      <div class="product-detail">
+                        <div class="product-name">
+                          Laptop gaming Acer Nitro 5 AN515 46 R6QR
+                        </div>
+                        <p class="product-note">
+                          Tặng: 2 x Đế Tản Nhiệt Cooler Master Notepal C3 Trị giá:
+                          230.000₫
+                        </p>
+                      </div>
+    
+                      <div class="product-qp">
+                        <div class="product-price">22.990.000₫</div>
+                        <div class="quantity-selector">
+                          <button class="quantity-btn decrease">-</button>
+                          <input
+                            type="number"
+                            class="quantity-input"
+                            value="1"
+                            min="1"
+                          />
+                          <button class="quantity-btn increase">+</button>
+                        </div>
+                      </div>
+                    </li>
+    
+                    <li class="product-item">
+                      <div class="box">
+                        <div class="product-img">
+                          <img
+                            src="https://product.hstatic.net/200000722513/product/acer-nitro-5-an515-46-r6qr_76527b5f7ffc4b1ba85be70a47091c25_1024x1024_8a2f0281efa040adb268338bcae8933c.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="delete-item">Xóa</div>
+                      </div>
+    
+                      <div class="product-detail">
+                        <div class="product-name">
+                          Laptop gaming Acer Nitro 5 AN515 46 R6QR
+                        </div>
+                        <p class="product-note">
+                          Tặng: 2 x Đế Tản Nhiệt Cooler Master Notepal C3 Trị giá:
+                          230.000₫
+                        </p>
+                      </div>
+    
+                      <div class="product-qp">
+                        <div class="product-price">22.990.000₫</div>
+                        <div class="quantity-selector">
+                          <button class="quantity-btn decrease">-</button>
+                          <input
+                            type="number"
+                            class="quantity-input"
+                            value="1"
+                            min="1"
+                          />
+                          <button class="quantity-btn increase">+</button>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="a"></div>
+                </div>
+            </div>
+            <div class="container-bottom">
+                <div class="result">
+                  <div class="b">
+                    <p>Phí vận chuyển:</p>
+                    <p>Miễn phí</p>
+                  </div>
+                  <div class="b">
+                    <p>Tổng tiền:</p>
+                    <p class="total-price">3.652.000 V ND</p>
+                  </div>
+                </div>
+    
+                <button class="buy-btn">ĐẶT HÀNG NGAY</button>
+            </div>
+          </div>
+          <div class="tab-content" id="order-info">
+            <div class="cus-info">
+                <div class="container-top">
+                    <div class="cus-info-item">
+                      <p class="title">Thông tin khách mua hàng</p>
+                      <div class="cus-field-info">
+                        <div class="form-field">
+                          <input
+                            type="text"
+                            class="form-input"
+                            id="cus-name"
+                            placeholder=" "
+                          />
+                          <label for="name" class="form-label">Nhập họ tên</label>
+                        </div>
+      
+                        <div class="form-field">
+                          <input
+                            type="text"
+                            class="form-input"
+                            id="cus-tele"
+                            placeholder=" "
+                          />
+                          <label for="name" class="form-label"
+                            >Nhập số điện thoại</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="address-container">
+                      <p class="title">Địa chỉ khách hàng</p>
+                      <div class="address-box">
+                        <div class="address-row">
+                          <select id="province" name="province">
+                            <option value="">Chọn Tỉnh, Thành phố</option>
+                          </select>
+      
+                          <select id="district" name="district">
+                            <option value="">Chọn Quận, Huyện</option>
+                          </select>
+                        </div>
+      
+                        <div class="address-row">
+                          <select id="ward" name="ward">
+                            <option value="">Chọn Phường, Xã</option>
+                          </select>
+      
+                          <div class="form-field">
+                            <input
+                              type="text"
+                              class="form-input"
+                              id="cus-name"
+                              placeholder=" "
+                            />
+                            <label for="name" class="form-label"
+                              >Số nhà, tên đường</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="form-field">
+                      <input
+                        type="text"
+                        class="form-input"
+                        id="cus-name"
+                        placeholder=" "
+                      />
+                      <label for="name" class="form-label"
+                        >Lưu ý, yêu cầu khác (Không bắt buộc)</label
+                      >
+                    </div>
+                </div>
+                <div class="container-bottom">
+                    <div class="result">
+                      <div class="b">
+                        <p>Phí vận chuyển:</p>
+                        <p>Miễn phí</p>
+                      </div>
+                      <div class="b">
+                        <p>Tổng tiền:</p>
+                        <p class="total-price">3.652.000 V ND</p>
+                      </div>
+                    </div>
+                    <button class="buy-btn">ĐẶT HÀNG NGAY</button>
+                </div>
+            </div>
+          </div>
+          <div class="tab-content" id="payment">
+            <p>Thanh toán</p>
+          </div>
+          <div class="tab-content" id="finish">
+            <p>Hoàn tất</p>
+          </div>
+        </div>
+      </div>
+      <footer id="footer"></footer>
     </div>
     <script type="module" src="./js/script.js"></script>
     <script type="module" src="./js/cart.js"></script>
-</body>
+  </body>
 </html>

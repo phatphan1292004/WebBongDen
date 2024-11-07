@@ -67,10 +67,6 @@
   margin-bottom: 10px;
 }
 
-.wrapper .main .product {
-  border-bottom: 1px solid #cfcfcf;
-}
-
 .wrapper .main .product-item .box {
   display: flex;
   justify-content: center;
@@ -152,10 +148,6 @@
   margin: 0;
 }
 
-.wrapper .tab-container .result {
-  margin-top: 50px;
-}
-
 .wrapper .tab-container .result .b {
   display: flex;
   justify-content: space-between;
@@ -179,4 +171,108 @@
   background-color: #e30019;
   color: white;
   border-radius: 4px;
+}
+
+.tab-container .cus-info .title{
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Code input */
+
+.form-input {
+  padding: 20px;
+  border: 1px solid #eee;
+  height: 40px;
+  padding: 0 20px;
+  transition: 0.25s ease;
+  border-radius: 4px;
+}
+
+.form-input:focus {
+  border-color: #6a5af9;
+}
+
+.form-field {
+  width: 100%;
+  position: relative;
+}
+.form-label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 21px;
+  user-select: none;
+  color: #999;
+  pointer-events: none;
+  transition: 0.25s ease;
+  font-size: 13px;
+}
+
+.form-input:not(:placeholder-shown) + .form-label,
+.form-input:focus + .form-label {
+  top: 0;
+  background-color: #fff;
+  left: 11px;
+  padding: 0 10px;
+  display: inline-block;
+  color: #6a5af9;
+  font-size: 12px;
+}
+
+
+/* end code input */
+
+.tab-container .cus-info .cus-info-item .cus-field-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.tab-container .cus-info .cus-info-item {
+  margin-bottom: 30px;
+}
+
+.tab-container .container-top .address-container {
+  margin-bottom: 40px;
+}
+
+.tab-container .container-top .address-container .address-box {
+  width: 100%;
+  max-width: 550px;
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ececec;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tab-container .container-top .address-container .address-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+select, input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+input[type="text"]::placeholder {
+  color: #999;
+}
+
+
+.tab-container .container-bottom{
+  padding-top: 50px;
+  border-top: 1px solid #cfcfcf;
+  margin-top: 30px;
 }

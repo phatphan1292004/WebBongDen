@@ -67,7 +67,7 @@
   color: var(--color-white);
 }
 .header .header-top .info div, .header .header-top .info a{
-  margin-right: 20px;
+  margin-left: 20px;
   display: flex;
   text-decoration: none;
   color: white;
