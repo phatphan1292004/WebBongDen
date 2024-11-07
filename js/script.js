@@ -11,8 +11,8 @@ window.addEventListener('load', function() {
     }
 
     Promise.all([
-        loadHTML('header', './reuse/header.html'),
-        loadHTML('footer', './reuse/footer.html')
+        loadHTML('header', '../resuse/header.html'),
+        loadHTML('footer', '../resuse/footer.html')
     ]).then(() => {
         // Mã để xử lý danh mục sản phẩm
         cateData.forEach((category) => {
@@ -36,13 +36,3 @@ window.addEventListener('load', function() {
         });
     });
 });
-
-      // Tải tệp header
-      fetch('header.html')
-      .then(response => response.text())
-      .then(data => document.getElementById('header').innerHTML = data);
-
-  // Tải tệp footer
-  fetch('footer.html')
-      .then(response => response.text())
-      .then
