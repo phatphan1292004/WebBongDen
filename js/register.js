@@ -1,24 +1,23 @@
-// lấy ra element của trang
+  
+  // lấy ra element của thuộc tính
+  const signInForm = document.getElementById("signInForm")
+  const username = document.getElementById("cus-name");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  const RePassword = document.getElementById("rePassword");
+  
+  signInForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const agreement = document.getElementById("agreement").checked;
 
-const formRegister = document.getElementById("formRegister");
-const emailElenment = document.getElementById("email");
-const passwordElenment = document.getElementById("password");
-const rePasswordElenment = document.getElementById("rePassword");
-
-// element hiển thị lỗi
-const rePasswordError = document.getElementById("rePasswordError")
-
-
-// lắng nghe sự kiên submit form đăng ký tài khoản
-formRegister.addEventListener("submit", function(e){
-    // ngăn chặn sự kiện load lại trang
-    e.preventDefault();
-
-    //kiểm tra mật khẩu với nhập lại mật khẩu
-    if(passwordElenment.value !== rePasswordElenment.value){
-        rePasswordError.style.display = "block";
-        rePasswordElenment.innerHTML = "Mật khẩu không khớp";
-    }
-
+  if (password.value !== RePassword.value) {
+      alert("Mật khẩu không khớp!");
+      return;
+  }
+  if (!agreement) {
+      alert("Bạn phải chấp nhận thỏa thuận!");
+      return;
+  }
+  // Proceed with form submission (e.g., send data to the server)
+  alert("Đăng kí thành công!");
 });
-
