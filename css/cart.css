@@ -390,4 +390,10 @@ input[type="text"]::placeholder {
   color: #e53935;
 }
 
+input.valid, select.valid {
+  border: 1px solid green; 
+}
 
+input.invalid, select.invalid {
+  border: 1px solid red; 
+}

@@ -179,6 +179,7 @@
                         class="form-input"
                         id="cus-name"
                         placeholder=" "
+                        required
                       />
                       <label for="name" class="form-label">Nhập họ tên</label>
                     </div>
@@ -189,6 +190,7 @@
                         class="form-input"
                         id="cus-tele"
                         placeholder=" "
+                        required
                       />
                       <label for="name" class="form-label"
                         >Nhập số điện thoại</label
@@ -201,17 +203,17 @@
                   <p class="title">Địa chỉ khách hàng</p>
                   <div class="address-box">
                     <div class="address-row">
-                      <select id="province" name="province">
+                      <select id="province" name="province" required>
                         <option value="">Chọn Tỉnh, Thành phố</option>
                       </select>
 
-                      <select id="district" name="district">
+                      <select id="district" name="district" required>
                         <option value="">Chọn Quận, Huyện</option>
                       </select>
                     </div>
 
                     <div class="address-row">
-                      <select id="ward" name="ward">
+                      <select id="ward" name="ward" required>
                         <option value="">Chọn Phường, Xã</option>
                       </select>
 
@@ -221,6 +223,7 @@
                           class="form-input"
                           id="cus-name"
                           placeholder=" "
+                          required
                         />
                         <label for="name" class="form-label"
                           >Số nhà, tên đường</label
