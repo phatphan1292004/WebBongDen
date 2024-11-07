@@ -200,6 +200,24 @@
 }
 
 .quantity-selector {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+}
+
+.quantity-btn {
+    padding: 5px 10px !important;
+    background-color: #596874 !important;
+    color: white !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+.quantity-btn:hover {
+    background-color: #1d2833 !important;
+}
+
+.quantity-selector {
     display: flex;
     align-items: center;
     gap: 5px;
