@@ -5,6 +5,7 @@
   background-color: #f8f9fa;
   padding: 10px;
   border-bottom: 2px solid #ddd;
+  position: relative;
 }
 
 .nav-item {
@@ -13,6 +14,17 @@
   border-radius: 5px;
   transition: background-color 0.3s;
 }
+/* 
+.indicator {
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: blue;
+  transition: left 0.3s ease, width 0.3s ease;
+} */
 
 .nav-item:hover {
   background-color: #ddd;
@@ -396,4 +408,10 @@ input.valid, select.valid {
 
 input.invalid, select.invalid {
   border: 1px solid red; 
+}
+
+
+.nav-item.highlight {
+  background-color: #4CAF50; /* Màu sắc nền nổi bật cho tab đã qua */
+  color: white;
 }
