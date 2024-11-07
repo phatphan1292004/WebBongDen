@@ -50,4 +50,12 @@
   ul li {
     list-style: none;
   }
+
+    hr {
+      border: 0;
+      height: 1px; 
+      background-color: #cfcfcf;
+      color: #cfcfcf; 
+  }
+  
   
