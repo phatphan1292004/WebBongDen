@@ -40,50 +40,214 @@
         <div class="main">
             <div class="sidebar">
                 <div class="nav">
-                    <div class="nav-item" data-tab="finish">
+                    <div class="nav-item" data-index="0">
                         <div class="nav-item-left">
                             <i class="fa-solid fa-chart-line"></i>
                             <p>Dashboard</p>
                         </div>
                     </div>
-
-                    <div class="nav-item" data-tab="finish">
+            
+                    <div class="nav-item" data-index="1">
                         <div class="nav-item-left">
                             <i class="fa-solid fa-chart-line"></i>
                             <p>Quản lý sản phẩm</p>
                         </div>
                     </div>
-
-                    <div class="nav-item" data-tab="finish">
+            
+                    <div class="nav-item" data-index="2">
                         <div class="nav-item-left">
                             <i class="fa-solid fa-chart-line"></i>
                             <p>Quản lý khách hàng</p>
                         </div>
                     </div>
-
-                    <div class="nav-item" data-tab="finish">
+            
+                    <div class="nav-item" data-index="3">
                         <div class="nav-item-left">
                             <i class="fa-solid fa-chart-line"></i>
                             <p>Quản lý đơn hàng</p>
                         </div>
                     </div>
-
-                    <div class="nav-item" data-tab="finish">
+            
+                    <div class="nav-item" data-index="4">
                         <div class="nav-item-left">
                             <i class="fa-solid fa-chart-line"></i>
                             <p>Thống kê doanh thu</p>
                         </div>
                     </div>
                 </div>
-
+            
                 <div class="sidebar-bottom">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     <p>Đăng xuất</p>
                 </div>
-            </div>
+            </div>            
 
             <div class="main-content">
+                <div class="tab-content" id="dashboard-content">
+                    <!-- <div class="card-revenue">
+                        <div class="card">
+                            <h3>Tong doanh thu</h3>
+                            <div class="value">107950.00</div>
+                            <div class="percentage up">↑ 6.71%</div>
+                            <div class="goal">
+                                Monthly Goal
+                                <div class="bar blue">
+                                    <span></span>
+                                </div>
+                                70%
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3>So hoa don</h3>
+                            <div class="value">16</div>
+                            <div class="percentage down">↓ 3.26%</div>
+                            <div class="goal">
+                                Monthly Goal
+                                <div class="bar green">
+                                    <span></span>
+                                </div>
+                                60%
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Sales Statistics</h3>
+                            <div class="legend">
+                                <span class="online">Online</span>
+                                <span class="offline">Offline</span>
+                            </div>
+                            <div class="chart"></div>
+                        </div>
+                        <div class="card">
+                            <h3>So khach hang</h3>
+                            <div class="value">5</div>
+                            <div class="percentage down">↓ 2.71%</div>
+                            <div class="goal">
+                                Monthly Goal
+                                <div class="bar yellow">
+                                    <span></span>
+                                </div>
+                                45%
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3>Lượt xem</h3>
+                            <div class="value">N/A</div>
+                            <div class="percentage na">↑ N/A</div>
+                            <div class="goal">
+                                Monthly Goal
+                                <div class="bar purple">
+                                    <span></span>
+                                </div>
+                                50%
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="tab-content" id="product-management-content">
+                    <div class="header-tab">
+                        <div class="search-container">
+                            <input type="text" id="product-search" placeholder="Tìm kiếm sản phẩm...">
+                            <button id="search-btn">Tìm kiếm</button>
+                        </div>
+
+                        <button class="add-product">
+                            <i class="fa-solid fa-plus"></i>
+                            Thêm sản phẩm
+                        </button>
+                    </div>
+                    
+                    <!-- Bảng danh sách sản phẩm -->
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Link Hình ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Loại sản phẩm</th>
+                                <th>Ngày thêm</th>
+                                <th>Thao tác</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>001</td>
+                                <td><a href="https://via.placeholder.com/50" target="_blank">https://via.placeholder.com/50</a></td>
+                                <td>Sản phẩm 1</td>
+                                <td>200.000 VNĐ</td>
+                                <td>Đèn LED</td>
+                                <td>01/12/2024</td>
+                                <td><button class="view-details">Xem chi tiết</button></td>
+                                <td><button class="edit-product"><i class="fa-regular fa-pen-to-square"></i></button></td>
+                                <td><button class="delete-product"><i class="fa-regular fa-trash-can"></i></button></td>
+                            </tr>
+
+                            <tr>
+                                <td>001</td>
+                                <td><a href="https://via.placeholder.com/50" target="_blank">https://via.placeholder.com/50</a></td>
+                                <td>Sản phẩm 1</td>
+                                <td>200.000 VNĐ</td>
+                                <td>Đèn LED</td>
+                                <td>01/12/2024</td>
+                                <td><button class="view-details">Xem chi tiết</button></td>
+                                <td><button class="edit-product"><i class="fa-regular fa-pen-to-square"></i></button></td>
+                                <td><button class="delete-product"><i class="fa-regular fa-trash-can"></i></button></td>
+                            </tr>
+
+                            <tr>
+                                <td>001</td>
+                                <td><a href="https://via.placeholder.com/50" target="_blank">https://via.placeholder.com/50</a></td>
+                                <td>Sản phẩm 1</td>
+                                <td>200.000 VNĐ</td>
+                                <td>Đèn LED</td>
+                                <td>01/12/2024</td>
+                                <td><button class="view-details">Xem chi tiết</button></td>
+                                <td><button class="edit-product"><i class="fa-regular fa-pen-to-square"></i></button></td>
+                                <td><button class="delete-product"><i class="fa-regular fa-trash-can"></i></button></td>
+                            </tr>
+
+                            <tr>
+                                <td>001</td>
+                                <td><a href="https://via.placeholder.com/50" target="_blank">https://via.placeholder.com/50</a></td>
+                                <td>Sản phẩm 1</td>
+                                <td>200.000 VNĐ</td>
+                                <td>Đèn LED</td>
+                                <td>01/12/2024</td>
+                                <td><button class="view-details">Xem chi tiết</button></td>
+                                <td><button class="edit-product"><i class="fa-regular fa-pen-to-square"></i></button></td>
+                                <td><button class="delete-product"><i class="fa-regular fa-trash-can"></i></button></td>
+                            </tr>
+
+                            <tr>
+                                <td>001</td>
+                                <td><a href="https://via.placeholder.com/50" target="_blank">https://via.placeholder.com/50</a></td>
+                                <td>Sản phẩm 1</td>
+                                <td>200.000 VNĐ</td>
+                                <td>Đèn LED</td>
+                                <td>01/12/2024</td>
+                                <td><button class="view-details">Xem chi tiết</button></td>
+                                <td><button class="edit-product"><i class="fa-regular fa-pen-to-square"></i></button></td>
+                                <td><button class="delete-product"><i class="fa-regular fa-trash-can"></i></button></td>
+                            </tr>
+                            <!-- Thêm các sản phẩm khác tại đây -->
+                        </tbody>
+                    </table>
+                </div>                
                 
+                <div class="tab-content" id="customer-management-content">
+                    <h1>Quản lý khách hàng</h1>
+                    <p>Content for Customer Management</p>
+                </div>
+                <div class="tab-content" id="order-management-content">
+                    <h1>Quản lý đơn hàng</h1>
+                    <p>Content for Order Management</p>
+                </div>
+                <div class="tab-content" id="revenue-statistics-content">
+                    <h1>Thống kê doanh thu</h1>
+                    <p>Content for Revenue Statistics</p>
+                </div>
             </div>
         </div>
     </div>

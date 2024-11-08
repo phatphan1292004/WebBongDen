@@ -27,6 +27,7 @@
 
 .wrapper .header i {
     font-size: 20px;
+    cursor: pointer;
 }
 
 
@@ -41,7 +42,7 @@
 
 /* Start Sidebar */
 .wrapper .main {
-    padding-top: 65px;
+    padding-top: 66px;
     background-color: #fafbfd;
 }
 
@@ -73,6 +74,7 @@
     padding: 15px;
     border-radius: 4px;
     text-align: left;
+    margin-bottom: 10px;
 }
 
 .main .sidebar .nav-item p {
@@ -82,6 +84,7 @@
 .main .sidebar .nav-item:hover,
 .wrapper .main .sidebar .sidebar-bottom:hover {
     background-color: #f2f2f2;
+    cursor: pointer;
 }
 
 .main .nav-item .nav-item-left {
@@ -115,7 +118,7 @@
 }
 
 .main .sidebar.expanded .nav-item-left i {
-    font-size: 20px;
+    cursor: pointer;
 }
 
 .main .sidebar.expanded .sidebar-bottom {
@@ -137,9 +140,252 @@
 }
 
 .main .main-content {
-    height: 800px; 
     flex: 1;
     margin-left: 240px;
 }
 
-/* End code Sidebar */
+
+
+.tab-content {
+    display: none;
+}
+
+.nav-item.active {
+    background-color: #e0e0e0;
+}
+
+.nav-item.active .tab-content {
+    display: block;
+}
+
+.main .main-content .tab-content {
+    padding: 20px;
+    height: 100vh;
+}
+
+/* Code dashboard */
+
+.card-revenue {
+    display: grid;
+    grid-template-columns: 25% 25% 50%;
+    grid-template-rows: 50% 50%;
+    gap: 20px;
+}
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1;
+    min-width: 200px;
+}
+.card h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #6c757d;
+}
+.card .value {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.card .percentage {
+    font-size: 14px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+}
+.card .percentage.up {
+    background-color: #e0f7f4;
+    color: #17c671;
+}
+.card .percentage.down {
+    background-color: #fdecea;
+    color: #e74c3c;
+}
+.card .percentage.na {
+    background-color: #fef7e0;
+    color: #f1c40f;
+}
+.card .goal {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #6c757d;
+}
+.card .goal .bar {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background-color: #e9ecef;
+    margin-left: 10px;
+    position: relative;
+}
+.card .goal .bar span {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    position: absolute;
+}
+.card .goal .bar.blue span {
+    background-color: #007bff;
+    width: 70%;
+}
+.card .goal .bar.green span {
+    background-color: #28a745;
+    width: 60%;
+}
+.card .goal .bar.yellow span {
+    background-color: #ffc107;
+    width: 45%;
+}
+.card .goal .bar.purple span {
+    background-color: #6f42c1;
+    width: 50%;
+}
+.chart-card {
+    min-width: 400px;
+}
+.chart-card h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #343a40;
+}
+.chart-card .legend {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.chart-card .legend span {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    font-size: 14px;
+    color: #6c757d;
+}
+.chart-card .legend span::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.chart-card .legend span.online::before {
+    background-color: #007bff;
+}
+.chart-card .legend span.offline::before {
+    background-color: #6c757d;
+}
+.chart {
+    width: 100%;
+    height: 200px;
+    background: url('https://placehold.co/400x200?text=Chart+Placeholder') no-repeat center center;
+    background-size: cover;
+}
+
+/* Code tab quan ly san pham */
+
+#product-management-content {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.main-content .tab-content .header-tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.main-content .header-tab .search-container {
+    display: flex;
+    align-items: center;
+}
+
+.main-content .header-tab .add-product {
+    padding: 10px 20px;
+    background-color: #e5f2fb;
+    color: #007bff;
+    border-radius: 4px;
+}
+
+.main-content .header-tab .search-container #product-search {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    margin-right: 10px;
+    width: 250px;
+}
+
+.main-content .header-tab .search-container #search-btn {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.main-content .header-tab .search-container #search-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Style cho bảng sản phẩm */
+.tab-content .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tab-content .product-table th,
+.tab-content .product-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ced4da;
+}
+
+.tab-content .product-table th {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.product-table td {
+    font-size: 14px;
+    color: #343a40;
+}
+
+.product-table td .delete-product {
+    color: #dda0a3;
+    background-color: rgb(255, 237, 237);
+    padding: 8px 20px;
+    border-radius: 3px;
+}
+
+.product-table td .edit-product {
+    background-color: #e6f9f7;
+    color: #8adfd0;
+    padding: 8px 20px;
+    border-radius: 3px;
+}
+
+
+.product-table img {
+    width: 50px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.view-details {
+    padding: 6px 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-details:hover {
+    background-color: #218838;
+}
