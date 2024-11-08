@@ -58,7 +58,19 @@
     </div>
     <footer id="footer"> </footer>
     </div>
+    <script>
+        function showCity(cityId) {
+    var tabs = document.querySelectorAll('.tab');
+    var maps = document.querySelectorAll('.map');
 
+    tabs.forEach(tab => tab.classList.remove('active'));
+    maps.forEach(map => map.classList.remove('active'));
+
+    document.querySelector(`#${cityId}`).classList.add('active');
+    document.querySelector(`.tab[onclick="showCity('${cityId}')"]`).classList.add('active');
+}
+
+    </script>
     <script type="module" src="./js/script.js"></script>
     <script type="module" src="./js/data.js"></script>
 </body>
