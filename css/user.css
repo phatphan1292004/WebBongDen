@@ -16,21 +16,18 @@ body {
 
 .container {
     display: flex;
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 1200px;
-    height: 100%;
-    margin: 0 auto;
     align-items: center;
     justify-content: center;
-    padding: 1.25rem 0 3.125rem
 }
 
 .sidebar {
-    display: block;
-    width: 250px;
+    width: 180px;
     background-color: #fff;
     flex-shrink: 0;
-    padding: 20px;
+    padding: 15px 0;
     border: 1px solid #ddd;
     margin-right: 20px;
     
@@ -38,58 +35,87 @@ body {
 
 .user-info {
     text-align: center;
+    display: flex;
     margin-bottom: 20px;
 }
 
-.user-info img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.user-info img{
+    width: 60px;
+    height: 60px;
+    
 }
 
 .user-info p {
-    margin-top: 10px;
     font-weight: bold;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 15px;
 }
 
 .menu {
     list-style: none;
-}
+    position: relative;
 
-.menu li {
+    
+}
+.infor , .order_management , .log_out{
+    display:  flex;
+    align-items: centers;
+    margin-bottom: 0.9375rem;
+}
+.menu i{
+    display: flex;
+    align-items: center;
+    margin-right: 3px;
+    border-radius: 50%;
+    justify-content: center;
+    width: 2rem;
+}
+.menu span {
     padding: 10px 0;
+    font-weight: 500 ;
+    margin-right: 2px;
+
     cursor: pointer;
     color: #333;
 }
 
-.menu li.active {
+.menu span.active {
     padding: 10px 0;
     cursor: pointer;
     color: #333;
 }
 
 .content {
-    flex: auto;
+    margin-left: 10px;
     background-color: #fff;
     padding: 20px;
+    position: relative;
     border: 1px solid #ddd;
+    width: 980px;
 }
-
+/* css cho quản lí đơn hàng */
+.order {
+    padding: 5px;
+}
 .order-header {
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
     margin-bottom: 5px;
 }
 
-.order-header h2 {
+.order-header h1,.information_header h1 {
     font-size: 18px;
+    font-weight: 400;
     margin-bottom: 10px;
+    text-transform: capitalize;
 }
 
 .tabs {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+
 }
 
 .tabs span {
@@ -105,7 +131,6 @@ body {
 
 .search-bar {
     display: flex;
-
     margin-top: 15px;
     padding-bottom: 5px;
 }
@@ -113,6 +138,7 @@ body {
 .search-bar input {
     flex: 1;
     padding: 8px;
+    margin-left: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
@@ -150,3 +176,36 @@ body {
     border-radius: 4px;
     cursor: pointer;
 }
+/* css cho quản lí thông tin */
+.information_account label {
+    display: block;
+    margin-top: 10px;
+  }
+.information_account input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.information_account button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+.information_account button:hover {
+    background-color: #45a049;
+  }
+  .sex{
+    display: flex;
+    margin-right: 10px;
+  }
