@@ -11,8 +11,8 @@ window.addEventListener('load', function() {
     }
 
     Promise.all([
-        loadHTML('header', '../resuse/header.html'),
-        loadHTML('footer', '../resuse/footer.html')
+        loadHTML('header', './reuse/header.html'),
+        loadHTML('footer', './reuse/footer.html')
     ]).then(() => {
         // Mã để xử lý danh mục sản phẩm
         cateData.forEach((category) => {
