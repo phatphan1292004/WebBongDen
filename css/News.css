@@ -1,6 +1,11 @@
+.main{
+    height: 100vh;
+}
 /* Container để căn chỉnh phần tin tức và sidebar */
 .news-container {
     display: flex;
+    
+    height: 100px;
     gap: 20px;
     padding: 20px;
     max-width: 1200px;
