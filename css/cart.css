@@ -147,10 +147,8 @@
 .wrapper .main .product-item .product-qp .quantity-input {
   width: 40px;
   text-align: center;
-  font-size: 18px;
   border: none;
   padding: 5px;
-  margin: 0 10px;
   -moz-appearance: textfield;
 }
 

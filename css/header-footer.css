@@ -43,7 +43,7 @@
 .header .header-top .menu i {
   margin-right: 10px;
 }
-.header .header-top .search-bar form {
+.header .header-top .search-bar form{
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,15 +59,14 @@
   padding: 5px;
 }
 .header .header-top .search-bar i {
-  color: #888;
+  color: #888; 
 }
 .header .header-top .info {
   display: flex;
   align-items: center;
   color: var(--color-white);
 }
-.header .header-top .info div,
-.header .header-top .info a {
+.header .header-top .info div, .header .header-top .info a{
   margin-left: 20px;
   display: flex;
   text-decoration: none;
@@ -98,8 +97,8 @@
 
 .header .navbar .navbar-list {
   list-style: none;
-  display: flex;
-  align-items: center;
+  display: flex; 
+  align-items: center; 
   width: 1240px;
   margin-right: auto;
   margin-left: auto;
@@ -131,7 +130,7 @@
 .header .navbar .navbar-list .dropdown .submenu > ul {
   display: flex;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr); 
   background-color: #fff;
   padding: 12px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -144,7 +143,7 @@
 }
 
 .header .navbar-list .dropdown .category-header {
-  font-size: 14px;
+  font-size: 15px;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--color-black);
@@ -158,8 +157,8 @@
 }
 
 .header .navbar-list .dropdown .category-item {
-  font-size: 13px;
-  color: var(--color-gray-mid);
+  font-size: 14px;
+  color: #555;
   text-align: left;
   margin: 10px 0;
 }
@@ -169,6 +168,7 @@
   cursor: pointer;
   border-radius: 4px;
 }
+
 
 .footer {
   background-color: var(--color-black);
@@ -182,7 +182,7 @@
   gap: 120px;
 }
 
-.footer .footer-top .tittle {
+.footer .footer-top .tittle{
   margin-bottom: 30px;
   color: #fff;
   font-weight: 600;
@@ -221,24 +221,21 @@
   color: #fff; /* Màu chữ */
 }
 
-.footer-bottom .logo,
-.wrapper .header-top .logo {
-  font-size: 24px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #fff;
+.footer-bottom .logo img,
+.wrapper .header-top .logo img{
+  height: 55px;
 }
 
 .footer-bottom .social-media {
   display: flex;
-  gap: 15px;
+  gap: 15px; 
 }
 
 .footer-bottom .social-icon {
-  color: #fff;
-  font-size: 30px;
+  color: #fff; 
+  font-size: 30px; 
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.3s; 
 }
 
 .footer-bottom .social-icon:hover {

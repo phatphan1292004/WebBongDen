@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
 .wrapper {
   min-height: 100vh;
   padding-top: 110px;
@@ -143,7 +144,7 @@
 }
 
 .header .navbar-list .dropdown .category-header {
-  font-size: 14px;
+  font-size: 15px;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--color-black);
@@ -157,8 +158,8 @@
 }
 
 .header .navbar-list .dropdown .category-item {
-  font-size: 13px;
-  color: var(--color-gray-mid);
+  font-size: 14px;
+  color: #555;
   text-align: left;
   margin: 10px 0;
 }
@@ -242,7 +243,7 @@
 }
 
 .wrapper .container {
-  width: 1240px;
+  max-width: 1240px;
   margin: 10px auto;
   display: flex;
   gap: 20px;
@@ -556,12 +557,9 @@
   color: #fff; /* Màu chữ */
 }
 
-.footer-bottom .logo,
-.wrapper .header-top .logo {
-  font-size: 24px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #fff; 
+.footer-bottom .logo img,
+.wrapper .header-top .logo img{
+  height: 55px;
 }
 
 .footer-bottom .social-media {
