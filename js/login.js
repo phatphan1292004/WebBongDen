@@ -34,17 +34,10 @@ formLogin.addEventListener("submit", function(event) {
         document.getElementById("loginMessage").style.color = "red";
     }
 });
-
-// xử lí sự kiện cho quên mật khẩu
-document.getElementById("forgot-password-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    const email = document.getElementById("email").value;
-    
-    // Giả lập gửi yêu cầu quên mật khẩu
-    document.getElementById("responseMessage").innerText = `A reset link has been sent to ${email}`;
-
-});
+function responseMassage(){
+    const email = document.getElementById("reset-email").value;
+    document.getElementById('responseMessage').innerText = `A reset link has been sent to ${email}`;
+}
 function showForgotPassword() {
     document.getElementById("login-form").style.display = "none";
     document.getElementById("forgot-password-form").style.display = "block";

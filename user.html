@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/user.css" />
+  </head>
+  <body>
+  <div class="container">
+
+    <class class="sidebar">
+        <div class="user-info">
+            <img src="user-avatar.png" alt="User Avatar">
+            <p>Phan Phat</p>
+        </div>
+        <ul class="menu">
+            <span class="information">Thông tin tài khoản</span>
+            <li class="active">Quản lý đơn hàng</li>
+            <li>Đăng xuất</li>
+        </ul>
+    </class>
+    
+    <main class="content">
+        <div class="order-header">
+            <h2>Quản lý đơn hàng</h2>
+            <div class="tabs">
+                <span class="active">Tất Cả</span>
+                <span>Mới</span>
+                <span>Đang Xử Lý</span>
+                <span>Đang Vận Chuyển</span>
+                <span>Hoàn Thành</span>
+                <span>Hủy</span>
+            </div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm đơn hàng theo Mã đơn hàng">
+            <button>Tìm đơn hàng</button>
+        </div>
+        <div class="no-orders">
+            <img src="no-orders.png" alt="No Orders">
+            <p>Quý khách chưa có đơn hàng nào.</p>
+            <button>Tiếp tục mua hàng</button>
+        </div>
+    </main>
+</div>
+</body>
+</html>
