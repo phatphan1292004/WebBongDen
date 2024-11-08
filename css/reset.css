@@ -57,5 +57,10 @@
       background-color: #cfcfcf;
       color: #cfcfcf; 
   }
+
+  .container {
+    width: 1240px;
+    margin: 0 auto;
+  }
   
   

@@ -14,7 +14,6 @@ window.addEventListener('load', function() {
         loadHTML('header', './reuse/header.html'),
         loadHTML('footer', './reuse/footer.html')
     ]).then(() => {
-        // Mã để xử lý danh mục sản phẩm
         cateData.forEach((category) => {
             const categoryItem = document.createElement("li");
             categoryItem.classList.add("category");
