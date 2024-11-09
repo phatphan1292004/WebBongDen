@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin</title>
     <link
       rel="stylesheet"
@@ -17,74 +17,77 @@
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./css/admin.css">
-    <link rel="stylesheet" href="./css/reset.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./css/admin.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+  </head>
+  <body>
     <div class="wrapper">
-        <header class="header">
-            <div class="header-left">
-                <i class="fa-solid fa-bars"></i>
-                <a href="index.html" class="header-logo">
-                    <img src="./img/logo-fold.png" alt="">
-                </a>
-            </div>
-            <div class="header-right">
-                <i class="fa-regular fa-bell"></i>
-                <div class="account">
-                    <img src="https://images.unsplash.com/photo-1726554881162-ceeb7d68be8c?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-                </div>
-            </div>
-        </header>
+      <header class="header">
+        <div class="header-left">
+          <i class="fa-solid fa-bars"></i>
+          <a href="index.html" class="header-logo">
+            <img src="./img/logo-fold.png" alt="" />
+          </a>
+        </div>
+        <div class="header-right">
+          <i class="fa-regular fa-bell"></i>
+          <div class="account">
+            <img
+              src="https://images.unsplash.com/photo-1726554881162-ceeb7d68be8c?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt=""
+            />
+          </div>
+        </div>
+      </header>
 
-        <div class="main">
-            <div class="sidebar">
-                <div class="nav">
-                    <div class="nav-item" data-index="0">
-                        <div class="nav-item-left">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <p>Dashboard</p>
-                        </div>
-                    </div>
-            
-                    <div class="nav-item" data-index="1">
-                        <div class="nav-item-left">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <p>Quản lý sản phẩm</p>
-                        </div>
-                    </div>
-            
-                    <div class="nav-item" data-index="2">
-                        <div class="nav-item-left">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <p>Quản lý khách hàng</p>
-                        </div>
-                    </div>
-            
-                    <div class="nav-item" data-index="3">
-                        <div class="nav-item-left">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <p>Quản lý đơn hàng</p>
-                        </div>
-                    </div>
-            
-                    <div class="nav-item" data-index="4">
-                        <div class="nav-item-left">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <p>Thống kê doanh thu</p>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="sidebar-bottom">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    <p>Đăng xuất</p>
-                </div>
-            </div>            
+      <div class="main">
+        <div class="sidebar">
+          <div class="nav">
+            <div class="nav-item" data-index="0">
+              <div class="nav-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Dashboard</p>
+              </div>
+            </div>
 
-            <div class="main-content">
-                <div class="tab-content" id="dashboard-content">
-                    <!-- <div class="card-revenue">
+            <div class="nav-item" data-index="1">
+              <div class="nav-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Quản lý sản phẩm</p>
+              </div>
+            </div>
+
+            <div class="nav-item" data-index="2">
+              <div class="nav-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Quản lý khách hàng</p>
+              </div>
+            </div>
+
+            <div class="nav-item" data-index="3">
+              <div class="nav-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Quản lý đơn hàng</p>
+              </div>
+            </div>
+
+            <div class="nav-item" data-index="4">
+              <div class="nav-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Thống kê doanh thu</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-bottom">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <p>Đăng xuất</p>
+          </div>
+        </div>
+
+        <div class="main-content">
+          <div class="tab-content" id="dashboard-content">
+            <!-- <div class="card-revenue">
                         <div class="card">
                             <h3>Tong doanh thu</h3>
                             <div class="value">107950.00</div>
@@ -142,115 +145,210 @@
                             </div>
                         </div>
                     </div> -->
-                </div>
-                <div class="tab-content" id="product-management-content">
-                    <div class="header-tab">
-                        <div class="search-container">
-                            <input type="text" id="product-search" placeholder="Tìm kiếm sản phẩm...">
-                            <button id="search-btn">Tìm kiếm</button>
-                        </div>
+          </div>
+          <div class="tab-content" id="product-management-content">
+            <div class="header-tab">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="product-search"
+                  placeholder="Tìm kiếm sản phẩm..."
+                />
+                <button id="search-btn">Tìm kiếm</button>
+              </div>
 
-                        <button class="add-product">
-                            <i class="fa-solid fa-plus"></i>
-                            Thêm sản phẩm
-                        </button>
-                    </div>
-                    
-                    <!-- Bảng danh sách sản phẩm -->
-                    <table class="product-table">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Link Hình ảnh</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Giá</th>
-                                <th>Loại sản phẩm</th>
-                                <th>Ngày thêm</th>
-                                <th>Thao tác</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>001</td>
-                                <td><a href="https://via.placeholder.com/50" target="_blank">https://via.placeholder.com/50</a></td>
-                                <td>Sản phẩm 1</td>
-                                <td>200.000 VNĐ</td>
-                                <td>Đèn LED</td>
-                                <td>01/12/2024</td>
-                                <td><button class="view-details">Xem chi tiết</button></td>
-                                <td><button class="edit-product"><i class="fa-regular fa-pen-to-square"></i></button></td>
-                                <td><button class="delete-product"><i class="fa-regular fa-trash-can"></i></button></td>
-                            </tr>
-
-                            <tr>
-                                <td>001</td>
-                                <td><a href="https://via.placeholder.com/50" target="_blank">https://via.placeholder.com/50</a></td>
-                                <td>Sản phẩm 1</td>
-                                <td>200.000 VNĐ</td>
-                                <td>Đèn LED</td>
-                                <td>01/12/2024</td>
-                                <td><button class="view-details">Xem chi tiết</button></td>
-                                <td><button class="edit-product"><i class="fa-regular fa-pen-to-square"></i></button></td>
-                                <td><button class="delete-product"><i class="fa-regular fa-trash-can"></i></button></td>
-                            </tr>
-
-                            <tr>
-                                <td>001</td>
-                                <td><a href="https://via.placeholder.com/50" target="_blank">https://via.placeholder.com/50</a></td>
-                                <td>Sản phẩm 1</td>
-                                <td>200.000 VNĐ</td>
-                                <td>Đèn LED</td>
-                                <td>01/12/2024</td>
-                                <td><button class="view-details">Xem chi tiết</button></td>
-                                <td><button class="edit-product"><i class="fa-regular fa-pen-to-square"></i></button></td>
-                                <td><button class="delete-product"><i class="fa-regular fa-trash-can"></i></button></td>
-                            </tr>
-
-                            <tr>
-                                <td>001</td>
-                                <td><a href="https://via.placeholder.com/50" target="_blank">https://via.placeholder.com/50</a></td>
-                                <td>Sản phẩm 1</td>
-                                <td>200.000 VNĐ</td>
-                                <td>Đèn LED</td>
-                                <td>01/12/2024</td>
-                                <td><button class="view-details">Xem chi tiết</button></td>
-                                <td><button class="edit-product"><i class="fa-regular fa-pen-to-square"></i></button></td>
-                                <td><button class="delete-product"><i class="fa-regular fa-trash-can"></i></button></td>
-                            </tr>
-
-                            <tr>
-                                <td>001</td>
-                                <td><a href="https://via.placeholder.com/50" target="_blank">https://via.placeholder.com/50</a></td>
-                                <td>Sản phẩm 1</td>
-                                <td>200.000 VNĐ</td>
-                                <td>Đèn LED</td>
-                                <td>01/12/2024</td>
-                                <td><button class="view-details">Xem chi tiết</button></td>
-                                <td><button class="edit-product"><i class="fa-regular fa-pen-to-square"></i></button></td>
-                                <td><button class="delete-product"><i class="fa-regular fa-trash-can"></i></button></td>
-                            </tr>
-                            <!-- Thêm các sản phẩm khác tại đây -->
-                        </tbody>
-                    </table>
-                </div>                
-                
-                <div class="tab-content" id="customer-management-content">
-                    <h1>Quản lý khách hàng</h1>
-                    <p>Content for Customer Management</p>
-                </div>
-                <div class="tab-content" id="order-management-content">
-                    <h1>Quản lý đơn hàng</h1>
-                    <p>Content for Order Management</p>
-                </div>
-                <div class="tab-content" id="revenue-statistics-content">
-                    <h1>Thống kê doanh thu</h1>
-                    <p>Content for Revenue Statistics</p>
-                </div>
+              <button class="add-product">
+                <i class="fa-solid fa-plus"></i>
+                Thêm sản phẩm
+              </button>
             </div>
+
+            <!-- Overlay và Form thêm sản phẩm -->
+            <div class="overlay" id="overlay">
+              <div class="add-product-form" id="add-product-form">
+                <div class="form-header">
+                    <p>Thêm sản phẩm mới</p>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <form id="product-form">
+                  <label for="product-id">Id:</label>
+                  <input type="text" id="product-id" required />
+
+                  <label for="product-image">Link Hình ảnh:</label>
+                  <input type="text" id="product-image" required />
+
+                  <label for="product-name">Tên sản phẩm:</label>
+                  <input type="text" id="product-name" required />
+
+                  <label for="product-price">Giá:</label>
+                  <input type="text" id="product-price" required />
+
+                  <label for="product-category">Loại sản phẩm:</label>
+                  <input type="text" id="product-category" required />
+
+                  <label for="product-date">Ngày thêm:</label>
+                  <input type="date" id="product-date" required />
+
+                  <button type="button" id="save-product">Lưu sản phẩm</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Bảng danh sách sản phẩm -->
+            <table class="product-table">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Link Hình ảnh</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Giá</th>
+                  <th>Loại sản phẩm</th>
+                  <th>Ngày thêm</th>
+                  <th>Thao tác</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="product-table-body">
+                <tr>
+                  <td>001</td>
+                  <td>
+                    <a href="https://via.placeholder.com/50" target="_blank"
+                      >https://via.placeholder.com/50</a
+                    >
+                  </td>
+                  <td>Sản phẩm 1</td>
+                  <td>200.000 VNĐ</td>
+                  <td>Đèn LED</td>
+                  <td>01/12/2024</td>
+                  <td><button class="view-details">Xem chi tiết</button></td>
+                  <td>
+                    <button class="edit-product">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button class="delete-product">
+                      <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>001</td>
+                  <td>
+                    <a href="https://via.placeholder.com/50" target="_blank"
+                      >https://via.placeholder.com/50</a
+                    >
+                  </td>
+                  <td>Sản phẩm 1</td>
+                  <td>200.000 VNĐ</td>
+                  <td>Đèn LED</td>
+                  <td>01/12/2024</td>
+                  <td><button class="view-details">Xem chi tiết</button></td>
+                  <td>
+                    <button class="edit-product">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button class="delete-product">
+                      <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>001</td>
+                  <td>
+                    <a href="https://via.placeholder.com/50" target="_blank"
+                      >https://via.placeholder.com/50</a
+                    >
+                  </td>
+                  <td>Sản phẩm 1</td>
+                  <td>200.000 VNĐ</td>
+                  <td>Đèn LED</td>
+                  <td>01/12/2024</td>
+                  <td><button class="view-details">Xem chi tiết</button></td>
+                  <td>
+                    <button class="edit-product">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button class="delete-product">
+                      <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>001</td>
+                  <td>
+                    <a href="https://via.placeholder.com/50" target="_blank"
+                      >https://via.placeholder.com/50</a
+                    >
+                  </td>
+                  <td>Sản phẩm 1</td>
+                  <td>200.000 VNĐ</td>
+                  <td>Đèn LED</td>
+                  <td>01/12/2024</td>
+                  <td><button class="view-details">Xem chi tiết</button></td>
+                  <td>
+                    <button class="edit-product">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button class="delete-product">
+                      <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>001</td>
+                  <td>
+                    <a href="https://via.placeholder.com/50" target="_blank"
+                      >https://via.placeholder.com/50</a
+                    >
+                  </td>
+                  <td>Sản phẩm 1</td>
+                  <td>200.000 VNĐ</td>
+                  <td>Đèn LED</td>
+                  <td>01/12/2024</td>
+                  <td><button class="view-details">Xem chi tiết</button></td>
+                  <td>
+                    <button class="edit-product">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button class="delete-product">
+                      <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+                <!-- Thêm các sản phẩm khác tại đây -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-content" id="customer-management-content">
+            <h1>Quản lý khách hàng</h1>
+            <p>Content for Customer Management</p>
+          </div>
+          <div class="tab-content" id="order-management-content">
+            <h1>Quản lý đơn hàng</h1>
+            <p>Content for Order Management</p>
+          </div>
+          <div class="tab-content" id="revenue-statistics-content">
+            <h1>Thống kê doanh thu</h1>
+            <p>Content for Revenue Statistics</p>
+          </div>
         </div>
+      </div>
     </div>
     <script type="module" src="./js/admin.js"></script>
-</body>
+  </body>
 </html>
