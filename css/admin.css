@@ -136,13 +136,13 @@
 }
 
 .main .main-content.collapsed {
-    margin-left: 80px;
+    padding-left: 80px;
 }
 
 .main .main-content {
     width: 100%;
     flex: 1;
-    margin-left: 240px;
+    padding-left: 240px;
 }
 
 
@@ -491,6 +491,7 @@
 
 table {
     border-collapse: collapse;
+    width: 100%;
 }
 
 .tab-container th {
@@ -505,7 +506,56 @@ table {
 }
 
 
+@media (max-width: 768px) {
+    /* Giảm kích thước chữ và padding cho các ô khi trên thiết bị di động */
+    .tab-container th, .tab-container td {
+        font-size: 12px;
+        padding: 10px;
+    }
 
+    /* Ẩn một số cột không cần thiết trên các màn hình nhỏ */
+    .tab-container td:nth-child(4), 
+    .tab-container th:nth-child(4) {
+        display: none;  /* Ẩn cột thứ 4 */
+    }
+
+    /* Điều chỉnh chiều rộng của các cột */
+    .tab-container td {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Chỉnh sửa bảng để hiển thị dọc trên màn hình rất nhỏ */
+    .tab-container th, .tab-container td {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    /* Thay đổi cách hiển thị bảng cho kích thước rất nhỏ */
+    .tab-container td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .tab-container th {
+        display: none; /* Ẩn tiêu đề trên các thiết bị di động rất nhỏ */
+    }
+
+    .tab-container td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        padding-right: 10px;
+    }
+
+    .search-container {
+        display: none !important;
+    }
+}
 
 
 

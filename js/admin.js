@@ -1,4 +1,4 @@
-import { cateData, subcateData, productData, customerData } from "./data.js";
+import { cateData, subcateData, productData, customerData, orderData } from "./data.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     const bar = document.querySelector(".fa-bars");
@@ -138,4 +138,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     loadCustomerTable();
+
+    const orderTableBody = document.getElementById('order-table-body');
+  
+    orderData.forEach(order => {
+      const row = document.createElement('tr');
+      
+      row.innerHTML = `
+        <td>${order.id}</td>
+        <td>${order.customerName}</td>
+        <td>${order.orderDate}</td>
+        <td>${order.expectedDeliveryDate}</td>
+        <td>${order.address}</td>
+        <td>${order.status}</td>
+        <td>${order.paymentMethod}</td>
+        <td>${order.orderTime}</td>
+        <td><button class="view-details">Xem chi tiết</button></td>
+      `;
+      
+      orderTableBody.appendChild(row);
+    });
 });

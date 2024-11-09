@@ -85,8 +85,7 @@
           </div>
         </div>
 
-        <div class="main-content">
-          
+        <div class="main-content">    
           <div class="tab-content" id="dashboard-content">
               <!-- <div class="card-revenue">
                           <div class="card">
@@ -285,8 +284,40 @@
           </div>
 
           <div class="tab-content" id="order-management-content">
-            <h1>Quản lý đơn hàng</h1>
-            <p>Content for Order Management</p>
+            <div class="header-tab">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="product-search"
+                  placeholder="Tìm kiếm đơn hàng..."
+                />
+                <button id="search-btn">Tìm kiếm</button>
+              </div>
+            </div>
+
+            <!-- Overlay và Form thêm sản phẩm -->
+
+            <!-- Bảng danh sách sản phẩm -->
+             <div class="tab-container">
+               <table class="product-table">
+                 <thead>
+                   <tr>
+                     <th>Id</th>
+                     <th>Tên Khách Hàng</th>
+                     <th>Ngày đặt hàng</th>
+                     <th>Ngày giao dự kiến</th>
+                     <th>Địa chỉ</th>
+                     <th>Trạng thái</th>
+                     <th>Phương thức thanh toán</th>
+                     <th>Thời gian đặt hàng</th>
+                     <th>Hóa đơn</th>
+                   </tr>
+                 </thead>
+                 <tbody id="order-table-body">
+
+                 </tbody>
+                </table>
+             </div>
           </div>
           <div class="tab-content" id="revenue-statistics-content">
             <h1>Thống kê doanh thu</h1>

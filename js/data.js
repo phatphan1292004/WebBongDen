@@ -612,3 +612,96 @@ export const customerData = [
     }
 ];
 
+export const orderData = [
+    {
+      id: '001',
+      customerName: 'Phan Van Phát',
+      orderDate: '20-1-2023',
+      expectedDeliveryDate: '25-1-2023',
+      address: '475 Man Thiện, Thủ Đức',
+      status: 'Đang giao hàng',
+      paymentMethod: 'Thanh toán khi nhận hàng',
+      orderTime: '20-1-2023',
+      invoice: '<button class="view-details">Xem chi tiết</button>'
+    },
+    {
+      id: '002',
+      customerName: 'Nguyễn Thị Mai',
+      orderDate: '21-1-2023',
+      expectedDeliveryDate: '26-1-2023',
+      address: '123 Nguyễn Huệ, Quận 1',
+      status: 'Đã giao',
+      paymentMethod: 'Thanh toán qua thẻ tín dụng',
+      orderTime: '21-1-2023',
+      invoice: '<button class="view-details">Xem chi tiết</button>'
+    },
+    {
+      id: '003',
+      customerName: 'Lê Hoàng Nam',
+      orderDate: '22-1-2023',
+      expectedDeliveryDate: '27-1-2023',
+      address: '68 Trần Hưng Đạo, Quận 5',
+      status: 'Đang giao hàng',
+      paymentMethod: 'Thanh toán qua ví điện tử',
+      orderTime: '22-1-2023',
+      invoice: '<button class="view-details">Xem chi tiết</button>'
+    },
+    {
+      id: '004',
+      customerName: 'Trần Quang Duy',
+      orderDate: '23-1-2023',
+      expectedDeliveryDate: '28-1-2023',
+      address: '123 Nguyễn Thị Minh Khai, Quận 3',
+      status: 'Chờ xử lý',
+      paymentMethod: 'Thanh toán khi nhận hàng',
+      orderTime: '23-1-2023',
+      invoice: '<button class="view-details">Xem chi tiết</button>'
+    },
+    {
+      id: '005',
+      customerName: 'Phạm Minh Tuấn',
+      orderDate: '24-1-2023',
+      expectedDeliveryDate: '29-1-2023',
+      address: '567 Lý Thái Tổ, Quận 10',
+      status: 'Đã giao',
+      paymentMethod: 'Thanh toán qua thẻ tín dụng',
+      orderTime: '24-1-2023',
+      invoice: '<button class="view-details">Xem chi tiết</button>'
+    },
+    {
+        id: '003',
+        customerName: 'Lê Hoàng Nam',
+        orderDate: '22-1-2023',
+        expectedDeliveryDate: '27-1-2023',
+        address: '68 Trần Hưng Đạo, Quận 5',
+        status: 'Đang giao hàng',
+        paymentMethod: 'Thanh toán qua ví điện tử',
+        orderTime: '22-1-2023',
+        invoice: '<button class="view-details">Xem chi tiết</button>'
+      },
+      {
+        id: '004',
+        customerName: 'Trần Quang Duy',
+        orderDate: '23-1-2023',
+        expectedDeliveryDate: '28-1-2023',
+        address: '123 Nguyễn Thị Minh Khai, Quận 3',
+        status: 'Chờ xử lý',
+        paymentMethod: 'Thanh toán khi nhận hàng',
+        orderTime: '23-1-2023',
+        invoice: '<button class="view-details">Xem chi tiết</button>'
+      },
+      {
+        id: '005',
+        customerName: 'Phạm Minh Tuấn',
+        orderDate: '24-1-2023',
+        expectedDeliveryDate: '29-1-2023',
+        address: '567 Lý Thái Tổ, Quận 10',
+        status: 'Đã giao',
+        paymentMethod: 'Thanh toán qua thẻ tín dụng',
+        orderTime: '24-1-2023',
+        invoice: '<button class="view-details">Xem chi tiết</button>'
+      }
+  ];
+  
+  
+
