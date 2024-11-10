@@ -2,9 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
 body {  
+
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -25,7 +27,8 @@ body {
     width: 300px;
     background-color: #f7f7f7;
     padding: 20px;
-    border-right: 1px solid #ddd;
+    border: 1px solid #ddd;
+    height: 500px;
     
 }
 
@@ -36,17 +39,17 @@ body {
 }
 
 .user-info img{
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
     
 }
 
 .user-info h3 {
-    font-weight: bold;
     margin-top: auto;
     margin-bottom: auto;
-    font-size: 15px;
+    font-size: 18px;
+    color: #333;
 }
 
 .menu {
@@ -60,50 +63,70 @@ body {
     margin-top: 20px;
 }
 
-.sidebar ul li {
-    margin-bottom: 20px;
-}
-
-.sidebar ul li a {
+.menu ul li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
     color: #333;
+    cursor: pointer;
+  }
+  .menu ul li a {
+    color: inherit;
     text-decoration: none;
+    margin-left: 10px;
+  }
+
+  .menu ul li i {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .menu ul li:hover,
+  .menu ul li a:hover {
+    color: #e30613;
+  }
+  
+.content {
+        display: flex;
+        margin-left: 15px;
+        background-color: #fff;
+        padding: 20px;
+        position: relative;
+        border: 1px solid #ddd;
+        width: 700px;
+        height: 500px;
 }
 
-.content {
-    margin-left: 10px;
-    background-color: #fff;
-    padding: 20px;
-    position: relative;
-    border: 1px solid #ddd;
-    width: 980px;
-}
 /* css cho quản lí đơn hàng */
 .order {
     padding: 5px;
 }
-.order-header {
+.order_header {
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
     margin-bottom: 5px;
 }
 
-.order-header h2,.information_header h2 {
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 10px;
+.order_header ,.information_header  {
+    border-bottom: .0625rem solid #120f0f;
+    padding: 1.125rem 0;
+}
+h2{
+    font-size: 1.125rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    margin: 0;
     text-transform: capitalize;
 }
 
 
-
-
-.search-bar {
+.search_bar {
     display: flex;
     margin-top: 15px;
     padding-bottom: 5px;
 }
 
-.search-bar input {
+.search_bar input {
     flex: 1;
     padding: 8px;
     margin-left: 10px;
@@ -111,7 +134,7 @@ body {
     border-radius: 4px;
 }
 
-.search-bar button {
+.search_bar button {
     padding: 8px 12px;
     border: none;
     background-color: #007bff;
@@ -120,23 +143,18 @@ body {
     cursor: pointer;
 }
 
-.no-orders {
+.no_orders {
     text-align: center;
     margin-top: 50px;
 }
 
-.no-orders img {
-    width: 80px;
-    height: auto;
-    margin-bottom: 20px;
-}
 
-.no-orders p {
+.no_orders p {
     font-size: 16px;
     margin-bottom: 20px;
 }
 
-.no-orders button {
+.no_orders button {
     padding: 10px 20px;
     background-color: red;
     color: #fff;
@@ -145,38 +163,106 @@ body {
     cursor: pointer;
 }
 /* css cho quản lí thông tin */
-.information_account label {
-    display: block;
-    margin-top: 10px;
-  }
-.userName{
+.content_section{
     display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    position: relative;
 }
+label{
+        font-size: 16px;
+        color: #333;
+        width: 150px;
+        margin-right: 40px;
+        text-align: right;
+        display: block;
+      }
+form{
+    margin-top: 0em;
+    unicode-bidi: isolate;
+    width: 100%;
+  }
 
-form input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
+form input[type="text"]
+,input[type="email"],
+input[type="tel"]
+ {
+    margin-left: 20px ;
+    font-size: 16px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 4px;
+    width: 300px;
+
 }
-.information_account button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+form input[type="radio"], select{
+    margin-left: 20px ;
+    font-size: 16px;
+}
+select{
+    margin-left: 20px ;
+    width: 80px ;
+    height: 40px ;
+    font-size: 16px;
+}
+.userName,.sex , .email , .phone , .bYear {
+    display: flex;
+    margin: 30px;
+}
+a {
+    color: #007bff;
+    text-decoration: underline;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+
+.submit{
+text-align: center;
+}  
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #e30613;
+    color: #fff;
     border-radius: 4px;
     cursor: pointer;
+    width: 500px;
+    text-align: center;
   }
   
-.information_account button:hover {
-    background-color: #45a049;
+  button[type="submit"]:hover {
+    background-color: #b4050e;
   }
-  .sex, .bYear , .phone, .email{
-    display: flex;
-    margin-right: 10px;
-  }
-  .sex input{
-margin-right: 20px;
-  }
+  /* đăng xuất */
+  #logoutModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+.btn {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+.btn-logout {
+    background-color: #f44336;
+    color: white;
+}
+.btn-cancel {
+    background-color: #4CAF50;
+    color: white;
+}

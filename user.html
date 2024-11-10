@@ -18,101 +18,137 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/user.css" />
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/header-footer.css">
+
   </head>
   <body>
-  <div class="container">
-    <!-- sidebar -->
-    <class class="sidebar">
-        <div class="user-info">
-            <img src="./img/b79144e03dc4996ce319ff59118caf65.jpg" alt="avatarUser">
-            <h3>Trần Công Lý</h3>
-        </div>
-        <div class="menu">
-            <nav>
-                <ul>
-                    <li >
-                        <a href="#account">Thông tin tài khoản</a>
-                    </li>
-                    <li>
-                        <a href="#orders">Quản lý đơn hàng</a>
-                    </li>
-                    <li onclick="showLogoutModal()">
-                        <a href="#logout">Đăng xuất</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </class>
-    <!-- content -->
+        <div class="container">
+          <!-- sidebar -->
+          <div class="sidebar">
+              <div class="user-info">
+                  <img src="./img/b79144e03dc4996ce319ff59118caf65.jpg" alt="avatarUser">
+                  <h3>Trần Công Lý</h3>
+              </div>
+              <div class="menu">
+                  <nav>
+                      <ul>
+                          <li onclick="showContent('information_account')">
+                              <i class="fa-solid fa-user"></i>
+                              <a href="#">Thông tin tài khoản</a>
+                          </li>
+                          <li onclick="showContent('order')">
+                              <i class="fa-solid fa-bars-progress"></i>
+                              <a href="#">Quản lý đơn hàng</a>
+                          </li>
+                          <li onclick="showContent('logout')">
+                              <i class="fa-solid fa-right-from-bracket"></i>
+                              <a href="#" id="logoutLink">Đăng xuất</a>
+                          </li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+      
+          <!-- content -->
+          <div class="content">
+              <!-- Quản lý đơn hàng -->
+              <div id="order" class="content_section" style="display: none;">
+                  <div class="order_header">
+                      <h2>Quản lý đơn hàng</h2>
+                  </div>
+                  <div class="search_bar">
+                        <div>
+                            
+                            <input type="text" 
+                            placeholder="Tìm đơn hàng theo Mã đơn hàng">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <div>
+                            <button>Tìm đơn hàng</button>
+                        </div>
+                  </div>
+                  <div class="no_orders">
+                      <p>Quý khách chưa có đơn hàng nào.</p>
+                      <button>Tiếp tục mua hàng</button>
+                  </div>
+              </div>
+      
+              <!-- Thông tin tài khoản -->
+              <div id="information_account" class="content_section" style="display: none;">
+                  <div class="information_header">
+                      <h2>Thông tin tài khoản</h2>
+                  </div>
+                  <form>
+                   
+                        <div  class="userName">
+                            <div>
+                                <label for="username">Họ tên:</label>                        
+                            </div>
+                            <div>
+                                <input type="text" id="username" name="username" required>                    
+                            </div>
+                        </div>      
 
-    <div class="content">
-    <!-- Quản lí đơn hàng -->
-     <div class="order">
-        <div class="order-header">
-             <h2>Quản lý đơn hàng</h2>
+                        <div  class="sex">
+                            <div>
+                                <label class="lableSex">Giới tính</label>                                          
+                            </div>
+                            <div>
+                                <input type="radio" name="gender" checked> Nam                      
+                                <input type="radio" name="gender" checked> Nữ                    
+                            </div>
+                        </div>      
+
+                        <div  class="email">
+                            <div>
+                                <label for="email">Email:</label>                                     
+                            </div>
+                            <div>
+                                <input type="email" id="email" name="email" required>                        
+                                <a href="#">Thay đổi</a>                   
+                            </div>
+                        </div>   
+
+                        <div  class="phone">
+                            <div>
+                                <label for="phone">Số điện thoại:</label>                                      
+                            </div>
+                            <div >
+                                <input type="tel" id="phone" name="phone" required>                        
+                                <a href="#">Thay đổi</a>                  
+                            </div>                 
+                        </div>     
+                        
+                        <div  class="bYear">
+                            <div>
+                                <label>Ngày sinh</label>                                         
+                            </div>
+                            <div>
+                                <select id="day"><option value="date" >Ngày</option></select>                        
+                                <select id="month"><option value = "month" >Tháng</option></select>                        
+                                <select id="year"><option value="year" >Năm</option></select>                          
+                            </div>                 
+                        </div>
+
+                        <div  class="submit">
+                                <button type="submit">Lưu</button>                         
+                        </div>
+                                                             
+                  </form>
+                  <p id="saveMessage" style="display: none; color: green;">Hồ sơ của bạn đã được lưu!</p>
+              </div>
+      
+              <!-- Đăng xuất -->
+              <div id="overlay"></div>
+              <div id="logoutModal">
+                  <p>Bạn có muốn đăng xuất không?</p>
+                  <button class="btn btn-logout" onclick="Logout()">Đăng xuất</button>
+                  <button class="btn btn-cancel" onclick="cancelLogout()">Không</button>
+              </div>
+          </div>
         </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Tìm đơn hàng theo Mã đơn hàng">
-                <button>Tìm đơn hàng</button>
-            </div>
-            <div class="no-orders">
-                <img src="no-orders.png" alt="No Orders">
-                <p>Quý khách chưa có đơn hàng nào.</p>
-                <button>Tiếp tục mua hàng</button>
-            </div>
-    </div>
-</div>
-     <!-- Quản lí thông tin tài khoản -->
-     <div class="main_content">
-    <div class="information_account">
-        <div class="information_header">
-             <h2>thông tin tài khoản</h2>
-             <div class="title">Quản lí thông tin hồ sơ để bảo mật tài khoản</div>
-        </div>
-                 <form>
-                    <div class="userName">
-                        <label for="username">Họ tên</label>
-                        <input type="text" id="username" name="username" required>
-                    </div>
-                    
-                    <div class="sex">  
-                        <label class="lableSex">Giới tính</label>
-                        <input type="radio" name="gender" checked> Nam
-                        <input type="radio" name="gender" checked> Nữ
-                    </div>
-                    <div class="email">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                        <a href="#">Thay đổi</a>
-                    </div>
-                    <div class="phone">
-                        <label for="phone">Số điện thoại:</label>
-                        <input type="tel" id="phone" name="phone" required>
-                        <a href="#">Thay đổi</a>
-                    </div>
-                    <div class="bYear">
-                        <label>Ngày sinh</label>
-                        <select><option value="date">Ngày</option></select>
-                        <select><option value = "month">Tháng</option></select>
-                        <select><option value="year">Năm</option></select>
-                    </div>
-                 </form>
-            <button type="submit">Lưu</button>
-            <p id="saveMessage" style="display: none; color: green;">Hồ sơ của bạn đã được lưu!</p>
-        </div>
-    </div>
-</div>
-<!-- đăng suất -->
- <!-- Logout confirmation modal -->
-<div id="logout">
-    <div class="modal-content">
-        <p>Bạn có chắc chắn muốn đăng xuất không?</p>
-        <div class="modal-buttons">
-            <button onclick="cancelLogout()">Không</button>
-            <button onclick="confirmLogout()">Đăng xuất</button>
-        </div>
-    </div>
-</div>
+      
 <script src="./js/user.js"></script>
 </body>
 </html>

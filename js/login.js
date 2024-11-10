@@ -36,7 +36,7 @@ formLogin.addEventListener("submit", function(event) {
 });
 function responseMassage(){
     const email = document.getElementById("reset-email").value;
-    document.getElementById('responseMessage').innerText = `A reset link has been sent to ${email}`;
+    document.getElementById("responseMessage").innerText = "mặt khẩu đã được gửi tới ${email}";
 }
 function showForgotPassword() {
     document.getElementById("login-form").style.display = "none";
