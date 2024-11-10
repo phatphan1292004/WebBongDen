@@ -50,22 +50,38 @@ function decreaseQuantity(){
     // Dữ liệu cụ thể cho các sản phẩm
     const products = [
         {
-            name: "Đèn chùm cổ điển số 1",
-            image1: "https://denhoamy.vn/upload/attachment/thumb/2051den-chum-trang-tri-noi-that-phong-cach-my-hien-dai-dc03782-02.jpg",
-            image2: "https://denhoamy.vn/upload/attachment/thumb/7239den-chum-tiffany-trang-tri-noi-that-dc03596-05.jpg",
+            name: "Đèn chùm bằng đồng trang trí phòng khách phong cách",
+            image1: "https://denhoamy.vn/upload/attachment/thumb/7301den-chum-thong-tang-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03443-01.jpg",
+            image2: "https://denhoamy.vn/upload/attachment/thumb/2376den-chum-thong-tang-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03438-02.jpg",
             oldPrice: "3,000,000",
             newPrice: "2,100,000",
             discount: 30
         },
         {
-            name: "Đèn chùm cổ điển số 2",
-            image1: "https://denhoamy.vn/upload/attachment/thumb/1254den-chum-co-dien-phong-khach-dc02713-04.jpg",
-            image2: "https://denhoamy.vn/upload/attachment/thumb/3425den-chum-hien-dai-phong-ngu-dc01392-06.jpg",
+            name: "Đèn chùm bằng đồng trang trí phòng khách phong cách",
+            image1: "https://denhoamy.vn/upload/attachment/thumb/1300den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03427-04.jpg",
+            image2: "https://denhoamy.vn/upload/attachment/thumb/5225den-chum-pha-le-trang-tri-phong-khach-phong-cach-trung-hoa-dc03444-04.jpg",
             oldPrice: "4,000,000",
             newPrice: "2,800,000",
             discount: 30
         },
-        // Thêm sản phẩm khác tại đây...
+        {
+            name: "Đèn chùm bằng đồng trang trí phòng khách phong cách",
+            image1: "https://denhoamy.vn/upload/attachment/thumb/5225den-chum-pha-le-trang-tri-phong-khach-phong-cach-trung-hoa-dc03444-04.jpg",
+            image2: "https://denhoamy.vn/upload/attachment/thumb/2809den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-hien-dai-dc03442-04.jpg",
+            oldPrice: "4,000,000",
+            newPrice: "2,800,000",
+            discount: 30
+        },
+        {
+            name: "Đèn chùm bằng đồng trang trí phòng khách phong cách",
+            image1: "https://denhoamy.vn/upload/attachment/thumb/2809den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-hien-dai-dc03442-04.jpg",
+            image2: "https://denhoamy.vn/upload/attachment/thumb/7000den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03441-02.jpg",
+            oldPrice: "4,000,000",
+            newPrice: "2,800,000",
+            discount: 30
+        }
+       
     ];
 
     document.addEventListener("DOMContentLoaded", function() {
