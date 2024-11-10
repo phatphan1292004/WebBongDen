@@ -762,7 +762,61 @@ table {
     height: 400px;
   }
   
+
+  /* vskmksdmks */
+/* Thống kê doanh thu */
+.chart-selection {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tab-content .revenue-header p{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.chart-selection .right {
+    display: flex;
+}
+
+.tab-content .chart-selection {
+    padding: 20px 0;
+}
+
+.tab-content .chart-selection .left select{
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+
+}
+
+.tab-content .chart-selection .right input{
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 8px;
+    width: 250px;
+    margin-right: 20px;
+} 
+
+.tab-content .chart-selection .right button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.revenue-statistics .revenue-body {
+    max-height: 530px;
+}
   
+#revenue-chart {
+    margin: 0 auto;
+}
 
  
   

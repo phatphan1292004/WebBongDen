@@ -289,20 +289,20 @@ document.addEventListener("DOMContentLoaded", function () {
       datasets: [
         {
           label: "Số lượng bán ra",
-          data: [120, 150, 100, 90, 110, 85, 120, 130, 140, 160], // Số lượng bán ra của từng sản phẩm
-          borderColor: "rgba(54, 162, 235, 1)", // Màu sắc đường cho số lượng bán ra
+          data: [120, 150, 100, 90, 110, 85, 120, 130, 140, 160],
+          borderColor: "rgba(54, 162, 235, 1)",
           backgroundColor: "rgba(54, 162, 235, 0.2)",
-          fill: true, // Đổ màu cho khu vực dưới đường
-          tension: 0.4, // Làm mượt đường
+          fill: true,
+          tension: 0.4,
           borderWidth: 2,
         },
         {
           label: "Số lượng tồn kho",
-          data: [80, 40, 60, 100, 50, 90, 30, 70, 50, 40], // Số lượng tồn kho của từng sản phẩm
-          borderColor: "rgba(255, 99, 132, 1)", // Màu sắc đường cho số lượng tồn kho
+          data: [80, 40, 60, 100, 50, 90, 30, 70, 50, 40],
+          borderColor: "rgba(255, 99, 132, 1)",
           backgroundColor: "rgba(255, 99, 132, 0.2)",
-          fill: true, // Đổ màu cho khu vực dưới đường
-          tension: 0.4, // Làm mượt đường
+          fill: true,
+          tension: 0.4,
           borderWidth: 2,
         },
       ],
@@ -325,4 +325,148 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     },
   });
+
+  function showDateInputs(value) {
+    var monthInputGroup = document.getElementById("month-input-group");
+
+    if (value === "monthly") {
+      monthInputGroup.style.display = "block";
+    } else {
+      monthInputGroup.style.display = "none";
+    }
+  }
+
+  document
+    .getElementById("statistic-type")
+    .addEventListener("change", function () {
+      var value = this.value;
+      showDateInputs(value);
+    });
+
+  // Hàm xử lý khi nhấn nút "Xem Thống Kê"
+  // Hàm xử lý khi nhấn nút "Xem Thống Kê"
+  function processInput() {
+    var year = document.getElementById("month").value; // lấy giá trị năm
+    var statisticType = document.getElementById("statistic-type").value; // lấy loại thống kê (theo tháng hay theo năm)
+
+    if (statisticType === "monthly" && !year) {
+      alert("Vui lòng nhập năm.");
+      return;
+    }
+
+    // Nếu chọn thống kê theo tháng, lấy dữ liệu tháng; nếu chọn theo năm, lấy dữ liệu năm
+    var revenueData =
+      statisticType === "monthly"
+        ? getMonthlyRevenueData(year)
+        : getYearlyRevenueData();
+    generateChart(revenueData, statisticType);
+  }
+
+  // Giả lập dữ liệu doanh thu và sản phẩm bán được theo tháng (cần thay thế bằng dữ liệu thực tế)
+  function getMonthlyRevenueData(year) {
+    return {
+      labels: [
+        "Tháng 1",
+        "Tháng 2",
+        "Tháng 3",
+        "Tháng 4",
+        "Tháng 5",
+        "Tháng 6",
+        "Tháng 7",
+        "Tháng 8",
+        "Tháng 9",
+        "Tháng 10",
+        "Tháng 11",
+        "Tháng 12",
+      ],
+      datasets: [
+        {
+          label: "Doanh thu",
+          data: [
+            5000, 7000, 4000, 6000, 8000, 9000, 6500, 7500, 6700, 8000, 8500,
+            9500,
+          ],
+          borderColor: "rgba(75, 192, 192, 1)",
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          fill: true,
+        },
+        {
+          label: "Sản phẩm bán được",
+          data: [150, 200, 120, 180, 220, 250, 190, 210, 180, 230, 240, 260],
+          borderColor: "rgba(153, 102, 255, 1)",
+          backgroundColor: "rgba(153, 102, 255, 0.2)",
+          fill: true,
+        },
+      ],
+    };
+  }
+
+  // Giả lập dữ liệu doanh thu và sản phẩm bán được theo năm (cần thay thế bằng dữ liệu thực tế)
+  function getYearlyRevenueData() {
+    return {
+      labels: ["2020", "2021", "2022", "2023", "2024"],
+      datasets: [
+        {
+          label: "Doanh thu",
+          data: [50000, 70000, 60000, 80000, 90000],
+          borderColor: "rgba(75, 192, 192, 1)",
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          fill: true,
+        },
+        {
+          label: "Sản phẩm bán được",
+          data: [1500, 2000, 1800, 2200, 2500],
+          borderColor: "rgba(153, 102, 255, 1)",
+          backgroundColor: "rgba(153, 102, 255, 0.2)",
+          fill: true,
+        },
+      ],
+    };
+  }
+
+  // Hàm tạo biểu đồ
+  function generateChart(data, statisticType) {
+    var ctx = document.getElementById("revenue-chart").getContext("2d");
+
+    if (window.myChart) {
+      window.myChart.destroy(); // Hủy bỏ biểu đồ cũ nếu có
+    }
+
+    window.myChart = new Chart(ctx, {
+      type: "line",
+      data: data,
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: statisticType === "monthly" ? "Tháng" : "Năm",
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Giá trị",
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // Thêm sự kiện cho nút "Xem Thống Kê"
+  document.getElementById("submit-btn").addEventListener("click", processInput);
+
+  // Thêm sự kiện khi thay đổi lựa chọn thống kê (theo tháng hoặc theo năm)
+  document
+    .getElementById("statistic-type")
+    .addEventListener("change", function () {
+      var statisticType = this.value;
+      if (statisticType === "monthly") {
+        document.getElementById("month").placeholder = "Nhập năm"; // Hiển thị placeholder "Nhập năm" khi chọn thống kê theo tháng
+      } else {
+        document.getElementById("month").placeholder = ""; // Không yêu cầu nhập tháng nếu chọn thống kê theo năm
+      }
+    });
 });

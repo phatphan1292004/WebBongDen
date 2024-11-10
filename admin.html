@@ -97,7 +97,7 @@
                     </div>
                     <div class="value">107950.00</div>
                   </div>
-                
+
                   <div class="bottom-card">
                     <div class="goal">
                       <div class="goal-title">
@@ -110,7 +110,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="card" id="orders-card">
                   <div class="top-card">
                     <div class="top-card-title">
@@ -119,7 +119,7 @@
                     </div>
                     <div class="value">16</div>
                   </div>
-                
+
                   <div class="bottom-card">
                     <div class="goal">
                       <div class="goal-title">
@@ -132,7 +132,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="card" id="customers-card">
                   <div class="top-card">
                     <div class="top-card-title">
@@ -141,7 +141,7 @@
                     </div>
                     <div class="value">5</div>
                   </div>
-                
+
                   <div class="bottom-card">
                     <div class="goal">
                       <div class="goal-title">
@@ -154,7 +154,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="card" id="visits-card">
                   <div class="top-card">
                     <div class="top-card-title">
@@ -163,7 +163,7 @@
                     </div>
                     <div class="value">N/A</div>
                   </div>
-                
+
                   <div class="bottom-card">
                     <div class="goal">
                       <div class="goal-title">
@@ -177,7 +177,7 @@
                   </div>
                 </div>
               </div>
-                
+
               <div class="chart-card">
                 <p>Doanh thu trong năm</p>
                 <canvas id="salesChart"></canvas>
@@ -202,7 +202,11 @@
                     <tr>
                       <td>#CUST001</td>
                       <td class="customer-info">
-                        <img src="https://plus.unsplash.com/premium_photo-1658527049634-15142565537a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww" alt="Avatar" class="customer-avatar">
+                        <img
+                          src="https://plus.unsplash.com/premium_photo-1658527049634-15142565537a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww"
+                          alt="Avatar"
+                          class="customer-avatar"
+                        />
                         <span>Nguyễn Văn A</span>
                       </td>
                       <td>10/11/2024</td>
@@ -213,17 +217,26 @@
                     <tr>
                       <td>#CUST002</td>
                       <td class="customer-info">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww" alt="Avatar" class="customer-avatar">
+                        <img
+                          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww"
+                          alt="Avatar"
+                          class="customer-avatar"
+                        />
                         <span>Trần Thị B</span>
                       </td>
                       <td>09/11/2024</td>
                       <td class="status pending">
-                        <span>Đang chờ</span></td>
+                        <span>Đang chờ</span>
+                      </td>
                     </tr>
                     <tr>
                       <td>#CUST003</td>
                       <td class="customer-info">
-                        <img src="https://plus.unsplash.com/premium_photo-1664536392779-049ba8fde933?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D" alt="Avatar" class="customer-avatar">
+                        <img
+                          src="https://plus.unsplash.com/premium_photo-1664536392779-049ba8fde933?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
+                          alt="Avatar"
+                          class="customer-avatar"
+                        />
                         <span>Lê Văn C</span>
                       </td>
                       <td>08/11/2024</td>
@@ -240,8 +253,8 @@
                 </div>
                 <canvas id="customerPieChart"></canvas>
               </div>
-            </div>     
-            
+            </div>
+
             <div class="card-container2">
               <div class="top-product">
                 <div class="top-product-header">
@@ -249,7 +262,7 @@
                 </div>
                 <canvas id="topProductsChart"></canvas>
               </div>
-            </div>            
+            </div>
           </div>
 
           <div class="tab-content" id="product-management-content">
@@ -423,8 +436,32 @@
             </div>
           </div>
           <div class="tab-content" id="revenue-statistics-content">
-            <h1>Thống kê doanh thu</h1>
-            <p>Content for Revenue Statistics</p>
+            <div class="revenue-statistics">
+              <div class="revenue-header">
+                <p>Thống kê doanh thu</p>
+              </div>
+              <div class="chart-selection">
+                <div class="left">
+                  <label for="statistic-type">Chọn loại thống kê:</label>
+                  <select id="statistic-type">
+                    <option value="monthly">Thống kê theo tháng</option>
+                    <option value="yearly">Thống kê theo năm</option>
+                  </select>
+                </div>
+                <div class="right">
+                  <div class="input-group" id="month-input-group">
+                    <label for="month">Năm:</label>
+                    <input type="number" id="month" placeholder="Nhập năm" required />
+                  </div>
+                  <button id="submit-btn">Xem Thống Kê</button>
+                </div>
+              </div>
+            
+              <!-- Biểu đồ -->
+              <div class="revenue-body">
+                <canvas id="revenue-chart"></canvas>
+              </div>
+            </div>            
           </div>
         </div>
       </div>
