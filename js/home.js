@@ -122,14 +122,42 @@ window.addEventListener("load", function () {
 
             <div class="price-discount">
                 <p class="product-price">${discountedPrice.toLocaleString()} VND</p>
-                <p class="discount-percentage">${(discountPercent * 100).toFixed(0)}%</p>
+                <p class="discount-percentage">${(
+                  discountPercent * 100
+                ).toFixed(0)}%</p>
             </div>
         </div>
     `;
 
-    categoryItem.innerHTML = productList; 
-    
-    document.getElementsByClassName("list-product")[0].appendChild(categoryItem); 
-});
+    categoryItem.innerHTML = productList;
 
+    document
+      .getElementsByClassName("list-product")[0]
+      .appendChild(categoryItem);
+  });
+
+  // JavaScript to toggle the sidebar and overlay visibility
+  const menuToggle = document.getElementById("menu-toggle");
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+
+  // Function to open sidebar
+  menuToggle.addEventListener("click", function () {
+    sidebar.classList.add("active"); // Show sidebar
+    overlay.classList.add("active"); // Show overlay
+  });
+
+  // Function to close sidebar when overlay is clicked
+  overlay.addEventListener("click", function () {
+    sidebar.classList.remove("active"); // Hide sidebar
+    overlay.classList.remove("active"); // Hide overlay
+  });
+
+  const searchIcon = document.querySelector(".search-btn");
+  const searchForm = document.querySelector("#search-form");
+
+  // Xử lý sự kiện khi nhấp vào biểu tượng tìm kiếm
+  searchIcon.addEventListener("click", () => {
+    searchForm.classList.toggle("open");
+  });
 });

@@ -27,19 +27,23 @@
       <header class="header">
         <div class="header-top">
           <div class="header-left">
-            <a href="index.html" class="logo">
-              <img src="./img/logo-white.png" alt="">
-            </a>
+            <!-- Hamburger icon for opening sidebar -->
+            <div style="display: flex; align-items: center;">
+              <i class="fa-solid fa-bars" id="menu-toggle"></i>
+              <a href="index.html" class="logo">
+                <img src="./img/logo-white.png" alt="">
+              </a>
+            </div>
             <div class="search-bar">
-              <form action="/search" method="GET">
+              <form action="/search" method="GET" id="search-form">
                 <input placeholder="Bạn cần tìm gì?" type="text" name="query" />
-                <button type="submit" aria-label="Search">
-                  <i class="fas fa-search"></i>
-                </button>
               </form>
+              <button type="submit" aria-label="Search" class="search-btn">
+                <i class="fas fa-search"></i>
+              </button>
             </div>
           </div>
-
+      
           <div class="header-right">
             <div class="info">
               <div class="info-item">
@@ -50,41 +54,30 @@
               <a class="info-item" href="cart.html">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Giỏ hàng</span>
-                <p>
-                  (
-                  <span class="quantity-product">0</span>
-                    )
-                  </p>
+                <p>(<span class="quantity-product">0</span>)</p>
               </a>
+      
+              <div class="header-user">
+                <img src="https://images.unsplash.com/photo-1636041282694-aa4e52370419?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="avt-user">
+              </div>
               <a href="login.html">
-                  <button class="login">
-                    <i class="fas fa-user"></i>
-                    <span>Đăng nhập</span>
-                  </button>
+                <button class="login">
+                  <i class="fas fa-user"></i>
+                  <span>Đăng nhập</span>
+                </button>
               </a>
             </div>
           </div>
         </div>
-
+      
         <nav class="navbar">
           <ul class="navbar-list">
             <li><a href="#">TRANG CHỦ</a></li>
             <li class="dropdown">
-              <a href="#"
-                >DANH MỤC
-                <i class="fa-solid fa-caret-down"></i>
-              </a>
+              <a href="#">DANH MỤC <i class="fa-solid fa-caret-down"></i></a>
               <div class="submenu">
                 <ul id="category-list">
-                  <!-- <li class="category">
-                    <p class="category-header">Đèn chùm</p>
-                    <ul class="category-products">
-                      <li class="category-item">Đèn chùm cổ điển</li>
-                      <li class="category-item">Đèn chùm hiện đại</li>
-                      <li class="category-item">Đèn chùm pha lê</li>
-                      <li class="category-item">Đèn chùm nến</li>
-                    </ul>
-                  </li> -->
+                  <!-- Categories will go here -->
                 </ul>
               </div>
             </li>
@@ -93,6 +86,18 @@
           </ul>
         </nav>
       </header>
+      
+      <!-- Sidebar and overlay -->
+      <div class="sidebar" id="sidebar">
+        <ul class="sidebar-list">
+          <li><a href="#">TRANG CHỦ</a></li>
+          <li><a href="#">DANH MỤC</a></li>
+          <li><a href="#">TIN TỨC</a></li>
+          <li><a href="#">LIÊN HỆ</a></li>
+        </ul>
+      </div>
+      <div class="overlay" id="overlay"></div>
+      
 
       <!-- Slider -->
       <div class="container">
@@ -1024,7 +1029,7 @@
       <footer class="footer">
         <div class="container">
           <div class="footer-top">
-            <div class="footer-top-contact">
+            <div class="footer-item">
               <div class="tittle">LIÊN HỆ</div>
               <div class="location">375 Man Thiện, TNPA, Thủ Đức, TPHCM</div>
               <div class="phone-number">Điện thoại: 0973038104</div>
@@ -1061,30 +1066,34 @@
           </div>
         </div>
         
-        <div class="footer-bottom">
-            <a href="" class="logo">
-              <img src="./img/logo-white.png" alt="">
-            </a>
-            <div class="social-media">
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                class="social-icon"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a
-                href="https://www.youtube.com"
-                target="_blank"
-                class="social-icon"
-                ><i class="fab fa-youtube"></i
-              ></a>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                class="social-icon"
-                ><i class="fab fa-instagram"></i
-              ></a>
+        <div class="tmp">
+          <div class="container">
+            <div class="footer-bottom">
+                <a href="" class="logo">
+                  <img src="./img/logo-white.png" alt="">
+                </a>
+                <div class="social-media">
+                  <a
+                    href="https://www.facebook.com"
+                    target="_blank"
+                    class="social-icon"
+                    ><i class="fab fa-facebook-f"></i
+                  ></a>
+                  <a
+                    href="https://www.youtube.com"
+                    target="_blank"
+                    class="social-icon"
+                    ><i class="fab fa-youtube"></i
+                  ></a>
+                  <a
+                    href="https://www.instagram.com"
+                    target="_blank"
+                    class="social-icon"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                </div>
             </div>
+          </div>  
         </div>
       </footer>
     </div>
