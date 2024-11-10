@@ -183,6 +183,64 @@
                 <div class="chart"></div>
               </div>
             </div>
+
+            <div class="card-container">
+              <div class="recent-order">
+                <div class="recent-order-header">
+                  <p>Đơn hàng gần đây</p>
+                </div>
+                <table class="order-table">
+                  <thead>
+                    <tr>
+                      <th>ID Khách Hàng</th>
+                      <th>Khách Hàng</th>
+                      <th>Ngày Đặt</th>
+                      <th>Trạng Thái</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#CUST001</td>
+                      <td class="customer-info">
+                        <img src="https://plus.unsplash.com/premium_photo-1658527049634-15142565537a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww" alt="Avatar" class="customer-avatar">
+                        <span>Nguyễn Văn A</span>
+                      </td>
+                      <td>10/11/2024</td>
+                      <td class="status completed">
+                        <span>Hoàn thành</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#CUST002</td>
+                      <td class="customer-info">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww" alt="Avatar" class="customer-avatar">
+                        <span>Trần Thị B</span>
+                      </td>
+                      <td>09/11/2024</td>
+                      <td class="status pending">
+                        <span>Đang chờ</span></td>
+                    </tr>
+                    <tr>
+                      <td>#CUST003</td>
+                      <td class="customer-info">
+                        <img src="https://plus.unsplash.com/premium_photo-1664536392779-049ba8fde933?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D" alt="Avatar" class="customer-avatar">
+                        <span>Lê Văn C</span>
+                      </td>
+                      <td>08/11/2024</td>
+                      <td class="status canceled"><span>Đã hủy</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="customer-chart">
+                <div class="cus-chart-header">
+                  <p>Khách hàng</p>
+                  Đơn vị tính: %
+                </div>
+                <canvas id="customerPieChart"></canvas>
+              </div>
+            </div>                         
           </div>
 
           <div class="tab-content" id="product-management-content">
@@ -363,5 +421,6 @@
       </div>
     </div>
     <script type="module" src="./js/admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </body>
 </html>

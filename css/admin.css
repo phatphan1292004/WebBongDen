@@ -579,6 +579,137 @@ table {
     }
 }
 
+/* Code card -container 2 in Dashboard */
+.card-container {
+    display: flex;
+    margin-top: 50px;
+    gap: 40px;
+  }
+  
+  .recent-order {
+    width: 70%;
+    max-width: 800px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .recent-order-header {
+    margin-bottom: 15px;
+  }
+  
+  .recent-order-header p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+  
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .order-table thead {
+    background-color: #fafafa;
+  }
+  
+  .order-table th,
+  .order-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .order-table th {
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .order-table td {
+    color: #333;
+  }
+  
+  .customer-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .customer-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .status {
+    font-weight: 600;
+    border-radius: 12px;
+    text-align: center;
+  }
+  
+  
+  .status.completed span{
+    display: block;
+    max-width: 120px;
+    padding: 8px 14px;
+    color: #28a745;
+    background-color: #e0f7e9;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .status.pending span{
+    display: block;
+    max-width: 120px;
+    padding: 8px 14px;
+    color: #ffc107;
+    background-color: #fff3cd;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .status.canceled span{
+    display: block;
+    max-width: 120px;
+    padding: 10px 20px;
+    color: #dc3545;
+    background-color: #f8d7da;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .customer-chart {
+    width: calc(30% + 27px); /* Chứa biểu đồ khách hàng */
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px; /* Padding được tính vào chiều rộng */
+  }
+
+  .customer-chart p {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#customerPieChart {
+    max-width: 300px;
+    max-height: 300px;
+    margin: 0 auto;
+}
+
+.cus-chart-header {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  
+  
 
 
 
