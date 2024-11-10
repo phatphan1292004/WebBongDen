@@ -163,61 +163,86 @@
 
 /* Code dashboard */
 
-.card-revenue {
-    display: grid;
-    grid-template-columns: 25% 25% 50%;
-    grid-template-rows: 50% 50%;
-    gap: 20px;
+.main .tab-content .card-revenue {
+    display: flex;
+    gap: 40px;
 }
-.card {
+
+.main .tab-content .card-revenue .container-left {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    width: 45%;
+}
+.tab-content .card-revenue .container-left .card {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    flex: 1;
+    padding: 15px;
+    height: 150px;
     min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-.card h3 {
-    margin: 0;
+
+.card-revenue .container-left .card .top-card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+.tab-content .card-revenue .container-left .card p {
     font-size: 14px;
     color: #6c757d;
+    font-weight: 600;
 }
-.card .value {
-    font-size: 32px;
-    font-weight: bold;
+.card-revenue .container-left .card .value {
+    font-size: 28px;
+    font-weight: 600;
     margin: 10px 0;
 }
-.card .percentage {
-    font-size: 14px;
-    padding: 2px 8px;
+.card-revenue .container-left .card .percentage {
+    font-size: 12px;
+    padding: 4px 8px;
     border-radius: 12px;
     display: inline-block;
 }
-.card .percentage.up {
+.card-revenue .container-left .card .percentage.up {
     background-color: #e0f7f4;
     color: #17c671;
 }
-.card .percentage.down {
+.card-revenue .container-left .card .percentage.down {
     background-color: #fdecea;
     color: #e74c3c;
 }
-.card .percentage.na {
+.card-revenue .container-left .card .percentage.na {
     background-color: #fef7e0;
     color: #f1c40f;
 }
-.card .goal {
+.card-revenue .container-left .card .goal {
     display: flex;
     align-items: center;
     font-size: 14px;
     color: #6c757d;
+    flex-direction: column;
 }
-.card .goal .bar {
-    flex: 1;
+.card-revenue .container-left .card .goal .bar {
+    margin-top: 8px;
     height: 6px;
+    width: 100%;
     border-radius: 3px;
     background-color: #e9ecef;
-    margin-left: 10px;
     position: relative;
+}
+
+.card-revenue .container-left .card .goal .goal-title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 .card .goal .bar span {
     display: block;
@@ -242,33 +267,18 @@
     width: 50%;
 }
 .chart-card {
-    min-width: 400px;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 .chart-card h3 {
     margin: 0;
     font-size: 16px;
     color: #343a40;
 }
-.chart-card .legend {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-.chart-card .legend span {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-    font-size: 14px;
-    color: #6c757d;
-}
-.chart-card .legend span::before {
-    content: '';
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 5px;
-}
+
 .chart-card .legend span.online::before {
     background-color: #007bff;
 }
@@ -278,7 +288,6 @@
 .chart {
     width: 100%;
     height: 200px;
-    background: url('https://placehold.co/400x200?text=Chart+Placeholder') no-repeat center center;
     background-size: cover;
 }
 
@@ -503,6 +512,19 @@ table {
 .main-content .tab-content .tab-container {
     overflow-y: scroll;
     max-height: 550px;
+}
+
+.main-content .tab-content .tab-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-content .tab-content .tab-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 6px;
+}
+
+.main-content .tab-content .tab-container::-webkit-scrollbar-track {
+    background-color: #eee;
 }
 
 

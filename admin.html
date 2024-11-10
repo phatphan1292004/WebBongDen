@@ -85,68 +85,106 @@
           </div>
         </div>
 
-        <div class="main-content">    
+        <div class="main-content">
           <div class="tab-content" id="dashboard-content">
-              <!-- <div class="card-revenue">
-                          <div class="card">
-                              <h3>Tong doanh thu</h3>
-                              <div class="value">107950.00</div>
-                              <div class="percentage up">↑ 6.71%</div>
-                              <div class="goal">
-                                  Monthly Goal
-                                  <div class="bar blue">
-                                      <span></span>
-                                  </div>
-                                  70%
-                              </div>
-                          </div>
-                          <div class="card">
-                              <h3>So hoa don</h3>
-                              <div class="value">16</div>
-                              <div class="percentage down">↓ 3.26%</div>
-                              <div class="goal">
-                                  Monthly Goal
-                                  <div class="bar green">
-                                      <span></span>
-                                  </div>
-                                  60%
-                              </div>
-                          </div>
-                          <div class="chart-card">
-                              <h3>Sales Statistics</h3>
-                              <div class="legend">
-                                  <span class="online">Online</span>
-                                  <span class="offline">Offline</span>
-                              </div>
-                              <div class="chart"></div>
-                          </div>
-                          <div class="card">
-                              <h3>So khach hang</h3>
-                              <div class="value">5</div>
-                              <div class="percentage down">↓ 2.71%</div>
-                              <div class="goal">
-                                  Monthly Goal
-                                  <div class="bar yellow">
-                                      <span></span>
-                                  </div>
-                                  45%
-                              </div>
-                          </div>
-                          <div class="card">
-                              <h3>Lượt xem</h3>
-                              <div class="value">N/A</div>
-                              <div class="percentage na">↑ N/A</div>
-                              <div class="goal">
-                                  Monthly Goal
-                                  <div class="bar purple">
-                                      <span></span>
-                                  </div>
-                                  50%
-                              </div>
-                          </div>
-                      </div> -->
+            <div class="card-revenue">
+              <div class="container-left">
+                <div class="card" id="revenue-card">
+                  <div class="top-card">
+                    <div class="top-card-title">
+                      <p>Tổng doanh thu</p>
+                      <div class="percentage up">↑ 6.71%</div>
+                    </div>
+                    <div class="value">107950.00</div>
+                  </div>
+                
+                  <div class="bottom-card">
+                    <div class="goal">
+                      <div class="goal-title">
+                        Monthly Goal
+                        <div class="goal-progress">70%</div>
+                      </div>
+                      <div class="bar blue">
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="card" id="orders-card">
+                  <div class="top-card">
+                    <div class="top-card-title">
+                      <p>Số đơn hàng</p>
+                      <div class="percentage down">↓ 3.26%</div>
+                    </div>
+                    <div class="value">16</div>
+                  </div>
+                
+                  <div class="bottom-card">
+                    <div class="goal">
+                      <div class="goal-title">
+                        Monthly Goal
+                        <div class="goal-progress">60%</div>
+                      </div>
+                      <div class="bar green">
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="card" id="customers-card">
+                  <div class="top-card">
+                    <div class="top-card-title">
+                      <p>Số khách hàng</p>
+                      <div class="percentage down">↓ 2.71%</div>
+                    </div>
+                    <div class="value">5</div>
+                  </div>
+                
+                  <div class="bottom-card">
+                    <div class="goal">
+                      <div class="goal-title">
+                        Monthly Goal
+                        <div class="goal-progress">45%</div>
+                      </div>
+                      <div class="bar yellow">
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="card" id="visits-card">
+                  <div class="top-card">
+                    <div class="top-card-title">
+                      <p>Lượt truy cập</p>
+                      <div class="percentage na">↑ N/A</div>
+                    </div>
+                    <div class="value">N/A</div>
+                  </div>
+                
+                  <div class="bottom-card">
+                    <div class="goal">
+                      <div class="goal-title">
+                        Monthly Goal
+                        <div class="goal-progress">50%</div>
+                      </div>
+                      <div class="bar purple">
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                
+              <div class="chart-card">
+                <p>Số lượng sản phẩm bán được trong 5 tháng gần đây</p>
+                <div class="chart"></div>
+              </div>
+            </div>
           </div>
-          
+
           <div class="tab-content" id="product-management-content">
             <div class="header-tab">
               <div class="search-container">
@@ -196,23 +234,23 @@
             </div>
 
             <!-- Bảng danh sách sản phẩm -->
-             <div class="tab-container">
-               <table class="product-table">
-                 <thead>
-                   <tr>
-                     <th>Id</th>
-                     <th>Link Hình ảnh</th>
-                     <th>Tên sản phẩm</th>
-                     <th>Giá</th>
-                     <th>Loại sản phẩm</th>
-                     <th>Ngày thêm</th>
-                     <th>Thao tác</th>
-                     <th></th>
-                     <th></th>
-                   </tr>
-                 </thead>
-                 <tbody id="product-table-body">
-                   <!-- <tr>
+            <div class="tab-container">
+              <table class="product-table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Link Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Loại sản phẩm</th>
+                    <th>Ngày thêm</th>
+                    <th>Thao tác</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="product-table-body">
+                  <!-- <tr>
                      <td>001</td>
                      <td>
                        <a href="https://via.placeholder.com/50" target="_blank"
@@ -235,9 +273,9 @@
                        </button>
                      </td>
                    </tr> -->
-                 </tbody>
-                </table>
-             </div>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div class="tab-content" id="customer-management-content">
@@ -298,26 +336,24 @@
             <!-- Overlay và Form thêm sản phẩm -->
 
             <!-- Bảng danh sách sản phẩm -->
-             <div class="tab-container">
-               <table class="product-table">
-                 <thead>
-                   <tr>
-                     <th>Id</th>
-                     <th>Tên Khách Hàng</th>
-                     <th>Ngày đặt hàng</th>
-                     <th>Ngày giao dự kiến</th>
-                     <th>Địa chỉ</th>
-                     <th>Trạng thái</th>
-                     <th>Phương thức thanh toán</th>
-                     <th>Thời gian đặt hàng</th>
-                     <th>Hóa đơn</th>
-                   </tr>
-                 </thead>
-                 <tbody id="order-table-body">
-
-                 </tbody>
-                </table>
-             </div>
+            <div class="tab-container">
+              <table class="product-table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Tên Khách Hàng</th>
+                    <th>Ngày đặt hàng</th>
+                    <th>Ngày giao dự kiến</th>
+                    <th>Địa chỉ</th>
+                    <th>Trạng thái</th>
+                    <th>Phương thức thanh toán</th>
+                    <th>Thời gian đặt hàng</th>
+                    <th>Hóa đơn</th>
+                  </tr>
+                </thead>
+                <tbody id="order-table-body"></tbody>
+              </table>
+            </div>
           </div>
           <div class="tab-content" id="revenue-statistics-content">
             <h1>Thống kê doanh thu</h1>
