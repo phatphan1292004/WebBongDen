@@ -1,5 +1,8 @@
 .main {
-    height: 65vh;
+    background-color: #fff;
+    height: 66vh;
+    display: flex;
+    
 }
 /* Container Styles */
 .contact-container {
@@ -7,14 +10,14 @@
     display: flex;
     gap: 20px;
     padding: 20px;
-    max-width: 1200px;
-   
+    width: 1500px;
     margin: auto;
 }
 
 /* Left Section: Tabs and Map */
 .left-section {
     flex: 1;
+    
 }
 
 .tabs {
@@ -59,7 +62,8 @@
 }
 
 .hotline {
-    color: #ffcc00;
+    padding: auto;
+    color: #fe0000;
     font-weight: bold;
 }
 

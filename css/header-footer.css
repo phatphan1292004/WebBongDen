@@ -120,12 +120,15 @@
   
   .header .navbar .navbar-list .dropdown:hover .submenu {
     display: block;
+    
   }
   
   .header .navbar .navbar-list .dropdown .submenu {
     display: none;
     position: absolute;
+    
   }
+ 
   
   .header .navbar .navbar-list .dropdown .submenu > ul {
     display: flex;
@@ -135,6 +138,7 @@
     padding: 12px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     text-align: left;
+    
   }
   
   .header .navbar-list .dropdown .submenu > ul .category {
