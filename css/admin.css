@@ -811,12 +811,14 @@ table {
 }
 
 .revenue-statistics .revenue-body {
-    max-height: 530px;
+    min-height: 530px;
 }
   
 #revenue-chart {
-    margin: 0 auto;
+    width: 100%;
 }
+
+  
 
  
   
