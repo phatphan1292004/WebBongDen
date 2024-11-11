@@ -194,6 +194,7 @@
 }
 
 .product-img {
+    
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -692,4 +693,12 @@
 }
 
 
+
+.header .navbar {
+    padding: 0;
+}
+
+.navbar-list .dropdown .submenu {
+    min-width: 1000px;
+}
 
