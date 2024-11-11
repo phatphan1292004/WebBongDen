@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   const tabHistory = [];
   let canChangeTab = false;
 
-
   //Lay ds tinh huyen xa
   const fetchData = async (url) => {
     const response = await fetch(url);
@@ -25,7 +24,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     wardSelect.innerHTML = '<option value="">Chọn Phường, Xã</option>';
 
     if (provinceCode) {
-      const province = await fetchData(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`);
+      const province = await fetchData(
+        `https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`
+      );
       province.districts.forEach((district) => {
         const option = new Option(district.name, district.code);
         districtSelect.appendChild(option);
@@ -33,19 +34,23 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  document.getElementById("district").addEventListener("change", async function () {
-    const districtCode = this.value;
-    const wardSelect = document.getElementById("ward");
-    wardSelect.innerHTML = '<option value="">Chọn Phường, Xã</option>';
+  document
+    .getElementById("district")
+    .addEventListener("change", async function () {
+      const districtCode = this.value;
+      const wardSelect = document.getElementById("ward");
+      wardSelect.innerHTML = '<option value="">Chọn Phường, Xã</option>';
 
-    if (districtCode) {
-      const district = await fetchData(`https://provinces.open-api.vn/api/d/${districtCode}?depth=2`);
-      district.wards.forEach((ward) => {
-        const option = new Option(ward.name, ward.code);
-        wardSelect.appendChild(option);
-      });
-    }
-  });
+      if (districtCode) {
+        const district = await fetchData(
+          `https://provinces.open-api.vn/api/d/${districtCode}?depth=2`
+        );
+        district.wards.forEach((ward) => {
+          const option = new Option(ward.name, ward.code);
+          wardSelect.appendChild(option);
+        });
+      }
+    });
 
   // Hàm kiểm tra input có hợp lệ hay không
   const validateInput = (input) => {
@@ -58,18 +63,24 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   };
 
-  document.querySelectorAll("input[required], select[required]").forEach((input) => {
-    input.addEventListener("input", () => validateInput(input));
-    input.addEventListener("change", () => validateInput(input));
-  });
+  document
+    .querySelectorAll("input[required], select[required]")
+    .forEach((input) => {
+      input.addEventListener("input", () => validateInput(input));
+      input.addEventListener("change", () => validateInput(input));
+    });
 
   const navList = document.querySelectorAll(".nav-item");
 
   //showTab khi có thay đổi
   function showTab(tabName) {
-    document.querySelectorAll(".tab-content, .nav-item").forEach((el) => el.classList.remove("active", "highlight"));
+    document
+      .querySelectorAll(".tab-content, .nav-item")
+      .forEach((el) => el.classList.remove("active", "highlight"));
     document.getElementById(tabName)?.classList.add("active");
-    document.querySelector(`.nav-item[data-tab="${tabName}"]`)?.classList.add("active");
+    document
+      .querySelector(`.nav-item[data-tab="${tabName}"]`)
+      ?.classList.add("active");
 
     const tabIndex = tabHistory.indexOf(tabName);
     if (tabIndex === -1) {
@@ -107,7 +118,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       const nextTab = currentTab?.nextElementSibling;
 
       if (currentTab?.id === "order-info") {
-        const inputs = currentTab.querySelectorAll("input[required], select[required]");
+        const inputs = currentTab.querySelectorAll(
+          "input[required], select[required]"
+        );
         let isAllValid = true;
         const provinceSelect = document.getElementById("province");
         const districtSelect = document.getElementById("district");
@@ -147,5 +160,35 @@ document.addEventListener("DOMContentLoaded", async function () {
         showTab(nextTab.id);
       }
     });
+  });
+
+  const menuToggle = document.getElementById("menu-toggle");
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  console.log(menuToggle, sidebar, overlay);
+  menuToggle.addEventListener("click", function () {
+    sidebar.classList.add("active"); 
+    overlay.classList.add("active"); 
+  });
+
+  overlay.addEventListener("click", function () {
+    sidebar.classList.remove("active"); 
+    overlay.classList.remove("active"); 
+  });
+
+  const searchIcon = document.querySelector(".search-btn");
+  const mobileSearchBar = document.getElementById("mobile-search-bar");
+  const closeSearchBtn = document.getElementById("close-search-button");
+
+  searchIcon.addEventListener("click", (event) => {
+    event.preventDefault();
+    mobileSearchBar.classList.add("active");
+    searchIcon.style.display = "none";
+  });
+
+  closeSearchBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    mobileSearchBar.classList.remove("active");
+    searchIcon.style.display = "block";
   });
 });

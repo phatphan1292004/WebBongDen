@@ -1,5 +1,5 @@
 import { cateData, subcateData, productData } from "./data.js";
-window.addEventListener('load', function() {
+document.addEventListener('DOMContentLoaded', function() {
     function loadHTML(elementId, filePath) {
         return fetch(filePath)
             .then(response => response.text())

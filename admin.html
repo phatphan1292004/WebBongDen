@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/admin.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <div class="header-left">
+          <i class="fa-solid fa-bars"></i>
+          <a href="index.html" class="header-logo">
+            <img src="./img/logo-fold.png" alt="" />
+          </a>
+        </div>
+        <div class="header-right">
+          <i class="fa-regular fa-bell"></i>
+          <div class="account">
+            <img
+              src="https://images.unsplash.com/photo-1726554881162-ceeb7d68be8c?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt=""
+            />
+          </div>
+        </div>
+      </header>
+
+      <div class="main">
+        <div class="sidebar">
+          <div class="nav">
+            <div class="nav-item" data-index="0">
+              <div class="nav-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <p style="font-weight: 500;">Dashboard</p>
+              </div>
+            </div>
+
+            <div class="nav-item" data-index="1">
+              <div class="nav-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Quản lý sản phẩm</p>
+              </div>
+            </div>
+
+            <div class="nav-item" data-index="2">
+              <div class="nav-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Quản lý khách hàng</p>
+              </div>
+            </div>
+
+            <div class="nav-item" data-index="3">
+              <div class="nav-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Quản lý đơn hàng</p>
+              </div>
+            </div>
+
+            <div class="nav-item" data-index="4">
+              <div class="nav-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Thống kê doanh thu</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-bottom">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <p>Đăng xuất</p>
+          </div>
+        </div>
+
+        <div class="main-content">
+          <div class="tab-content" id="dashboard-content">
+            <div class="card-revenue">
+              <div class="container-left">
+                <div class="card" id="revenue-card">
+                  <div class="top-card">
+                    <div class="top-card-title">
+                      <p>Tổng doanh thu</p>
+                      <div class="percentage up">↑ 6.71%</div>
+                    </div>
+                    <div class="value">107950.00</div>
+                  </div>
+
+                  <div class="bottom-card">
+                    <div class="goal">
+                      <div class="goal-title">
+                        Monthly Goal
+                        <div class="goal-progress">70%</div>
+                      </div>
+                      <div class="bar blue">
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card" id="orders-card">
+                  <div class="top-card">
+                    <div class="top-card-title">
+                      <p>Số đơn hàng</p>
+                      <div class="percentage down">↓ 3.26%</div>
+                    </div>
+                    <div class="value">16</div>
+                  </div>
+
+                  <div class="bottom-card">
+                    <div class="goal">
+                      <div class="goal-title">
+                        Monthly Goal
+                        <div class="goal-progress">60%</div>
+                      </div>
+                      <div class="bar green">
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card" id="customers-card">
+                  <div class="top-card">
+                    <div class="top-card-title">
+                      <p>Số khách hàng</p>
+                      <div class="percentage down">↓ 2.71%</div>
+                    </div>
+                    <div class="value">5</div>
+                  </div>
+
+                  <div class="bottom-card">
+                    <div class="goal">
+                      <div class="goal-title">
+                        Monthly Goal
+                        <div class="goal-progress">45%</div>
+                      </div>
+                      <div class="bar yellow">
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card" id="visits-card">
+                  <div class="top-card">
+                    <div class="top-card-title">
+                      <p>Lượt truy cập</p>
+                      <div class="percentage na">↑ N/A</div>
+                    </div>
+                    <div class="value">N/A</div>
+                  </div>
+
+                  <div class="bottom-card">
+                    <div class="goal">
+                      <div class="goal-title">
+                        Monthly Goal
+                        <div class="goal-progress">50%</div>
+                      </div>
+                      <div class="bar purple">
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-card">
+                <p>Doanh thu trong năm</p>
+                <canvas id="salesChart"></canvas>
+              </div>
+            </div>
+
+            <div class="card-container">
+              <div class="recent-order">
+                <div class="recent-order-header">
+                  <p>Đơn hàng gần đây</p>
+                </div>
+                <table class="order-table">
+                  <thead>
+                    <tr>
+                      <th>ID Khách Hàng</th>
+                      <th>Khách Hàng</th>
+                      <th>Ngày Đặt</th>
+                      <th>Trạng Thái</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#CUST001</td>
+                      <td class="customer-info">
+                        <img
+                          src="https://plus.unsplash.com/premium_photo-1658527049634-15142565537a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww"
+                          alt="Avatar"
+                          class="customer-avatar"
+                        />
+                        <span>Nguyễn Văn A</span>
+                      </td>
+                      <td>10/11/2024</td>
+                      <td class="status completed">
+                        <span>Hoàn thành</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#CUST002</td>
+                      <td class="customer-info">
+                        <img
+                          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww"
+                          alt="Avatar"
+                          class="customer-avatar"
+                        />
+                        <span>Trần Thị B</span>
+                      </td>
+                      <td>09/11/2024</td>
+                      <td class="status pending">
+                        <span>Đang chờ</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#CUST003</td>
+                      <td class="customer-info">
+                        <img
+                          src="https://plus.unsplash.com/premium_photo-1664536392779-049ba8fde933?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
+                          alt="Avatar"
+                          class="customer-avatar"
+                        />
+                        <span>Lê Văn C</span>
+                      </td>
+                      <td>08/11/2024</td>
+                      <td class="status canceled"><span>Đã hủy</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="customer-chart">
+                <div class="cus-chart-header">
+                  <p>Khách hàng</p>
+                  Đơn vị tính: %
+                </div>
+                <canvas id="customerPieChart"></canvas>
+              </div>
+            </div>
+
+            <div class="card-container2">
+              <div class="top-product">
+                <div class="top-product-header">
+                  <p>Top 10 sản phẩm bán chạy</p>
+                </div>
+                <canvas id="topProductsChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="product-management-content">
+            <div class="header-tab">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="product-search"
+                  placeholder="Tìm kiếm sản phẩm..."
+                />
+                <button id="search-btn">Tìm kiếm</button>
+              </div>
+
+              <button class="add-product">
+                <i class="fa-solid fa-plus"></i>
+                Thêm sản phẩm
+              </button>
+            </div>
+
+            <!-- Overlay và Form thêm sản phẩm -->
+            <div class="overlay" id="overlay">
+              <div class="add-product-form" id="add-product-form">
+                <div class="form-header">
+                  <p>Thêm sản phẩm mới</p>
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+                <form id="product-form">
+                  <label for="product-id">Id:</label>
+                  <input type="text" id="product-id" required />
+
+                  <label for="product-image">Link Hình ảnh:</label>
+                  <input type="text" id="product-image" required />
+
+                  <label for="product-name">Tên sản phẩm:</label>
+                  <input type="text" id="product-name" required />
+
+                  <label for="product-price">Giá:</label>
+                  <input type="text" id="product-price" required />
+
+                  <label for="product-category">Loại sản phẩm:</label>
+                  <input type="text" id="product-category" required />
+
+                  <label for="product-date">Ngày thêm:</label>
+                  <input type="date" id="product-date" required />
+
+                  <button type="button" id="save-product">Lưu sản phẩm</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Bảng danh sách sản phẩm -->
+            <div class="tab-container">
+              <table class="product-table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Link Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Loại sản phẩm</th>
+                    <th>Ngày thêm</th>
+                    <th>Thao tác</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="product-table-body">
+                  <!-- <tr>
+                     <td>001</td>
+                     <td>
+                       <a href="https://via.placeholder.com/50" target="_blank"
+                         >https://via.placeholder.com/50</a
+                       >
+                     </td>
+                     <td>Sản phẩm 1</td>
+                     <td>200.000 VNĐ</td>
+                     <td>Đèn LED</td>
+                     <td>01/12/2024</td>
+                     <td><button class="view-details">Xem chi tiết</button></td>
+                     <td>
+                       <button class="edit-product">
+                         <i class="fa-regular fa-pen-to-square"></i>
+                       </button>
+                     </td>
+                     <td>
+                       <button class="delete-product">
+                         <i class="fa-regular fa-trash-can"></i>
+                       </button>
+                     </td>
+                   </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-content" id="customer-management-content">
+            <div class="header-tab">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="customer-search"
+                  placeholder="Tìm kiếm khách hàng..."
+                />
+                <button id="search-btn">Tìm kiếm</button>
+              </div>
+            </div>
+
+            <!-- Bảng danh sách khách hàng -->
+            <div class="tab-container">
+              <table class="customer-table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Tên khách hàng</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Ngày đăng ký</th>
+                    <th>Lịch sử mua hàng</th>
+                  </tr>
+                </thead>
+                <tbody id="customer-table-body">
+                  <!-- <tr>
+                    <td>C001</td>
+                    <td>Nguyễn An</td>
+                    <td>nguyenan@example.com</td>
+                    <td>0123456789</td>
+                    <td>123 Đường Lê Lợi, Quận 1, TP.HCM</td>
+                    <td>15/10/2023</td>
+                    <td>
+                      <button class="view-details">Xem chi tiết</button>
+                    </td>
+                  </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-content" id="order-management-content">
+            <div class="header-tab">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="product-search"
+                  placeholder="Tìm kiếm đơn hàng..."
+                />
+                <button id="search-btn">Tìm kiếm</button>
+              </div>
+            </div>
+
+            <!-- Overlay và Form thêm sản phẩm -->
+
+            <!-- Bảng danh sách sản phẩm -->
+            <div class="tab-container">
+              <table class="product-table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Tên Khách Hàng</th>
+                    <th>Ngày đặt hàng</th>
+                    <th>Ngày giao dự kiến</th>
+                    <th>Địa chỉ</th>
+                    <th>Trạng thái</th>
+                    <th>Phương thức thanh toán</th>
+                    <th>Thời gian đặt hàng</th>
+                    <th>Hóa đơn</th>
+                  </tr>
+                </thead>
+                <tbody id="order-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-content" id="revenue-statistics-content">
+            <div class="revenue-statistics">
+              <div class="revenue-header">
+                <p>Thống kê doanh thu</p>
+              </div>
+              <div class="chart-selection">
+                <div class="left">
+                  <label for="statistic-type">Chọn loại thống kê:</label>
+                  <select id="statistic-type">
+                    <option value="monthly">Thống kê theo tháng</option>
+                    <option value="yearly">Thống kê theo năm</option>
+                  </select>
+                </div>
+                <div class="right">
+                  <div class="input-group" id="month-input-group">
+                    <label for="month">Năm:</label>
+                    <input type="number" id="month" placeholder="Nhập năm" required />
+                  </div>
+                  <button id="submit-btn">Xem Thống Kê</button>
+                </div>
+              </div>
+            
+              <!-- Biểu đồ -->
+              <div class="revenue-body">
+                <canvas id="revenue-chart"></canvas>
+              </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./js/admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
+</html>
