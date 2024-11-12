@@ -235,7 +235,9 @@
     text-align: center;
     
 }
-
+a {
+    text-decoration: none;
+}
 .product-description h6 {
     height: 100px;
     font-size: 16px;
