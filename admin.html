@@ -276,6 +276,18 @@
                 <button id="search-btn">Tìm kiếm</button>
               </div>
 
+              <div class="sort-dropdown">
+                <select id="sort-select-product" class="sort-select">
+                  <option value="" disabled selected>Chọn</option>
+                  <option value="name-asc">Tên A-Z</option>
+                  <option value="name-desc">Tên Z-A</option>
+                  <option value="price-asc">Giá Thấp-Cao</option>
+                  <option value="price-desc">Giá Cao-Thấp</option>
+                </select>
+                <button id="sort-btn" class="sort-button">
+                  <i class="fa-solid fa-sort"></i> Sắp xếp
+                </button>
+              </div>
               <button class="add-product">
                 <i class="fa-solid fa-plus"></i>
                 Thêm sản phẩm
@@ -368,6 +380,18 @@
                 />
                 <button id="search-btn">Tìm kiếm</button>
               </div>
+
+
+              <div class="sort-dropdown">
+                <select id="sort-select-customer" class="sort-select">
+                  <option value="" disabled selected>Chọn</option>
+                  <option value="name-asc">Tên A-Z</option>
+                  <option value="name-desc">Tên Z-A</option>
+                </select>
+                <button id="sort-btn" class="sort-button">
+                  <i class="fa-solid fa-sort"></i> Sắp xếp
+                </button>
+              </div>
             </div>
 
             <!-- Bảng danh sách khách hàng -->
@@ -410,6 +434,20 @@
                   placeholder="Tìm kiếm đơn hàng..."
                 />
                 <button id="search-btn">Tìm kiếm</button>
+              </div>
+
+              <div style="display: flex; gap: 20px;">
+                <select id="sort-select-order" class="sort-select">
+                  <option value="" disabled selected>Chọn</option>
+                  <option value="name-asc">Ngày đặt: Mới nhất</option>
+                  <option value="name-desc">Ngày đặt: Cũ nhất</option>
+                  <option value="price-asc">ID A-Z</option>
+                  <option value="price-desc">ID Z-A</option>
+                </select>
+  
+                <button id="sort-btn" class="sort-button">
+                  <i class="fa-solid fa-sort"></i> Sắp xếp
+                </button>
               </div>
             </div>
 

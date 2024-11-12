@@ -337,9 +337,67 @@
     cursor: pointer;
 }
 
+
 .main-content .header-tab .search-container #search-btn:hover {
     background-color: #0056b3;
 }
+
+
+/* Container của Sort Dropdown */
+.sort-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 430px;
+  }
+  
+  /* Nút Sắp xếp */
+  .sort-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .sort-button:hover {
+    background-color: #e6e6e6;
+  }
+  
+  /* Icon sắp xếp */
+  .sort-button i {
+    font-size: 16px;
+  }
+  
+  /* Select Sắp xếp */
+  .sort-select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  /* Khi focus vào Select */
+  .sort-select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  /* Tùy chỉnh màu nền khi hover vào Select */
+  .sort-select:hover {
+    background-color: #e6e6e6;
+  }
+  
 
 /* Style cho bảng sản phẩm */
 .tab-content .product-table {
