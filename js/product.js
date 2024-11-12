@@ -18,17 +18,63 @@ document.addEventListener('DOMContentLoaded', function() {
             console.warn('Các phần tử menu-toggle, sidebar hoặc overlay không tồn tại trong DOM!');
         }
 
-        // Xử lý sự kiện cho các item trong danh mục
         const categoryItems = document.querySelectorAll('.cate-item');
         categoryItems.forEach(item => {
             item.addEventListener('click', function() {
-                const subcategoryList = this.nextElementSibling;
-                if (subcategoryList.classList.contains('show')) {
-                    subcategoryList.classList.remove('show');
-                } else {
-                    subcategoryList.classList.add('show');
-                }
+                const subcategoryList = this.nextElementSibling; // Lấy danh sách con kế tiếp
+                const icon = this.querySelector('i'); // Lấy phần tử icon
+                
+                // Toggle lớp show cho .subcategory-list
+                subcategoryList.classList.toggle('show');
+                
+                // Toggle lớp active cho icon để xoay mũi tên
+                icon.classList.toggle('active');
             });
         });
+
+        const searchIcon = document.querySelector(".search-btn");
+        const mobileSearchBar = document.getElementById("mobile-search-bar");
+        const closeSearchBtn = document.getElementById("close-search-button");
+      
+        searchIcon.addEventListener("click", (event) => {
+          event.preventDefault();
+          mobileSearchBar.classList.add("active");
+          searchIcon.style.display = "none";
+        });
+      
+        closeSearchBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          mobileSearchBar.classList.remove("active");
+          searchIcon.style.display = "block";
+        });
+
+        function showNotification() {
+            cartNotification.classList.add('show');
+        
+            // Ẩn thông báo sau 3 giây
+            setTimeout(() => {
+                cartNotification.classList.remove('show');
+            }, 3000);
+        }
+
+        let quantityProduct = 0;
+        const quantityProductOrder = document.querySelector('.quantity-product');
+        const buyProductBtn = document.querySelector('.buy-product');
+        const cartNotification = document.getElementById('cartNotification');
+        buyProductBtn.addEventListener('click', function() {
+            quantityProduct++;
+            quantityProductOrder.textContent = quantityProduct;
+            showNotification();
+        });
     }, 1000);  
+
+    
+    $(document).ready(function(){
+        $('.product-image-list').slick({
+          infinite: true,
+          slidesToShow: 1,
+          prevArrow: `<button type='button' class='slick-prev slick-arrow'><i class="fa-solid fa-angle-left"></i></button>`,
+          nextArrow: `<button type='button' class='slick-next slick-arrow'><i class="fa-solid fa-angle-right"></i></button>`,
+        });
+    });
 });
