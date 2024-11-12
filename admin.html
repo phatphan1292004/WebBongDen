@@ -46,7 +46,7 @@
             <div class="nav-item" data-index="0">
               <div class="nav-item-left">
                 <i class="fa-solid fa-chart-line"></i>
-                <p style="font-weight: 500;">Dashboard</p>
+                <p style="font-weight: 500">Dashboard</p>
               </div>
             </div>
 
@@ -381,7 +381,6 @@
                 <button id="search-btn">Tìm kiếm</button>
               </div>
 
-
               <div class="sort-dropdown">
                 <select id="sort-select-customer" class="sort-select">
                   <option value="" disabled selected>Chọn</option>
@@ -436,7 +435,7 @@
                 <button id="search-btn">Tìm kiếm</button>
               </div>
 
-              <div style="display: flex; gap: 20px;">
+              <div style="display: flex; gap: 20px">
                 <select id="sort-select-order" class="sort-select">
                   <option value="" disabled selected>Chọn</option>
                   <option value="name-asc">Ngày đặt: Mới nhất</option>
@@ -444,7 +443,7 @@
                   <option value="price-asc">ID A-Z</option>
                   <option value="price-desc">ID Z-A</option>
                 </select>
-  
+
                 <button id="sort-btn" class="sort-button">
                   <i class="fa-solid fa-sort"></i> Sắp xếp
                 </button>
@@ -452,7 +451,57 @@
             </div>
 
             <!-- Overlay và Form thêm sản phẩm -->
-
+            <div class="overlay2" id="overlay2">
+              <div class="invoice-details">
+                <div class="invoice-header">
+                  <p>CHI TIẾT HÓA ĐƠN</p>
+                </div>
+                <div class="customer-info">
+                  <p>THÔNG TIN KHÁCH HÀNG</p>
+                  <p>
+                    <strong>Tên:</strong>
+                    <span id="customer-name">Nguyễn Văn A</span>
+                  </p>
+                  <p>
+                    <strong>Địa chỉ:</strong>
+                    <span id="customer-address">123 Đường ABC</span>
+                  </p>
+                  <p>
+                    <strong>Số điện thoại:</strong>
+                    <span id="customer-phone">0987654321</span>
+                  </p>
+                </div>
+            
+                <div class="order-items">
+                  <h4>Sản phẩm Mua</h4>
+                  <table class="items-table">
+                    <thead>
+                      <tr>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Số Lượng</th>
+                        <th>Đơn Giá</th>
+                        <th>Thành Tiền</th>
+                      </tr>
+                    </thead>
+                    <tbody id="order-items-body">
+                      <!-- Các sản phẩm sẽ được chèn vào đây -->
+                    </tbody>
+                  </table>
+                </div>
+            
+                <div class="total-price">
+                  <h4>Tổng Tiền</h4>
+                  <p>
+                    <strong>Tổng cộng:</strong>
+                    <span id="total-amount">0 VND</span>
+                  </p>
+                </div>
+            
+                <!-- Thêm nút đóng -->
+                <button class="close-overlay" id="close-overlay">Đóng</button>
+              </div>
+            </div>
+            
             <!-- Bảng danh sách sản phẩm -->
             <div class="tab-container">
               <table class="product-table">
@@ -489,17 +538,22 @@
                 <div class="right">
                   <div class="input-group" id="month-input-group">
                     <label for="month">Năm:</label>
-                    <input type="number" id="month" placeholder="Nhập năm" required />
+                    <input
+                      type="number"
+                      id="month"
+                      placeholder="Nhập năm"
+                      required
+                    />
                   </div>
                   <button id="submit-btn">Xem Thống Kê</button>
                 </div>
               </div>
-            
+
               <!-- Biểu đồ -->
               <div class="revenue-body">
                 <canvas id="revenue-chart"></canvas>
               </div>
-            </div>            
+            </div>
           </div>
         </div>
       </div>

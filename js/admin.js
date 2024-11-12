@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Xóa row khi ấn vào nút xóa
-  document.querySelector("tbody").addEventListener("click", function (e) {
+  document.querySelector("#product-table-body").addEventListener("click", function (e) {
     if (e.target.classList.contains("delete-product")) {
       e.stopPropagation();
       const row = e.target.closest("tr");
@@ -176,6 +176,16 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
 
     orderTableBody.appendChild(row);
+  });
+
+  
+  orderTableBody.addEventListener('click', function(event) {
+    if (event.target && event.target.classList.contains('view-details')) {
+      const invoiceDetails = document.querySelector('.invoice-details');
+      if (invoiceDetails) {
+        document.getElementById('overlay2').style.display = 'flex';
+      }
+    }
   });
 
   // Dữ liệu cho biểu đồ khách hàng

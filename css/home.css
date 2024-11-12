@@ -5,7 +5,7 @@
 }
 
 /* Sidebar styles */
-.sidebar {
+.wrapper .sidebar {
   position: fixed;
   top: 0;
   left: -250px; /* Sidebar initially hidden */
@@ -17,17 +17,17 @@
   z-index: 1000000; /* Make sure sidebar is above other content */
 }
 
-.sidebar-list {
+.wrapper .sidebar-list {
   list-style-type: none;
   padding: 0;
 }
 
-.sidebar-list li {
+.wrapper .sidebar-list li {
   padding: 15px;
   border-bottom: 1px solid #555;
 }
 
-.sidebar a {
+.wrapper .sidebar a {
   font-size: 14px;
   color: black;
   font-weight: 500;
@@ -35,12 +35,12 @@
   display: block;
 }
 
-.sidebar-list li:hover {
+.wrapper .sidebar-list li:hover {
   background-color: #444;
 }
 
 /* Overlay styles */
-.overlay {
+.wrapper .overlay {
   position: fixed;
   top: 0;
   left: 0;

@@ -1,183 +1,21 @@
 /* Wrapper and General Header */
-.wrapper .header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: var(--color-black);
-    z-index: 1000000;
-  }
+.header-right .header-user {
+    display: none !important; 
+}
+
+p {
+    margin: 0 !important;
+}
   
-  .wrapper .header .header-top {
-    max-width: 1240px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--color-black);
-    padding: 10px 0;
-  }
-  
-  .header .header-left {
-    display: flex;
-    align-items: center;
-  }
-  
-  .header .header-top .logo {
-    margin-right: 36px;
-  }
-  
-  /* Menu */
-  .header .header-top .menu {
-    color: var(--color-white);
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .header .header-top .menu i {
-    margin-right: 10px;
-  }
-  
-  /* Search Bar */
-  .header .header-top .search-bar form {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--color-white);
-    border-radius: 5px;
-    padding: 5px 10px;
-    width: 360px;
-  }
-  
-  .header .header-top .search-bar input {
-    border: none;
-    outline: none;
-    padding: 5px;
-    flex-grow: 1;
-  }
-  
-  .header .header-top .search-bar i {
-    color: #888;
-  }
-  
-  /* Info Section */
-  .header .header-top .info {
-    display: flex;
-    align-items: center;
-    color: var(--color-white);
-  }
-  
-  .header .header-top .info div {
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .header .header-top .info div i {
-    margin-right: 5px;
-  }
-  
-  .header .header-top .info .login {
-    background-color: var(--color-yellow);
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: var(--color-black);
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-  }
-  
-  /* Navbar */
-  .header .navbar {
-    background-color: var(--color-yellow);
-    width: 100%;
-  }
-  
-  .header .navbar .navbar-list {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 0;
-  }
-  
-  .header .navbar .navbar-list li {
-    position: relative;
-  }
-  
-  .header .navbar .navbar-list li > a {
-    display: block;
-    padding: 10px 26px;
-    font-size: 14px;
-    text-decoration: none;
-    color: var(--color-black);
-    font-weight: 600;
-  }
-  
-  .header .navbar .navbar-list > li > a:hover {
-    background-color: var(--color-yellow-dark);
-  }
-  
-  /* Dropdown Menu */
-  .header .navbar .navbar-list .dropdown:hover .submenu {
-    display: block;
-  }
-  
-  .header .navbar .navbar-list .dropdown .submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 12px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-  }
-  
-  .header .navbar .navbar-list .dropdown .submenu > ul {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .header .navbar .navbar-list .dropdown .submenu .category {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-gray-dark);
-    padding: 15px;
-  }
-  
-  .header .navbar .navbar-list .dropdown .category-header {
-    font-size: 16px;
-    font-weight: 500;
-    color: red;
-    margin-bottom: 10px;
-  }
-  
-  .header .navbar .navbar-list .dropdown .category-products {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .header .navbar .navbar-list .dropdown .category-item {
-    padding: 8px 6px;
-    font-size: 14px;
-    color: var(--color-gray-mid);
-  }
-  
-  .header .navbar .navbar-list .dropdown .category-item:hover {
-    background-color: #f0f0f0;
-    color: var(--color-gray-darkest);
-    cursor: pointer;
-    border-radius: 4px;
-  }
+
+    .navbar .navbar-list {
+        margin: 0;
+        padding: 0;
+    }
+
+    .category .category-products{
+        padding: 0 !important;
+    }
   
   .single-product-wrapper {
     border: 1px solid #e0e0e0; /* Light border around the card */

@@ -691,6 +691,120 @@ table {
   .order-table td {
     color: #333;
   }
+
+  .overlay2 {
+    display: none; /* Ban đầu ẩn */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Màu nền mờ */
+    display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Đảm bảo nó xuất hiện trên các phần khác */
+  }
+  
+  .invoice-details {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    overflow: hidden; /* Đảm bảo không bị tràn nội dung */
+  }
+  
+  .invoice-details h3 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center; /* Căn giữa tiêu đề */
+  }
+  
+  .invoice-details button.close-overlay {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu */
+  }
+  
+  .invoice-details button.close-overlay:hover {
+    background-color: #d32f2f;
+  }
+  
+  
+  .customer-info,
+  .order-items {
+    margin-bottom: 20px;
+  }
+  
+  .customer-info h4,
+  .order-items h4 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .customer-info p,
+  .order-items table {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .customer-info p {
+    margin: 5px 0;
+  }
+  
+  .order-items .items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .order-items .items-table th,
+  .order-items .items-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .order-items .items-table th {
+    background-color: #f1f1f1;
+    color: #333;
+  }
+  
+  .order-items .items-table td {
+    background-color: #fff;
+  }
+  
+  .order-items .items-table td:last-child {
+    text-align: right;
+  }
+  
+  .total-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .total-price p {
+    font-size: 20px;
+    color: #d32f2f;
+  }
+  
+  .total-price p strong {
+    font-weight: 700;
+  }
+
   
   .customer-info {
     display: flex;
