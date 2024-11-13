@@ -1,6 +1,4 @@
 .main {
-    background-color: #fff;
-    height: 66vh;
     display: flex;
     
 }
@@ -10,15 +8,12 @@
     display: flex;
     gap: 20px;
     padding: 20px;
-    width: 1500px;
-    margin: auto;
+    width: 1000px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 4px;
 }
 
-/* Left Section: Tabs and Map */
-.left-section {
-    flex: 1;
-    
-}
 
 .tabs {
     display: flex;
@@ -51,10 +46,15 @@
     display: block;
 }
 
-/* Right Section: Contact Information and Form */
-.right-section {
-    flex: 1;
+
+.left-section {
+    width: 50%;
 }
+
+.right-section {
+    width: 50%;
+}
+
 
 .right-section h2 {
     font-size: 24px;
