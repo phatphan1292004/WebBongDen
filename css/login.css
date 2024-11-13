@@ -1,3 +1,4 @@
+/* Input chung */
 select, input[type="text"], input[type="email"], input[type="password"] {
   width: 100%;
   padding: 8px;
@@ -7,139 +8,157 @@ select, input[type="text"], input[type="email"], input[type="password"] {
   background-color: #fff;
 }
 
+/* Placeholder */
 input[type="text"]::placeholder {
   color: #999;
 }
 
+/* Form chung */
+.form-main {
+  margin-top: 30px;
+}
+
 .form-input {
-  padding: 20px;
-  border: 1px solid #eee;
   height: 40px;
   padding: 0 20px;
-  transition: 0.25s ease;
+  border: 1px solid #eee;
   border-radius: 4px;
+  transition: 0.25s ease;
 }
 
 .form-input:focus {
   border-color: #6a5af9;
 }
 
+/* Field và Label */
 .form-field {
   width: 100%;
   position: relative;
+  margin-bottom: 30px;
 }
+
 .form-label {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   left: 21px;
-  user-select: none;
+  transform: translateY(-50%);
   color: #999;
   pointer-events: none;
-  transition: 0.25s ease;
+  user-select: none;
   font-size: 13px;
+  transition: 0.25s ease;
 }
 
 .form-input:not(:placeholder-shown) + .form-label,
 .form-input:focus + .form-label {
   top: 0;
-  background-color: #fff;
   left: 11px;
   padding: 0 10px;
-  display: inline-block;
+  background-color: #fff;
   color: #6a5af9;
   font-size: 12px;
 }
 
+/* Body và Wrapper */
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to right bottom, #00aefd , #ffa400);
+  background-image: url(../img/background-login.png);
+  height: 100vh;
 }
 
 .wrapper {
   width: 420px;
-  background-color: #fafafa;
-  border-radius: 4px;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.wrapper .form-header {
+/* Header và Main */
+.form-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0 30px 0;
 }
 
-.wrapper .form-main .form-field {
-  margin-bottom: 30px;
+.form-header p {
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.wrapper .form-group p {
+.form-group p {
   margin-bottom: 10px;
   color: #333;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-
-.wrapper .form-footer {
+/* Footer */
+.form-footer {
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
-  align-items:flex-start;
+  align-items: center;
 }
+
+button[type="submit"],
+[type="button"],
 .wrapper .form-footer button {
   padding: 10px 20px;
   background-color: #4288e5;
   color: white;
   border-radius: 4px;
-  text-align: right;
 }
 
-.wrapper .form-header .logo {
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 600;
-  color: black;
-}
-
-.wrapper .form-footer .forgot-pw {
+/* Forgot Password */
+.forgot-pw {
   font-size: 15px;
   color: #6a5af9;
-  display: block;
-  margin-top: 10px;
   text-decoration: none;
   cursor: pointer;
+  margin-top: 10px;
 }
 
-.wrapper .form-footer .forgot-pw:hover {
+.forgot-pw:hover {
   text-decoration: underline;
 }
-.login_signup{
-  margin-top: 15px;
-  text-align: center;
-}
-.forgot-container{
-  width: 100%;
-  height: 100%;
-  padding: 20px;
+
+.forgot-container {
+  width: 380px;
   margin-bottom: 10px;
   border: 1px solid #c0bfbf;
   border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.forgot-container>p {
+  margin-bottom: 40px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.login_signup {
+  margin-top: 15px;
   text-align: center;
 }
-.forgot-container h2{
-    margin-bottom: 20px;
-    font-size: 20px;
+
+.group-btn {
+  margin-top: 20px;
 }
-.forgot-container [type ="button"],button[type ="submit"]{
-  padding: 10px 20px;
-  background-color: #2866b7;
-  margin-top: 10px;
-  color: white;
-  border-radius: 4px;
-  text-align: right;
-} 
+
+.group-btn p {
+  margin-top: 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.group-btn button {
+  width: 100%;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+  display: block;
+}

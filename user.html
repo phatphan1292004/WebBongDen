@@ -41,7 +41,7 @@
                               <i class="fa-solid fa-bars-progress"></i>
                               <a href="#">Quản lý đơn hàng</a>
                           </li>
-                          <li onclick="showContent('logout')">
+                          <li onclick="logout()">
                               <i class="fa-solid fa-right-from-bracket"></i>
                               <a href="#" id="logoutLink">Đăng xuất</a>
                           </li>
@@ -53,26 +53,45 @@
           <!-- content -->
           <div class="content">
               <!-- Quản lý đơn hàng -->
-              <div id="order" class="content_section" style="display: none;">
+              <div id="order" class="content_section">
                   <div class="order_header">
                       <h2>Quản lý đơn hàng</h2>
                   </div>
                   <div class="search_bar">
                         <div>
-                            
                             <input type="text" 
                             placeholder="Tìm đơn hàng theo Mã đơn hàng">
-                            <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                         <div>
                             <button>Tìm đơn hàng</button>
                         </div>
                   </div>
-                  <div class="no_orders">
+                  <div id="noOrders" class="no_orders">
                       <p>Quý khách chưa có đơn hàng nào.</p>
                       <button>Tiếp tục mua hàng</button>
                   </div>
               </div>
+              <div class="order-table-container" id="orderTableContainer" style="display: none;">
+                <table class="order-table">
+                    <!-- thead là thể hiện phần đầu của bảng -->
+                    <thead>
+                        <!-- tr là 1 hàng của bảng -->
+                         <!-- th là 1 phân vùng trong hàng -->
+                        <tr>
+                            <th>Id</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Loại sản phẩm</th>
+                            <th>Ngày thêm</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                <!-- tbody thể hiện phần thân của bảng -->
+                    <tbody id="orderTableBody">
+                       <!-- đây là nơi để thêm thông tin -->
+                    </tbody>
+                </table>
+            </div>
       
               <!-- Thông tin tài khoản -->
               <div id="information_account" class="content_section" style="display: none;">
@@ -92,7 +111,7 @@
 
                         <div  class="sex">
                             <div>
-                                <label class="lableSex">Giới tính</label>                                          
+                                <label class="lableSex">Giới tính:</label>                                          
                             </div>
                             <div>
                                 <input type="radio" name="gender" checked> Nam                      
@@ -122,9 +141,9 @@
                         
                         <div  class="bYear">
                             <div>
-                                <label>Ngày sinh</label>                                         
+                                <label>Ngày sinh:</label>                                         
                             </div>
-                            <div>
+                            <div class="DMY">
                                 <select id="day"><option value="date" >Ngày</option></select>                        
                                 <select id="month"><option value = "month" >Tháng</option></select>                        
                                 <select id="year"><option value="year" >Năm</option></select>                          
@@ -132,21 +151,12 @@
                         </div>
 
                         <div  class="submit">
-                                <button type="submit">Lưu</button>                         
+                                <button onclick="luuThongTin()" type="submit">Lưu</button>                         
                         </div>
                                                              
                   </form>
                   <p id="saveMessage" style="display: none; color: green;">Hồ sơ của bạn đã được lưu!</p>
-              </div>
-      
-              <!-- Đăng xuất -->
-              <div id="overlay"></div>
-              <div id="logoutModal">
-                  <p>Bạn có muốn đăng xuất không?</p>
-                  <button class="btn btn-logout" onclick="Logout()">Đăng xuất</button>
-                  <button class="btn btn-cancel" onclick="cancelLogout()">Không</button>
-              </div>
-          </div>
+              </div>      
         </div>
       
 <script src="./js/user.js"></script>

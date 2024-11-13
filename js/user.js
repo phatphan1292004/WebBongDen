@@ -1,4 +1,5 @@
-  // Show the modal
+
+  
   function showContent(sectionId) {
     // Ẩn tất cả các phần nội dung
     document.querySelectorAll(".content_section").forEach(section => {
@@ -8,25 +9,15 @@
     // Hiển thị phần nội dung được chọn
     document.getElementById(sectionId).style.display = 'block';
   }
-  // Hiển thị hộp thông báo khi nhấn vào "Đăng xuất"
-  document.getElementById("logoutLink").addEventListener("click", function(event) {
-    event.preventDefault();
-    document.getElementById("logoutModal").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-});
 
 // Hàm xử lý đăng xuất
 function logout() {
-    alert("Bạn đã đăng xuất!");
-    // Chuyển hướng hoặc thực hiện hành động đăng xuất tại đây
-    document.getElementById("logoutModal").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
+  alert("Đăng xuất thành công");
+  window.location.href = "login.html";
 }
 
-// Hàm hủy bỏ đăng xuất
-function cancelLogout() {
-    document.getElementById("logoutModal").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
+function luuThongTin(){
+  // document.getElementById("saveMessage").style.display = "block";
 }
 // option cho ngày
 function populateDays() {
@@ -46,7 +37,7 @@ function populateDays() {
     for (let i = 1; i <= 12; i++) {
       const option = document.createElement('option');
       option.value = i;
-      option.textContent = i;
+      option.textContent = "tháng " + i;
       monthSelect.appendChild(option);
     }
   }
@@ -68,3 +59,48 @@ function populateDays() {
     populateMonths();
     populateYears();
   });
+
+  // // hàm xử lí quản lí đơn hàng
+  const orders = []; // Change to an array with order objects to show the table.
+
+  // Function to load orders
+  function loadOrders() {
+      const orders = []; 
+      const noOrdersDiv = document.getElementById('noOrders');
+      const orderTableContainer = document.getElementById('orderTableContainer');
+      const orderTableBody = document.getElementById('orderTableBody');
+          if (orders.length === 0) {
+              // hiện thị ra không có đơn hàng nào
+              noOrdersDiv.style.display = 'block';
+              orderTableContainer.style.display = 'none';
+                  } else {
+                      // hiện thị ra order table
+                      noOrdersDiv.style.display = 'none';
+                      orderTableContainer.style.display = 'block';
+                  }
+                //           // Populate orders in the table
+                //           orders.forEach(order => {
+                //                         const row = document.createElement('tr');
+                         
+                //                                     row.innerHTML = 
+                //                                                 <td>${order.id}</td>,
+                          
+                // <td>${order.productName}</td>,
+                //     <td>${order.price} VNĐ</td>,
+                //     <td>${order.category}</td>,
+                //     <td>${order.dateAdded}</td>,
+                //     <td><a href="${order.imageUrl}" target="_blank">${order.imageUrl}</a></td>,
+                //     <td>${order.productName}</td>,
+                //     <td>${order.price} VNĐ</td>,
+                //     <td>${order.category}</td>,
+                //     <td>${order.dateAdded}</td>,
+                //     <td>
+                //         <button class="btn-view">Xem chi tiết</button>
+                //         <button class="btn-edit">Sửa</button>
+                //         <button class="btn-delete">Xóa</button>
+                //     </td>;
+                //      orderTableBody.appendChild(row);
+                //                                               });
+
+  }
+

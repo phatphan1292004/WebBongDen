@@ -18,17 +18,18 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/reset.css">
   </head>
   <body>
     <div class="wrapper">
       <form id="login-form">
         <div class="form-header">
-          <a href="" class="logo">DenLed.com</a>
+          <a href="index.html" class="logo"><img src="./img/logo.png" alt=""></a>
           <p>ĐĂNG NHẬP</p>
         </div>
         <div class="form-main">
           <div class="form-group">
-            <p>Tài khoản</p>
+            <p>TÀI KHOẢN</p>
             <div class="form-field">
               <input
                 type="text"
@@ -41,7 +42,7 @@
           </div>
 
           <div class="form-group">
-            <p>Mật khẩu</p>
+            <p>MẬT KHẨU</p>
             <div class="form-field">
               <input
                 type="password"
@@ -68,14 +69,20 @@
       </div>
       <!-- form quên mật khẩu -->
       <div id="forgot-password-form" class="forgot-container" style="display: none;">
-          <h2>Khôi Phục Mật Khẩu</h2>
+          <p>KHÔI PHỤC MẬT KHẨU</p>
           <form action="#">
               <div class="input-group">
                   <label for="reset-email">Nhập email của bạn</label>
-                  <input type="email" id="reset-email" name="reset-email" required>
+                  <input type="email" id="reset-email" name="reset-email" required placeholder="example@gmail.com">
                 </div>
-                <button type="submit" onclick = "responseMassage()">Gửi Yêu Cầu Đặt Lại Mật Khẩu</button>
-                <button type="button" onclick="showLogin()">Quay lại Đăng Nhập</button>
+                <div class="group-btn">
+                  <button type="submit" onclick = "responseMassage()">Gửi Yêu Cầu Đặt Lại Mật Khẩu</button>
+                  <p>Bạn đã nhớ mật khẩu? 
+                    <span  class="back-to-login" onclick="showLogin()" style="color: #4288e5;">
+                      Quay lại trang đăng nhập
+                    </span>
+                  </p>
+                </div>
             </form>
             <p id="responseMessage"></p>
         </div>  
