@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/user.css" />
+    <link rel="stylesheet" href="./css/reset.css">
+
+
+  </head>
+  <body>
+        <div class="container">
+          <!-- sidebar -->
+          <div class="sidebar">
+              <div class="user-info">
+                  <img src="./img/b79144e03dc4996ce319ff59118caf65.jpg" alt="avatarUser">
+                  <h3>Trần Công Lý</h3>
+              </div>
+              <div class="menu">
+                  <nav>
+                      <ul>
+                          <li onclick="showContent('information_account')">
+                              <i class="fa-solid fa-user"></i>
+                              <a href="#">Thông tin tài khoản</a>
+                          </li>
+                          <li onclick="showContent('order')">
+                              <i class="fa-solid fa-bars-progress"></i>
+                              <a href="#">Quản lý đơn hàng</a>
+                          </li>
+                          <li onclick="logout()">
+                              <i class="fa-solid fa-right-from-bracket"></i>
+                              <a href="#" id="logoutLink">Đăng xuất</a>
+                          </li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+      
+          <!-- content -->
+          <div class="content">
+              <!-- Quản lý đơn hàng -->
+              <div id="order" class="content_section">
+                  <div class="order_header">
+                      <h2>Quản lý đơn hàng</h2>
+                  </div>
+                  <div class="search_bar">
+                        <div>
+                            <input type="text" 
+                            placeholder="Tìm đơn hàng theo Mã đơn hàng">
+                        </div>
+                        <div>
+                            <button>Tìm đơn hàng</button>
+                        </div>
+                  </div>
+                  <div id="noOrders" class="no_orders">
+                      <p>Quý khách chưa có đơn hàng nào.</p>
+                      <button>Tiếp tục mua hàng</button>
+                  </div>
+              </div>
+              <div class="order-table-container" id="orderTableContainer" style="display: none;">
+                <table class="order-table">
+                    <!-- thead là thể hiện phần đầu của bảng -->
+                    <thead>
+                        <!-- tr là 1 hàng của bảng -->
+                         <!-- th là 1 phân vùng trong hàng -->
+                        <tr>
+                            <th>Id</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Loại sản phẩm</th>
+                            <th>Ngày thêm</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                <!-- tbody thể hiện phần thân của bảng -->
+                    <tbody id="orderTableBody">
+                       <!-- đây là nơi để thêm thông tin -->
+                    </tbody>
+                </table>
+            </div>
+      
+              <!-- Thông tin tài khoản -->
+              <div id="information_account" class="content_section" style="display: none;">
+                  <div class="information_header">
+                      <h2>Thông tin tài khoản</h2>
+                  </div>
+                  <form>
+                   
+                        <div  class="userName">
+                            <div>
+                                <label for="username">Họ tên:</label>                        
+                            </div>
+                            <div>
+                                <input type="text" id="username" name="username" required>                    
+                            </div>
+                        </div>      
+
+                        <div  class="sex">
+                            <div>
+                                <label class="lableSex">Giới tính:</label>                                          
+                            </div>
+                            <div>
+                                <input type="radio" name="gender" checked> Nam                      
+                                <input type="radio" name="gender" checked> Nữ                    
+                            </div>
+                        </div>      
+
+                        <div  class="email">
+                            <div>
+                                <label for="email">Email:</label>                                     
+                            </div>
+                            <div>
+                                <input type="email" id="email" name="email" required>                        
+                                <a href="#">Thay đổi</a>                   
+                            </div>
+                        </div>   
+
+                        <div  class="phone">
+                            <div>
+                                <label for="phone">Số điện thoại:</label>                                      
+                            </div>
+                            <div >
+                                <input type="tel" id="phone" name="phone" required>                        
+                                <a href="#">Thay đổi</a>                  
+                            </div>                 
+                        </div>     
+                        
+                        <div  class="bYear">
+                            <div>
+                                <label>Ngày sinh:</label>                                         
+                            </div>
+                            <div class="DMY">
+                                <select id="day"><option value="date" >Ngày</option></select>                        
+                                <select id="month"><option value = "month" >Tháng</option></select>                        
+                                <select id="year"><option value="year" >Năm</option></select>                          
+                            </div>                 
+                        </div>
+
+                        <div  class="submit">
+                                <button onclick="luuThongTin()" type="submit">Lưu</button>                         
+                        </div>
+                                                             
+                  </form>
+                  <p id="saveMessage" style="display: none; color: green;">Hồ sơ của bạn đã được lưu!</p>
+              </div>      
+        </div>
+      
+<script src="./js/user.js"></script>
+</body>
+</html>
