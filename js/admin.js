@@ -181,15 +181,12 @@ document.addEventListener("DOMContentLoaded", function () {
   
   orderTableBody.addEventListener('click', function(event) {
     if (event.target && event.target.classList.contains('view-details')) {
-      const invoiceDetails = document.querySelector('.invoice-details');
-      if (invoiceDetails) {
-        document.getElementById('overlay2').style.display = 'flex';
-      }
+        document.getElementById('overlay2').classList.add('active');
     }
   });
 
   document.getElementById('close-invoice-details').addEventListener('click', function() {
-    document.getElementById('overlay2').style.display = 'none';
+    document.getElementById('overlay2').classList.remove('active');
   });
 
   // Dữ liệu cho biểu đồ khách hàng

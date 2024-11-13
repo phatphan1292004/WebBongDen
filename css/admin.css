@@ -470,8 +470,9 @@
 
 /* Form Add Product */
 /* Lớp overlay mờ */
-.main-content .tab-content .overlay {
+.main-content .tab-content .overlay, .overlay2 {
     position: fixed;
+    z-index: 10000;
     top: 0;
     left: 0;
     width: 100%;
@@ -486,7 +487,7 @@
 }
 
 /* Hiển thị overlay */
-.main-content .tab-content .overlay.active {
+.main-content .tab-content .overlay.active, .overlay2.active {
     visibility: visible;
     opacity: 1;
 }
@@ -692,19 +693,6 @@ table {
     color: #333;
   }
 
-  .overlay2 {
-    display: none; /* Ban đầu ẩn */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Màu nền mờ */
-    display: flex; /* Sử dụng flexbox để căn giữa nội dung */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Đảm bảo nó xuất hiện trên các phần khác */
-  }
   
   .invoice-details {
     background-color: #fff;
