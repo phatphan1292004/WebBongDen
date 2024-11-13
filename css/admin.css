@@ -691,6 +691,117 @@ table {
   .order-table td {
     color: #333;
   }
+
+  .overlay2 {
+    display: none; /* Ban đầu ẩn */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Màu nền mờ */
+    display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Đảm bảo nó xuất hiện trên các phần khác */
+  }
+  
+  .invoice-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    overflow: hidden; /* Đảm bảo không bị tràn nội dung */
+  }
+
+  .invoice-details .invoice-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dadada;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .invoice-details .invoice-header i {
+    font-size: 20px;
+  }
+
+  .invoice-details .invoice-header .close-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    cursor: pointer;
+  }
+
+  .invoice-details .invoice-header .close-icon:hover {
+    background-color: #e0e0e0;
+  }
+
+
+  .invoice-details .invoice-header p {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .customer-info-invoice {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0;
+    border-bottom: 1px solid #dadada;   
+}
+  
+  .customer-info-invoice strong {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .customer-info-invoice p:nth-child(1) {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .invoice-details .total-price p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  .invoice-details .total-price strong {
+    display: inline-block;
+    color: red;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  
+  .invoice-details button.close-overlay {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu */
+  }
+  
+  .invoice-details button.close-overlay:hover {
+    background-color: #d32f2f;
+  }
+
+  .order-items h4 {
+    padding-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+  }
   
   .customer-info {
     display: flex;
