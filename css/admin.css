@@ -708,21 +708,79 @@ table {
   
   .invoice-details {
     background-color: #fff;
-    padding: 30px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 800px;
     overflow: hidden; /* Đảm bảo không bị tràn nội dung */
   }
-  
-  .invoice-details h3 {
-    font-size: 26px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center; /* Căn giữa tiêu đề */
+
+  .invoice-details .invoice-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dadada;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+
+  .invoice-details .invoice-header i {
+    font-size: 20px;
+  }
+
+  .invoice-details .invoice-header .close-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    cursor: pointer;
+  }
+
+  .invoice-details .invoice-header .close-icon:hover {
+    background-color: #e0e0e0;
+  }
+
+
+  .invoice-details .invoice-header p {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .customer-info-invoice {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0;
+    border-bottom: 1px solid #dadada;   
+}
+  
+  .customer-info-invoice strong {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .customer-info-invoice p:nth-child(1) {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .invoice-details .total-price p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  .invoice-details .total-price strong {
+    display: inline-block;
+    color: red;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
   
   .invoice-details button.close-overlay {
     margin-top: 20px;
@@ -738,73 +796,12 @@ table {
   .invoice-details button.close-overlay:hover {
     background-color: #d32f2f;
   }
-  
-  
-  .customer-info,
-  .order-items {
-    margin-bottom: 20px;
-  }
-  
-  .customer-info h4,
-  .order-items h4 {
-    font-size: 20px;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .customer-info p,
-  .order-items table {
-    font-size: 16px;
-    color: #555;
-  }
-  
-  .customer-info p {
-    margin: 5px 0;
-  }
-  
-  .order-items .items-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  .order-items .items-table th,
-  .order-items .items-table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  .order-items .items-table th {
-    background-color: #f1f1f1;
-    color: #333;
-  }
-  
-  .order-items .items-table td {
-    background-color: #fff;
-  }
-  
-  .order-items .items-table td:last-child {
-    text-align: right;
-  }
-  
-  .total-price {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-    margin-top: 20px;
-  }
-  
-  .total-price p {
-    font-size: 20px;
-    color: #d32f2f;
-  }
-  
-  .total-price p strong {
-    font-weight: 700;
-  }
 
+  .order-items h4 {
+    padding-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+  }
   
   .customer-info {
     display: flex;

@@ -188,6 +188,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  document.getElementById('close-invoice-details').addEventListener('click', function() {
+    document.getElementById('overlay2').style.display = 'none';
+  });
+
   // Dữ liệu cho biểu đồ khách hàng
   const data = {
     labels: ["Khách hàng mới", "Khách hàng thường xuyên", "Khác"], // Các nhãn
