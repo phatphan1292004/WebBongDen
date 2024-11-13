@@ -5,241 +5,248 @@
     font-family: "Poppins", sans-serif;
 }
 
-body {  
-
+.main {
     display: flex;
     justify-content: center;
-    padding: 20px;
-    background-color: #f5f5f5;
-
+    align-items: flex-start; /* Căn chỉnh phần tử theo chiều dọc từ đầu */
+    min-height: 100%;
+    padding: 50px 0; /* Đảm bảo main có chiều cao đầy đủ tùy vào nội dung */
 }
 
-.container {
+.container-cus {
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1200px;
-    align-items: center;
-    justify-content: center;
+    gap: 30px;
+    height: 100%; 
 }
 
-.sidebar {
+.sidebar-info-customer {
+    background-color: #fff;
+    padding: 15px;
     width: 300px;
-    background-color: #f7f7f7;
-    padding: 20px;
-    border: 1px solid #ddd;
-    height: 500px;
-    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 100%; 
 }
 
-.user-info {
-    text-align: center;
+.sidebar-info-customer .customer-info {
     display: flex;
+    gap: 20px;
+    align-items: center;
+    border-bottom: 1px solid #dadada;
     margin-bottom: 20px;
+    padding-bottom: 15px;
 }
 
-.user-info img{
+.sidebar-info-customer .customer-info img {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    
+    border-radius: 100%;
 }
 
-.user-info h3 {
-    margin-top: auto;
-    margin-bottom: auto;
+.sidebar-info-customer .customer-info .customer-name {
+    font-weight: 550;
+    font-size: 16px;
+}
+
+.sidebar-info-customer .menu-user ul li {
+   padding: 15px;
+   border-radius: 4px;
+   margin-bottom: 10px;
+}
+
+.sidebar-info-customer .menu-user ul li:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.sidebar-info-customer .menu-user ul li a {
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 14 px;
+    color: #000;
+}
+
+/* Code phần content */
+
+.content {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    width: 700px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 100%; /* Đảm bảo content có chiều cao đầy đủ */
+}
+
+.content .information_header h2{
+    font-size: 18px !important;
+    font-weight: 600;
+    text-align: center;
+}
+
+.dlex {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.info-form {
+    margin-top: 30px;
+}
+
+.info-form label {
+    width: 30%;
+    text-align: right;
+}
+
+.info-form .dlex div {
+    width: 70%;
+}
+
+.info-form .dlex input[type="text"],
+.info-form .dlex input[type="email"],
+.info-form .dlex input[type="tel"] {
+    padding: 0 15px;
+    height: 36px;
+    border-radius: 4px;
+    border: 1px solid #dadada;
+    width: 80%;
+}
+
+.DMY {
+    display: flex;
+    gap: 10px; 
+}
+
+.DMY select {
+    padding: 0 15px;
+    height: 36px;
+    border-radius: 4px;
+    border: 1px solid #dadada;
+    max-width: 120px; 
+}
+
+.DMY select:focus {
+    border-color: #4288e5; 
+    outline: none;
+}
+
+.content .submit {
+    width: 150px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin: 40px auto;
+}
+
+.content .submit button {
+    color: white;
+    font-weight: 500;
+}
+
+/* Code đơn hàng của user */
+.content .content_section .order_header h2 {
     font-size: 18px;
-    color: #333;
+    font-weight: 600;
 }
 
-.menu {
-    list-style: none;
-    position: relative;
-
-    
-}
-.sidebar ul {
-    list-style: none;
+.content_section .search_bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 38px;
+    border: 1px solid #dadada;
+    padding-left: 20px;
     margin-top: 20px;
 }
 
-.menu ul li {
-    padding: 10px 0;
-    display: flex;
-    align-items: center;
-    color: #333;
-    cursor: pointer;
-  }
-  .menu ul li a {
-    color: inherit;
-    text-decoration: none;
-    margin-left: 10px;
-  }
-
-  .menu ul li i {
-    font-size: 18px;
-    color: #333;
-  }
-  
-  .menu ul li:hover,
-  .menu ul li a:hover {
-    color: #e30613;
-  }
-  
-.content {
-        display: flex;
-        margin-left: 15px;
-        background-color: #fff;
-        padding: 20px;
-        position: relative;
-        border: 1px solid #ddd;
-        width: 700px;
-        height: 500px;
-}
-
-/* css cho quản lí đơn hàng */
-
-.order_header {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-}
-
-.order_header ,.information_header  {
-    border-bottom: .0625rem solid #120f0f;
-    padding: 1.125rem 0;
-}
-h2{
-    font-size: 1.125rem;
-    font-weight: bold;
-    line-height: 1.5rem;
-    margin: 0;
-    text-transform: capitalize;
-}
-
-
-.search_bar {
-    display: flex;
-    margin-top: 15px;
-    padding-bottom: 5px;
-}
-
-.search_bar input {
-    padding: 8px;
-    margin-left: 10px;
-    border: 1px solid #ddd;
+.content_section .search_bar input{
+    width: 80%;
+    height: 38px;
     border-radius: 4px;
-    width: 500px;
+    border: none;
+    outline: none;
 }
 
-.search_bar button {
-    padding: 8px 12px;
-    margin-left: 15px;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.no_orders {
+.content_section .search_bar button {
+    font-size: 14px;
     text-align: center;
-    margin-top: 100px;
+    width: 100px;
+    height: 38px;
+} 
+
+#order-status {
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid #dadada;
+    font-size: 14px;
 }
 
-
-.no_orders p {
-    font-size: 16px;
-    margin-bottom: 20px;
+.filter_bar {
+    margin-top: 20px;
 }
 
-.no_orders button {
-    padding: 10px 20px;
-    background-color: red;
-    color: #fff;
+.order-table-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* Cập nhật để cột tự động co giãn theo nội dung */
+}
+
+.order-table th,
+.order-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dadada;
+    font-size: 14px;
+    color: #000;
+}
+
+.order-table th {
+    background-color: #fff;
+    color: black;
+    font-weight: 600;
+}
+
+.order-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.order-table tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.order-table td {
+    word-wrap: break-word;
+}
+
+.order-table .action-btn {
+    padding: 6px 12px;
+    background-color: #4288e5;
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-/* css cho quản lí thông tin */
-.content_section{
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    width: 700px;
-    position: relative;
-}
-label{
-        font-size: 16px;
-        color: #333;
-        width: 150px;
-        margin-right: 40px;
-        text-align: right;
-        display: block;
-      }
-form{
-    margin-top: 0em;
-    unicode-bidi: isolate;
-    width: 100%;
-  }
-
-form input[type="text"]
-,input[type="email"],
-input[type="tel"]
- {
-    margin-left: 20px ;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 300px;
-    height: auto;
-
-}
-form input[type="radio"]{
-    margin-left: 20px ;
-    font-size: 16px;
-
-}
-.DMY{
-    margin-left: 10px;
-    display: flex;
-    justify-content: space-between;
-    width: 310px;
-}
-select{
-    margin-left: 10px ;
-    width: 100px ;
-    height: 35px ;
-    font-size: 13px;
-    align-items: center;
-    padding: 0.5rem;
-    border: 1px solid rgba(0,0,0,.09);
-
-}
-.userName,.sex , .email , .phone , .bYear {
-    display: flex;
-    margin: 30px;
-}
-a {
-    color: #007bff;
-    text-decoration: underline;
-    font-size: 14px;
-    margin-left: 10px;
-  }
-
-.submit{
-text-align: center;
-}  
-  button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #e30613;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 500px;
     text-align: center;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #b4050e;
-  }
-  
+}
+
+.order-table .action-btn:hover {
+    background-color: #357ad5;
+}
+
+.footer {
+    margin-top: 0;
+}
