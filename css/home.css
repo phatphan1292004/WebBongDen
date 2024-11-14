@@ -330,10 +330,6 @@
   border-radius: 4px;
 }
 
-.header-user {
-  position: relative; 
-  display: none;
-}
 
 .user-info-dropdown {
   background-color: #fff;
