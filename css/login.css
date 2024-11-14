@@ -162,3 +162,24 @@ button[type="submit"],
   margin-bottom: 5px;
   display: block;
 }
+
+/* Thiết kế hộp thông báo */
+.notification {
+  position: fixed;
+  top: 20px;
+  left: -300px;
+  width: 250px;
+  padding: 15px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: left 0.5s ease-in-out;
+  z-index: 1000;
+}
+
+/* Hiển thị thông báo */
+.notification.show {
+  left: 20px;
+}
