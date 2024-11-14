@@ -101,7 +101,7 @@
 
 .header .header-right .header-user {
   border-radius: 100%;
-  display: block;
+  display: none;
   margin-left: 20px;
   position: relative;
   cursor: pointer;
@@ -243,7 +243,7 @@
   background-color: var(--color-yellow);
   padding: 10px 20px;
   min-width: 140px;
-  display: none;
+  display: block;
   border-radius: 5px;
 }
 
@@ -332,6 +332,7 @@
 
 .header-user {
   position: relative; 
+  display: none;
 }
 
 .user-info-dropdown {
