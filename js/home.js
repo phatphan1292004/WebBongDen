@@ -208,4 +208,15 @@ window.addEventListener("load", function () {
     mobileSearchBar.classList.remove('active'); 
     searchIcon.style.display = 'block';
   })
+
+  // Xử lý phần đăng nhập
+  const loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+  
+  if (loggedInUser) {
+    // Ẩn nút đăng nhập và hiển thị avatar người dùng
+    const loginLink = document.getElementById('login-btn')
+    const headerUser = document.querySelector(".header-user");
+    loginLink.style.display = "none";  
+    headerUser.style.display = "block";  
+  }
 });

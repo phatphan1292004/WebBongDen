@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    sessionStorage.setItem("loggedInUser", JSON.stringify(user));
     showNotification("Đăng nhập thành công!");
 
     // Chuyển hướng sang trang chính
