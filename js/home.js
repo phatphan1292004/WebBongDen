@@ -1,8 +1,8 @@
 import { cateData, subcateData, productData } from "./data.js";
 window.addEventListener("load", function () {
   // Use SlickSlider
-  $(document).ready(function(){
-    $('.slider-wrapper').slick({
+  $(document).ready(function () {
+    $(".slider-wrapper").slick({
       infinite: true,
       slidesToShow: 1,
       autoplay: true,
@@ -19,13 +19,13 @@ window.addEventListener("load", function () {
             infinite: true,
             dots: true,
             arrows: false,
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
   });
 
-  $('.feedback-list').slick({
+  $(".feedback-list").slick({
     slidesToShow: 1, // Số lượng item hiển thị cùng lúc
     slidesToScroll: 1, // Số lượng item di chuyển mỗi lần cuộn
     infinite: true, // Cho phép cuộn vô hạn
@@ -43,16 +43,15 @@ window.addEventListener("load", function () {
           infinite: true,
           dots: false,
           arrows: false,
-          centerMode: true, 
-          centerPadding: '10px', 
-        }
-      }
-    ]
+          centerMode: true,
+          centerPadding: "10px",
+        },
+      },
+    ],
   });
-  
 
-  $(document).ready(function() {
-    $('.list-product-hot').slick({
+  $(document).ready(function () {
+    $(".list-product-hot").slick({
       infinite: true,
       slidesToShow: 5,
       slidesToScroll: 1,
@@ -65,8 +64,7 @@ window.addEventListener("load", function () {
             slidesToShow: 4,
             slidesToScroll: 2,
             infinite: false,
-      
-          }
+          },
         },
         {
           breakpoint: 768,
@@ -76,8 +74,8 @@ window.addEventListener("load", function () {
             infinite: true,
             dots: true,
             centerMode: true, // Bật chế độ center
-            centerPadding: '10px', // Độ rộng của phần tử lòi ra
-          }
+            centerPadding: "10px", // Độ rộng của phần tử lòi ra
+          },
         },
         {
           breakpoint: 480,
@@ -86,12 +84,12 @@ window.addEventListener("load", function () {
             slidesToScroll: 2,
             infinite: false,
             centerMode: true, // Bật chế độ center
-            centerPadding: '10px', // Độ rộng của phần tử lòi ra
-          }
-        }
-      ]
+            centerPadding: "10px", // Độ rộng của phần tử lòi ra
+          },
+        },
+      ],
     });
-  });  
+  });
 
   //Load category
   cateData.forEach((category) => {
@@ -136,45 +134,62 @@ window.addEventListener("load", function () {
   //     </div>
   //   </div>
   // </li>
-  productData.forEach((item) => {
-    const categoryItem = document.createElement("li");
-    categoryItem.classList.add("product-item");
 
-    // Tính toán giá sau giảm
-    const originalPrice = parseInt(item.price);
-    const discountPercent = parseFloat(item.discountPercent);
-    const discountedPrice = originalPrice * (1 - discountPercent); // Giá sau giảm
+  // Lọc sản phẩm dựa trên danh mục
+  function getProductsByCategory(category) {
+    return productData.filter((item) => item.nameCate === category);
+  }
 
-    const productList = `
-        <div class="img">
-            <img
-                src="${item.urlImage}"
-                alt="${item.name}"
-            />
-        </div>
+  function renderProducts(category, index) {
+    const filteredProducts = getProductsByCategory(category);
 
-        <div class="product-info">
-            <div class="product-name">
-                ${item.name}
-            </div>
+    const productList = document.getElementsByClassName("list-product")[index];
+    productList.innerHTML = "";
 
-            <p class="original-price">${originalPrice.toLocaleString()} VND</p>
+    filteredProducts.forEach((item) => {
+      const categoryItem = document.createElement("li");
+      categoryItem.classList.add("product-item");
 
-            <div class="price-discount">
-                <p class="product-price">${discountedPrice.toLocaleString()} VND</p>
-                <p class="discount-percentage">${(
-                  discountPercent * 100
-                ).toFixed(0)}%</p>
-            </div>
-        </div>
-    `;
 
-    categoryItem.innerHTML = productList;
+      const originalPrice = parseInt(item.price);
+      const discountPercent = parseFloat(item.discountPercent);
+      const discountedPrice = originalPrice * (1 - discountPercent); 
 
-    document
-      .getElementsByClassName("list-product")[0]
-      .appendChild(categoryItem);
-  });
+      const productListHTML = `
+          <div class="img">
+              <img src="${item.urlImage}" alt="${item.name}" />
+          </div>
+  
+          <div class="product-info">
+              <div class="product-name">
+                  ${item.name}
+              </div>
+  
+              <p class="original-price">${originalPrice.toLocaleString()} VND</p>
+  
+              <div class="price-discount">
+                  <p class="product-price">${discountedPrice.toLocaleString()} VND</p>
+                  <p class="discount-percentage">${(
+                    discountPercent * 100
+                  ).toFixed(0)}%</p>
+              </div>
+          </div>
+      `;
+
+      categoryItem.innerHTML = productListHTML;
+      productList.appendChild(categoryItem);
+    }); 
+  } 
+
+  renderProducts("Đèn chùm",0);
+  renderProducts("Đèn thả",1);
+  renderProducts("Đèn bàn",2);
+  renderProducts("Đèn ốp trần",3);
+  renderProducts("Đèn quạt",4);
+  renderProducts("Đèn khác",5);
+  
+
+  // Code cho mobile
 
   // JavaScript to toggle the sidebar and overlay visibility
   const menuToggle = document.getElementById("menu-toggle");
@@ -194,18 +209,18 @@ window.addEventListener("load", function () {
   });
 
   const searchIcon = document.querySelector(".search-btn");
-  const mobileSearchBar = document.getElementById('mobile-search-bar');
-  const closeSearchBtn = document.getElementById('close-search-button');
+  const mobileSearchBar = document.getElementById("mobile-search-bar");
+  const closeSearchBtn = document.getElementById("close-search-button");
 
-  searchIcon.addEventListener('click', (event) => {
-    event.preventDefault(); 
-    mobileSearchBar.classList.add('active'); 
-    searchIcon.style.display = 'none';
+  searchIcon.addEventListener("click", (event) => {
+    event.preventDefault();
+    mobileSearchBar.classList.add("active");
+    searchIcon.style.display = "none";
   });
 
-  closeSearchBtn.addEventListener('click', (e) => {
+  closeSearchBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    mobileSearchBar.classList.remove('active'); 
-    searchIcon.style.display = 'block';
-  })
+    mobileSearchBar.classList.remove("active");
+    searchIcon.style.display = "block";
+  });
 });

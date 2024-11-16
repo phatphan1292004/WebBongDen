@@ -696,6 +696,7 @@
 .home-product .wrapper-bottom .list-product .product-item .img img {
   transition: transform 0.3s ease;
   height: 100%;
+  width: 100%;
 }
 
 .home-product .wrapper-bottom .list-product .product-item .img:hover img {
