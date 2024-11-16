@@ -1,315 +1,295 @@
 export const cateData = [
     {
-        id: "01",
+        id: "DM01",  
         name: "Đèn chùm"
     },
     {
-        id: "02",
+        id: "DM02", 
         name: "Đèn thả"
     },
     {
-        id: "03",
+        id: "DM03",  
         name: "Đèn bàn"
     },
     {
-        id: "04",
+        id: "DM04",  
         name: "Đèn ốp trần"
     },
     {
-        id: "05",
+        id: "DM05", 
         name: "Đèn quạt"
     },
     {
-        id: "06",
+        id: "DM06",  
         name: "Đèn khác"
     }
 ];
 
+
 export const subcateData = [
+    // Chi tiết danh mục đèn chùm
     {
-        id: "01",
+        id: "CTDM01",
         name: "Đèn chùm hiện đại",
-        idCate: "01" 
+        idCate: "DM01"  
     },
     {
-        id: "02",
+        id: "CTDM02",
         name: "Đèn chùm cổ điển",
-        idCate: "01" 
+        idCate: "DM01"  
     },
     {
-        id: "03",
-        name: "Đèn thả trang trí",
-        idCate: "02" 
+        id: "CTDM03",
+        name: "Đèn chùm pha lê",
+        idCate: "DM01"  
     },
     {
-        id: "04",
+        id: "CTDM04",
+        name: "Đèn chùm nến",
+        idCate: "DM01"  
+    },
+    {
+        id: "CTDM05",
+        name: "Đèn chùm thông tầng",
+        idCate: "DM01"  
+    },
+    {
+        id: "CTDM05",
+        name: "Đèn chùm đồng",
+        idCate: "DM01"  
+    },
+
+    // Chi tiết danh mục của đèn thả
+    {
+        id: "CTDM06",
         name: "Đèn thả nghệ thuật",
-        idCate: "02" 
+        idCate: "DM02" 
     },
+
     {
-        id: "05",
-        name: "Đèn bàn học",
-        idCate: "03" 
+        id: "CTDM07",
+        name: "Đèn thả cổ điển",
+        idCate: "DM02" 
     },
+
     {
-        id: "06",
-        name: "Đèn bàn trang trí",
-        idCate: "03" 
+        id: "CTDM08",
+        name: "Đèn thả hiện đại",
+        idCate: "DM02" 
     },
+
     {
-        id: "07",
-        name: "Đèn ốp trần LED",
-        idCate: "04"
+        id: "CTDM09",
+        name: "Đèn thả pha lê",
+        idCate: "DM02" 
     },
+
     {
-        id: "08",
+        id: "CTDM010",
+        name: "Đèn thả thông tầng",
+        idCate: "DM02" 
+    },
+
+    // Chi tiết danh mục đèn bàn
+    {
+        id: "CTDM11",
+        name: "Đèn bàn phòng ngủ",
+        idCate: "DM03"  
+    },
+
+    {
+        id: "CTDM12",
+        name: "Đèn bàn phòng khách",
+        idCate: "DM03"  
+    },
+
+    {
+        id: "CTDM13",
+        name: "Đèn bàn cổ điển",
+        idCate: "DM03"  
+    },
+
+    {
+        id: "CTDM14",
+        name: "Đèn bàn hiện đại",
+        idCate: "DM03"  
+    },
+
+    // Chi tiết danh mục đèn ốp trần
+    {
+        id: "CTDM15",
         name: "Đèn ốp trần cổ điển",
-        idCate: "04"
+        idCate: "DM04"  
+    },
+
+    {
+        id: "CTDM16",
+        name: "Đèn ốp trần hiện đại",
+        idCate: "DM04"  
+    },
+
+    {
+        id: "CTDM17",
+        name: "Đèn ốp trần gỗ",
+        idCate: "DM04"  
+    },
+
+    {
+        id: "CTDM18",
+        name: "Đèn ốp trần trung hoa",
+        idCate: "DM04"  
+    },
+   
+
+    // Chi tiết danh mục đèn quạt trần
+    {
+        id: "CTDM19",
+        name: "Đèn quạt giấu cánh",
+        idCate: "DM05"  // Cập nhật idCate thành "DM05"
     },
     {
-        id: "09",
-        name: "Đèn quạt trần",
-        idCate: "05" 
+        id: "CTDM20",
+        name: "Đèn quạt sải cánh",
+        idCate: "DM05"  // Cập nhật idCate thành "DM05"
     },
+
     {
-        id: "10",
-        name: "Đèn quạt điều khiển từ xa",
-        idCate: "05" 
+        id: "CTDM21",
+        name: "Đèn quạt cổ điển",
+        idCate: "DM05"  // Cập nhật idCate thành "DM05"
     },
+
     {
-        id: "11",
-        name: "Đèn trang trí khác",
-        idCate: "06" 
+        id: "CTDM21",
+        name: "Đèn quạt hiện đại",
+        idCate: "DM05"  // Cập nhật idCate thành "DM05"
+    },
+
+    // Đèn khác
+    {
+        id: "CTDM22",
+        name: "Đèn ngoài trời",
+        idCate: "DM06" 
+    },
+
+    {
+        id: "CTDM23",
+        name: "Đèn tranh",
+        idCate: "DM06" 
+    },
+
+    {
+        id: "CTDM24",
+        name: "Đèn âm trần",
+        idCate: "DM06" 
     }
-];   
+];
 
 export const productData = [
     {
         id: "001",
-        name: "Đèn chùm tiffany trang trí nội thất DC03596",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7239den-chum-tiffany-trang-tri-noi-that-dc03596-05.jpg",
+        name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03814",
+        urlImage: "https://denhoamy.vn/upload/attachment/thumb/6257den-chum-trang-tri-noi-that-phong-cach-my-dc03814-01.jpg",
         price: "3000000",
         discountPercent: "0.1",
-        desc: `Đèn chùm trang trí nội thất phong cách Mỹ hiện đại DC01\n
-                Không gian lắp đặt: trang trí phòng khách, phòng ngủ, phòng ăn, nhà hàng, quán cafe, văn phòng, khách sạn, ...\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + chao vải\n
-                Mã sản phẩm: DC01`,
-        idCate: "01",
+        idCate: "DM01",
         nameCate: "Đèn chùm",
         dateCreate: "12-9-2023"
     },
     {
         id: "002",
-        name: "Đèn chùm hiện đại trang trí phòng khách",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/3433den-chum-trang-tri-noi-that-phong-cach-my-dc03780-01.jpg",
+        name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03815",
+        urlImage: "https://denhoamy.vn/upload/attachment/thumb/8991den-chum-trang-tri-noi-that-phong-cach-my-dc03813-01.jpg",
         price: "4500000",
         discountPercent: "0.15",
-        desc: `Đèn chùm hiện đại với thiết kế tinh tế phù hợp với không gian phòng khách.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Thép không gỉ + chao thủy tinh.\n
-                Mã sản phẩm: DC02`,
-        idCate: "01",
+        idCate: "DM01",
         nameCate: "Đèn chùm",
         dateCreate: "15-10-2023"
     },
     {
         id: "003",
-        name: "Đèn thả trang trí nghệ thuật",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/8334den-chum-may-trang-tri-noi-that-phong-cach-bomehian-dc03783-06.jpg",
+        name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03816",
+        urlImage: "https://denhoamy.vn/upload/attachment/thumb/5647den-chum-trang-tri-noi-that-phong-cach-my-dc03812-01.jpg",
         price: "2200000",
         discountPercent: "0.05",
-        desc: `Đèn thả trang trí nghệ thuật phù hợp với không gian phòng ăn và nhà hàng.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + kính màu.\n
-                Mã sản phẩm: DT01`,
-        idCate: "02",
-        nameCate: "Đèn thả",
+        idCate: "DM01",
+        nameCate: "Đèn chùm",
         dateCreate: "20-10-2023"
     },
     {
         id: "004",
-        name: "Đèn thả nghệ thuật trang trí quán cafe",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/6391den-tha-thiet-ke-trang-tri-noi-that-phong-cach-hien-dai-dt02958-01.jpg",
+        name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03817",
+        urlImage: "https://denhoamy.vn/upload/attachment/thumb/837den-chum-trang-tri-noi-that-phong-cach-my-dc03811-07.jpg",
         price: "3500000",
         discountPercent: "0.2",
-        desc: `Đèn thả nghệ thuật với thiết kế hiện đại dành cho không gian quán cafe và nhà hàng.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Thép không gỉ + chao thủy tinh.\n
-                Mã sản phẩm: DT02`,
-        idCate: "02",
-        nameCate: "Đèn thả",
+        idCate: "DM01",
+        nameCate: "Đèn chùm",
         dateCreate: "22-10-2023"
     },
     {
         id: "005",
-        name: "Đèn bàn học LED",
+        name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03818",
         urlImage: "https://denhoamy.vn/upload/attachment/thumb/3414den-op-tran-pha-le-trang-tri-noi-that-phong-cach-hien-dai-do01558-01.jpg",
         price: "1500000",
         discountPercent: "0.05",
-        desc: `Đèn bàn học LED với ánh sáng dịu nhẹ, bảo vệ mắt cho học sinh và sinh viên.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Nhựa cao cấp.\n
-                Mã sản phẩm: DB01`,
-        idCate: "03",
-        nameCate: "Đèn bàn",
+        idCate: "DM01",
+        nameCate: "Đèn chùm",
         dateCreate: "25-10-2023"
     },
     {
         id: "006",
-        name: "Đèn bàn trang trí phòng ngủ",
+        name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03819",
         urlImage: "https://denhoamy.vn/upload/attachment/thumb/8155den-quat-trang-tri-noi-that-phong-cach-hien-dai-dq00907-01.jpg",
         price: "1800000",
         discountPercent: "0.1",
-        desc: `Đèn bàn trang trí phòng ngủ với thiết kế sang trọng, tạo không gian ấm cúng.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Gỗ + thủy tinh.\n
-                Mã sản phẩm: DB02`,
-        idCate: "03",
-        nameCate: "Đèn bàn",
+        idCate: "DM01",
+        nameCate: "Đèn chùm",
         dateCreate: "30-10-2023"
     },
+
     {
         id: "007",
-        name: "Đèn ốp trần LED",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7449den-tuong-trang-tri-ngoai-that-phong-cach-tan-co-dien-dv01836-04.jpg",
-        price: "2500000",
-        discountPercent: "0.05",
-        desc: `Đèn ốp trần LED siêu sáng phù hợp cho các không gian văn phòng và phòng khách.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + nhựa cao cấp.\n
-                Mã sản phẩm: DO01`,
-        idCate: "04",
-        nameCate: "Đèn ốp trần",
-        dateCreate: "5-11-2023"
+        name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03219",
+        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7022den-chum-trang-tri-noi-that-phong-cach-my-dc03809-06.jpg",
+        price: "1800000",
+        discountPercent: "0.1",
+        idCate: "DM01",
+        nameCate: "Đèn chùm",
+        dateCreate: "30-10-2023"
     },
+
     {
-        id: "007",
-        name: "Đèn ốp trần LED",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7449den-tuong-trang-tri-ngoai-that-phong-cach-tan-co-dien-dv01836-04.jpg",
-        price: "2500000",
-        discountPercent: "0.05",
-        desc: `Đèn ốp trần LED siêu sáng phù hợp cho các không gian văn phòng và phòng khách.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + nhựa cao cấp.\n
-                Mã sản phẩm: DO01`,
-        idCate: "04",
-        nameCate: "Đèn ốp trần",
-        dateCreate: "5-11-2023"
+        id: "008",
+        name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03819",
+        urlImage: "https://denhoamy.vn/upload/attachment/thumb/1984den-chum-trang-tri-noi-that-phong-cach-my-dc03808-04.jpg",
+        price: "1800000",
+        discountPercent: "0.1",
+        idCate: "DM01",
+        nameCate: "Đèn chùm",
+        dateCreate: "30-10-2023"
     },
+
     {
-        id: "007",
-        name: "Đèn ốp trần LED",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7449den-tuong-trang-tri-ngoai-that-phong-cach-tan-co-dien-dv01836-04.jpg",
-        price: "2500000",
-        discountPercent: "0.05",
-        desc: `Đèn ốp trần LED siêu sáng phù hợp cho các không gian văn phòng và phòng khách.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + nhựa cao cấp.\n
-                Mã sản phẩm: DO01`,
-        idCate: "04",
-        nameCate: "Đèn ốp trần",
-        dateCreate: "5-11-2023"
+        id: "009",
+        name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03819",
+        urlImage: "https://denhoamy.vn/upload/attachment/thumb/2051den-chum-trang-tri-noi-that-phong-cach-my-hien-dai-dc03782-02.jpg",
+        price: "1800000",
+        discountPercent: "0.1",
+        idCate: "DM01",
+        nameCate: "Đèn chùm",
+        dateCreate: "30-10-2023"
     },
+
     {
-        id: "007",
-        name: "Đèn ốp trần LED",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7449den-tuong-trang-tri-ngoai-that-phong-cach-tan-co-dien-dv01836-04.jpg",
-        price: "2500000",
-        discountPercent: "0.05",
-        desc: `Đèn ốp trần LED siêu sáng phù hợp cho các không gian văn phòng và phòng khách.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + nhựa cao cấp.\n
-                Mã sản phẩm: DO01`,
-        idCate: "04",
-        nameCate: "Đèn ốp trần",
-        dateCreate: "5-11-2023"
+        id: "010",
+        name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03819",
+        urlImage: "https://denhoamy.vn/upload/attachment/thumb/3433den-chum-trang-tri-noi-that-phong-cach-my-dc03780-01.jpg",
+        price: "1800000",
+        discountPercent: "0.1",
+        idCate: "DM01",
+        nameCate: "Đèn chùm",
+        dateCreate: "30-10-2023"
     },
-    {
-        id: "007",
-        name: "Đèn ốp trần LED",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7449den-tuong-trang-tri-ngoai-that-phong-cach-tan-co-dien-dv01836-04.jpg",
-        price: "2500000",
-        discountPercent: "0.05",
-        desc: `Đèn ốp trần LED siêu sáng phù hợp cho các không gian văn phòng và phòng khách.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + nhựa cao cấp.\n
-                Mã sản phẩm: DO01`,
-        idCate: "04",
-        nameCate: "Đèn ốp trần",
-        dateCreate: "5-11-2023"
-    },
-    {
-        id: "007",
-        name: "Đèn ốp trần LED",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7449den-tuong-trang-tri-ngoai-that-phong-cach-tan-co-dien-dv01836-04.jpg",
-        price: "2500000",
-        discountPercent: "0.05",
-        desc: `Đèn ốp trần LED siêu sáng phù hợp cho các không gian văn phòng và phòng khách.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + nhựa cao cấp.\n
-                Mã sản phẩm: DO01`,
-        idCate: "04",
-        nameCate: "Đèn ốp trần",
-        dateCreate: "5-11-2023"
-    },
-    {
-        id: "007",
-        name: "Đèn ốp trần LED",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7449den-tuong-trang-tri-ngoai-that-phong-cach-tan-co-dien-dv01836-04.jpg",
-        price: "2500000",
-        discountPercent: "0.05",
-        desc: `Đèn ốp trần LED siêu sáng phù hợp cho các không gian văn phòng và phòng khách.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + nhựa cao cấp.\n
-                Mã sản phẩm: DO01`,
-        idCate: "04",
-        nameCate: "Đèn ốp trần",
-        dateCreate: "5-11-2023"
-    },
-    {
-        id: "007",
-        name: "Đèn ốp trần LED",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7449den-tuong-trang-tri-ngoai-that-phong-cach-tan-co-dien-dv01836-04.jpg",
-        price: "2500000",
-        discountPercent: "0.05",
-        desc: `Đèn ốp trần LED siêu sáng phù hợp cho các không gian văn phòng và phòng khách.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + nhựa cao cấp.\n
-                Mã sản phẩm: DO01`,
-        idCate: "04",
-        nameCate: "Đèn ốp trần",
-        dateCreate: "5-11-2023"
-    },
-    {
-        id: "007",
-        name: "Đèn ốp trần LED",
-        urlImage: "https://denhoamy.vn/upload/attachment/thumb/7449den-tuong-trang-tri-ngoai-that-phong-cach-tan-co-dien-dv01836-04.jpg",
-        price: "2500000",
-        discountPercent: "0.05",
-        desc: `Đèn ốp trần LED siêu sáng phù hợp cho các không gian văn phòng và phòng khách.\n
-                Tình trạng: Mới 100%, Full box\n
-                Bóng Led ánh sáng: vàng/ trung tính/ trắng. Tuổi thọ bóng trung bình: 50000H. Điện áp: 220V.\n
-                Chất liệu: Hợp kim + nhựa cao cấp.\n
-                Mã sản phẩm: DO01`,
-        idCate: "04",
-        nameCate: "Đèn ốp trần",
-        dateCreate: "5-11-2023"
-    }
 ];
 
 export const customerData = [
