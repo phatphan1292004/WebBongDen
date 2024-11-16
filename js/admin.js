@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${item.price}</td>
                 <td>${item.nameCate}</td>
                 <td>${item.dateCreate}</td>
-                <td><button class="view-details">Xem chi tiết</button></td>
+                <td><button class="view-details view-details-product">Xem chi tiết</button></td>
                 <td>
                     <button class="delete-product">
                         <i class="fa-regular fa-trash-can"></i>
@@ -273,18 +273,6 @@ document.addEventListener("DOMContentLoaded", function () {
           barThickness: 12,
         },
       },
-      // plugins: {
-      //   tooltip: {
-      //     callbacks: {
-      //       title: function (tooltipItem) {
-      //         return months[tooltipItem[0].dataIndex]; // Hiển thị tháng của cột khi hover vào
-      //       },
-      //       label: function (tooltipItem) {
-      //         return "Doanh thu: " + tooltipItem.raw.toLocaleString(); // Hiển thị doanh thu của tháng khi hover vào
-      //       },
-      //     },
-      //   },
-      // },
     },
   });
 
@@ -487,4 +475,83 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("month").placeholder = ""; // Không yêu cầu nhập tháng nếu chọn thống kê theo năm
       }
     });
+
+    // Code phần chi tiết sản phẩm
+    productTableBody.addEventListener("click", function (event) {
+      if (event.target && event.target.classList.contains("view-details-product")) {
+          document.querySelector('.tab-content-container').style.display = 'none';  
+          document.querySelector('.product-details').style.display = 'block';
+      }
+    });
+
+    document.getElementById('edit-product-btn').addEventListener('click', function() {
+      // Chuyển tất cả các trường sang chế độ chỉnh sửa (ẩn span và hiển thị input)
+      document.getElementById('edit-product-id').style.display = 'block';
+      document.getElementById('edit-product-image').style.display = 'block';
+      document.getElementById('edit-product-name').style.display = 'block';
+      document.getElementById('edit-product-price').style.display = 'block';
+      document.getElementById('edit-product-category').style.display = 'block';
+      document.getElementById('edit-product-status').style.display = 'block';
+      document.getElementById('edit-product-description').style.display = 'block';
+      document.getElementById('edit-product-date').style.display = 'block';
+    
+      document.getElementById('product-id-view').style.display = 'none';
+      document.getElementById('product-image-view').style.display = 'none';
+      document.getElementById('product-name-view').style.display = 'none';
+      document.getElementById('product-price-view').style.display = 'none';
+      document.getElementById('product-category-view').style.display = 'none';
+      document.getElementById('product-status-view').style.display = 'none';
+      document.getElementById('product-description-view').style.display = 'none';
+      document.getElementById('product-date-view').style.display = 'none';
+    
+      // Hiển thị nút Save
+      document.getElementById('save-product-btn').style.display = 'block';
+      document.getElementById('edit-product-btn').style.display = 'none';
+    });
+    
+    document.getElementById('save-product-btn').addEventListener('click', function() {
+      // Lưu lại giá trị trong các input
+      const productId = document.getElementById('edit-product-id').value;
+      const productImage = document.getElementById('edit-product-image').value;
+      const productName = document.getElementById('edit-product-name').value;
+      const productPrice = document.getElementById('edit-product-price').value;
+      const productCategory = document.getElementById('edit-product-category').value;
+      const productStatus = document.getElementById('edit-product-status').value;
+      const productDescription = document.getElementById('edit-product-description').value;
+      const productDate = document.getElementById('edit-product-date').value;
+    
+      // Cập nhật lại các phần tử để hiển thị thông tin đã sửa
+      document.getElementById('product-id-view').textContent = productId;
+      document.getElementById('product-image-view').textContent = productImage;
+      document.getElementById('product-name-view').textContent = productName;
+      document.getElementById('product-price-view').textContent = productPrice;
+      document.getElementById('product-category-view').textContent = productCategory;
+      document.getElementById('product-status-view').textContent = productStatus;
+      document.getElementById('product-description-view').textContent = productDescription;
+      document.getElementById('product-date-view').textContent = productDate;
+    
+      // Chuyển lại các input và textarea thành ẩn
+      document.getElementById('edit-product-id').style.display = 'none';
+      document.getElementById('edit-product-image').style.display = 'none';
+      document.getElementById('edit-product-name').style.display = 'none';
+      document.getElementById('edit-product-price').style.display = 'none';
+      document.getElementById('edit-product-category').style.display = 'none';
+      document.getElementById('edit-product-status').style.display = 'none';
+      document.getElementById('edit-product-description').style.display = 'none';
+      document.getElementById('edit-product-date').style.display = 'none';
+    
+      // Hiển thị các phần tử thông tin ở dạng inline-block
+      document.getElementById('product-id-view').style.display = 'inline-block';
+      document.getElementById('product-image-view').style.display = 'inline-block';
+      document.getElementById('product-name-view').style.display = 'inline-block';
+      document.getElementById('product-price-view').style.display = 'inline-block';
+      document.getElementById('product-category-view').style.display = 'inline-block';
+      document.getElementById('product-status-view').style.display = 'inline-block';
+      document.getElementById('product-description-view').style.display = 'inline-block';
+      document.getElementById('product-date-view').style.display = 'inline-block';
+    
+      // Ẩn nút Save và hiện lại nút Edit
+      document.getElementById('save-product-btn').style.display = 'none';
+      document.getElementById('edit-product-btn').style.display = 'inline-block';
+    });      
 });
