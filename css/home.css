@@ -281,6 +281,7 @@
 
 .header .navbar .navbar-list .dropdown:hover .submenu {
   display: block;
+  width: 1000px;
 }
 
 .header .navbar .navbar-list .dropdown .submenu {
@@ -518,7 +519,7 @@
 .wrapper .container {
   max-width: 1280px;
   padding: 0 20px;
-  margin: 5px auto;
+  margin: 0 auto;
   display: flex;
   gap: 20px;
 }
@@ -694,6 +695,7 @@
 .home-product .wrapper-bottom .list-product .product-item .img img {
   transition: transform 0.3s ease;
   height: 100%;
+  width: 100%;
 }
 
 .home-product .wrapper-bottom .list-product .product-item .img:hover img {

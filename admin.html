@@ -46,7 +46,7 @@
             <div class="nav-item" data-index="0">
               <div class="nav-item-left">
                 <i class="fa-solid fa-tachometer-alt"></i>
-                <p style="font-weight: 500;">Dashboard</p>
+                <p style="font-weight: 500">Dashboard</p>
               </div>
             </div>
 
@@ -266,107 +266,247 @@
           </div>
 
           <div class="tab-content" id="product-management-content">
-            <div class="header-tab">
-              <div class="search-container">
-                <input
-                  type="text"
-                  id="product-search"
-                  placeholder="Tìm kiếm sản phẩm..."
-                />
-                <button id="search-btn">Tìm kiếm</button>
-              </div>
+            <div class="tab-content-container">
+              <div class="header-tab">
+                <div class="search-container">
+                  <input
+                    type="text"
+                    id="product-search"
+                    placeholder="Tìm kiếm sản phẩm..."
+                  />
+                  <button id="search-btn">Tìm kiếm</button>
+                </div>
 
-              <div class="sort-dropdown">
-                <select id="sort-select-product" class="sort-select">
-                  <option value="" disabled selected>Chọn</option>
-                  <option value="name-asc">Tên A-Z</option>
-                  <option value="name-desc">Tên Z-A</option>
-                  <option value="price-asc">Giá Thấp-Cao</option>
-                  <option value="price-desc">Giá Cao-Thấp</option>
-                </select>
-                <button id="sort-btn" class="sort-button">
-                  <i class="fa-solid fa-sort"></i> Sắp xếp
+                <div class="sort-dropdown">
+                  <select id="sort-select-product" class="sort-select">
+                    <option value="" disabled selected>Chọn</option>
+                    <option value="name-asc">Tên A-Z</option>
+                    <option value="name-desc">Tên Z-A</option>
+                    <option value="price-asc">Giá Thấp-Cao</option>
+                    <option value="price-desc">Giá Cao-Thấp</option>
+                  </select>
+                  <button id="sort-btn" class="sort-button">
+                    <i class="fa-solid fa-sort"></i> Sắp xếp
+                  </button>
+                </div>
+                <button class="add-product">
+                  <i class="fa-solid fa-plus"></i>
+                  Thêm sản phẩm
                 </button>
               </div>
-              <button class="add-product">
-                <i class="fa-solid fa-plus"></i>
-                Thêm sản phẩm
-              </button>
-            </div>
 
-            <!-- Overlay và Form thêm sản phẩm -->
-            <div class="overlay" id="overlay">
-              <div class="add-product-form" id="add-product-form">
-                <div class="form-header">
-                  <p>Thêm sản phẩm mới</p>
-                  <i class="fa-solid fa-xmark"></i>
+              <!-- Overlay và Form thêm sản phẩm -->
+              <div class="overlay" id="overlay">
+                <div class="add-product-form" id="add-product-form">
+                  <div class="form-header">
+                    <p>Thêm sản phẩm mới</p>
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
+                  <form id="product-form">
+                    <label for="product-id">Id:</label>
+                    <input type="text" id="product-id" required />
+
+                    <label for="product-image">Link Hình ảnh:</label>
+                    <input type="text" id="product-image" required />
+
+                    <label for="product-name">Tên sản phẩm:</label>
+                    <input type="text" id="product-name" required />
+
+                    <label for="product-price">Giá:</label>
+                    <input type="text" id="product-price" required />
+
+                    <label for="product-category">Loại sản phẩm:</label>
+                    <input type="text" id="product-category" required />
+
+                    <label for="product-date">Ngày thêm:</label>
+                    <input type="date" id="product-date" required />
+
+                    <button type="button" id="save-product">
+                      Lưu sản phẩm
+                    </button>
+                  </form>
                 </div>
-                <form id="product-form">
-                  <label for="product-id">Id:</label>
-                  <input type="text" id="product-id" required />
+              </div>
 
-                  <label for="product-image">Link Hình ảnh:</label>
-                  <input type="text" id="product-image" required />
-
-                  <label for="product-name">Tên sản phẩm:</label>
-                  <input type="text" id="product-name" required />
-
-                  <label for="product-price">Giá:</label>
-                  <input type="text" id="product-price" required />
-
-                  <label for="product-category">Loại sản phẩm:</label>
-                  <input type="text" id="product-category" required />
-
-                  <label for="product-date">Ngày thêm:</label>
-                  <input type="date" id="product-date" required />
-
-                  <button type="button" id="save-product">Lưu sản phẩm</button>
-                </form>
+              <!-- Bảng danh sách sản phẩm -->
+              <div class="tab-container">
+                <table class="product-table">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Link Hình ảnh</th>
+                      <th>Tên sản phẩm</th>
+                      <th>Giá</th>
+                      <th>Loại sản phẩm</th>
+                      <th>Ngày thêm</th>
+                      <th>Thao tác</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="product-table-body">
+                    <!-- <tr>
+                       <td>001</td>
+                       <td>
+                         <a href="https://via.placeholder.com/50" target="_blank"
+                           >https://via.placeholder.com/50</a
+                         >
+                       </td>
+                       <td>Sản phẩm 1</td>
+                       <td>200.000 VNĐ</td>
+                       <td>Đèn LED</td>
+                       <td>01/12/2024</td>
+                       <td><button class="view-details">Xem chi tiết</button></td>
+                       <td>
+                         <button class="edit-product">
+                           <i class="fa-regular fa-pen-to-square"></i>
+                         </button>
+                       </td>
+                       <td>
+                         <button class="delete-product">
+                           <i class="fa-regular fa-trash-can"></i>
+                         </button>
+                       </td>
+                     </tr> -->
+                  </tbody>
+                </table>
               </div>
             </div>
 
-            <!-- Bảng danh sách sản phẩm -->
-            <div class="tab-container">
-              <table class="product-table">
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Link Hình ảnh</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Giá</th>
-                    <th>Loại sản phẩm</th>
-                    <th>Ngày thêm</th>
-                    <th>Thao tác</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="product-table-body">
-                  <!-- <tr>
-                     <td>001</td>
-                     <td>
-                       <a href="https://via.placeholder.com/50" target="_blank"
-                         >https://via.placeholder.com/50</a
-                       >
-                     </td>
-                     <td>Sản phẩm 1</td>
-                     <td>200.000 VNĐ</td>
-                     <td>Đèn LED</td>
-                     <td>01/12/2024</td>
-                     <td><button class="view-details">Xem chi tiết</button></td>
-                     <td>
-                       <button class="edit-product">
-                         <i class="fa-regular fa-pen-to-square"></i>
-                       </button>
-                     </td>
-                     <td>
-                       <button class="delete-product">
-                         <i class="fa-regular fa-trash-can"></i>
-                       </button>
-                     </td>
-                   </tr> -->
-                </tbody>
-              </table>
+            <!-- Khung chi tiết sản phẩm -->
+            <div
+              class="product-details"
+              id="product-details"
+              style="display: none"
+              >
+              <button id="close-details-btn">
+                <i class="fa-solid fa-arrow-left"></i> Quay lại
+              </button>
+              <!-- Phần tiêu đề và thông tin cơ bản -->
+              <div class="details-header">
+
+                <div class="product-info">
+                  <div class="product-info-left">
+                    <div class="product-image">
+                      <img
+                        id="product-image"
+                        src="https://denhoamy.vn/upload/attachment/5647den-chum-trang-tri-noi-that-phong-cach-my-dc03812-01.jpg"
+                        alt="Hình ảnh sản phẩm"
+                      />
+                    </div>
+                    <div class="basic-details">
+                      <p>
+                        <strong>Tên sản phẩm:</strong>
+                        <span id="product-name">Skinny Men Blazer</span>
+                      </p>
+                      <p>
+                        <strong>Mã sản phẩm:</strong>
+                        <span id="product-id">#5353</span>
+                      </p>
+                    </div>
+                  </div>
+                  <button id="save-product-btn" class="save-button" style="display: none;">
+                    <i class="fa-solid fa-pen"></i> Save
+                  </button>
+
+                  <button id="edit-product-btn" class="edit-button">
+                    <i class="fa-solid fa-pen"></i> Edit
+                  </button>
+                </div>
+              </div>
+
+              <div class="details-main">
+                <!-- Phần thông tin thống kê -->
+                <div class="stats-container">
+                  <div class="stat-box">
+                    <div class="stat-icon">
+                      <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div class="stat-text">
+                      <p><strong>Số lượng bán được:</strong></p>
+                      <span id="sold-quantity">0</span>
+                    </div>
+                  </div>
+                  <div class="stat-box">
+                    <div class="stat-icon">
+                      <i class="fa-solid fa-warehouse"></i>
+                    </div>
+                    <div class="stat-text">
+                      <p><strong>Số lượng tồn kho:</strong></p>
+                      <span id="stock-quantity">0</span>
+                    </div>
+                  </div>
+                  <div class="stat-box">
+                    <div class="stat-icon">
+                      <i class="fa-solid fa-star-half-alt"></i>
+                    </div>
+                    <div class="stat-text">
+                      <p><strong>Rating:</strong></p>
+                      <span id="product-rating">0/5</span>
+                    </div>
+                  </div>
+                  <div class="stat-box">
+                    <div class="stat-icon">
+                      <i class="fa-solid fa-comment-alt"></i>
+                    </div>
+                    <div class="stat-text">
+                      <p><strong>Đánh giá:</strong></p>
+                      <span id="product-reviews">0 đánh giá</span>
+                    </div>
+                  </div>
+                </div>                
+                
+                <!-- Phần chi tiết sản phẩm -->
+                <div class="details-content">
+                  <div>
+                    <strong>Id:</strong>
+                    <span id="product-id-view">5353</span>
+                    <input type="text" id="edit-product-id" value="5353" style="display: none;" readonly />
+                  </div>
+                  
+                  <div>
+                    <strong>Hình ảnh:</strong>
+                    <span id="product-image-view">https://denhoamy.vn/upload/attachment/5647den-chum-trang-tri-noi-that-phong-cach-my-dc03812-01.jpg</span>
+                    <input type="text" id="edit-product-image" style="display: none;" accept="image/*" />
+                  </div>
+                  
+                  <div>
+                    <strong>Tên sản phẩm:</strong>
+                    <span id="product-name-view">Skinny Men Blazer</span>
+                    <input type="text" id="edit-product-name" value="Skinny Men Blazer" style="display: none;" />
+                  </div>
+                
+                  <div>
+                    <strong>Giá:</strong>
+                    <span id="product-price-view">200,000 VNĐ</span>
+                    <input type="text" id="edit-product-price" value="200,000 VNĐ" style="display: none;" />
+                  </div>
+                
+                  <div>
+                    <strong>Loại sản phẩm:</strong>
+                    <span id="product-category-view">Thời trang nam</span>
+                    <input type="text" id="edit-product-category" value="Thời trang nam" style="display: none;" />
+                  </div>
+                
+                  <div>
+                    <strong>Tình trạng:</strong>
+                    <span id="product-status-view">Còn hàng</span>
+                    <input type="text" id="edit-product-status" value="Còn hàng" style="display: none;" />
+                  </div>
+                
+                  <div>
+                    <strong>Mô tả:</strong>
+                    <span id="product-description-view">Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</span>
+                    <textarea id="edit-product-description" style="display: none;">Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea>
+                  </div>
+                
+                  <div>
+                    <strong>Ngày thêm:</strong>
+                    <span id="product-date-view">2024-11-15</span>
+                    <input type="date" id="edit-product-date" value="2024-11-15" style="display: none;" />
+                  </div>
+                </div>                           
+              </div>
             </div>
           </div>
 
@@ -409,16 +549,16 @@
                 </thead>
                 <tbody id="customer-table-body">
                   <!-- <tr>
-                    <td>C001</td>
-                    <td>Nguyễn An</td>
-                    <td>nguyenan@example.com</td>
-                    <td>0123456789</td>
-                    <td>123 Đường Lê Lợi, Quận 1, TP.HCM</td>
-                    <td>15/10/2023</td>
-                    <td>
-                      <button class="view-details">Xem chi tiết</button>
-                    </td>
-                  </tr> -->
+                      <td>C001</td>
+                      <td>Nguyễn An</td>
+                      <td>nguyenan@example.com</td>
+                      <td>0123456789</td>
+                      <td>123 Đường Lê Lợi, Quận 1, TP.HCM</td>
+                      <td>15/10/2023</td>
+                      <td>
+                        <button class="view-details">Xem chi tiết</button>
+                      </td>
+                    </tr> -->
                 </tbody>
               </table>
             </div>
@@ -437,15 +577,16 @@
 
               <div style="display: flex; gap: 20px">
                 <select id="sort-select-order" class="sort-select">
-                  <option value="" disabled selected>Chọn</option>
+                  <option value="" disabled selected>Tất cả</option>
                   <option value="name-asc">Ngày đặt: Mới nhất</option>
                   <option value="name-desc">Ngày đặt: Cũ nhất</option>
                   <option value="price-asc">ID A-Z</option>
                   <option value="price-desc">ID Z-A</option>
+                  <option value="pending-orders">Đơn hàng chưa duyệt</option>
                 </select>
 
                 <button id="sort-btn" class="sort-button">
-                  <i class="fa-solid fa-sort"></i> Sắp xếp
+                  <i class="fa-solid fa-sort"></i> Lọc
                 </button>
               </div>
             </div>
@@ -541,14 +682,14 @@
                 <thead>
                   <tr>
                     <th>Id</th>
-                    <th>Tên Khách Hàng</th>
+                    <th>Tên KH</th>
                     <th>Ngày đặt hàng</th>
                     <th>Ngày giao dự kiến</th>
                     <th>Địa chỉ</th>
                     <th>Trạng thái</th>
-                    <th>Phương thức thanh toán</th>
-                    <th>Thời gian đặt hàng</th>
+                    <th>PT thanh toán</th>
                     <th>Hóa đơn</th>
+                    <th>Thao tác</th>
                   </tr>
                 </thead>
                 <tbody id="order-table-body"></tbody>
@@ -558,7 +699,7 @@
           <div class="tab-content" id="revenue-statistics-content">
             <div class="revenue-statistics">
               <div class="revenue-header">
-                <p>Thống kê doanh thu</p>
+                <p>THỐNG KÊ DOANH THU</p>
               </div>
               <div class="chart-selection">
                 <div class="left">
