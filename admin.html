@@ -438,15 +438,16 @@
 
               <div style="display: flex; gap: 20px;">
                 <select id="sort-select-order" class="sort-select">
-                  <option value="" disabled selected>Chọn</option>
+                  <option value="" disabled selected>Tất cả</option>
                   <option value="name-asc">Ngày đặt: Mới nhất</option>
                   <option value="name-desc">Ngày đặt: Cũ nhất</option>
                   <option value="price-asc">ID A-Z</option>
                   <option value="price-desc">ID Z-A</option>
+                  <option value="pending-orders">Đơn hàng chưa duyệt</option>
                 </select>
   
                 <button id="sort-btn" class="sort-button">
-                  <i class="fa-solid fa-sort"></i> Sắp xếp
+                  <i class="fa-solid fa-sort"></i> Lọc
                 </button>
               </div>
             </div>
@@ -544,14 +545,14 @@
                 <thead>
                   <tr>
                     <th>Id</th>
-                    <th>Tên Khách Hàng</th>
+                    <th>Tên KH</th>
                     <th>Ngày đặt hàng</th>
                     <th>Ngày giao dự kiến</th>
                     <th>Địa chỉ</th>
                     <th>Trạng thái</th>
-                    <th>Phương thức thanh toán</th>
-                    <th>Thời gian đặt hàng</th>
+                    <th>PT thanh toán</th>
                     <th>Hóa đơn</th>
+                    <th>Thao tác</th>
                   </tr>
                 </thead>
                 <tbody id="order-table-body"></tbody>
@@ -561,7 +562,7 @@
           <div class="tab-content" id="revenue-statistics-content">
             <div class="revenue-statistics">
               <div class="revenue-header">
-                <p>Thống kê doanh thu</p>
+                <p>THỐNG KÊ DOANH THU</p>
               </div>
               <div class="chart-selection">
                 <div class="left">

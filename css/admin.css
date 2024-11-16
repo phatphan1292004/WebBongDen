@@ -672,6 +672,22 @@ table {
   .order-table {
     width: 100%;
   }
+
+  .approve-order {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #e6f9f7;
+    color: forestgreen;
+  }
+
+  .reject-order {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: rgb(255, 237, 237);
+    color: red;
+  }
   
   .order-table thead {
     background-color: #fafafa;
@@ -945,7 +961,7 @@ table {
 
 .tab-content .chart-selection .left select{
     padding: 10px 15px;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #ccc;
 
 }
@@ -954,7 +970,7 @@ table {
     padding: 10px 15px;
     border: 1px solid #ccc;
     outline: none;
-    border-radius: 8px;
+    border-radius: 4px;
     width: 250px;
     margin-right: 20px;
 } 

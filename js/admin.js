@@ -78,11 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${item.dateCreate}</td>
                 <td><button class="view-details">Xem chi tiết</button></td>
                 <td>
-                    <button class="edit-product">
-                        <i class="fa-regular fa-pen-to-square"></i>
-                    </button>
-                </td>
-                <td>
                     <button class="delete-product">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
@@ -130,14 +125,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Xóa row khi ấn vào nút xóa
-  document.querySelector("#product-table-body").addEventListener("click", function (e) {
-    if (e.target.classList.contains("delete-product")) {
-      e.stopPropagation();
-      const row = e.target.closest("tr");
-      row.remove();
-      document.querySelector("tbody").dispatchEvent(new Event("change"));
-    }
-  });
+  document
+    .querySelector("#product-table-body")
+    .addEventListener("click", function (e) {
+      if (e.target.classList.contains("delete-product")) {
+        e.stopPropagation();
+        const row = e.target.closest("tr");
+        row.remove();
+        document.querySelector("tbody").dispatchEvent(new Event("change"));
+      }
+    });
 
   function loadCustomerTable() {
     cusTableBody.innerHTML = "";
@@ -171,23 +168,33 @@ document.addEventListener("DOMContentLoaded", function () {
         <td>${order.address}</td>
         <td>${order.status}</td>
         <td>${order.paymentMethod}</td>
-        <td>${order.orderTime}</td>
-        <td><button class="view-details">Xem chi tiết</button></td>
+        <td><button class="view-details">Chi tiết</button></td>
+        <td>
+      ${
+        order.status === "Chờ xử lý"
+          ? `
+        <button class="approve-order" onclick="approveOrder(${order.id})"><i class="fa-solid fa-check"></i></button>
+        <button class="reject-order" onclick="rejectOrder(${order.id})"><i class="fa-solid fa-times"></i></button>
+      `
+          : ""
+      }
+        </td>
       `;
 
     orderTableBody.appendChild(row);
   });
 
-  
-  orderTableBody.addEventListener('click', function(event) {
-    if (event.target && event.target.classList.contains('view-details')) {
-        document.getElementById('overlay2').classList.add('active');
+  orderTableBody.addEventListener("click", function (event) {
+    if (event.target && event.target.classList.contains("view-details")) {
+      document.getElementById("overlay2").classList.add("active");
     }
   });
 
-  document.getElementById('close-invoice-details').addEventListener('click', function() {
-    document.getElementById('overlay2').classList.remove('active');
-  });
+  document
+    .getElementById("close-invoice-details")
+    .addEventListener("click", function () {
+      document.getElementById("overlay2").classList.remove("active");
+    });
 
   // Dữ liệu cho biểu đồ khách hàng
   const data = {
