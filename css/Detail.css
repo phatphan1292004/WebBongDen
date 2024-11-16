@@ -300,6 +300,7 @@ a {
 .product-topbar {
     font-size: 16px; /* Kích thước font chữ cho thanh sản phẩm */
     color: #333; /* Màu sắc chữ */
+    margin-bottom: 20px;
 }
 
 .total-products p {
@@ -703,4 +704,60 @@ a {
 .navbar-list .dropdown .submenu {
     min-width: 1000px;
 }
+
+.sidebar-news {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    max-width: 100%; /* Đảm bảo sidebar không bị tràn */
+    overflow: hidden; /* Ẩn nội dung tràn ra */
+}
+
+.list-news-latest {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 100%; /* Giới hạn kích thước */
+}
+
+.item-article {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    max-width: 100%; /* Đảm bảo các bài viết không tràn */
+    overflow: hidden;
+}
+
+.post-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 100%;
+}
+
+.post-content .title {
+    font-size: 14px;
+    color: #007bff;
+    max-width: 100%; /* Đảm bảo tiêu đề nằm trong giới hạn */
+}
+
+.post-content .title a {
+    display: -webkit-box; /* Sử dụng layout flex để cắt dòng */
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    overflow: hidden; /* Ẩn phần văn bản dư */
+    -webkit-line-clamp: 3; /* Số dòng muốn hiển thị (thay đổi thành 2 nếu cần) */
+    -webkit-box-orient: vertical; /* Định hướng chiều dọc */
+}
+
+.post-content .title a:hover {
+    color: #0056b3; /* Hiệu ứng hover */
+}
+
+
 
