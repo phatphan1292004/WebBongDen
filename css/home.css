@@ -520,7 +520,7 @@
 .wrapper .container {
   max-width: 1280px;
   padding: 0 20px;
-  margin: 5px auto;
+  margin: 0 auto;
   display: flex;
   gap: 20px;
 }

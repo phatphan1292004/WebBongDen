@@ -188,7 +188,7 @@ export const productData = [
     id: "001",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03814",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/6257den-chum-trang-tri-noi-that-phong-cach-my-dc03814-01.jpg",
+      "./img/dc1.jpg",
     price: "3000000",
     discountPercent: "0.1",
     idCate: "DM01",
