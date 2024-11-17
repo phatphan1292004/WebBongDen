@@ -34,4 +34,19 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("category-list").appendChild(categoryItem);
         });
     });
+
+    
+    const headerUser = document.querySelector(".header-user");
+    const loginBtn = document.getElementById("login-header-btn");
+  
+    // Kiểm tra sessionStorage
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
+  
+    if (loggedInUser) {
+      headerUser.style.display = "block";
+      loginBtn.style.display = "none";
+    } else {
+      headerUser.style.display = "none";
+      loginBtn.style.display = "block";
+    }
 });
