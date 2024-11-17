@@ -324,31 +324,36 @@ a {
     background-color: #fff; /* White background */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
-.single-product-wrapper .product-img {
+.product-img img {
+    width: 100%; /* Chiều rộng 100% so với khung cha */
+    height: 200px; /* Chiều cao cố định */
+    object-fit: cover; /* Cắt hình ảnh nếu tỷ lệ không khớp */
+    border-radius: 5px; /* Tùy chọn: Bo góc nhẹ cho hình ảnh */
+}
+
+.product-img {
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* Đảm bảo hình ảnh hover không bị tràn */
 }
 
-.single-product-wrapper .product-img img {
-    width: 100%;
-    transition: opacity 0.5s ease;
-}
-
-.single-product-wrapper .product-img .hover-img {
+.product-img .hover-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.8s ease-in-out; /* Hiệu ứng hover mượt */
 }
 
-.single-product-wrapper .product-img:hover .hover-img {
-    opacity: 1;
+.product-img:hover .hover-img {
+    opacity: 1; /* Hiển thị ảnh khi hover */
 }
+
 
 .single-product-wrapper .product-img:hover img {
-    opacity: 0;
+    opacity: 1;
 }
 .product-badge {
     background-color: red; /* Đặt màu nền thành màu đỏ */
