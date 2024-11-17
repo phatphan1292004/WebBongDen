@@ -104,6 +104,7 @@
   object-fit: cover;
 }
 
+
 .wrapper .main .product-item .product-detail .product-name {
   margin-bottom: 10px;
   font-weight: 500;
@@ -123,6 +124,9 @@
 
 .wrapper .main .product-item .product-qp {
   margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
 
 .wrapper .main .product-item .product-qp .quantity-selector {
@@ -313,7 +317,7 @@ input[type="text"]::placeholder {
 }
 
 .tab-container .container-top .section.order-info p span:first-child {
-  font-weight: bold;
+  font-weight: 600;
   color: #000; /* Màu đen đậm cho tiêu đề */
 }
 

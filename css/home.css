@@ -245,6 +245,10 @@
   border-radius: 5px;
 }
 
+.header .header-top .info a {
+  text-decoration: none;
+}
+
 .header .header-top .info .login:hover {
   background-color: var(--color-yellow-dark);
 }
