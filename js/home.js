@@ -220,18 +220,41 @@ window.addEventListener("load", function () {
 
   closeSearchBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    mobileSearchBar.classList.remove('active'); 
-    searchIcon.style.display = 'block';
-  })
+    mobileSearchBar.classList.remove("active");
+    searchIcon.style.display = "block";
+  });
 
-  // Xử lý phần đăng nhập
-  const loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
-  
-  if (loggedInUser) {
-    // Ẩn nút đăng nhập và hiển thị avatar người dùng
-    const loginLink = document.getElementById('login-btn')
-    const headerUser = document.querySelector(".header-user");
-    loginLink.style.display = "none";  
-    headerUser.style.display = "block";  
-  }
+  const saleEndTime = new Date("Nov 18, 2024 00:00:00").getTime();
+
+  // Cập nhật đồng hồ đếm ngược mỗi giây
+  const countdownFunction = setInterval(function() {
+
+      // Lấy thời gian hiện tại
+      const now = new Date().getTime();
+
+      // Tính toán thời gian còn lại
+      const timeLeft = saleEndTime - now;
+
+      // Tính số ngày, giờ, phút, giây
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      // Hiển thị kết quả trên trang web
+      document.getElementById("days").innerHTML = days < 10 ? '0' + days : days;
+      document.getElementById("hours").innerHTML = hours < 10 ? '0' + hours : hours;
+      document.getElementById("minutes").innerHTML = minutes < 10 ? '0' + minutes : minutes;
+      document.getElementById("seconds").innerHTML = seconds < 10 ? '0' + seconds : seconds;
+
+      // Nếu thời gian kết thúc, hiển thị thông báo
+      if (timeLeft < 0) {
+          clearInterval(countdownFunction);
+          document.getElementById("days").innerHTML = "00";
+          document.getElementById("hours").innerHTML = "00";
+          document.getElementById("minutes").innerHTML = "00";
+          document.getElementById("seconds").innerHTML = "00";
+          alert("Sale đã kết thúc!");
+      }
+  }, 1000);
 });
