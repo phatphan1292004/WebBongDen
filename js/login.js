@@ -30,16 +30,15 @@ document.addEventListener("DOMContentLoaded", function () {
     showNotification(`Mật khẩu đã được gửi tới ${email}`, "success");
   }
 
-  // Chuyển đổi giữa form đăng nhập và form quên mật khẩu
-  function showForgotPassword() {
+  document.querySelector(".forgot-pw").addEventListener('click', function() {
     document.getElementById("login-form").style.display = "none";
     document.getElementById("forgot-password-form").style.display = "block";
-  }
+  });
 
-  function showLogin() {
-    document.getElementById("forgot-password-form").style.display = "none";
+  document.querySelector(".back-to-login").addEventListener('click', function() {
     document.getElementById("login-form").style.display = "block";
-  }
+    document.getElementById("forgot-password-form").style.display = "none";
+  });
 
   // Xử lý khi submit form đăng nhập
   const loginForm = document.getElementById("login-form");
