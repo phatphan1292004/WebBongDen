@@ -66,6 +66,20 @@ document.addEventListener('DOMContentLoaded', function() {
             quantityProductOrder.textContent = quantityProduct;
             showNotification();
         });
+
+        const headerUser = document.querySelector(".header-user");
+        const loginBtn = document.getElementById("login-header-btn");
+    
+      // Kiểm tra sessionStorage
+        const loggedInUser = sessionStorage.getItem("loggedInUser");
+    
+        if (loggedInUser) {
+        headerUser.style.display = "block";
+        loginBtn.style.display = "none";
+        } else {
+        headerUser.style.display = "none";
+        loginBtn.style.display = "block";
+        }
     }, 1000);  
 
     
