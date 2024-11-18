@@ -77,4 +77,30 @@ document.addEventListener('DOMContentLoaded', function() {
           nextArrow: `<button type='button' class='slick-next slick-arrow'><i class="fa-solid fa-angle-right"></i></button>`,
         });
     });
+
+    // Code phần rating
+    const ratingItems = document.querySelectorAll(".rating-item");
+  const selectedRatingDisplay = document.querySelector(".selected-rating");
+
+  // Xử lý sự kiện hover
+  ratingItems.forEach((item, index) => {
+    item.addEventListener("mouseover", function() {
+      // Đổi màu các sao trước sao được hover
+      for (let i = 0; i <= index; i++) {
+        ratingItems[i].classList.add("selected");
+      }
+      for (let i = index + 1; i < ratingItems.length; i++) {
+        ratingItems[i].classList.remove("selected");
+      }
+    });
+
+    // Xử lý sự kiện click
+    item.addEventListener("click", function() {
+      const ratingValue = index + 1;
+      console.log("Điểm đánh giá: " + ratingValue);
+      for (let i = 0; i <= index; i++) {
+        ratingItems[i].classList.add("selected");
+      }
+    });
+  });
 });
