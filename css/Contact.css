@@ -1,11 +1,12 @@
 .main {
     display: flex;
-    
+    justify-content: center; /* Căn giữa các phần tử con */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    height: 65vh;
 }
-/* Container Styles */
 .contact-container {
-    justify-content: center;
     display: flex;
+    justify-content: center;
     gap: 20px;
     padding: 20px;
     width: 1000px;
@@ -13,7 +14,6 @@
     background-color: #fff;
     border-radius: 4px;
 }
-
 
 .tabs {
     display: flex;
