@@ -153,6 +153,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  cusTableBody.addEventListener('click', function(e) {
+    if (e.target && e.target.classList.contains("view-details")) {
+      document.getElementById("purchase-history-overlay").classList.add("active");
+    }
+  });
+  document.getElementById("close-purchase-history-details").addEventListener('click', function() {
+    document.getElementById("purchase-history-overlay").classList.remove("active");
+  });
+
   loadCustomerTable();
 
   const orderTableBody = document.getElementById("order-table-body");
