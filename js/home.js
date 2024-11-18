@@ -278,4 +278,14 @@ window.addEventListener("load", function () {
     headerUser.style.display = "none";
     loginBtn.style.display = "block";
   }
+
+  // Code phần click vào sp chuyển tới trang product
+  const listProductItems = document.querySelectorAll(".product-item");
+
+  listProductItems.forEach((item) => {
+    item.addEventListener("click", function () {
+      // Chuyển hướng sang trang product.html
+      window.location.href = "product.html";
+    });
+  });
 });

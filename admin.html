@@ -77,6 +77,24 @@
                 <p>Thống kê doanh thu</p>
               </div>
             </div>
+
+            <div class="nav-item" data-index="4" id="nav-item-system">
+              <div class="nav-item-header">
+                <div class="nav-item-left">
+                  <i class="fas fa-cogs"></i>
+                  <p>Hệ thống</p>
+                </div>
+                <div class="nav-item-right">
+                  <i class="fas fa-chevron-down dropdown-arrow"></i>
+                </div>
+              </div>
+            
+              <!-- Submenu tách ra nhưng nằm trong nav-item -->
+              <ul class="submenu-admin">
+                <li><a href="#">Phiếu giảm giá</a></li>
+                <li><a href="#">Cài đặt hệ thống</a></li>
+              </ul>
+            </div>                      
           </div>
 
           <div class="sidebar-bottom">
@@ -334,7 +352,7 @@
                   <thead>
                     <tr>
                       <th>Id</th>
-                      <th>Link Hình ảnh</th>
+                      <th>Hình ảnh</th>
                       <th>Tên sản phẩm</th>
                       <th>Giá</th>
                       <th>Loại sản phẩm</th>
@@ -378,13 +396,12 @@
               class="product-details"
               id="product-details"
               style="display: none"
-              >
+            >
               <button id="close-details-btn">
                 <i class="fa-solid fa-arrow-left"></i> Quay lại
               </button>
               <!-- Phần tiêu đề và thông tin cơ bản -->
               <div class="details-header">
-
                 <div class="product-info">
                   <div class="product-info-left">
                     <div class="product-image">
@@ -405,7 +422,11 @@
                       </p>
                     </div>
                   </div>
-                  <button id="save-product-btn" class="save-button" style="display: none;">
+                  <button
+                    id="save-product-btn"
+                    class="save-button"
+                    style="display: none"
+                  >
                     <i class="fa-solid fa-pen"></i> Save
                   </button>
 
@@ -423,7 +444,7 @@
                       <i class="fa-solid fa-chart-line"></i>
                     </div>
                     <div class="stat-text">
-                      <p><strong>Số lượng bán được:</strong></p>
+                      <p>Số lượng bán được</p>
                       <span id="sold-quantity">0</span>
                     </div>
                   </div>
@@ -432,7 +453,7 @@
                       <i class="fa-solid fa-warehouse"></i>
                     </div>
                     <div class="stat-text">
-                      <p><strong>Số lượng tồn kho:</strong></p>
+                      <p>Số lượng tồn kho</p>
                       <span id="stock-quantity">0</span>
                     </div>
                   </div>
@@ -441,7 +462,7 @@
                       <i class="fa-solid fa-star-half-alt"></i>
                     </div>
                     <div class="stat-text">
-                      <p><strong>Rating:</strong></p>
+                      <p>Rating</p>
                       <span id="product-rating">0/5</span>
                     </div>
                   </div>
@@ -450,62 +471,119 @@
                       <i class="fa-solid fa-comment-alt"></i>
                     </div>
                     <div class="stat-text">
-                      <p><strong>Đánh giá:</strong></p>
+                      <p>Đánh giá</p>
                       <span id="product-reviews">0 đánh giá</span>
                     </div>
                   </div>
-                </div>                
-                
+                </div>
+
                 <!-- Phần chi tiết sản phẩm -->
                 <div class="details-content">
                   <div>
                     <strong>Id:</strong>
                     <span id="product-id-view">5353</span>
-                    <input type="text" id="edit-product-id" value="5353" style="display: none;" readonly />
+                    <input
+                      type="text"
+                      id="edit-product-id"
+                      value="5353"
+                      style="display: none"
+                      readonly
+                    />
                   </div>
-                  
+
                   <div>
                     <strong>Hình ảnh:</strong>
-                    <span id="product-image-view">https://denhoamy.vn/upload/attachment/5647den-chum-trang-tri-noi-that-phong-cach-my-dc03812-01.jpg</span>
-                    <input type="text" id="edit-product-image" style="display: none;" accept="image/*" />
+                    <span id="product-image-view"
+                      >https://denhoamy.vn/upload/attachment/5647den-chum-trang-tri-noi-that-phong-cach-my-dc03812-01.jpg</span
+                    >
+                    <input
+                      type="text"
+                      id="edit-product-image"
+                      style="display: none"
+                      accept="image/*"
+                    />
                   </div>
-                  
+
                   <div>
                     <strong>Tên sản phẩm:</strong>
                     <span id="product-name-view">Skinny Men Blazer</span>
-                    <input type="text" id="edit-product-name" value="Skinny Men Blazer" style="display: none;" />
+                    <input
+                      type="text"
+                      id="edit-product-name"
+                      value="Skinny Men Blazer"
+                      style="display: none"
+                    />
                   </div>
-                
+
                   <div>
                     <strong>Giá:</strong>
                     <span id="product-price-view">200,000 VNĐ</span>
-                    <input type="text" id="edit-product-price" value="200,000 VNĐ" style="display: none;" />
+                    <input
+                      type="text"
+                      id="edit-product-price"
+                      value="200,000 VNĐ"
+                      style="display: none"
+                    />
                   </div>
-                
+
                   <div>
                     <strong>Loại sản phẩm:</strong>
                     <span id="product-category-view">Thời trang nam</span>
-                    <input type="text" id="edit-product-category" value="Thời trang nam" style="display: none;" />
+                    <input
+                      type="text"
+                      id="edit-product-category"
+                      value="Thời trang nam"
+                      style="display: none"
+                    />
                   </div>
-                
+
                   <div>
                     <strong>Tình trạng:</strong>
                     <span id="product-status-view">Còn hàng</span>
-                    <input type="text" id="edit-product-status" value="Còn hàng" style="display: none;" />
+                    <input
+                      type="text"
+                      id="edit-product-status"
+                      value="Còn hàng"
+                      style="display: none"
+                    />
                   </div>
-                
+
                   <div>
                     <strong>Mô tả:</strong>
-                    <span id="product-description-view">Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</span>
-                    <textarea id="edit-product-description" style="display: none;">Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea>
+                    <span id="product-description-view"
+                      >Blazer phong cách trẻ trung, phù hợp cho các sự
+                      kiện.</span
+                    >
+                    <textarea
+                      id="edit-product-description"
+                      style="display: none"
+                    >
+Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
+                    >
                   </div>
-                
+
                   <div>
                     <strong>Ngày thêm:</strong>
                     <span id="product-date-view">2024-11-15</span>
-                    <input type="date" id="edit-product-date" value="2024-11-15" style="display: none;" />
+                    <input
+                      type="date"
+                      id="edit-product-date"
+                      value="2024-11-15"
+                      style="display: none"
+                    />
                   </div>
-                </div>                           
+
+                  <div>
+                    <strong>Giảm giá:</strong>
+                    <span id="product-discount-view">10%</span>
+                    <input
+                      type="text"
+                      id="edit-product-discount"
+                      value="10%"
+                      style="display: none"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -562,6 +640,81 @@
                 </tbody>
               </table>
             </div>
+
+            <div class="overlay3" id="purchase-history-overlay">
+              <div class="purchase-history-details">
+                <div class="purchase-history-header">
+                  <p>LỊCH SỬ MUA HÀNG</p>
+                  <div class="close-icon" id="close-purchase-history-details">
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
+                </div>
+            
+                <div class="customer-info-purchase-history">
+                  <p>THÔNG TIN KHÁCH HÀNG</p>
+                  <p><strong>Tên:</strong> <span id="customer-name">Nguyễn Văn A</span></p>
+                  <p><strong>Địa chỉ:</strong> <span id="customer-address">123 Đường ABC</span></p>
+                  <p><strong>Số điện thoại:</strong> <span id="customer-phone">0987654321</span></p>
+                </div>
+            
+                <div class="order-items">
+                  <h4>SẢN PHẨM MUA</h4>
+                  <table class="items-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Tên SP</th>
+                        <th>SL</th>
+                        <th>Đơn Giá</th>
+                        <th>Thành Tiền</th>
+                      </tr>
+                    </thead>
+                    <tbody id="order-items-body">
+                      <tr>
+                        <td>1</td>
+                        <td>Đèn Trang Trí Hoa Mỹ</td>
+                        <td>5</td>
+                        <td>2,000,000 VND</td>
+                        <td>10,000,000 VND</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Đèn Chùm Pha Lê</td>
+                        <td>2</td>
+                        <td>3,500,000 VND</td>
+                        <td>7,000,000 VND</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>Đèn Led Đổi Màu</td>
+                        <td>10</td>
+                        <td>500,000 VND</td>
+                        <td>5,000,000 VND</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>Đèn Tường Hiện Đại</td>
+                        <td>3</td>
+                        <td>1,200,000 VND</td>
+                        <td>3,600,000 VND</td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>Đèn Bàn Gốm Sứ</td>
+                        <td>4</td>
+                        <td>1,000,000 VND</td>
+                        <td>4,000,000 VND</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            
+                <div class="total-price">
+                  <p><strong>TỔNG TIỀN:</strong> <span id="total-amount">29,600,000 VND</span></p>
+                </div>
+              </div>
+            </div>
+            
           </div>
 
           <div class="tab-content" id="order-management-content">
