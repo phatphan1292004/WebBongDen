@@ -77,6 +77,24 @@
                 <p>Thống kê doanh thu</p>
               </div>
             </div>
+
+            <div class="nav-item" data-index="4" id="nav-item-system">
+              <div class="nav-item-header">
+                <div class="nav-item-left">
+                  <i class="fas fa-cogs"></i>
+                  <p>Hệ thống</p>
+                </div>
+                <div class="nav-item-right">
+                  <i class="fas fa-chevron-down dropdown-arrow"></i>
+                </div>
+              </div>
+            
+              <!-- Submenu tách ra nhưng nằm trong nav-item -->
+              <ul class="submenu-admin">
+                <li><a href="#">Phiếu giảm giá</a></li>
+                <li><a href="#">Cài đặt hệ thống</a></li>
+              </ul>
+            </div>                      
           </div>
 
           <div class="sidebar-bottom">
@@ -334,7 +352,7 @@
                   <thead>
                     <tr>
                       <th>Id</th>
-                      <th>Link Hình ảnh</th>
+                      <th>Hình ảnh</th>
                       <th>Tên sản phẩm</th>
                       <th>Giá</th>
                       <th>Loại sản phẩm</th>
@@ -426,7 +444,7 @@
                       <i class="fa-solid fa-chart-line"></i>
                     </div>
                     <div class="stat-text">
-                      <p><strong>Số lượng bán được:</strong></p>
+                      <p>Số lượng bán được</p>
                       <span id="sold-quantity">0</span>
                     </div>
                   </div>
@@ -435,7 +453,7 @@
                       <i class="fa-solid fa-warehouse"></i>
                     </div>
                     <div class="stat-text">
-                      <p><strong>Số lượng tồn kho:</strong></p>
+                      <p>Số lượng tồn kho</p>
                       <span id="stock-quantity">0</span>
                     </div>
                   </div>
@@ -444,7 +462,7 @@
                       <i class="fa-solid fa-star-half-alt"></i>
                     </div>
                     <div class="stat-text">
-                      <p><strong>Rating:</strong></p>
+                      <p>Rating</p>
                       <span id="product-rating">0/5</span>
                     </div>
                   </div>
@@ -453,7 +471,7 @@
                       <i class="fa-solid fa-comment-alt"></i>
                     </div>
                     <div class="stat-text">
-                      <p><strong>Đánh giá:</strong></p>
+                      <p>Đánh giá</p>
                       <span id="product-reviews">0 đánh giá</span>
                     </div>
                   </div>
@@ -551,6 +569,17 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                       type="date"
                       id="edit-product-date"
                       value="2024-11-15"
+                      style="display: none"
+                    />
+                  </div>
+
+                  <div>
+                    <strong>Giảm giá:</strong>
+                    <span id="product-discount-view">10%</span>
+                    <input
+                      type="text"
+                      id="edit-product-discount"
+                      value="10%"
                       style="display: none"
                     />
                   </div>

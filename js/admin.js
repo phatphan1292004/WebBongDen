@@ -62,6 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
   tabContents[0].style.display = "block"; // Show the first tab by default
   navItems[0].classList.add("active"); // Activate the first tab by default
 
+  // Trang product========================================
+
   // Load product table
   function loadProductTable() {
     productTableBody.innerHTML = "";
@@ -70,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
       newRow.innerHTML = `
                 <td>${item.id}</td>
                 <td>
-                    <a href="${item.urlImage}" target="_blank">${item.urlImage}</a>
+                      <img src="${item.urlImage}" alt="" class = "row-image-item">
                 </td>
                 <td>${item.name}</td>
                 <td>${item.price}</td>
@@ -136,6 +138,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
+
+   // Trang khách hàng 
+
   function loadCustomerTable() {
     cusTableBody.innerHTML = "";
     customerData.forEach((item) => {
@@ -164,6 +169,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   loadCustomerTable();
 
+
+
+
+  // Trang đơn hàng
   const orderTableBody = document.getElementById("order-table-body");
 
   orderData.forEach((order) => {
@@ -204,6 +213,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", function () {
       document.getElementById("overlay2").classList.remove("active");
     });
+
+    // Trang thống kê
+
 
   // Dữ liệu cho biểu đồ khách hàng
   const data = {
@@ -503,6 +515,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById('edit-product-status').style.display = 'block';
       document.getElementById('edit-product-description').style.display = 'block';
       document.getElementById('edit-product-date').style.display = 'block';
+      document.getElementById('edit-product-discount').style.display = 'block';
     
       document.getElementById('product-id-view').style.display = 'none';
       document.getElementById('product-image-view').style.display = 'none';
@@ -512,6 +525,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById('product-status-view').style.display = 'none';
       document.getElementById('product-description-view').style.display = 'none';
       document.getElementById('product-date-view').style.display = 'none';
+      document.getElementById('product-discount-view').style.display = 'none';
     
       // Hiển thị nút Save
       document.getElementById('save-product-btn').style.display = 'block';
@@ -528,6 +542,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const productStatus = document.getElementById('edit-product-status').value;
       const productDescription = document.getElementById('edit-product-description').value;
       const productDate = document.getElementById('edit-product-date').value;
+      const productDiscount = document.getElementById('edit-product-discount').value;
     
       // Cập nhật lại các phần tử để hiển thị thông tin đã sửa
       document.getElementById('product-id-view').textContent = productId;
@@ -538,6 +553,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById('product-status-view').textContent = productStatus;
       document.getElementById('product-description-view').textContent = productDescription;
       document.getElementById('product-date-view').textContent = productDate;
+      document.getElementById('product-discount-view').textContent = productDiscount;
     
       // Chuyển lại các input và textarea thành ẩn
       document.getElementById('edit-product-id').style.display = 'none';
@@ -548,6 +564,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById('edit-product-status').style.display = 'none';
       document.getElementById('edit-product-description').style.display = 'none';
       document.getElementById('edit-product-date').style.display = 'none';
+      document.getElementById('edit-product-discount').style.display = 'none';
     
       // Hiển thị các phần tử thông tin ở dạng inline-block
       document.getElementById('product-id-view').style.display = 'inline-block';
@@ -558,9 +575,16 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById('product-status-view').style.display = 'inline-block';
       document.getElementById('product-description-view').style.display = 'inline-block';
       document.getElementById('product-date-view').style.display = 'inline-block';
+      document.getElementById('product-discount-view').style.display = 'inline-block';
     
       // Ẩn nút Save và hiện lại nút Edit
       document.getElementById('save-product-btn').style.display = 'none';
       document.getElementById('edit-product-btn').style.display = 'inline-block';
-    });      
+    });   
+    
+    const navItem = document.getElementById('nav-item-system');
+
+    navItem.addEventListener('click', () => {
+    navItem.classList.toggle('open');
+    });
 });

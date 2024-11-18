@@ -605,12 +605,11 @@
 .wrapper .product-wrapper .list-product-hot .product-hot-item,
 .container-sale .list-product-hot .product-hot-item {
   padding: 10px;
-  width: calc(20% - 16px);
   background-color: #fff;
-  background-repeat: 4px;
   border: 2px solid #ededed;
   border-radius: 4px;
   margin: 0 10px;
+  cursor: pointer;
 }
 
 .wrapper .product-wrapper .product-hot-item .product-info,
@@ -693,9 +692,9 @@
   padding: 10px;
   width: calc(20% - 16px);
   background-color: #fff;
-  background-repeat: 4px;
   border: 2px solid #ededed;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .list-product .product-item .product-name {
@@ -1160,6 +1159,7 @@
 
   .product-hot-item {
     margin: 4px !important;
+    cursor: pointer;
   }
 
   .info-wrapper .list-info {
