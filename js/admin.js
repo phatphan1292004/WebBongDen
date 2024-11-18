@@ -65,9 +65,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Trang product========================================
 
   // Load product table
-  function loadProductTable() {
+  function loadProductTable(products = productData) {
     productTableBody.innerHTML = "";
-    productData.forEach((item) => {
+    products.forEach((item) => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
                 <td>${item.id}</td>
@@ -88,8 +88,73 @@ document.addEventListener("DOMContentLoaded", function () {
       productTableBody.appendChild(newRow);
     });
   }
-
   loadProductTable();
+  // Hàm sắp xếp dữ liệu và cập nhật bảng
+  function sortProductTable(sortType) {
+    const sortedProducts = [...productData];
+    switch (sortType) {
+      case "name-asc":
+        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "name-desc":
+        sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "price-asc":
+        sortedProducts.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        sortedProducts.sort((a, b) => b.price - a.price);
+        break;
+    }
+    loadProductTable(sortedProducts);
+  }
+
+  // Gắn sự kiện click cho nút sắp xếp
+  document.getElementById("sort-btn-product").addEventListener("click", () => {
+    const sortType = document.getElementById("sort-select-product").value;
+    if (sortType) {
+      sortProductTable(sortType);
+    } else {
+      alert("Vui lòng chọn kiểu sắp xếp");
+    }
+  });
+
+  // Tái sử dụng hàm search chỉ cho tên sản phẩm
+  // Tái sử dụng hàm search cho cả sản phẩm và khách hàng
+  function searchProducts(searchBtnId, searchInputId, data, loadFunction, searchField) {
+    document.getElementById(searchBtnId).addEventListener("click", () => {
+      const searchTerm = document
+        .getElementById(searchInputId)
+        .value.toLowerCase();
+      const filteredData = data.filter((item) =>
+        item[searchField].toLowerCase().includes(searchTerm)
+      );
+      loadFunction(filteredData); // Gọi hàm load với dữ liệu đã lọc
+    });
+  }
+  
+
+  function loadCustomerTable(cus = customerData) {
+    cusTableBody.innerHTML = "";
+    cus.forEach((item) => {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+                <td>${item.id}</td>
+                <td>${item.name}</td>
+                <td>${item.email}</td>
+                <td>${item.phone}</td>
+                <td>${item.address}</td>
+                <td>${item.registeredDate}</td>
+                <td><button class="view-details">Xem chi tiết</button></td>
+            `;
+      cusTableBody.appendChild(newRow);
+    });
+  }
+
+  // Gọi hàm tìm kiếm cho sản phẩm chỉ theo tên
+  searchProducts("search-btn-product", "product-search", productData, loadProductTable,"name");
+  searchProducts("search-btn-cus", "customer-search", customerData, loadCustomerTable, "name");
+  searchProducts("search-btn-order", "order-search", orderData, loadOrderTable, "customerName");
 
   document.querySelector(".add-product").addEventListener("click", function () {
     overlay.classList.add("active");
@@ -138,12 +203,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
+  // Trang khách hàng
 
-   // Trang khách hàng 
-
-  function loadCustomerTable() {
+  function loadCustomerTable(cus = customerData) {
     cusTableBody.innerHTML = "";
-    customerData.forEach((item) => {
+    cus.forEach((item) => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
                 <td>${item.id}</td>
@@ -158,27 +222,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  cusTableBody.addEventListener('click', function(e) {
+  cusTableBody.addEventListener("click", function (e) {
     if (e.target && e.target.classList.contains("view-details")) {
-      document.getElementById("purchase-history-overlay").classList.add("active");
+      document
+        .getElementById("purchase-history-overlay")
+        .classList.add("active");
     }
   });
-  document.getElementById("close-purchase-history-details").addEventListener('click', function() {
-    document.getElementById("purchase-history-overlay").classList.remove("active");
-  });
+  document
+    .getElementById("close-purchase-history-details")
+    .addEventListener("click", function () {
+      document
+        .getElementById("purchase-history-overlay")
+        .classList.remove("active");
+    });
 
   loadCustomerTable();
-
-
-
 
   // Trang đơn hàng
   const orderTableBody = document.getElementById("order-table-body");
 
-  orderData.forEach((order) => {
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
+  function loadOrderTable(orders = orderData) {
+    orderTableBody.innerHTML = ""; 
+    
+    orders.forEach((order) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
         <td>${order.id}</td>
         <td>${order.customerName}</td>
         <td>${order.orderDate}</td>
@@ -188,19 +257,22 @@ document.addEventListener("DOMContentLoaded", function () {
         <td>${order.paymentMethod}</td>
         <td><button class="view-details">Chi tiết</button></td>
         <td>
-      ${
-        order.status === "Chờ xử lý"
-          ? `
-        <button class="approve-order" onclick="approveOrder(${order.id})"><i class="fa-solid fa-check"></i></button>
-        <button class="reject-order" onclick="rejectOrder(${order.id})"><i class="fa-solid fa-times"></i></button>
-      `
-          : ""
-      }
+          ${
+            order.status === "Chờ xử lý"
+              ? `
+            <button class="approve-order" onclick="approveOrder(${order.id})"><i class="fa-solid fa-check"></i></button>
+            <button class="reject-order" onclick="rejectOrder(${order.id})"><i class="fa-solid fa-times"></i></button>
+          `
+              : ""
+          }
         </td>
       `;
-
-    orderTableBody.appendChild(row);
-  });
+      orderTableBody.appendChild(row);
+    });
+  }
+  
+  // Ví dụ gọi hàm loadOrderTable để hiển thị `orderData`
+  loadOrderTable(orderData);  
 
   orderTableBody.addEventListener("click", function (event) {
     if (event.target && event.target.classList.contains("view-details")) {
@@ -214,8 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("overlay2").classList.remove("active");
     });
 
-    // Trang thống kê
-
+  // Trang thống kê
 
   // Dữ liệu cho biểu đồ khách hàng
   const data = {
@@ -497,94 +568,125 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Code phần chi tiết sản phẩm
-    productTableBody.addEventListener("click", function (event) {
-      if (event.target && event.target.classList.contains("view-details-product")) {
-          document.querySelector('.tab-content-container').style.display = 'none';  
-          document.querySelector('.product-details').style.display = 'block';
-      }
-    });
+  // Code phần chi tiết sản phẩm
+  productTableBody.addEventListener("click", function (event) {
+    if (
+      event.target &&
+      event.target.classList.contains("view-details-product")
+    ) {
+      document.querySelector(".tab-content-container").style.display = "none";
+      document.querySelector(".product-details").style.display = "block";
+    }
+  });
 
-    document.getElementById('edit-product-btn').addEventListener('click', function() {
+  document
+    .getElementById("edit-product-btn")
+    .addEventListener("click", function () {
       // Chuyển tất cả các trường sang chế độ chỉnh sửa (ẩn span và hiển thị input)
-      document.getElementById('edit-product-id').style.display = 'block';
-      document.getElementById('edit-product-image').style.display = 'block';
-      document.getElementById('edit-product-name').style.display = 'block';
-      document.getElementById('edit-product-price').style.display = 'block';
-      document.getElementById('edit-product-category').style.display = 'block';
-      document.getElementById('edit-product-status').style.display = 'block';
-      document.getElementById('edit-product-description').style.display = 'block';
-      document.getElementById('edit-product-date').style.display = 'block';
-      document.getElementById('edit-product-discount').style.display = 'block';
-    
-      document.getElementById('product-id-view').style.display = 'none';
-      document.getElementById('product-image-view').style.display = 'none';
-      document.getElementById('product-name-view').style.display = 'none';
-      document.getElementById('product-price-view').style.display = 'none';
-      document.getElementById('product-category-view').style.display = 'none';
-      document.getElementById('product-status-view').style.display = 'none';
-      document.getElementById('product-description-view').style.display = 'none';
-      document.getElementById('product-date-view').style.display = 'none';
-      document.getElementById('product-discount-view').style.display = 'none';
-    
-      // Hiển thị nút Save
-      document.getElementById('save-product-btn').style.display = 'block';
-      document.getElementById('edit-product-btn').style.display = 'none';
-    });
-    
-    document.getElementById('save-product-btn').addEventListener('click', function() {
-      // Lưu lại giá trị trong các input
-      const productId = document.getElementById('edit-product-id').value;
-      const productImage = document.getElementById('edit-product-image').value;
-      const productName = document.getElementById('edit-product-name').value;
-      const productPrice = document.getElementById('edit-product-price').value;
-      const productCategory = document.getElementById('edit-product-category').value;
-      const productStatus = document.getElementById('edit-product-status').value;
-      const productDescription = document.getElementById('edit-product-description').value;
-      const productDate = document.getElementById('edit-product-date').value;
-      const productDiscount = document.getElementById('edit-product-discount').value;
-    
-      // Cập nhật lại các phần tử để hiển thị thông tin đã sửa
-      document.getElementById('product-id-view').textContent = productId;
-      document.getElementById('product-image-view').textContent = productImage;
-      document.getElementById('product-name-view').textContent = productName;
-      document.getElementById('product-price-view').textContent = productPrice;
-      document.getElementById('product-category-view').textContent = productCategory;
-      document.getElementById('product-status-view').textContent = productStatus;
-      document.getElementById('product-description-view').textContent = productDescription;
-      document.getElementById('product-date-view').textContent = productDate;
-      document.getElementById('product-discount-view').textContent = productDiscount;
-    
-      // Chuyển lại các input và textarea thành ẩn
-      document.getElementById('edit-product-id').style.display = 'none';
-      document.getElementById('edit-product-image').style.display = 'none';
-      document.getElementById('edit-product-name').style.display = 'none';
-      document.getElementById('edit-product-price').style.display = 'none';
-      document.getElementById('edit-product-category').style.display = 'none';
-      document.getElementById('edit-product-status').style.display = 'none';
-      document.getElementById('edit-product-description').style.display = 'none';
-      document.getElementById('edit-product-date').style.display = 'none';
-      document.getElementById('edit-product-discount').style.display = 'none';
-    
-      // Hiển thị các phần tử thông tin ở dạng inline-block
-      document.getElementById('product-id-view').style.display = 'inline-block';
-      document.getElementById('product-image-view').style.display = 'inline-block';
-      document.getElementById('product-name-view').style.display = 'inline-block';
-      document.getElementById('product-price-view').style.display = 'inline-block';
-      document.getElementById('product-category-view').style.display = 'inline-block';
-      document.getElementById('product-status-view').style.display = 'inline-block';
-      document.getElementById('product-description-view').style.display = 'inline-block';
-      document.getElementById('product-date-view').style.display = 'inline-block';
-      document.getElementById('product-discount-view').style.display = 'inline-block';
-    
-      // Ẩn nút Save và hiện lại nút Edit
-      document.getElementById('save-product-btn').style.display = 'none';
-      document.getElementById('edit-product-btn').style.display = 'inline-block';
-    });   
-    
-    const navItem = document.getElementById('nav-item-system');
+      document.getElementById("edit-product-id").style.display = "block";
+      document.getElementById("edit-product-image").style.display = "block";
+      document.getElementById("edit-product-name").style.display = "block";
+      document.getElementById("edit-product-price").style.display = "block";
+      document.getElementById("edit-product-category").style.display = "block";
+      document.getElementById("edit-product-status").style.display = "block";
+      document.getElementById("edit-product-description").style.display =
+        "block";
+      document.getElementById("edit-product-date").style.display = "block";
+      document.getElementById("edit-product-discount").style.display = "block";
 
-    navItem.addEventListener('click', () => {
-    navItem.classList.toggle('open');
+      document.getElementById("product-id-view").style.display = "none";
+      document.getElementById("product-image-view").style.display = "none";
+      document.getElementById("product-name-view").style.display = "none";
+      document.getElementById("product-price-view").style.display = "none";
+      document.getElementById("product-category-view").style.display = "none";
+      document.getElementById("product-status-view").style.display = "none";
+      document.getElementById("product-description-view").style.display =
+        "none";
+      document.getElementById("product-date-view").style.display = "none";
+      document.getElementById("product-discount-view").style.display = "none";
+
+      // Hiển thị nút Save
+      document.getElementById("save-product-btn").style.display = "block";
+      document.getElementById("edit-product-btn").style.display = "none";
     });
+
+  document
+    .getElementById("save-product-btn")
+    .addEventListener("click", function () {
+      // Lưu lại giá trị trong các input
+      const productId = document.getElementById("edit-product-id").value;
+      const productImage = document.getElementById("edit-product-image").value;
+      const productName = document.getElementById("edit-product-name").value;
+      const productPrice = document.getElementById("edit-product-price").value;
+      const productCategory = document.getElementById(
+        "edit-product-category"
+      ).value;
+      const productStatus = document.getElementById(
+        "edit-product-status"
+      ).value;
+      const productDescription = document.getElementById(
+        "edit-product-description"
+      ).value;
+      const productDate = document.getElementById("edit-product-date").value;
+      const productDiscount = document.getElementById(
+        "edit-product-discount"
+      ).value;
+
+      // Cập nhật lại các phần tử để hiển thị thông tin đã sửa
+      document.getElementById("product-id-view").textContent = productId;
+      document.getElementById("product-image-view").textContent = productImage;
+      document.getElementById("product-name-view").textContent = productName;
+      document.getElementById("product-price-view").textContent = productPrice;
+      document.getElementById("product-category-view").textContent =
+        productCategory;
+      document.getElementById("product-status-view").textContent =
+        productStatus;
+      document.getElementById("product-description-view").textContent =
+        productDescription;
+      document.getElementById("product-date-view").textContent = productDate;
+      document.getElementById("product-discount-view").textContent =
+        productDiscount;
+
+      // Chuyển lại các input và textarea thành ẩn
+      document.getElementById("edit-product-id").style.display = "none";
+      document.getElementById("edit-product-image").style.display = "none";
+      document.getElementById("edit-product-name").style.display = "none";
+      document.getElementById("edit-product-price").style.display = "none";
+      document.getElementById("edit-product-category").style.display = "none";
+      document.getElementById("edit-product-status").style.display = "none";
+      document.getElementById("edit-product-description").style.display =
+        "none";
+      document.getElementById("edit-product-date").style.display = "none";
+      document.getElementById("edit-product-discount").style.display = "none";
+
+      // Hiển thị các phần tử thông tin ở dạng inline-block
+      document.getElementById("product-id-view").style.display = "inline-block";
+      document.getElementById("product-image-view").style.display =
+        "inline-block";
+      document.getElementById("product-name-view").style.display =
+        "inline-block";
+      document.getElementById("product-price-view").style.display =
+        "inline-block";
+      document.getElementById("product-category-view").style.display =
+        "inline-block";
+      document.getElementById("product-status-view").style.display =
+        "inline-block";
+      document.getElementById("product-description-view").style.display =
+        "inline-block";
+      document.getElementById("product-date-view").style.display =
+        "inline-block";
+      document.getElementById("product-discount-view").style.display =
+        "inline-block";
+
+      // Ẩn nút Save và hiện lại nút Edit
+      document.getElementById("save-product-btn").style.display = "none";
+      document.getElementById("edit-product-btn").style.display =
+        "inline-block";
+    });
+
+  const navItem = document.getElementById("nav-item-system");
+
+  navItem.addEventListener("click", () => {
+    navItem.classList.toggle("open");
+  });
 });
