@@ -13,7 +13,27 @@
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s;
+  position: relative;
+  z-index: 1000;
+  background-color: #e0e0e0;
+  z-index: 1;
 }
+
+/* Đảm bảo đường ngang băng qua các nav-item */
+.nav-item:not(:first-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  right: 100%;
+  width: 251.5px;
+  z-index: -1000;
+  height: 3px;
+  background-color: #dadada;
+  transition: left 0.3s ease, width 0.3s ease;
+}
+
+
 /* 
 .indicator {
   position: absolute;
@@ -31,10 +51,21 @@
 }
 
 .nav-item.active {
-  background-color: #007bff;
+  background-color: #4CAF50; /* Màu xanh lá cho tab đang chọn */
   color: white;
+  box-shadow: 0 4px 6px rgba(0, 128, 0, 0.3); /* Thêm bóng đổ đậm hơn cho tab đang chọn */
 }
 
+.nav-item.completed {
+  background-color: #4CAF50; /* Màu xanh lá cho các tab đã hoàn thành */
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 128, 0, 0.3);
+}
+
+
+.nav-item.completed::after {
+  background-color: #4CAF50; /* Đường ngang sẽ đổi sang màu xanh khi tab hoàn thành */
+}
 
 .tab-content {
   padding: 20px;

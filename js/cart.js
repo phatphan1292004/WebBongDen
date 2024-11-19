@@ -91,9 +91,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     navList.forEach((item) => {
       if (tabHistory.includes(item.getAttribute("data-tab"))) {
-        item.classList.add("highlight");
+        item.classList.add("highlight", "completed"); // Thêm lớp "completed" khi tab hoàn thành
       } else {
-        item.classList.remove("highlight");
+        item.classList.remove("highlight", "completed");
       }
     });
   }
