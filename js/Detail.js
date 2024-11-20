@@ -31,286 +31,277 @@ document.addEventListener("DOMContentLoaded", function () {
   const products = [
     {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/3870den-chum-trang-tri-phong-cach-trung-hoa-dc03719-02.jpg",
+      image1: "./img/dc01.jpg",
       oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
       discount: "-33%"
-    },
-    {
-      name: "Đèn chùm trang trí nội thất phong cách Trung Hoa",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/604den-chum-trang-tri-noi-that-phong-cach-trung-hoa-dc03703-04.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-33%"
-    },
-    {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/920den-chum-dong-trang-tri-phong-cach-trung-hoa-dc03700-03.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-33%"
-    },
-    {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/3745den-chum-bang-dong-trang-tri-noi-that-phong-cach-trung-hoa-dc03676-08.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-33%"
-    },
-    {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/9858den-chum-trang-tri-noi-that-phong-cach-trung-hoa-dc03633-03.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-33%"
-    },
-    {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/4876den-chum-trang-tri-nha-hang-phong-cach-trung-hoa-dc03602-03.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-33%"
-    },
-    {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/1334den-chum-bang-dong-trang-tri-noi-that-phong-cach-trung-hoa-hien-dai-dc03526-02.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-33%"
-    },
-    {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/6033den-chum-trang-tri-noi-that-phong-cach-indochine-dc03510-01.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-33%"
-    },
-    {
-      name: "Đèn chùm trang trí nội thất phong cách Indochine",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/5173den-chum-trang-tri-noi-that-phong-cach-indochine-dc03475-01.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-33%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/7690den-chum-bang-dong-trang-tri-phong-khach-phong-ngu-phong-cach-hien-dai-dc03448-02.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/1572den-chum-la-sen-trang-tri-phong-khach-phong-cach-trung-hoa-dc03445-01.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/5162den-chum-trang-tri-phong-khach-phong-cach-trung-hoa-dc03429-03.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/7301den-chum-thong-tang-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03443-01.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/5225den-chum-pha-le-trang-tri-phong-khach-phong-cach-trung-hoa-dc03444-04.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/369den-chum-da-cam-thach-trang-tri-dai-sanh-phong-cach-trung-hoa-dc03432-01.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/2809den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-hien-dai-dc03442-04.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/2809den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-hien-dai-dc03442-04.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/7000den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03441-02.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/2689den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03435-04.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/4566den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03428-04.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
     },
     {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/3870den-chum-trang-tri-phong-cach-trung-hoa-dc03719-02.jpg",
+      image1: "./img/dc02.jpg",
       oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
     {
-      name: "Đèn chùm trang trí nội thất phong cách Trung Hoa",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/604den-chum-trang-tri-noi-that-phong-cach-trung-hoa-dc03703-04.jpg",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc03.jpg",
       oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
     {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/920den-chum-dong-trang-tri-phong-cach-trung-hoa-dc03700-03.jpg",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc04.jpg",
       oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
     {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/3745den-chum-bang-dong-trang-tri-noi-that-phong-cach-trung-hoa-dc03676-08.jpg",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc05.jpg",
       oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
     {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/9858den-chum-trang-tri-noi-that-phong-cach-trung-hoa-dc03633-03.jpg",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc06.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    }, {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc07.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    }, {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc08.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    }, {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc09.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    }, {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc10.jpg",
       oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
     {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/4876den-chum-trang-tri-nha-hang-phong-cach-trung-hoa-dc03602-03.jpg",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc11.jpg",
       oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
     {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/1334den-chum-bang-dong-trang-tri-noi-that-phong-cach-trung-hoa-hien-dai-dc03526-02.jpg",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc12.jpg",
       oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
     {
-      name: "Đèn chùm tiffany trang trí nội thất DC03596",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/6033den-chum-trang-tri-noi-that-phong-cach-indochine-dc03510-01.jpg",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc13.jpg",
       oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
     {
-      name: "Đèn chùm trang trí nội thất phong cách Indochine",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/5173den-chum-trang-tri-noi-that-phong-cach-indochine-dc03475-01.jpg",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc14.jpg",
       oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
     {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/7690den-chum-bang-dong-trang-tri-phong-khach-phong-ngu-phong-cach-hien-dai-dc03448-02.jpg",
-      oldPrice: "2.500.000 VND",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc15.jpg",
+      oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
-      discount: "-20%"
+      discount: "-33%"
     },
     {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/1572den-chum-la-sen-trang-tri-phong-khach-phong-cach-trung-hoa-dc03445-01.jpg",
-      oldPrice: "2.500.000 VND",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc16.jpg",
+      oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
-      discount: "-20%"
+      discount: "-33%"
+    }, {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc17.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    }, {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc18.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    }, {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc19.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    }, {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dc20.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
     },
     {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/5162den-chum-trang-tri-phong-khach-phong-cach-trung-hoa-dc03429-03.jpg",
-      oldPrice: "2.500.000 VND",
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt01.jpg",
+      oldPrice: "3.000.000 VND",
       newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/7301den-chum-thong-tang-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03443-01.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/5225den-chum-pha-le-trang-tri-phong-khach-phong-cach-trung-hoa-dc03444-04.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/369den-chum-da-cam-thach-trang-tri-dai-sanh-phong-cach-trung-hoa-dc03432-01.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/2809den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-hien-dai-dc03442-04.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/2809den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-hien-dai-dc03442-04.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/7000den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03441-02.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/2689den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03435-04.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
-    },
-    {
-      name: "Đèn chùm bằng đồng trang trí phòng khách phòng ngủ phong cách hiện đại DC03448",
-      image1: "https://denhoamy.vn/upload/attachment/thumb/4566den-chum-bang-dong-trang-tri-phong-khach-phong-cach-trung-hoa-dc03428-04.jpg",
-      oldPrice: "2.500.000 VND",
-      newPrice: "2.000.000 VND",
-      discount: "-20%"
+      discount: "-33%"
     },
     
-  
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt02.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt03.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt04.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt05.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt06.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt07.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt08.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt09.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt10.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt11.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt12.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt13.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt14.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt15.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt16.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt17.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt18.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt19.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
+      image1: "./img/dt20.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
   ];
 
   const itemsPerPage = 20; // Hiển thị 20 sản phẩm mỗi trang
@@ -380,5 +371,27 @@ document.addEventListener("DOMContentLoaded", function () {
       displayProducts(currentPage);
     }
   });
+});
+
+// Lấy tất cả các liên kết trong phần phân trang
+const pageLinks = document.querySelectorAll('.page-link');
+
+// Thêm sự kiện click vào từng liên kết
+pageLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault(); // Ngăn hành động mặc định của liên kết
+        const page = this.getAttribute('data-page'); // Lấy số trang từ data-page
+        
+        if (page) {
+            // Gọi hàm cuộn lên đầu trang
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Cuộn mượt
+            });
+
+            // Xử lý logic để hiển thị nội dung trang tương ứng (tùy thuộc vào cách bạn phân trang)
+            console.log(`Chuyển đến trang ${page}`); // Thay bằng logic phân trang thực tế
+        }
+    });
 });
 
