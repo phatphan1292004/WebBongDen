@@ -25,8 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // Dữ liệu sản phẩm
-
-
 document.addEventListener("DOMContentLoaded", function () {
   const products = [
     {
