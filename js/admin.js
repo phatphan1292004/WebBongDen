@@ -56,6 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       tabContents[index].style.display = "block";
       item.classList.add("active");
+
+      tabContents.forEach((tab) => {
+        tab.classList.remove("active"); // Xóa class active
+      });
+
+      if (index !== 5) {
+        document.getElementById("submenu-admin").classList.remove("open");
+      }
     });
   });
 
@@ -121,7 +129,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Tái sử dụng hàm search chỉ cho tên sản phẩm
   // Tái sử dụng hàm search cho cả sản phẩm và khách hàng
-  function searchProducts(searchBtnId, searchInputId, data, loadFunction, searchField) {
+  function searchProducts(
+    searchBtnId,
+    searchInputId,
+    data,
+    loadFunction,
+    searchField
+  ) {
     document.getElementById(searchBtnId).addEventListener("click", () => {
       const searchTerm = document
         .getElementById(searchInputId)
@@ -132,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
       loadFunction(filteredData); // Gọi hàm load với dữ liệu đã lọc
     });
   }
-  
 
   function loadCustomerTable(cus = customerData) {
     cusTableBody.innerHTML = "";
@@ -152,9 +165,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Gọi hàm tìm kiếm cho sản phẩm chỉ theo tên
-  searchProducts("search-btn-product", "product-search", productData, loadProductTable,"name");
-  searchProducts("search-btn-cus", "customer-search", customerData, loadCustomerTable, "name");
-  searchProducts("search-btn-order", "order-search", orderData, loadOrderTable, "customerName");
+  searchProducts(
+    "search-btn-product",
+    "product-search",
+    productData,
+    loadProductTable,
+    "name"
+  );
+  searchProducts(
+    "search-btn-cus",
+    "customer-search",
+    customerData,
+    loadCustomerTable,
+    "name"
+  );
+  searchProducts(
+    "search-btn-order",
+    "order-search",
+    orderData,
+    loadOrderTable,
+    "customerName"
+  );
 
   document.querySelector(".add-product").addEventListener("click", function () {
     overlay.classList.add("active");
@@ -243,8 +274,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const orderTableBody = document.getElementById("order-table-body");
 
   function loadOrderTable(orders = orderData) {
-    orderTableBody.innerHTML = ""; 
-    
+    orderTableBody.innerHTML = "";
+
     orders.forEach((order) => {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -270,9 +301,9 @@ document.addEventListener("DOMContentLoaded", function () {
       orderTableBody.appendChild(row);
     });
   }
-  
+
   // Ví dụ gọi hàm loadOrderTable để hiển thị `orderData`
-  loadOrderTable(orderData);  
+  loadOrderTable(orderData);
 
   orderTableBody.addEventListener("click", function (event) {
     if (event.target && event.target.classList.contains("view-details")) {
@@ -687,6 +718,375 @@ document.addEventListener("DOMContentLoaded", function () {
   const navItem = document.getElementById("nav-item-system");
 
   navItem.addEventListener("click", () => {
-    navItem.classList.toggle("open");
+    document.getElementById("submenu-admin").classList.toggle("open");
   });
+
+  const menuItems = document.querySelectorAll(".submenu-admin .menu-item");
+  menuItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      // Lấy target từ data-target
+      const targetId = item.getAttribute("data-target");
+
+      // Ẩn tất cả tab-content
+      tabContents.forEach((tab) => {
+        tab.classList.remove("active"); // Xóa class active
+      });
+
+      // Hiển thị tab-content tương ứng
+      const targetTab = document.getElementById(targetId);
+      if (targetTab) {
+        targetTab.classList.add("active"); // Thêm class active
+      }
+    });
+  });
+
+  // Code trang phiếu khuyến mãi ------------------------------------------
+
+  // Gán sự kiện cho các nút "Xóa"
+  const discountList = document.querySelector(".list-discount");
+  const notification = document.getElementById("notification");
+  const customConfirm = document.getElementById("custom-confirm");
+  const confirmMessage = document.getElementById("confirm-message");
+  const confirmOk = document.getElementById("confirm-ok");
+  const confirmCancel = document.getElementById("confirm-cancel");
+  const addDiscountBtn = document.getElementById("add-discount-btn");
+  let editingRow = null; // Lưu trữ hàng đang chỉnh sửa
+  const discountCodeInput = document.getElementById("discount-code");
+  const discountPercentInput = document.getElementById("discount-percent");
+  const discountExpiryInput = document.getElementById("discount-expiry");
+  const discountForm = document.getElementById("discount-form");
+
+  discountList.addEventListener("click", function (e) {
+    if (e.target.tagName === "BUTTON" && e.target.textContent === "Xóa") {
+      const row = e.target.closest("tr");
+      const discountCode = row.cells[0].textContent;
+
+      // Hiển thị khung xác nhận tùy chỉnh
+      showCustomConfirm(
+        `Bạn có chắc chắn muốn xóa mã giảm giá ${discountCode}?`,
+        function () {
+          row.remove(); // Xóa hàng khỏi bảng
+          showNotification(`Phiếu giảm giá ${discountCode} đã bị xóa.`);
+        }
+      );
+    }
+
+    if (e.target.tagName === "BUTTON" && e.target.textContent === "Chỉnh sửa") {
+      const row = e.target.closest("tr"); // Lấy hàng chứa nút "Chỉnh sửa"
+      editingRow = row; // Lưu hàng đang chỉnh sửa
+
+      // Lấy dữ liệu từ hàng
+      const discountCode = row.cells[0].textContent; // Mã giảm giá
+      const discountPercent = row.cells[1].textContent.replace("%", ""); // Mức giảm
+      const discountExpiry = row.cells[3].textContent; // Ngày hết hạn (dd/MM/yyyy)
+
+      // Chuyển đổi định dạng ngày từ dd/MM/yyyy sang yyyy-MM-dd
+      const formattedExpiryDate = formatDateToDDMMYYYY(discountExpiry);
+
+      // Điền dữ liệu vào form
+      discountCodeInput.value = discountCode;
+      discountPercentInput.value = discountPercent;
+      discountExpiryInput.value = formattedExpiryDate; // Gán ngày đã định dạng (yyyy-MM-dd)
+
+      // Đổi nút "THÊM PHIẾU GIẢM GIÁ" thành "CẬP NHẬT"
+      addDiscountBtn.textContent = "CẬP NHẬT";
+      addDiscountBtn.classList.add("toggleEdit");
+      console.log(`Đang chỉnh sửa phiếu giảm giá: ${discountCode}`);
+    }
+    function formatDateToDDMMYYYY(dateString) {
+      const [day, month, year] = dateString.split("/");
+      return `${year}-${month}-${day}`;
+    }
+  });
+
+  addDiscountBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (addDiscountBtn.classList.contains("toggleEdit")) {
+      // Nếu nút có class toggleEdit => Xử lý cập nhật
+      if (editingRow) {
+        // Cập nhật dữ liệu trong bảng
+        editingRow.cells[0].textContent = discountCodeInput.value.trim(); // Mã giảm giá
+        editingRow.cells[1].textContent = `${discountPercentInput.value.trim()}%`; // Mức giảm
+        editingRow.cells[3].textContent = discountExpiryInput.value.trim(); // Ngày hết hạn
+
+        showNotification(
+          `Cập nhật thành công mã giảm giá: ${discountCodeInput.value.trim()}`
+        );
+
+        // Reset trạng thái
+        editingRow = null;
+        discountForm.reset();
+        addDiscountBtn.textContent = "THÊM PHIẾU GIẢM GIÁ";
+        addDiscountBtn.classList.remove("toggleEdit"); // Bỏ class toggleEdit
+      }
+    } else {
+      // Nếu nút không có class toggleEdit => Xử lý thêm mới
+      const discountCode = discountCodeInput.value.trim(); // Mã giảm giá
+      const discountPercent = discountPercentInput.value.trim(); // Mức giảm
+      const discountExpiry = discountExpiryInput.value.trim(); // Ngày hết hạn
+
+      // Kiểm tra dữ liệu nhập vào
+      if (!discountCode || !discountPercent || !discountExpiry) {
+        showNotification("Vui lòng điền đầy đủ thông tin phiếu giảm giá!");
+        return;
+      }
+
+      // Tạo một hàng mới
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td>${discountCode}</td>
+        <td>${discountPercent}%</td>
+        <td>${new Date().toISOString().split("T")[0]}</td> <!-- Ngày bắt đầu -->
+        <td>${discountExpiry}</td>
+        <td>
+          <button class="edit-btn">Chỉnh sửa</button>
+          <button class="delete-btn">Xóa</button>
+        </td>
+      `;
+
+      // Thêm hàng mới vào bảng
+      discountList.querySelector("tbody").appendChild(newRow);
+
+      // Thông báo
+      showNotification(`Đã thêm phiếu giảm giá: ${discountCode}`);
+
+      // Reset form
+      discountForm.reset();
+    }
+  });
+
+  // End phiếu khuyến mãi  ==================
+
+  // Xử lí phần quản lí tài khoản
+  const accountForm = document.getElementById("account-form");
+  const accountUsernameInput = document.getElementById("account-username");
+  const accountEmailInput = document.getElementById("account-email");
+  const accountRoleSelect = document.getElementById("account-role");
+  const addAccountBtn = document.getElementById("add-account-btn");
+  const accountListTable = document.querySelector("#account-list tbody");
+
+  accountForm.addEventListener("submit", function (e) {
+    e.preventDefault(); // Ngăn chặn form submit mặc định
+
+    console.log("a");
+    const username = accountUsernameInput.value.trim();
+    const email = accountEmailInput.value.trim();
+    const role = accountRoleSelect.value;
+
+    if (!username || !email || !role) {
+      showNotification("Vui lòng điền đầy đủ thông tin tài khoản!", "error");
+      return;
+    }
+
+    if (addAccountBtn.textContent.trim() === "Thêm Tài khoản") {
+      // Thêm tài khoản mới
+      const newRow = document.createElement("tr");
+      const newId = accountListTable.querySelectorAll("tr").length + 1;
+
+      newRow.innerHTML = `
+        <td>${newId}</td>
+        <td>${username}</td>
+        <td>${email}</td>
+        <td>${
+          role === "admin"
+            ? "Quản trị viên"
+            : role === "editor"
+            ? "Người chỉnh sửa"
+            : "Người xem"
+        }</td>
+        <td>
+          <button class="edit-btn">Chỉnh sửa</button>
+          <button class="delete-btn">Xóa</button>
+        </td>`;
+
+      accountListTable.appendChild(newRow);
+      showNotification("Đã thêm tài khoản thành công!");
+    } else if (addAccountBtn.textContent === "Cập nhật Tài khoản") {
+      // Cập nhật tài khoản
+      if (editingRow) {
+        editingRow.cells[1].textContent = username;
+        editingRow.cells[2].textContent = email;
+        editingRow.cells[3].textContent =
+          role === "admin"
+            ? "Quản trị viên"
+            : role === "editor"
+            ? "Người chỉnh sửa"
+            : "Khách hàng";
+
+        showNotification("Cập nhật tài khoản thành công!");
+        addAccountBtn.textContent = "Thêm Tài khoản";
+        editingRow = null;
+      }
+    }
+
+    // Reset form
+    accountForm.reset();
+  });
+
+  // Xử lý sự kiện "Chỉnh sửa" và "Xóa"
+  accountListTable.addEventListener("click", function (e) {
+    if (e.target.classList.contains("edit-btn")) {
+      // Chỉnh sửa tài khoản
+      const row = e.target.closest("tr");
+      editingRow = row;
+
+      // Điền thông tin tài khoản vào form
+      accountUsernameInput.value = row.cells[1].textContent;
+      accountEmailInput.value = row.cells[2].textContent;
+
+      const roleText = row.cells[3].textContent;
+      accountRoleSelect.value =
+        roleText === "Quản trị viên"
+          ? "admin"
+          : roleText === "Người chỉnh sửa"
+          ? "editor"
+          : "viewer";
+
+      // Thay đổi nút thành "Cập nhật Tài khoản"
+      addAccountBtn.textContent = "Cập nhật Tài khoản";
+    }
+
+    if (e.target.classList.contains("delete-btn")) {
+      // Xóa tài khoản
+      const row = e.target.closest("tr");
+      const username = row.cells[1].textContent;
+
+      showCustomConfirm(
+        `Bạn có chắc chắn muốn xóa tài khoản ${username}?`,
+        function () {
+          row.remove();
+          showNotification(`Đã xóa tài khoản ${username}`);
+        }
+      );
+    }
+  });
+
+  // Code phần Noti Setting
+  const notificationForm = document.getElementById("notification-form");
+  const notificationContentInput = document.getElementById(
+    "notification-content"
+  );
+  const notificationTimeInput = document.getElementById("notification-time");
+  const notificationList = document.getElementById("notification-list");
+  const sendNotificationBtn = document.getElementById("send-notification-btn");
+  const formOptionNoti = document.getElementById("form-option-noti");
+
+  // **1. Lưu cài đặt thông báo**
+  formOptionNoti.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const emailNotification = formOptionNoti.querySelector(
+      "input[type='checkbox']:checked"
+    );
+    const browserNotification = formOptionNoti.querySelector(
+      "input[type='checkbox']:not(:checked)"
+    );
+    const frequency = document.getElementById("notification-frequency").value;
+
+    console.log("Cài đặt Thông báo:");
+    console.log("Email Notification:", emailNotification ? "Bật" : "Tắt");
+    console.log("Browser Notification:", browserNotification ? "Bật" : "Tắt");
+    console.log("Tần suất:", frequency);
+
+    alert("Cài đặt thông báo đã được lưu.");
+  });
+
+  // **2. Thêm hoặc cập nhật thông báo**
+  notificationForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const content = notificationContentInput.value.trim();
+    const time = notificationTimeInput.value.trim();
+
+    if (!content || !time) {
+      showNotification("Vui lòng nhập đầy đủ nội dung và thời gian thông báo!");
+      return;
+    }
+
+    if (editingRow) {
+      // Cập nhật thông báo
+      editingRow.cells[1].textContent = content;
+      editingRow.cells[2].textContent = time;
+      showNotification("Thông báo đã được cập nhật.");
+      sendNotificationBtn.textContent = "Gửi Thông báo";
+      editingRow = null;
+    } else {
+      // Thêm thông báo mới
+      const newRow = document.createElement("tr");
+      const newId = notificationList.querySelectorAll("tr").length + 1;
+
+      newRow.innerHTML = `
+        <td>${newId}</td>
+        <td>${content}</td>
+        <td>${time}</td>
+        <td>
+          <button class="edit-btn">Chỉnh sửa</button>
+          <button class="delete-btn">Xóa</button>
+        </td>
+      `;
+
+      notificationList.appendChild(newRow);
+      showNotification("Thông báo mới đã được thêm.");
+    }
+
+    // Reset form
+    notificationForm.reset();
+  });
+
+  // **3. Chỉnh sửa và xóa thông báo**
+  notificationList.addEventListener("click", function (e) {
+    if (e.target.classList.contains("edit-btn")) {
+      const row = e.target.closest("tr");
+      editingRow = row;
+
+      // Điền thông tin vào form để chỉnh sửa
+      notificationContentInput.value = row.cells[1].textContent;
+      notificationTimeInput.value = row.cells[2].textContent;
+      sendNotificationBtn.textContent = "Cập nhật Thông báo";
+    }
+
+    if (e.target.classList.contains("delete-btn")) {
+      const row = e.target.closest("tr");
+      const notificationId = row.cells[0].textContent;
+
+      showCustomConfirm(
+        `Bạn có chắc chắn muốn xóa thông báo ID ${notificationId}?`,
+        function () {
+          row.remove();
+          showNotification(`Thông báo ID ${notificationId} đã bị xóa.`);
+        }
+      );
+    }
+  });
+
+  function showCustomConfirm(message, onConfirm) {
+    confirmMessage.textContent = message;
+    customConfirm.classList.remove("hidden");
+
+    // Xử lý sự kiện khi nhấn "Đồng ý"
+    confirmOk.onclick = function () {
+      customConfirm.classList.add("hidden");
+      onConfirm();
+    };
+
+    // Xử lý sự kiện khi nhấn "Hủy"
+    confirmCancel.onclick = function () {
+      customConfirm.classList.add("hidden");
+    };
+  }
+
+  function showNotification(message, status = "success") {
+    notification.textContent = message;
+    notification.classList.remove("success", "error", "warning");
+    notification.classList.add("show");
+    notification.classList.add(status);
+    notification.classList.remove("hidden");
+
+    // Ẩn thông báo sau 3 giây
+    setTimeout(() => {
+      notification.classList.remove("show");
+      notification.classList.add("hidden");
+    }, 3000);
+  }
 });
