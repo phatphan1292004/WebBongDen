@@ -300,6 +300,181 @@ document.addEventListener("DOMContentLoaded", function () {
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk01.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk02.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk03.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk04.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk05.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk06.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk07.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk08.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk09.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk10.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk11.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk12.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk13.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk14.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk15.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk16.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk17.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk18.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk19.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk20.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk21.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk22.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk23.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk24.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn LED âm trần COB siêu sáng trang trí nội thất phong cách hiện đại DA00088",
+      image1: "./img/dk25.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
   ];
 
   const itemsPerPage = 20; // Hiển thị 20 sản phẩm mỗi trang
