@@ -376,7 +376,8 @@
 }
 
 .main-content .header-tab .search-container #product-search,
-.main-content .header-tab .search-container #customer-search {
+.main-content .header-tab .search-container #customer-search,
+.main-content .header-tab .search-container #order-search {
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ced4da;
@@ -385,7 +386,8 @@
   width: 250px;
 }
 
-.main-content .header-tab .search-container #search-btn {
+#search-btn-product,
+#search-btn-cus, #search-btn-order {
   padding: 8px 15px;
   background-color: #007bff;
   color: white;

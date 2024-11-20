@@ -47,6 +47,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   loginForm.addEventListener("submit", function (event) {
     event.preventDefault();
+    if(username.value === 'admin123' && password.value === 'admin123') {
+      window.location.href = "admin.html";
+    }else {
+      showNotification("Tài khoản hoặc mật khẩu không chính xác.", "error");
+    }
 
     // Lấy danh sách người dùng từ sessionStorage
     let users = JSON.parse(sessionStorage.getItem("users")) || [];
@@ -72,19 +77,4 @@ document.addEventListener("DOMContentLoaded", function () {
     // Chuyển hướng sang trang chính
     window.location.href = "index.html";
   });
-
-  // Chuyển tới trang Admin khi nhập tk mk của admin
-  document
-    .getElementById("login-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-      const username = document.getElementById("cus-account").value;
-      const password = document.getElementById("cus-password").value;
-
-      if (username === "admin123" && password === "admin123") {
-        window.location.href = "admin.html";
-      } else {
-        showNotification("Tài khoản hoặc mật khẩu không chính xác.", "error");
-      }
-    });
 });
