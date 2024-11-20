@@ -475,6 +475,182 @@ document.addEventListener("DOMContentLoaded", function () {
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq01.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq02.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq03.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq04.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq05.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq06.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq07.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq08.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq09.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq10.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq11.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq12.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq13.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq14.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq15.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq16.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq17.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq18.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq19.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq20.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq21.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq22.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq23.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq24.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn quạt trang trí nội thất phong cách hiện đại",
+      image1: "./img/dq25.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    
   ];
 
   const itemsPerPage = 20; // Hiển thị 20 sản phẩm mỗi trang
@@ -542,6 +718,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentPage < totalPages) {
       currentPage++;
       displayProducts(currentPage);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Cuộn mượt
+    });
+      
     }
   });
 });
