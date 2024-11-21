@@ -56,6 +56,16 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       tabContents[index].style.display = "block";
       item.classList.add("active");
+
+      tabContents.forEach((tab) => {
+        tab.classList.remove("active"); // Xóa class active
+      });
+
+      if (index == 5) {
+        document.getElementById("submenu-admin").classList.toggle("open");
+      } else if (index < 5) {
+        document.getElementById("submenu-admin").classList.remove("open");
+      }
     });
   });
 
@@ -80,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${item.dateCreate}</td>
                 <td><button class="view-details view-details-product">Xem chi tiết</button></td>
                 <td>
-                    <button class="delete-product">
+                    <button class="delete-product" data-id="${item.id}">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </td>
@@ -121,7 +131,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Tái sử dụng hàm search chỉ cho tên sản phẩm
   // Tái sử dụng hàm search cho cả sản phẩm và khách hàng
-  function searchProducts(searchBtnId, searchInputId, data, loadFunction, searchField) {
+  function searchProducts(
+    searchBtnId,
+    searchInputId,
+    data,
+    loadFunction,
+    searchField
+  ) {
     document.getElementById(searchBtnId).addEventListener("click", () => {
       const searchTerm = document
         .getElementById(searchInputId)
@@ -132,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
       loadFunction(filteredData); // Gọi hàm load với dữ liệu đã lọc
     });
   }
-  
 
   function loadCustomerTable(cus = customerData) {
     cusTableBody.innerHTML = "";
@@ -152,9 +167,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Gọi hàm tìm kiếm cho sản phẩm chỉ theo tên
-  searchProducts("search-btn-product", "product-search", productData, loadProductTable,"name");
-  searchProducts("search-btn-cus", "customer-search", customerData, loadCustomerTable, "name");
-  searchProducts("search-btn-order", "order-search", orderData, loadOrderTable, "customerName");
+  searchProducts(
+    "search-btn-product",
+    "product-search",
+    productData,
+    loadProductTable,
+    "name"
+  );
+  searchProducts(
+    "search-btn-cus",
+    "customer-search",
+    customerData,
+    loadCustomerTable,
+    "name"
+  );
+  searchProducts(
+    "search-btn-order",
+    "order-search",
+    orderData,
+    loadOrderTable,
+    "customerName"
+  );
 
   document.querySelector(".add-product").addEventListener("click", function () {
     overlay.classList.add("active");
@@ -195,16 +228,28 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#product-table-body")
     .addEventListener("click", function (e) {
-      if (e.target.classList.contains("delete-product")) {
-        e.stopPropagation();
-        const row = e.target.closest("tr");
-        row.remove();
-        document.querySelector("tbody").dispatchEvent(new Event("change"));
+      const deleteButton = e.target.closest(".delete-product");
+      if (deleteButton) {
+        const productId = deleteButton.getAttribute("data-id");
+        showCustomConfirm(
+          `Bạn có chắc chắn muốn xóa đơn hàng ID: ${productId}?`,
+          function () {
+            deleteProductById(productId);
+            showNotification(`Sản phẩm với ID ${productId} đã bị xóa.`);
+            loadProductTable(productData);
+          }
+        );
       }
     });
 
-  // Trang khách hàng
+  function deleteProductById(productId) {
+    const index = productData.findIndex((product) => product.id === productId);
+    if (index !== -1) {
+      productData.splice(index, 1); // Xóa phần tử khỏi mảng
+    }
+  }
 
+  // Trang khách hàng
   function loadCustomerTable(cus = customerData) {
     cusTableBody.innerHTML = "";
     cus.forEach((item) => {
@@ -239,12 +284,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
   loadCustomerTable();
 
-  // Trang đơn hàng
+  function sortCustomers(option) {
+    const sortedCustomers = [...customerData];
+    switch (option) {
+      case "name-asc":
+        sortedCustomers.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "name-desc":
+        sortedCustomers.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "date-desc":
+        sortedCustomers.sort(
+          (a, b) => new Date(b.registeredDate) - new Date(a.registeredDate)
+        );
+        break;
+      default:
+        console.log("Tùy chọn không hợp lệ.");
+        break;
+    }
+    loadCustomerTable(sortedCustomers);
+  }
+
+  // Thêm sự kiện cho nút sắp xếp
+  document
+    .querySelector("#sort-btn-cus")
+    .addEventListener("click", function () {
+      const selectedOption = document.querySelector(
+        "#sort-select-customer"
+      ).value;
+      if (selectedOption) {
+        sortCustomers(selectedOption);
+      } else {
+        showNotification("Vui lòng chọn một tùy chọn sắp xếp.", "error");
+      }
+    });
+
+  // Trang đơn hàng ===========================================================
   const orderTableBody = document.getElementById("order-table-body");
 
   function loadOrderTable(orders = orderData) {
-    orderTableBody.innerHTML = ""; 
-    
+    orderTableBody.innerHTML = "";
+
     orders.forEach((order) => {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -260,8 +340,8 @@ document.addEventListener("DOMContentLoaded", function () {
           ${
             order.status === "Chờ xử lý"
               ? `
-            <button class="approve-order" onclick="approveOrder(${order.id})"><i class="fa-solid fa-check"></i></button>
-            <button class="reject-order" onclick="rejectOrder(${order.id})"><i class="fa-solid fa-times"></i></button>
+            <button class="approve-order" onclick="approveOrder('${order.id}')"><i class="fa-solid fa-check"></i></button>
+            <button class="reject-order" onclick="rejectOrder('${order.id}')"><i class="fa-solid fa-times"></i></button>
           `
               : ""
           }
@@ -270,9 +350,9 @@ document.addEventListener("DOMContentLoaded", function () {
       orderTableBody.appendChild(row);
     });
   }
-  
+
   // Ví dụ gọi hàm loadOrderTable để hiển thị `orderData`
-  loadOrderTable(orderData);  
+  loadOrderTable(orderData);
 
   orderTableBody.addEventListener("click", function (event) {
     if (event.target && event.target.classList.contains("view-details")) {
@@ -285,6 +365,96 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", function () {
       document.getElementById("overlay2").classList.remove("active");
     });
+
+  const sortSelect = document.getElementById("sort-select-order");
+  const sortButton = document.getElementById("sort-btn-order");
+  // Hàm lọc danh sách đơn hàng
+  sortButton.addEventListener("click", function () {
+    const sortValue = sortSelect.value;
+    let filteredOrders = [...orderData];
+
+    switch (sortValue) {
+      case "name-asc": // Ngày đặt: Mới nhất
+        // Sắp xếp danh sách theo ngày đặt hàng mới nhất
+        filteredOrders.sort((a, b) => {
+          const dateA = new Date(a.orderDate.split("-").reverse().join("-"));
+          const dateB = new Date(b.orderDate.split("-").reverse().join("-"));
+          return dateB - dateA; // Sắp xếp giảm dần
+        });
+
+        // Lấy ngày đặt hàng mới nhất
+        const latestOrderDate =
+          filteredOrders.length > 0
+            ? new Date(
+                filteredOrders[0].orderDate.split("-").reverse().join("-")
+              )
+            : null;
+
+        // Lọc các đơn hàng có ngày đặt hàng trùng với ngày mới nhất
+        const latestOrders = filteredOrders.filter((order) => {
+          const orderDate = new Date(
+            order.orderDate.split("-").reverse().join("-")
+          );
+          return orderDate.getTime() === latestOrderDate.getTime();
+        });
+
+        // Hiển thị danh sách đơn hàng mới nhất ra bảng
+        loadOrderTable(latestOrders);
+        break;
+
+      case "name-desc": // Ngày đặt: Cũ nhất
+        filteredOrders.sort(
+          (a, b) => new Date(a.orderDate) - new Date(b.orderDate)
+        );
+        break;
+      case "price-asc": // ID A-Z
+        filteredOrders.sort((a, b) => a.id - b.id);
+        break;
+      case "price-desc": // ID Z-A
+        filteredOrders.sort((a, b) => b.id - a.id);
+        break;
+      case "pending-orders": // Đơn hàng chưa duyệt
+        filteredOrders = filteredOrders.filter(
+          (order) => order.status === "Chờ xử lý"
+        );
+        break;
+      default:
+        break;
+    }
+
+    // Cập nhật bảng đơn hàng sau khi lọc
+    loadOrderTable(filteredOrders);
+  });
+
+  // Hàm xử lý duyệt đơn hàng
+  window.approveOrder = function (orderId) {
+    const order = orderData.find((order) => order.id === orderId);
+
+    if (order) {
+      order.status = "Đã duyệt";
+      showNotification(`Đơn hàng ID: ${orderId} đã được duyệt!`);
+      loadOrderTable(orderData);
+    } else {
+      showNotification(`Không tìm thấy đơn hàng với ID: ${orderId}`, "error");
+    }
+  };
+
+  window.rejectOrder = function (orderId) {
+    showCustomConfirm(
+      `Bạn có chắc chắn muốn xóa đơn hàng ID: ${orderId}?`,
+      function () {
+        const index = orderData.findIndex(
+          (order) => String(order.id) === String(orderId)
+        );
+        if (index !== -1) {
+          orderData.splice(index, 1); // Xóa phần tử tại vị trí index
+        }
+        showNotification(`Đơn hàng ID: ${orderId} đã bị xóa!`);
+        loadOrderTable(orderData); // Cập nhật lại bảng
+      }
+    );
+  };
+  // ----Ket thuc trang don hang ============================
 
   // Trang thống kê
 
@@ -319,106 +489,122 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   };
 
-  // Vẽ biểu đồ vào canvas
-  const ctx = document.getElementById("customerPieChart").getContext("2d");
-  new Chart(ctx, config);
+  const ctx2 = document.getElementById("customerPieChart").getContext("2d");
 
-  // Dữ liệu cho biểu đồ doanh thu cả năm
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
-  const salesData = [
-    100000, 150000, 120000, 180000, 20000, 25000, 30000, 35000,
+  // Khởi tạo biểu đồ
+  new Chart(ctx2, config);
+
+  const ctx = document.getElementById("revenueChart").getContext("2d");
+
+  // Dữ liệu doanh thu và số lượng sản phẩm bán được cho 12 tháng
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
+  const revenue = [
+    100000, 150000, 130000, 180000, 20000, 25000, 30000, 40000, 50000, 60000,
+    70000, 80000,
+  ];
+  const quantitySold = [120, 150, 170, 200, 50, 60, 70, 80, 90, 100, 110, 120];
 
-  const ctx2 = document.getElementById("salesChart").getContext("2d");
-  const salesChart = new Chart(ctx2, {
+  // Vẽ biểu đồ
+  new Chart(ctx, {
     type: "bar",
     data: {
       labels: months,
       datasets: [
         {
           label: "Doanh thu (VND)",
-          data: salesData,
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          data: revenue,
+          backgroundColor: "rgba(75, 192, 192, 0.3)",
           borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 1,
+          yAxisID: "y",
+          barPercentage: 0.8, // Giảm độ rộng của cột
+          categoryPercentage: 0.9, // Đưa cột sát với cạnh bên
+        },
+        {
+          label: "Số lượng bán được",
+          data: quantitySold,
+          type: "line",
+          borderColor: "#FF5733",
+          backgroundColor: "rgba(255, 87, 51, 0.3)",
+          borderWidth: 2,
+          fill: true,
+          tension: 0.3,
+          yAxisID: "y1",
+          pointBackgroundColor: "#FF5733",
+          pointRadius: 4,
         },
       ],
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false,
+      plugins: {
+        tooltip: {
+          mode: "index",
+          intersect: false,
+        },
+        legend: {
+          position: "top",
+          labels: {
+            font: {
+              size: 14,
+            },
+          },
+        },
+      },
+      layout: {
+        padding: {
+          left: 0, // Loại bỏ padding bên trái
+          right: 0,
+        },
+      },
       scales: {
         x: {
           ticks: {
-            maxRotation: 0,
-            autoSkip: false,
+            font: {
+              size: 12,
+            },
           },
-          categoryPercentage: 0.8,
-          barPercentage: 0.7,
         },
         y: {
-          beginAtZero: true,
-        },
-      },
-      elements: {
-        bar: {
-          barThickness: 12,
-        },
-      },
-    },
-  });
-
-  const ctx3 = document.getElementById("topProductsChart").getContext("2d");
-  const topProductsLineChart = new Chart(ctx3, {
-    type: "line", // Dạng biểu đồ đường
-    data: {
-      labels: [
-        "Sản phẩm 1",
-        "Sản phẩm 2",
-        "Sản phẩm 3",
-        "Sản phẩm 4",
-        "Sản phẩm 5",
-        "Sản phẩm 6",
-        "Sản phẩm 7",
-        "Sản phẩm 8",
-        "Sản phẩm 9",
-        "Sản phẩm 10",
-      ],
-      datasets: [
-        {
-          label: "Số lượng bán ra",
-          data: [120, 150, 100, 90, 110, 85, 120, 130, 140, 160],
-          borderColor: "rgba(54, 162, 235, 1)",
-          backgroundColor: "rgba(54, 162, 235, 0.2)",
-          fill: true,
-          tension: 0.4,
-          borderWidth: 2,
-        },
-        {
-          label: "Số lượng tồn kho",
-          data: [80, 40, 60, 100, 50, 90, 30, 70, 50, 40],
-          borderColor: "rgba(255, 99, 132, 1)",
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-          fill: true,
-          tension: 0.4,
-          borderWidth: 2,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          beginAtZero: true,
-        },
-        y: {
-          beginAtZero: true,
-        },
-      },
-      plugins: {
-        title: {
+          type: "linear",
           display: true,
-          text: "Top 10 Sản phẩm bán chạy",
+          position: "left",
+          title: {
+            display: true,
+            text: "Doanh thu (VND)",
+          },
+          ticks: {
+            color: "rgba(75, 192, 192, 1)",
+          },
+          beginAtZero: true, // Bắt đầu từ 0
+        },
+        y1: {
+          type: "linear",
+          display: true,
+          position: "right",
+          grid: {
+            drawOnChartArea: false,
+          },
+          title: {
+            display: true,
+            text: "Số lượng sản phẩm",
+          },
+          ticks: {
+            color: "#FF5733",
+          },
         },
       },
     },
@@ -576,8 +762,17 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       document.querySelector(".tab-content-container").style.display = "none";
       document.querySelector(".product-details").style.display = "block";
+      document.querySelector(".product-stats").style.display = "none";
     }
   });
+
+  document
+    .getElementById("close-details-btn")
+    .addEventListener("click", function () {
+      document.querySelector(".product-details").style.display = "none";
+      document.querySelector(".tab-content-container").style.display = "block";
+      document.querySelector(".product-stats").style.display = "flex";
+    });
 
   document
     .getElementById("edit-product-btn")
@@ -684,9 +879,459 @@ document.addEventListener("DOMContentLoaded", function () {
         "inline-block";
     });
 
-  const navItem = document.getElementById("nav-item-system");
+  const menuItems = document.querySelectorAll(".submenu-admin .menu-item");
 
-  navItem.addEventListener("click", () => {
-    navItem.classList.toggle("open");
+  menuItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      // Loại bỏ class active khỏi tất cả menu-items
+      menuItems.forEach((menuItem) => menuItem.classList.remove("active"));
+
+      // Thêm class active vào menu-item hiện tại
+      item.classList.add("active");
+
+      // Lấy target từ data-target
+      const targetId = item.getAttribute("data-target");
+
+      // Ẩn tất cả tab-content
+      tabContents.forEach((tab) => {
+        tab.classList.remove("active");
+      });
+
+      // Hiển thị tab-content tương ứng
+      const targetTab = document.getElementById(targetId);
+      if (targetTab) {
+        targetTab.classList.add("active"); // Thêm class active
+      }
+    });
+  });
+
+  // Code trang phiếu khuyến mãi ------------------------------------------
+
+  // Gán sự kiện cho các nút "Xóa"
+  const discountList = document.querySelector(".list-discount");
+  const notification = document.getElementById("notification");
+  const customConfirm = document.getElementById("custom-confirm");
+  const confirmMessage = document.getElementById("confirm-message");
+  const confirmOk = document.getElementById("confirm-ok");
+  const confirmCancel = document.getElementById("confirm-cancel");
+  const addDiscountBtn = document.getElementById("add-discount-btn");
+  let editingRow = null; // Lưu trữ hàng đang chỉnh sửa
+  const discountCodeInput = document.getElementById("discount-code");
+  const discountPercentInput = document.getElementById("discount-percent");
+  const discountExpiryInput = document.getElementById("discount-expiry");
+  const discountForm = document.getElementById("discount-form");
+
+  discountList.addEventListener("click", function (e) {
+    if (e.target.tagName === "BUTTON" && e.target.textContent === "Xóa") {
+      const row = e.target.closest("tr");
+      const discountCode = row.cells[0].textContent;
+
+      // Hiển thị khung xác nhận tùy chỉnh
+      showCustomConfirm(
+        `Bạn có chắc chắn muốn xóa mã giảm giá ${discountCode}?`,
+        function () {
+          row.remove(); // Xóa hàng khỏi bảng
+          showNotification(`Phiếu giảm giá ${discountCode} đã bị xóa.`);
+        }
+      );
+    }
+
+    if (e.target.tagName === "BUTTON" && e.target.textContent === "Chỉnh sửa") {
+      const row = e.target.closest("tr"); // Lấy hàng chứa nút "Chỉnh sửa"
+      editingRow = row; // Lưu hàng đang chỉnh sửa
+
+      // Lấy dữ liệu từ hàng
+      const discountCode = row.cells[0].textContent; // Mã giảm giá
+      const discountPercent = row.cells[1].textContent.replace("%", ""); // Mức giảm
+      const discountExpiry = row.cells[3].textContent; // Ngày hết hạn (dd/MM/yyyy)
+
+      // Chuyển đổi định dạng ngày từ dd/MM/yyyy sang yyyy-MM-dd
+      const formattedExpiryDate = formatDateToDDMMYYYY(discountExpiry);
+
+      // Điền dữ liệu vào form
+      discountCodeInput.value = discountCode;
+      discountPercentInput.value = discountPercent;
+      discountExpiryInput.value = formattedExpiryDate; // Gán ngày đã định dạng (yyyy-MM-dd)
+
+      // Đổi nút "THÊM PHIẾU GIẢM GIÁ" thành "CẬP NHẬT"
+      addDiscountBtn.textContent = "CẬP NHẬT";
+      addDiscountBtn.classList.add("toggleEdit");
+      console.log(`Đang chỉnh sửa phiếu giảm giá: ${discountCode}`);
+    }
+    function formatDateToDDMMYYYY(dateString) {
+      const [day, month, year] = dateString.split("/");
+      return `${year}-${month}-${day}`;
+    }
+  });
+
+  addDiscountBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (addDiscountBtn.classList.contains("toggleEdit")) {
+      // Nếu nút có class toggleEdit => Xử lý cập nhật
+      if (editingRow) {
+        // Cập nhật dữ liệu trong bảng
+        editingRow.cells[0].textContent = discountCodeInput.value.trim(); // Mã giảm giá
+        editingRow.cells[1].textContent = `${discountPercentInput.value.trim()}%`; // Mức giảm
+        editingRow.cells[3].textContent = discountExpiryInput.value.trim(); // Ngày hết hạn
+
+        showNotification(
+          `Cập nhật thành công mã giảm giá: ${discountCodeInput.value.trim()}`
+        );
+
+        // Reset trạng thái
+        editingRow = null;
+        discountForm.reset();
+        addDiscountBtn.textContent = "THÊM PHIẾU GIẢM GIÁ";
+        addDiscountBtn.classList.remove("toggleEdit"); // Bỏ class toggleEdit
+      }
+    } else {
+      // Nếu nút không có class toggleEdit => Xử lý thêm mới
+      const discountCode = discountCodeInput.value.trim(); // Mã giảm giá
+      const discountPercent = discountPercentInput.value.trim(); // Mức giảm
+      const discountExpiry = discountExpiryInput.value.trim(); // Ngày hết hạn
+
+      // Kiểm tra dữ liệu nhập vào
+      if (!discountCode || !discountPercent || !discountExpiry) {
+        showNotification("Vui lòng điền đầy đủ thông tin phiếu giảm giá!");
+        return;
+      }
+
+      // Tạo một hàng mới
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td>${discountCode}</td>
+        <td>${discountPercent}%</td>
+        <td>${new Date().toISOString().split("T")[0]}</td> <!-- Ngày bắt đầu -->
+        <td>${discountExpiry}</td>
+        <td>
+          <button class="edit-btn">Chỉnh sửa</button>
+          <button class="delete-btn">Xóa</button>
+        </td>
+      `;
+
+      // Thêm hàng mới vào bảng
+      discountList.querySelector("tbody").appendChild(newRow);
+
+      // Thông báo
+      showNotification(`Đã thêm phiếu giảm giá: ${discountCode}`);
+
+      // Reset form
+      discountForm.reset();
+    }
+  });
+
+  // End phiếu khuyến mãi  ==================
+
+  // Xử lí phần quản lí tài khoản
+  const accountForm = document.getElementById("account-form");
+  const accountUsernameInput = document.getElementById("account-username");
+  const accountEmailInput = document.getElementById("account-email");
+  const accountRoleSelect = document.getElementById("account-role");
+  const addAccountBtn = document.getElementById("add-account-btn");
+  const accountListTable = document.querySelector("#account-list tbody");
+
+  accountForm.addEventListener("submit", function (e) {
+    e.preventDefault(); // Ngăn chặn form submit mặc định
+
+    console.log("a");
+    const username = accountUsernameInput.value.trim();
+    const email = accountEmailInput.value.trim();
+    const role = accountRoleSelect.value;
+
+    if (!username || !email || !role) {
+      showNotification("Vui lòng điền đầy đủ thông tin tài khoản!", "error");
+      return;
+    }
+
+    if (addAccountBtn.textContent.trim() === "Thêm Tài khoản") {
+      // Thêm tài khoản mới
+      const newRow = document.createElement("tr");
+      const newId = accountListTable.querySelectorAll("tr").length + 1;
+
+      newRow.innerHTML = `
+        <td>${newId}</td>
+        <td>${username}</td>
+        <td>${email}</td>
+        <td>${
+          role === "admin"
+            ? "Quản trị viên"
+            : role === "editor"
+            ? "Người chỉnh sửa"
+            : "Người xem"
+        }</td>
+        <td>
+          <button class="edit-btn">Chỉnh sửa</button>
+          <button class="delete-btn">Xóa</button>
+        </td>`;
+
+      accountListTable.appendChild(newRow);
+      showNotification("Đã thêm tài khoản thành công!");
+    } else if (addAccountBtn.textContent === "Cập nhật Tài khoản") {
+      // Cập nhật tài khoản
+      if (editingRow) {
+        editingRow.cells[1].textContent = username;
+        editingRow.cells[2].textContent = email;
+        editingRow.cells[3].textContent =
+          role === "admin"
+            ? "Quản trị viên"
+            : role === "editor"
+            ? "Người chỉnh sửa"
+            : "Khách hàng";
+
+        showNotification("Cập nhật tài khoản thành công!");
+        addAccountBtn.textContent = "Thêm Tài khoản";
+        editingRow = null;
+      }
+    }
+
+    // Reset form
+    accountForm.reset();
+  });
+
+  // Xử lý sự kiện "Chỉnh sửa" và "Xóa"
+  accountListTable.addEventListener("click", function (e) {
+    if (e.target.classList.contains("edit-btn")) {
+      // Chỉnh sửa tài khoản
+      const row = e.target.closest("tr");
+      editingRow = row;
+
+      // Điền thông tin tài khoản vào form
+      accountUsernameInput.value = row.cells[1].textContent;
+      accountEmailInput.value = row.cells[2].textContent;
+
+      const roleText = row.cells[3].textContent;
+      accountRoleSelect.value =
+        roleText === "Quản trị viên"
+          ? "admin"
+          : roleText === "Người chỉnh sửa"
+          ? "editor"
+          : "viewer";
+
+      // Thay đổi nút thành "Cập nhật Tài khoản"
+      addAccountBtn.textContent = "Cập nhật Tài khoản";
+    }
+
+    if (e.target.classList.contains("delete-btn")) {
+      // Xóa tài khoản
+      const row = e.target.closest("tr");
+      const username = row.cells[1].textContent;
+
+      showCustomConfirm(
+        `Bạn có chắc chắn muốn xóa tài khoản ${username}?`,
+        function () {
+          row.remove();
+          showNotification(`Đã xóa tài khoản ${username}`);
+        }
+      );
+    }
+  });
+
+  // Code phần Noti Setting
+  const notificationForm = document.getElementById("notification-form");
+  const notificationContentInput = document.getElementById(
+    "notification-content"
+  );
+  const notificationTimeInput = document.getElementById("notification-time");
+  const notificationList = document.getElementById("notification-list");
+  const sendNotificationBtn = document.getElementById("send-notification-btn");
+  const formOptionNoti = document.getElementById("form-option-noti");
+
+  // **1. Lưu cài đặt thông báo**
+  formOptionNoti.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const emailNotification = formOptionNoti.querySelector(
+      "input[type='checkbox']:checked"
+    );
+    const browserNotification = formOptionNoti.querySelector(
+      "input[type='checkbox']:not(:checked)"
+    );
+    const frequency = document.getElementById("notification-frequency").value;
+
+    console.log("Cài đặt Thông báo:");
+    console.log("Email Notification:", emailNotification ? "Bật" : "Tắt");
+    console.log("Browser Notification:", browserNotification ? "Bật" : "Tắt");
+    console.log("Tần suất:", frequency);
+
+    alert("Cài đặt thông báo đã được lưu.");
+  });
+
+  // **2. Thêm hoặc cập nhật thông báo**
+  notificationForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const content = notificationContentInput.value.trim();
+    const time = notificationTimeInput.value.trim();
+
+    if (!content || !time) {
+      showNotification("Vui lòng nhập đầy đủ nội dung và thời gian thông báo!");
+      return;
+    }
+
+    if (editingRow) {
+      // Cập nhật thông báo
+      editingRow.cells[1].textContent = content;
+      editingRow.cells[2].textContent = time;
+      showNotification("Thông báo đã được cập nhật.");
+      sendNotificationBtn.textContent = "Gửi Thông báo";
+      editingRow = null;
+    } else {
+      // Thêm thông báo mới
+      const newRow = document.createElement("tr");
+      const newId = notificationList.querySelectorAll("tr").length + 1;
+
+      newRow.innerHTML = `
+        <td>${newId}</td>
+        <td>${content}</td>
+        <td>${time}</td>
+        <td>
+          <button class="edit-btn">Chỉnh sửa</button>
+          <button class="delete-btn">Xóa</button>
+        </td>
+      `;
+
+      notificationList.appendChild(newRow);
+      showNotification("Thông báo mới đã được thêm.");
+    }
+
+    // Reset form
+    notificationForm.reset();
+  });
+
+  // **3. Chỉnh sửa và xóa thông báo**
+  notificationList.addEventListener("click", function (e) {
+    if (e.target.classList.contains("edit-btn")) {
+      const row = e.target.closest("tr");
+      editingRow = row;
+
+      // Điền thông tin vào form để chỉnh sửa
+      notificationContentInput.value = row.cells[1].textContent;
+      notificationTimeInput.value = row.cells[2].textContent;
+      sendNotificationBtn.textContent = "Cập nhật Thông báo";
+    }
+
+    if (e.target.classList.contains("delete-btn")) {
+      const row = e.target.closest("tr");
+      const notificationId = row.cells[0].textContent;
+
+      showCustomConfirm(
+        `Bạn có chắc chắn muốn xóa thông báo ID ${notificationId}?`,
+        function () {
+          row.remove();
+          showNotification(`Thông báo ID ${notificationId} đã bị xóa.`);
+        }
+      );
+    }
+  });
+
+  function showCustomConfirm(message, onConfirm) {
+    confirmMessage.textContent = message;
+    customConfirm.classList.remove("hidden");
+
+    // Xử lý sự kiện khi nhấn "Đồng ý"
+    confirmOk.onclick = function () {
+      customConfirm.classList.add("hidden");
+      onConfirm();
+    };
+
+    // Xử lý sự kiện khi nhấn "Hủy"
+    confirmCancel.onclick = function () {
+      customConfirm.classList.add("hidden");
+    };
+  }
+
+  function showNotification(message, status = "success") {
+    notification.textContent = message;
+    notification.classList.remove("success", "error", "warning");
+    notification.classList.add("show");
+    notification.classList.add(status);
+    notification.classList.remove("hidden");
+
+    // Ẩn thông báo sau 3 giây
+    setTimeout(() => {
+      notification.classList.remove("show");
+      notification.classList.add("hidden");
+    }, 3000);
+  }
+
+  // Danh sách thông báo mẫu
+  const notifications = [
+    {
+      title: "Cập nhật hệ thống",
+      message: "Hệ thống sẽ được bảo trì vào lúc 12:00 AM ngày 25/11/2023.",
+      time: "20/11/2023, 10:00 AM",
+    },
+
+    {
+      title: "Cập nhật hệ thống",
+      message: "Hệ thống sẽ được bảo trì vào lúc 12:00 AM ngày 25/11/2023.",
+      time: "20/11/2023, 10:00 AM",
+    },
+
+    {
+      title: "Cập nhật hệ thống",
+      message: "Hệ thống sẽ được bảo trì vào lúc 12:00 AM ngày 25/11/2023.",
+      time: "20/11/2023, 10:00 AM",
+    },
+
+    {
+      title: "Cập nhật hệ thống",
+      message: "Hệ thống sẽ được bảo trì vào lúc 12:00 AM ngày 25/11/2023.",
+      time: "20/11/2023, 10:00 AM",
+    },
+    {
+      title: "Sản phẩm mới",
+      message: "Sản phẩm mới đã được thêm vào danh mục Đèn chùm.",
+      time: "19/11/2023, 8:30 AM",
+    },
+    {
+      title: "Thông báo khuyến mãi",
+      message: "Giảm giá 20% cho tất cả các sản phẩm từ 20/11 đến 25/11.",
+      time: "18/11/2023, 3:15 PM",
+    },
+  ];
+
+  // Hàm hiển thị danh sách thông báo
+  function loadNotifications() {
+    const notificationList = document.querySelector(".notification-list");
+    const noneNoti = document.querySelector(".none-noti");
+
+    // Kiểm tra nếu không có thông báo
+    if (notifications.length === 0) {
+      noneNoti.style.display = "block"; // Hiển thị "Chưa có thông báo nào"
+      notificationList.style.display = "none"; // Ẩn danh sách thông báo
+    } else {
+      noneNoti.style.display = "none"; // Ẩn "Chưa có thông báo nào"
+      notificationList.style.display = "block"; // Hiển thị danh sách thông báo
+
+      // Thêm từng thông báo vào danh sách
+      notifications.forEach((noti) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+        <h4 class="noti-title">${noti.title}</h4>
+        <p class="noti-message">${noti.message}</p>
+        <span class="noti-time">${noti.time}</span>
+      `;
+        notificationList.appendChild(li);
+      });
+    }
+  }
+
+  // Gọi hàm khi tải trang
+  loadNotifications();
+
+  document.querySelector(".fa-bell").addEventListener("click", function () {
+    document
+      .querySelector(".notification-container")
+      .classList.toggle("hidden");
+  });
+
+  // Đăng xuất
+  document.getElementById("sign-up").addEventListener("click", function () {
+    showCustomConfirm("Bạn có muốn đăng xuất không?", function () {
+      window.location.href = "index.html";
+      sessionStorage.clear();
+    });
   });
 });

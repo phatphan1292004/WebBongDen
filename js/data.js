@@ -921,7 +921,7 @@ export const customerData = [
   },
 ];
 
-export const orderData = [
+export let orderData = [
   {
     id: "001",
     customerName: "Phan Van Phát",
