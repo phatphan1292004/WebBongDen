@@ -225,27 +225,29 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Xóa row khi ấn vào nút xóa
-  document.querySelector("#product-table-body").addEventListener("click", function (e) {
-    const deleteButton = e.target.closest(".delete-product");
-    if (deleteButton) {
-      const productId = deleteButton.getAttribute("data-id");
-      showCustomConfirm(
-        `Bạn có chắc chắn muốn xóa đơn hàng ID: ${productId}?`, function() {
-          deleteProductById(productId);
-          showNotification(`Sản phẩm với ID ${productId} đã bị xóa.`);
-          loadProductTable(productData);
-        }
-      )
-    }
-  });
-  
+  document
+    .querySelector("#product-table-body")
+    .addEventListener("click", function (e) {
+      const deleteButton = e.target.closest(".delete-product");
+      if (deleteButton) {
+        const productId = deleteButton.getAttribute("data-id");
+        showCustomConfirm(
+          `Bạn có chắc chắn muốn xóa đơn hàng ID: ${productId}?`,
+          function () {
+            deleteProductById(productId);
+            showNotification(`Sản phẩm với ID ${productId} đã bị xóa.`);
+            loadProductTable(productData);
+          }
+        );
+      }
+    });
+
   function deleteProductById(productId) {
     const index = productData.findIndex((product) => product.id === productId);
     if (index !== -1) {
       productData.splice(index, 1); // Xóa phần tử khỏi mảng
     }
   }
-
 
   // Trang khách hàng
   function loadCustomerTable(cus = customerData) {
@@ -282,7 +284,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   loadCustomerTable();
 
-
   function sortCustomers(option) {
     const sortedCustomers = [...customerData];
     switch (option) {
@@ -303,16 +304,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     loadCustomerTable(sortedCustomers);
   }
-  
+
   // Thêm sự kiện cho nút sắp xếp
-  document.querySelector("#sort-btn-cus").addEventListener("click", function () {
-    const selectedOption = document.querySelector("#sort-select-customer").value;
-    if (selectedOption) {
-      sortCustomers(selectedOption);
-    } else {
-      showNotification("Vui lòng chọn một tùy chọn sắp xếp.", "error");
-    }
-  });
+  document
+    .querySelector("#sort-btn-cus")
+    .addEventListener("click", function () {
+      const selectedOption = document.querySelector(
+        "#sort-select-customer"
+      ).value;
+      if (selectedOption) {
+        sortCustomers(selectedOption);
+      } else {
+        showNotification("Vui lòng chọn một tùy chọn sắp xếp.", "error");
+      }
+    });
 
   // Trang đơn hàng ===========================================================
   const orderTableBody = document.getElementById("order-table-body");
@@ -426,25 +431,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const order = orderData.find((order) => order.id === orderId);
 
     if (order) {
-        order.status = "Đã duyệt";
-        showNotification(`Đơn hàng ID: ${orderId} đã được duyệt!`);
-        loadOrderTable(orderData); 
+      order.status = "Đã duyệt";
+      showNotification(`Đơn hàng ID: ${orderId} đã được duyệt!`);
+      loadOrderTable(orderData);
     } else {
-        showNotification(`Không tìm thấy đơn hàng với ID: ${orderId}`, "error");
+      showNotification(`Không tìm thấy đơn hàng với ID: ${orderId}`, "error");
     }
-};
+  };
 
-  
-window.rejectOrder = function (orderId) {
-  showCustomConfirm(`Bạn có chắc chắn muốn xóa đơn hàng ID: ${orderId}?`, function () {
-    const index = orderData.findIndex((order) => String(order.id) === String(orderId));
-    if (index !== -1) {
-      orderData.splice(index, 1); // Xóa phần tử tại vị trí index
-    }
-    showNotification(`Đơn hàng ID: ${orderId} đã bị xóa!`);
-    loadOrderTable(orderData); // Cập nhật lại bảng
-  });
-};
+  window.rejectOrder = function (orderId) {
+    showCustomConfirm(
+      `Bạn có chắc chắn muốn xóa đơn hàng ID: ${orderId}?`,
+      function () {
+        const index = orderData.findIndex(
+          (order) => String(order.id) === String(orderId)
+        );
+        if (index !== -1) {
+          orderData.splice(index, 1); // Xóa phần tử tại vị trí index
+        }
+        showNotification(`Đơn hàng ID: ${orderId} đã bị xóa!`);
+        loadOrderTable(orderData); // Cập nhật lại bảng
+      }
+    );
+  };
   // ----Ket thuc trang don hang ============================
 
   // Trang thống kê
@@ -480,106 +489,122 @@ window.rejectOrder = function (orderId) {
     },
   };
 
-  // Vẽ biểu đồ vào canvas
-  const ctx = document.getElementById("customerPieChart").getContext("2d");
-  new Chart(ctx, config);
+  const ctx2 = document.getElementById("customerPieChart").getContext("2d");
 
-  // Dữ liệu cho biểu đồ doanh thu cả năm
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
-  const salesData = [
-    100000, 150000, 120000, 180000, 20000, 25000, 30000, 35000,
+  // Khởi tạo biểu đồ
+  new Chart(ctx2, config);
+
+  const ctx = document.getElementById("revenueChart").getContext("2d");
+
+  // Dữ liệu doanh thu và số lượng sản phẩm bán được cho 12 tháng
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
+  const revenue = [
+    100000, 150000, 130000, 180000, 20000, 25000, 30000, 40000, 50000, 60000,
+    70000, 80000,
+  ];
+  const quantitySold = [120, 150, 170, 200, 50, 60, 70, 80, 90, 100, 110, 120];
 
-  const ctx2 = document.getElementById("salesChart").getContext("2d");
-  const salesChart = new Chart(ctx2, {
+  // Vẽ biểu đồ
+  new Chart(ctx, {
     type: "bar",
     data: {
       labels: months,
       datasets: [
         {
           label: "Doanh thu (VND)",
-          data: salesData,
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          data: revenue,
+          backgroundColor: "rgba(75, 192, 192, 0.3)",
           borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 1,
+          yAxisID: "y",
+          barPercentage: 0.8, // Giảm độ rộng của cột
+          categoryPercentage: 0.9, // Đưa cột sát với cạnh bên
+        },
+        {
+          label: "Số lượng bán được",
+          data: quantitySold,
+          type: "line",
+          borderColor: "#FF5733",
+          backgroundColor: "rgba(255, 87, 51, 0.3)",
+          borderWidth: 2,
+          fill: true,
+          tension: 0.3,
+          yAxisID: "y1",
+          pointBackgroundColor: "#FF5733",
+          pointRadius: 4,
         },
       ],
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false,
+      plugins: {
+        tooltip: {
+          mode: "index",
+          intersect: false,
+        },
+        legend: {
+          position: "top",
+          labels: {
+            font: {
+              size: 14,
+            },
+          },
+        },
+      },
+      layout: {
+        padding: {
+          left: 0, // Loại bỏ padding bên trái
+          right: 0,
+        },
+      },
       scales: {
         x: {
           ticks: {
-            maxRotation: 0,
-            autoSkip: false,
+            font: {
+              size: 12,
+            },
           },
-          categoryPercentage: 0.8,
-          barPercentage: 0.7,
         },
         y: {
-          beginAtZero: true,
-        },
-      },
-      elements: {
-        bar: {
-          barThickness: 12,
-        },
-      },
-    },
-  });
-
-  const ctx3 = document.getElementById("topProductsChart").getContext("2d");
-  const topProductsLineChart = new Chart(ctx3, {
-    type: "line", // Dạng biểu đồ đường
-    data: {
-      labels: [
-        "Sản phẩm 1",
-        "Sản phẩm 2",
-        "Sản phẩm 3",
-        "Sản phẩm 4",
-        "Sản phẩm 5",
-        "Sản phẩm 6",
-        "Sản phẩm 7",
-        "Sản phẩm 8",
-        "Sản phẩm 9",
-        "Sản phẩm 10",
-      ],
-      datasets: [
-        {
-          label: "Số lượng bán ra",
-          data: [120, 150, 100, 90, 110, 85, 120, 130, 140, 160],
-          borderColor: "rgba(54, 162, 235, 1)",
-          backgroundColor: "rgba(54, 162, 235, 0.2)",
-          fill: true,
-          tension: 0.4,
-          borderWidth: 2,
-        },
-        {
-          label: "Số lượng tồn kho",
-          data: [80, 40, 60, 100, 50, 90, 30, 70, 50, 40],
-          borderColor: "rgba(255, 99, 132, 1)",
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-          fill: true,
-          tension: 0.4,
-          borderWidth: 2,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          beginAtZero: true,
-        },
-        y: {
-          beginAtZero: true,
-        },
-      },
-      plugins: {
-        title: {
+          type: "linear",
           display: true,
-          text: "Top 10 Sản phẩm bán chạy",
+          position: "left",
+          title: {
+            display: true,
+            text: "Doanh thu (VND)",
+          },
+          ticks: {
+            color: "rgba(75, 192, 192, 1)",
+          },
+          beginAtZero: true, // Bắt đầu từ 0
+        },
+        y1: {
+          type: "linear",
+          display: true,
+          position: "right",
+          grid: {
+            drawOnChartArea: false,
+          },
+          title: {
+            display: true,
+            text: "Số lượng sản phẩm",
+          },
+          ticks: {
+            color: "#FF5733",
+          },
         },
       },
     },
@@ -737,8 +762,17 @@ window.rejectOrder = function (orderId) {
     ) {
       document.querySelector(".tab-content-container").style.display = "none";
       document.querySelector(".product-details").style.display = "block";
+      document.querySelector(".product-stats").style.display = "none";
     }
   });
+
+  document
+    .getElementById("close-details-btn")
+    .addEventListener("click", function () {
+      document.querySelector(".product-details").style.display = "none";
+      document.querySelector(".tab-content-container").style.display = "block";
+      document.querySelector(".product-stats").style.display = "flex";
+    });
 
   document
     .getElementById("edit-product-btn")
@@ -846,14 +880,21 @@ window.rejectOrder = function (orderId) {
     });
 
   const menuItems = document.querySelectorAll(".submenu-admin .menu-item");
+
   menuItems.forEach((item) => {
     item.addEventListener("click", () => {
+      // Loại bỏ class active khỏi tất cả menu-items
+      menuItems.forEach((menuItem) => menuItem.classList.remove("active"));
+
+      // Thêm class active vào menu-item hiện tại
+      item.classList.add("active");
+
       // Lấy target từ data-target
       const targetId = item.getAttribute("data-target");
 
       // Ẩn tất cả tab-content
       tabContents.forEach((tab) => {
-        tab.classList.remove("active"); // Xóa class active
+        tab.classList.remove("active");
       });
 
       // Hiển thị tab-content tương ứng
@@ -1213,4 +1254,84 @@ window.rejectOrder = function (orderId) {
       notification.classList.add("hidden");
     }, 3000);
   }
+
+  // Danh sách thông báo mẫu
+  const notifications = [
+    {
+      title: "Cập nhật hệ thống",
+      message: "Hệ thống sẽ được bảo trì vào lúc 12:00 AM ngày 25/11/2023.",
+      time: "20/11/2023, 10:00 AM",
+    },
+
+    {
+      title: "Cập nhật hệ thống",
+      message: "Hệ thống sẽ được bảo trì vào lúc 12:00 AM ngày 25/11/2023.",
+      time: "20/11/2023, 10:00 AM",
+    },
+
+    {
+      title: "Cập nhật hệ thống",
+      message: "Hệ thống sẽ được bảo trì vào lúc 12:00 AM ngày 25/11/2023.",
+      time: "20/11/2023, 10:00 AM",
+    },
+
+    {
+      title: "Cập nhật hệ thống",
+      message: "Hệ thống sẽ được bảo trì vào lúc 12:00 AM ngày 25/11/2023.",
+      time: "20/11/2023, 10:00 AM",
+    },
+    {
+      title: "Sản phẩm mới",
+      message: "Sản phẩm mới đã được thêm vào danh mục Đèn chùm.",
+      time: "19/11/2023, 8:30 AM",
+    },
+    {
+      title: "Thông báo khuyến mãi",
+      message: "Giảm giá 20% cho tất cả các sản phẩm từ 20/11 đến 25/11.",
+      time: "18/11/2023, 3:15 PM",
+    },
+  ];
+
+  // Hàm hiển thị danh sách thông báo
+  function loadNotifications() {
+    const notificationList = document.querySelector(".notification-list");
+    const noneNoti = document.querySelector(".none-noti");
+
+    // Kiểm tra nếu không có thông báo
+    if (notifications.length === 0) {
+      noneNoti.style.display = "block"; // Hiển thị "Chưa có thông báo nào"
+      notificationList.style.display = "none"; // Ẩn danh sách thông báo
+    } else {
+      noneNoti.style.display = "none"; // Ẩn "Chưa có thông báo nào"
+      notificationList.style.display = "block"; // Hiển thị danh sách thông báo
+
+      // Thêm từng thông báo vào danh sách
+      notifications.forEach((noti) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+        <h4 class="noti-title">${noti.title}</h4>
+        <p class="noti-message">${noti.message}</p>
+        <span class="noti-time">${noti.time}</span>
+      `;
+        notificationList.appendChild(li);
+      });
+    }
+  }
+
+  // Gọi hàm khi tải trang
+  loadNotifications();
+
+  document.querySelector(".fa-bell").addEventListener("click", function () {
+    document
+      .querySelector(".notification-container")
+      .classList.toggle("hidden");
+  });
+
+  // Đăng xuất
+  document.getElementById("sign-up").addEventListener("click", function () {
+    showCustomConfirm("Bạn có muốn đăng xuất không?", function () {
+      window.location.href = "index.html";
+      sessionStorage.clear();
+    });
+  });
 });

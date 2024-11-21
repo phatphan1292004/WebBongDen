@@ -13,7 +13,113 @@
   width: 100%;
   height: 66px;
   background-color: #fff;
+  /* position: relative; */
 }
+
+.wrapper .header-right {
+  gap: 20px;
+  position: relative;
+} 
+
+.wrapper .header-right .noti-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.wrapper .header-right .noti-icon:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.notification-container  {
+  width: 400px;
+  height: 470px;
+  position: absolute;
+  z-index: 10000000;
+  right: 75px;
+  top: 100%;
+  transform: translateY(-10px);
+  background-color: #fff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.notification-container .noti-content {
+  padding: 15px;
+  max-height: 420px;
+  overflow-y: auto; 
+}
+
+.notification-container .noti-content::-webkit-scrollbar {
+  width: 4px; 
+}
+
+.notification-container .noti-content::-webkit-scrollbar-thumb {
+  background: #ccc; 
+  border-radius: 4px; 
+}
+
+.notification-container .noti-content::-webkit-scrollbar-thumb:hover {
+  background: #aaa; 
+}
+
+.notification-container .noti-content::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+
+.notification-container .noti-content .none-noti {
+margin: 0 auto;
+text-align: center;
+}
+
+.notification-container .noti-content .none-noti i {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.notification-container .noti-header {
+  padding: 10px 15px;
+  border-bottom: 1px solid #dadada;
+}
+
+.notification-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-list li {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.notification-list .noti-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.notification-list .noti-message {
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.notification-list .noti-time {
+  font-size: 11px;
+  color: #999;
+  display: block;
+  text-align: right;
+}
+
 
 .wrapper .header-left,
 .wrapper .header-right {
@@ -21,9 +127,6 @@
   align-items: center;
 }
 
-.wrapper .header-right {
-  gap: 20px;
-}
 
 .wrapper .header i {
   font-size: 20px;
@@ -207,7 +310,8 @@
   padding-left: 240px;
 }
 
-.nav-item.active {
+.nav-item.active,
+.menu-item.active {
   background-color: #e0e0e0;
 }
 
@@ -231,6 +335,14 @@
   gap: 40px;
   max-height: 320px;
 }
+
+.main .tab-content .card-revenue .top-product-list .product-item {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 15px;
+}
+
+
 
 .main .tab-content .card-revenue .container-left {
   display: grid;
@@ -359,6 +471,27 @@
 #product-management-content {
   background-color: #f8f9fa;
 }
+
+#product-management-content .product-stats {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+#product-management-content .product-stats .stat-card {
+  width: calc(25% - 15px);
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 20px;
+}
+
+#product-management-content .product-stats .stat-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
 
 .main-content .tab-content .header-tab {
   display: flex;
@@ -966,7 +1099,12 @@ table {
 }
 
 .card-container2 {
-  margin-top: 50px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 50px auto;
 }
 
 /* Định dạng cho phần sản phẩm bán chạy */
@@ -1783,8 +1921,9 @@ table {
   z-index: 1000;
 }
 
-.custom-confirm.hidden {
-  display: none; /* Ẩn khung khi không dùng */
+.custom-confirm.hidden,
+.notification-container.hidden {
+  display: none; 
 }
 
 .custom-confirm-content {
@@ -1828,4 +1967,26 @@ table {
 
 .btn-cancel:hover {
   background-color: #e53935;
+}
+
+.notification-bell {
+  position: relative;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+/* Hiệu ứng rung */
+@keyframes bell-shake {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+  75% { transform: rotate(-10deg); }
+  100% { transform: rotate(0); }
+}
+
+/* Thêm hiệu ứng rung khi có class "shake" */
+.notification-bell.shake {
+  animation: bell-shake 0.5s ease-in-out;
 }

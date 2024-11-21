@@ -30,7 +30,9 @@
           </a>
         </div>
         <div class="header-right">
-          <i class="fa-regular fa-bell"></i>
+          <div class="noti-icon">
+            <i class="fa-regular fa-bell notification-bell shake"></i>
+          </div>
           <div class="account">
             <img
               src="https://images.unsplash.com/photo-1726554881162-ceeb7d68be8c?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -38,7 +40,23 @@
             />
           </div>
         </div>
+        <div class="notification-container hidden">
+            <div class="noti-header">
+              <p>Thông báo</p>
+            </div>
+            <div class="noti-content">
+              <div class="none-noti" style="display: none;">
+                <i class="fa-regular fa-bell"></i>
+                <p>Chưa có thông báo nào</p>
+              </div>
+
+              <ul class="notification-list">
+                <!-- Thông báo sẽ được thêm vào đây qua JavaScript -->
+              </ul>
+            </div>
+        </div>
       </header>
+
 
       <div class="main">
         <div class="sidebar">
@@ -53,7 +71,7 @@
             <div class="nav-item" data-index="1">
               <div class="nav-item-left">
                 <i class="fa-solid fa-box"></i>
-                <p>Quản lý sản phẩm</p>
+                <p>Quản lý kho hàng</p>
               </div>
             </div>
 
@@ -89,7 +107,7 @@
                 </div>
               </div>
             </div>
-            <!-- Submenu tách ra nhưng nằm trong nav-item -->
+            <!-- Submenu-->
             <ul class="submenu-admin" id="submenu-admin">
               <li class="menu-item" data-target="discount-management">
                 <i class="fa-solid fa-tags"></i><a href="#">Giảm giá</a>
@@ -105,7 +123,7 @@
             </ul>
           </div>
 
-          <div class="sidebar-bottom">
+          <div class="sidebar-bottom" id="sign-up">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
             <p>Đăng xuất</p>
           </div>
@@ -204,10 +222,55 @@
                 </div>
               </div>
 
-              <div class="chart-card">
-                <p>Doanh thu trong năm</p>
-                <canvas id="salesChart"></canvas>
-              </div>
+              <div class="top-product">
+                <div class="top-product-header">
+                  <p>Top 5 sản phẩm bán chạy</p>
+                </div>
+                <div class="top-product-list">
+                  <table class="top-product-table">
+                    <thead>
+                      <tr>
+                        <th>SP</th>
+                        <th>Số lượng bán</th>
+                        <th>Tổng tiền thu được</th>
+                        <th>Số lượng tồn kho</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Sản phẩm 1</td>
+                        <td>150</td>
+                        <td>1,500,000 VND</td>
+                        <td>50</td>
+                      </tr>
+                      <tr>
+                        <td>Sản phẩm 2</td>
+                        <td>120</td>
+                        <td>1,200,000 VND</td>
+                        <td>30</td>
+                      </tr>
+                      <tr>
+                        <td>Sản phẩm 3</td>
+                        <td>100</td>
+                        <td>1,000,000 VND</td>
+                        <td>20</td>
+                      </tr>
+                      <tr>
+                        <td>Sản phẩm 4</td>
+                        <td>90</td>
+                        <td>900,000 VND</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Sản phẩm 5</td>
+                        <td>80</td>
+                        <td>800,000 VND</td>
+                        <td>5</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>              
             </div>
 
             <div class="card-container">
@@ -282,16 +345,31 @@
             </div>
 
             <div class="card-container2">
-              <div class="top-product">
-                <div class="top-product-header">
-                  <p>Top 10 sản phẩm bán chạy</p>
-                </div>
-                <canvas id="topProductsChart"></canvas>
-              </div>
-            </div>
+              <div class="">Doanh thu trong năm</div>
+              <canvas id="revenueChart" width="400" height="200"></canvas>
+            </div>            
           </div>
 
           <div class="tab-content" id="product-management-content">
+            <div class="product-stats">
+              <div class="stat-card">
+                <h3>Tổng sản phẩm trong kho</h3>
+                <p id="total-stock">0</p>
+              </div>
+              <div class="stat-card">
+                <h3>Số loại sản phẩm</h3>
+                <p id="total-categories">0</p>
+              </div>
+              <div class="stat-card">
+                <h3>Sản phẩm hết hàng</h3>
+                <p id="out-of-stock">0</p>
+              </div>
+              <div class="stat-card">
+                <h3>Sản phẩm mới nhất</h3>
+                <p id="latest-product">Chưa có</p>
+              </div>
+            </div>
+
             <div class="tab-content-container">
               <div class="header-tab">
                 <div class="search-container">
