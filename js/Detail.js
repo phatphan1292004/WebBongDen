@@ -820,6 +820,180 @@ document.addEventListener("DOMContentLoaded", function () {
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot01.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot02.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot03.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot04.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot05.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot06.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot07.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot08.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot09.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot10.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot11.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot12.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot13.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot14.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot15.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot16.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot17.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot18.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot19.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot20.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },{
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot21.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot22.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot23.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot24.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn ốp trần trang trí nội thất phong cách Nhật",
+      image1: "./img/ot25.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
     
   ];
 
