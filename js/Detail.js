@@ -650,6 +650,176 @@ document.addEventListener("DOMContentLoaded", function () {
       newPrice: "2.000.000 VND",
       discount: "-33%"
     },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db01.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },{
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db02.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db03.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db04.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db05.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db06.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },{
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db07.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db08.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db09.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db10.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db11.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },{
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db12.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db13.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db14.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db15.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db16.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },{
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db17.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db17.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db19.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db20.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db21.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },{
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db22.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db23.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db24.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
+    {
+      name: "Đèn bàn trang trí nội thất phong cách Mỹ DB02102",
+      image1: "./img/db25.jpg",
+      oldPrice: "3.000.000 VND",
+      newPrice: "2.000.000 VND",
+      discount: "-33%"
+    },
     
   ];
 
