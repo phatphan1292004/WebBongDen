@@ -1809,6 +1809,7 @@ table {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  width: 130px;
 }
 
 .btn-cancel {
@@ -1818,6 +1819,7 @@ table {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  width: 130px;
 }
 
 .btn-ok:hover {

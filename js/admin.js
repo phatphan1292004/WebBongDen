@@ -61,7 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
         tab.classList.remove("active"); // Xóa class active
       });
 
-      if (index !== 5) {
+      if (index == 5) {
+        document.getElementById("submenu-admin").classList.toggle("open");
+      } else if (index < 5) {
         document.getElementById("submenu-admin").classList.remove("open");
       }
     });
@@ -88,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${item.dateCreate}</td>
                 <td><button class="view-details view-details-product">Xem chi tiết</button></td>
                 <td>
-                    <button class="delete-product">
+                    <button class="delete-product" data-id="${item.id}">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </td>
@@ -223,19 +225,29 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Xóa row khi ấn vào nút xóa
-  document
-    .querySelector("#product-table-body")
-    .addEventListener("click", function (e) {
-      if (e.target.classList.contains("delete-product")) {
-        e.stopPropagation();
-        const row = e.target.closest("tr");
-        row.remove();
-        document.querySelector("tbody").dispatchEvent(new Event("change"));
-      }
-    });
+  document.querySelector("#product-table-body").addEventListener("click", function (e) {
+    const deleteButton = e.target.closest(".delete-product");
+    if (deleteButton) {
+      const productId = deleteButton.getAttribute("data-id");
+      showCustomConfirm(
+        `Bạn có chắc chắn muốn xóa đơn hàng ID: ${productId}?`, function() {
+          deleteProductById(productId);
+          showNotification(`Sản phẩm với ID ${productId} đã bị xóa.`);
+          loadProductTable(productData);
+        }
+      )
+    }
+  });
+  
+  function deleteProductById(productId) {
+    const index = productData.findIndex((product) => product.id === productId);
+    if (index !== -1) {
+      productData.splice(index, 1); // Xóa phần tử khỏi mảng
+    }
+  }
+
 
   // Trang khách hàng
-
   function loadCustomerTable(cus = customerData) {
     cusTableBody.innerHTML = "";
     cus.forEach((item) => {
@@ -270,7 +282,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
   loadCustomerTable();
 
-  // Trang đơn hàng
+
+  function sortCustomers(option) {
+    const sortedCustomers = [...customerData];
+    switch (option) {
+      case "name-asc":
+        sortedCustomers.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "name-desc":
+        sortedCustomers.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "date-desc":
+        sortedCustomers.sort(
+          (a, b) => new Date(b.registeredDate) - new Date(a.registeredDate)
+        );
+        break;
+      default:
+        console.log("Tùy chọn không hợp lệ.");
+        break;
+    }
+    loadCustomerTable(sortedCustomers);
+  }
+  
+  // Thêm sự kiện cho nút sắp xếp
+  document.querySelector("#sort-btn-cus").addEventListener("click", function () {
+    const selectedOption = document.querySelector("#sort-select-customer").value;
+    if (selectedOption) {
+      sortCustomers(selectedOption);
+    } else {
+      showNotification("Vui lòng chọn một tùy chọn sắp xếp.", "error");
+    }
+  });
+
+  // Trang đơn hàng ===========================================================
   const orderTableBody = document.getElementById("order-table-body");
 
   function loadOrderTable(orders = orderData) {
@@ -291,8 +335,8 @@ document.addEventListener("DOMContentLoaded", function () {
           ${
             order.status === "Chờ xử lý"
               ? `
-            <button class="approve-order" onclick="approveOrder(${order.id})"><i class="fa-solid fa-check"></i></button>
-            <button class="reject-order" onclick="rejectOrder(${order.id})"><i class="fa-solid fa-times"></i></button>
+            <button class="approve-order" onclick="approveOrder('${order.id}')"><i class="fa-solid fa-check"></i></button>
+            <button class="reject-order" onclick="rejectOrder('${order.id}')"><i class="fa-solid fa-times"></i></button>
           `
               : ""
           }
@@ -316,6 +360,92 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", function () {
       document.getElementById("overlay2").classList.remove("active");
     });
+
+  const sortSelect = document.getElementById("sort-select-order");
+  const sortButton = document.getElementById("sort-btn-order");
+  // Hàm lọc danh sách đơn hàng
+  sortButton.addEventListener("click", function () {
+    const sortValue = sortSelect.value;
+    let filteredOrders = [...orderData];
+
+    switch (sortValue) {
+      case "name-asc": // Ngày đặt: Mới nhất
+        // Sắp xếp danh sách theo ngày đặt hàng mới nhất
+        filteredOrders.sort((a, b) => {
+          const dateA = new Date(a.orderDate.split("-").reverse().join("-"));
+          const dateB = new Date(b.orderDate.split("-").reverse().join("-"));
+          return dateB - dateA; // Sắp xếp giảm dần
+        });
+
+        // Lấy ngày đặt hàng mới nhất
+        const latestOrderDate =
+          filteredOrders.length > 0
+            ? new Date(
+                filteredOrders[0].orderDate.split("-").reverse().join("-")
+              )
+            : null;
+
+        // Lọc các đơn hàng có ngày đặt hàng trùng với ngày mới nhất
+        const latestOrders = filteredOrders.filter((order) => {
+          const orderDate = new Date(
+            order.orderDate.split("-").reverse().join("-")
+          );
+          return orderDate.getTime() === latestOrderDate.getTime();
+        });
+
+        // Hiển thị danh sách đơn hàng mới nhất ra bảng
+        loadOrderTable(latestOrders);
+        break;
+
+      case "name-desc": // Ngày đặt: Cũ nhất
+        filteredOrders.sort(
+          (a, b) => new Date(a.orderDate) - new Date(b.orderDate)
+        );
+        break;
+      case "price-asc": // ID A-Z
+        filteredOrders.sort((a, b) => a.id - b.id);
+        break;
+      case "price-desc": // ID Z-A
+        filteredOrders.sort((a, b) => b.id - a.id);
+        break;
+      case "pending-orders": // Đơn hàng chưa duyệt
+        filteredOrders = filteredOrders.filter(
+          (order) => order.status === "Chờ xử lý"
+        );
+        break;
+      default:
+        break;
+    }
+
+    // Cập nhật bảng đơn hàng sau khi lọc
+    loadOrderTable(filteredOrders);
+  });
+
+  // Hàm xử lý duyệt đơn hàng
+  window.approveOrder = function (orderId) {
+    const order = orderData.find((order) => order.id === orderId);
+
+    if (order) {
+        order.status = "Đã duyệt";
+        showNotification(`Đơn hàng ID: ${orderId} đã được duyệt!`);
+        loadOrderTable(orderData); 
+    } else {
+        showNotification(`Không tìm thấy đơn hàng với ID: ${orderId}`, "error");
+    }
+};
+
+  
+window.rejectOrder = function (orderId) {
+  showCustomConfirm(`Bạn có chắc chắn muốn xóa đơn hàng ID: ${orderId}?`, function () {
+    const index = orderData.findIndex((order) => String(order.id) === String(orderId));
+    if (index !== -1) {
+      orderData.splice(index, 1); // Xóa phần tử tại vị trí index
+    }
+    showNotification(`Đơn hàng ID: ${orderId} đã bị xóa!`);
+    loadOrderTable(orderData); // Cập nhật lại bảng
+  });
+};
+  // ----Ket thuc trang don hang ============================
 
   // Trang thống kê
 
@@ -714,12 +844,6 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("edit-product-btn").style.display =
         "inline-block";
     });
-
-  const navItem = document.getElementById("nav-item-system");
-
-  navItem.addEventListener("click", () => {
-    document.getElementById("submenu-admin").classList.toggle("open");
-  });
 
   const menuItems = document.querySelectorAll(".submenu-admin .menu-item");
   menuItems.forEach((item) => {
