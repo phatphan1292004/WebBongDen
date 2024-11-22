@@ -511,10 +511,25 @@ section .shop_grid_area {
   color: #999;
 }
 
-.header .navbar {
-  padding: 0;
+
+
+
+.product-container.hide {
+  opacity: 0; /* Làm mờ các sản phẩm */
+  transform: translateX(20px); /* Trượt nhẹ sang phải */
 }
 
-.navbar-list .dropdown .submenu {
-  min-width: 1000px;
+/* Hiệu ứng khi các sản phẩm xuất hiện */
+.product-container.show {
+  opacity: 1;
+  transform: translateX(0); /* Trở về vị trí ban đầu */
+}
+/* Các sản phẩm */
+.single-product-wrapper {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.single-product-wrapper.hide {
+  opacity: 0;
 }

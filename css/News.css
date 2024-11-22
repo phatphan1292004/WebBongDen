@@ -29,9 +29,23 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+.new-item {
+    margin: 15px 0; /* Khoảng cách bên ngoài giữa các div */
+    padding: 15px; /* Khoảng cách bên trong */
+    border: 1px solid #ddd; /* Viền mỏng và nhẹ nhàng */
+    border-radius: 8px; /* Bo góc cho mềm mại */
+    background-color: #f9f9f9; /* Màu nền nhẹ để làm nổi bật nội dung */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng nhẹ */
+}
+
+.new-item:hover {
+    background-color: #f0f0f0; /* Thay đổi màu nền khi hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tăng đổ bóng khi hover */
+}
+
 
 .main-news .title {
-    font-size: 22px;
+    font-size: 24px;
     margin-bottom: 8px;
     font-weight: 600;
     text-decoration: none;
@@ -50,16 +64,30 @@ body {
     margin-bottom: 15px;
 }
 
-.main-news img {
-    width: 100%;
-    border-radius: 5px;
-}
-
 .new-item {
     display: flex;
-    gap: 30px;
-    margin-bottom: 40px;
-}
+    gap: 16px; /* Khoảng cách giữa hình và nội dung */
+    border: 1px solid #ddd;
+    padding: 16px;
+    background-color: #fff;
+  }
+  
+  .item-image {
+    flex-shrink: 0; /* Ngăn hình ảnh bị co lại */
+    width: 300px; /* Chiều rộng cố định */
+    height: 300px; /* Chiều cao cố định */
+    overflow: hidden; /* Đảm bảo không vượt kích thước */
+    border-radius: 8px; /* Bo góc nếu cần */
+  }
+  
+  .item-image img {
+    width: 100%; /* Đảm bảo hình ảnh vừa khung */
+    height: 100%; /* Đảm bảo chiều cao vừa khung */
+    object-fit: cover; /* Cắt hình ảnh để vừa khung */
+  }
+  
+
+  
 
 .sidebar-new {
     flex: 1;
