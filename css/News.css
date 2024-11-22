@@ -64,17 +64,30 @@ body {
     margin-bottom: 15px;
 }
 
-.item-image img {
-    width: 600px;
-    height: 300px;
-    object-fit: cover; /* Giữ tỉ lệ ảnh và cắt phần thừa */
-}
-
 .new-item {
     display: flex;
-    gap: 30px;
-    margin-bottom: 40px;
-}
+    gap: 16px; /* Khoảng cách giữa hình và nội dung */
+    border: 1px solid #ddd;
+    padding: 16px;
+    background-color: #fff;
+  }
+  
+  .item-image {
+    flex-shrink: 0; /* Ngăn hình ảnh bị co lại */
+    width: 300px; /* Chiều rộng cố định */
+    height: 300px; /* Chiều cao cố định */
+    overflow: hidden; /* Đảm bảo không vượt kích thước */
+    border-radius: 8px; /* Bo góc nếu cần */
+  }
+  
+  .item-image img {
+    width: 100%; /* Đảm bảo hình ảnh vừa khung */
+    height: 100%; /* Đảm bảo chiều cao vừa khung */
+    object-fit: cover; /* Cắt hình ảnh để vừa khung */
+  }
+  
+
+  
 
 .sidebar-new {
     flex: 1;
