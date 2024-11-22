@@ -37,15 +37,15 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc02.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "5.000.000 VND",
+      newPrice: "4.000.000 VND",
       discount: "-33%"
     },
     {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc03.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "6.000.000 VND",
+      newPrice: "5.000.000 VND",
       discount: "-33%"
     },
     {
@@ -58,67 +58,67 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc05.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "33.000.000 VND",
+      newPrice: "23.000.000 VND",
       discount: "-33%"
     },
     {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc06.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "32.000.000 VND",
+      newPrice: "22.000.000 VND",
       discount: "-33%"
     }, {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc07.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "32.000.000 VND",
+      newPrice: "21.000.000 VND",
       discount: "-33%"
     }, {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc08.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "32.000.000 VND",
+      newPrice: "25.000.000 VND",
       discount: "-33%"
     }, {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc09.jpg",
       oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      newPrice: "22.000.000 VND",
       discount: "-33%"
     }, {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc10.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "30.000.000 VND",
+      newPrice: "33.000.000 VND",
       discount: "-33%"
     },
     {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc11.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "30.000.000 VND",
+      newPrice: "23.000.000 VND",
       discount: "-33%"
     },
     {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc12.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "30.000.000 VND",
+      newPrice: "26.000.000 VND",
       discount: "-33%"
     },
     {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc13.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "30.000.000 VND",
+      newPrice: "27.000.000 VND",
       discount: "-33%"
     },
     {
       name: "Đèn chùm trang trí phong cách Trung Hoa DC03719",
       image1: "./img/dc14.jpg",
-      oldPrice: "3.000.000 VND",
-      newPrice: "2.000.000 VND",
+      oldPrice: "30.000.000 VND",
+      newPrice: "29.000.000 VND",
       discount: "-33%"
     },
     {
