@@ -98,37 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
       productTableBody.appendChild(newRow);
     });
   }
-  loadProductTable();
-  // Hàm sắp xếp dữ liệu và cập nhật bảng
-  function sortProductTable(sortType) {
-    const sortedProducts = [...productData];
-    switch (sortType) {
-      case "name-asc":
-        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case "name-desc":
-        sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
-        break;
-      case "price-asc":
-        sortedProducts.sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        sortedProducts.sort((a, b) => b.price - a.price);
-        break;
-    }
-    loadProductTable(sortedProducts);
-  }
-
-  // Gắn sự kiện click cho nút sắp xếp
-  document.getElementById("sort-btn-product").addEventListener("click", () => {
-    const sortType = document.getElementById("sort-select-product").value;
-    if (sortType) {
-      sortProductTable(sortType);
-    } else {
-      alert("Vui lòng chọn kiểu sắp xếp");
-    }
-  });
-
   // Tái sử dụng hàm search chỉ cho tên sản phẩm
   // Tái sử dụng hàm search cho cả sản phẩm và khách hàng
   function searchProducts(
@@ -287,12 +256,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function sortCustomers(option) {
     const sortedCustomers = [...customerData];
     switch (option) {
-      case "name-asc":
-        sortedCustomers.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case "name-desc":
-        sortedCustomers.sort((a, b) => b.name.localeCompare(a.name));
-        break;
       case "date-desc":
         sortedCustomers.sort(
           (a, b) => new Date(b.registeredDate) - new Date(a.registeredDate)
@@ -374,45 +337,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let filteredOrders = [...orderData];
 
     switch (sortValue) {
-      case "name-asc": // Ngày đặt: Mới nhất
-        // Sắp xếp danh sách theo ngày đặt hàng mới nhất
-        filteredOrders.sort((a, b) => {
-          const dateA = new Date(a.orderDate.split("-").reverse().join("-"));
-          const dateB = new Date(b.orderDate.split("-").reverse().join("-"));
-          return dateB - dateA; // Sắp xếp giảm dần
-        });
-
-        // Lấy ngày đặt hàng mới nhất
-        const latestOrderDate =
-          filteredOrders.length > 0
-            ? new Date(
-                filteredOrders[0].orderDate.split("-").reverse().join("-")
-              )
-            : null;
-
-        // Lọc các đơn hàng có ngày đặt hàng trùng với ngày mới nhất
-        const latestOrders = filteredOrders.filter((order) => {
-          const orderDate = new Date(
-            order.orderDate.split("-").reverse().join("-")
-          );
-          return orderDate.getTime() === latestOrderDate.getTime();
-        });
-
-        // Hiển thị danh sách đơn hàng mới nhất ra bảng
-        loadOrderTable(latestOrders);
-        break;
-
-      case "name-desc": // Ngày đặt: Cũ nhất
-        filteredOrders.sort(
-          (a, b) => new Date(a.orderDate) - new Date(b.orderDate)
-        );
-        break;
-      case "price-asc": // ID A-Z
-        filteredOrders.sort((a, b) => a.id - b.id);
-        break;
-      case "price-desc": // ID Z-A
-        filteredOrders.sort((a, b) => b.id - a.id);
-        break;
       case "pending-orders": // Đơn hàng chưa duyệt
         filteredOrders = filteredOrders.filter(
           (order) => order.status === "Chờ xử lý"
@@ -422,7 +346,6 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
     }
 
-    // Cập nhật bảng đơn hàng sau khi lọc
     loadOrderTable(filteredOrders);
   });
 
@@ -1294,7 +1217,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Hàm hiển thị danh sách thông báo
   function loadNotifications() {
-    const notificationList = document.querySelector(".notification-list");
+    const notificationList = document.querySelector(
+      ".notification-list-header"
+    );
     const noneNoti = document.querySelector(".none-noti");
 
     // Kiểm tra nếu không có thông báo
@@ -1334,4 +1259,251 @@ document.addEventListener("DOMContentLoaded", function () {
       sessionStorage.clear();
     });
   });
+
+  // Phân trang cho kho hàng
+  $(document).ready(function () {
+    // Kiểm tra và xóa <thead> cũ nếu tồn tại
+    $("#product-table thead").not(":first").remove();
+
+    // Khởi tạo DataTables
+    $("#product-table").DataTable({
+      data: productData, // Dữ liệu từ file data.js
+      destroy: true, // Xóa cấu hình DataTables cũ nếu có
+      autoWidth: false, // Tắt tự động điều chỉnh chiều rộng
+      paging: true, // Kích hoạt phân trang
+      pageLength: 20, // Hiển thị 20 dòng mỗi trang
+      columns: [
+        { data: "id" }, // Id
+        {
+          data: "urlImage", // Hình ảnh
+          render: function (data) {
+            return `<img src="${data}" alt="Product Image" style="width: 50px; height: 50px;">`;
+          },
+        },
+        { data: "name" }, // Tên sản phẩm
+        {
+          data: "price", // Giá
+          render: function (data) {
+            return parseInt(data).toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            });
+          },
+        },
+        { data: "nameCate" }, // Loại sản phẩm
+        { data: "dateCreate" }, // Ngày thêm
+        {
+          data: null, // Thao tác
+          render: function (data, type, row) {
+            return `
+             <button class="view-details view-details-product">Xem chi tiết</button>
+            `;
+          },
+        },
+        {
+          data: null,
+          render: function (data, type, row) {
+            return `
+            
+                    <button class="delete-product" data-id="${row.id}">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+            `;
+          },
+        },
+      ],
+
+      lengthChange: false,
+      searching: false,
+      ordering: true,
+      info: true,
+      language: {
+        paginate: {
+          previous: "Trước",
+          next: "Tiếp",
+        },
+        info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",
+      },
+      initComplete: function () {
+        // Kiểm tra và xóa <thead> trùng lặp sau khi DataTables khởi tạo
+        $("#product-table thead").not(":first").remove();
+      },
+    });
+  });
+
+  // Phân trang cho khách hàng
+  $(document).ready(function () {
+    // Cấu hình DataTables
+    $(".customer-table").DataTable({
+      data: customerData, // Dữ liệu đầu vào
+      autoWidth: false,
+      paging: true, // Kích hoạt phân trang
+      pageLength: 10, // Hiển thị 20 dòng mỗi trang
+      columns: [
+        { data: "id", title: "Id" }, // Id khách hàng
+        { data: "name", title: "Tên khách hàng" }, // Tên khách hàng
+        { data: "email", title: "Email" }, // Email
+        { data: "phone", title: "Số điện thoại" }, // Số điện thoại
+        { data: "address", title: "Địa chỉ" }, // Địa chỉ
+        { data: "registeredDate", title: "Ngày đăng ký" }, // Ngày đăng ký
+        {
+          data: null,
+          render: function (data, type, row) {
+            return `
+            <button class="view-details">Xem chi tiết</button>
+            `;
+          },
+        },
+      ],
+      paging: true,
+      pageLength: 10,
+      lengthChange: false,
+      searching: false,
+      ordering: true,
+      info: true,
+      language: {
+        paginate: {
+          previous: "Trước",
+          next: "Tiếp",
+        },
+        info: "Hiển thị _START_ đến _END_ của _TOTAL_ khách hàng",
+      },
+    });
+  });
+
+  // Phân trang cho hóa đơn
+  $(document).ready(function () {
+    // Khởi tạo DataTables
+    $("#order-table").DataTable({
+      data: orderData,
+      destroy: true,
+      autoWidth: false,
+      paging: true,
+      pageLength: 12,
+      columns: [
+        { data: "id" },
+        { data: "customerName" },
+        { data: "orderDate" },
+        { data: "expectedDeliveryDate" },
+        { data: "address" },
+        { data: "status" },
+        { data: "paymentMethod" },
+        {
+          data: null,
+          render: function (data) {
+            return `<button class="view-details">Chi tiết</button>`;
+          },
+        },
+        {
+          data: null, // Thao tác
+          render: function (data, type, row) {
+            if (row.status === "Chờ xử lý") {
+              return `
+                <button class="approve-order" onclick="approveOrder('${row.id}')">
+                  <i class="fa-solid fa-check"></i>
+                </button>
+                <button class="reject-order" onclick="rejectOrder('${row.id}')">
+                  <i class="fa-solid fa-times"></i>
+                </button>
+              `;
+            } else {
+              return "";
+            }
+          },
+        },
+      ],
+      lengthChange: false,
+      searching: false,
+      ordering: true,
+      info: true,
+      language: {
+        paginate: {
+          previous: "Trước",
+          next: "Tiếp",
+        },
+        info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",
+      },
+      initComplete: function () {
+        $("#product-table thead").not(":first").remove();
+      },
+    });
+  });
+
+  // Xử lý sự kiện khi form được submit
+  document
+    .getElementById("super-sale-form")
+    .addEventListener("submit", function (e) {
+      e.preventDefault(); // Ngăn reload trang
+
+      // Lấy giá trị từ các input
+      const saleTime = document.getElementById("sale-time").value.trim();
+      const productId = document.getElementById("product-id-sale").value.trim();
+      const productName = document.getElementById("product-name-sale").value.trim();
+
+      // Kiểm tra dữ liệu rỗng
+      if (!saleTime || !productId || !productName) {
+        alert("Vui lòng nhập đầy đủ thông tin sản phẩm!");
+        return;
+      }
+
+      // Thêm sản phẩm vào danh sách
+      const tableBody = document.getElementById("super-sale-list");
+      const newRow = document.createElement("tr");
+
+      newRow.innerHTML = `
+    <td>${saleTime}</td>
+    <td>${productId}</td>
+    <td>${productName}</td>
+    <td>
+      <button class="edit-btn">Chỉnh sửa</button>
+      <button class="delete-btn">Xóa</button>
+    </td>
+  `;
+
+      tableBody.appendChild(newRow);
+
+      showNotification("Thêm sản phẩm thành công")
+      // Xóa nội dung các input sau khi thêm
+      document.getElementById("sale-time").value = "";
+      document.getElementById("product-id-sale").value = "";
+      document.getElementById("product-name-sale").value = "";
+    });
+
+  // Xử lý sự kiện chỉnh sửa và xóa
+  document
+    .getElementById("super-sale-list")
+    .addEventListener("click", function (e) {
+      const row = e.target.closest("tr"); // Lấy hàng chứa nút được click
+
+      // Xóa sản phẩm
+      if (e.target.classList.contains("delete-btn")) {
+        showCustomConfirm("Bạn có chắc mún xóa sản phẩm này", function() {
+          row.remove();
+          showNotification("Bạn đã xóa thành công");
+        })
+      }
+
+      // Chỉnh sửa sản phẩm
+      if (e.target.classList.contains("edit-btn")) {
+        const saleTimeCell = row.cells[0];
+        const productIdCell = row.cells[1];
+        const productNameCell = row.cells[2];
+
+        // Lấy giá trị hiện tại
+        const currentSaleTime = saleTimeCell.textContent;
+        const currentProductId = productIdCell.textContent;
+        const currentProductName = productNameCell.textContent;
+
+        // Hiển thị prompt để chỉnh sửa
+        const newSaleTime = prompt("Sửa thời gian giảm giá:", currentSaleTime);
+        const newProductId = prompt("Sửa ID sản phẩm:", currentProductId);
+        const newProductName = prompt("Sửa tên sản phẩm:", currentProductName);
+
+        // Cập nhật giá trị mới (nếu người dùng không bấm Hủy)
+        if (newSaleTime !== null) saleTimeCell.textContent = newSaleTime;
+        if (newProductId !== null) productIdCell.textContent = newProductId;
+        if (newProductName !== null)
+          productNameCell.textContent = newProductName;
+      }
+    });
 });

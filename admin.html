@@ -17,6 +17,10 @@
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
+    />
     <link rel="stylesheet" href="./css/admin.css" />
     <link rel="stylesheet" href="./css/reset.css" />
   </head>
@@ -40,23 +44,7 @@
             />
           </div>
         </div>
-        <div class="notification-container hidden">
-            <div class="noti-header">
-              <p>Thông báo</p>
-            </div>
-            <div class="noti-content">
-              <div class="none-noti" style="display: none;">
-                <i class="fa-regular fa-bell"></i>
-                <p>Chưa có thông báo nào</p>
-              </div>
-
-              <ul class="notification-list">
-                <!-- Thông báo sẽ được thêm vào đây qua JavaScript -->
-              </ul>
-            </div>
-        </div>
       </header>
-
 
       <div class="main">
         <div class="sidebar">
@@ -270,7 +258,7 @@
                     </tbody>
                   </table>
                 </div>
-              </div>              
+              </div>
             </div>
 
             <div class="card-container">
@@ -347,7 +335,7 @@
             <div class="card-container2">
               <div class="">Doanh thu trong năm</div>
               <canvas id="revenueChart" width="400" height="200"></canvas>
-            </div>            
+            </div>
           </div>
 
           <div class="tab-content" id="product-management-content">
@@ -379,19 +367,6 @@
                     placeholder="Tìm kiếm sản phẩm..."
                   />
                   <button id="search-btn-product">Tìm kiếm</button>
-                </div>
-
-                <div class="sort-dropdown">
-                  <select id="sort-select-product" class="sort-select">
-                    <option value="" disabled selected>Chọn</option>
-                    <option value="name-asc">Tên A-Z</option>
-                    <option value="name-desc">Tên Z-A</option>
-                    <option value="price-asc">Giá Thấp-Cao</option>
-                    <option value="price-desc">Giá Cao-Thấp</option>
-                  </select>
-                  <button id="sort-btn-product" class="sort-button">
-                    <i class="fa-solid fa-sort"></i> Sắp xếp
-                  </button>
                 </div>
                 <button class="add-product">
                   <i class="fa-solid fa-plus"></i>
@@ -434,7 +409,7 @@
 
               <!-- Bảng danh sách sản phẩm -->
               <div class="tab-container">
-                <table class="product-table">
+                <table class="product-table" id="product-table">
                   <thead>
                     <tr>
                       <th>Id</th>
@@ -444,7 +419,6 @@
                       <th>Loại sản phẩm</th>
                       <th>Ngày thêm</th>
                       <th>Thao tác</th>
-                      <th></th>
                       <th></th>
                     </tr>
                   </thead>
@@ -688,8 +662,6 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
               <div class="sort-dropdown">
                 <select id="sort-select-customer" class="sort-select">
                   <option value="" disabled selected>Chọn</option>
-                  <option value="name-asc">Tên A-Z</option>
-                  <option value="name-desc">Tên Z-A</option>
                   <option value="date-desc">Đăng kí gần đây</option>
                 </select>
                 <button id="sort-btn-cus" class="sort-button">
@@ -829,10 +801,6 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
               <div style="display: flex; gap: 20px">
                 <select id="sort-select-order" class="sort-select">
                   <option value="" disabled selected>Tất cả</option>
-                  <option value="name-asc">Ngày đặt: Mới nhất</option>
-                  <option value="name-desc">Ngày đặt: Cũ nhất</option>
-                  <option value="price-asc">ID A-Z</option>
-                  <option value="price-desc">ID Z-A</option>
                   <option value="pending-orders">Đơn hàng chưa duyệt</option>
                 </select>
 
@@ -931,7 +899,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
 
             <!-- Bảng danh sách sản phẩm -->
             <div class="tab-container">
-              <table class="product-table">
+              <table class="product-table" id="order-table">
                 <thead>
                   <tr>
                     <th>Id</th>
@@ -990,46 +958,48 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
             id="discount-management"
             style="display: none"
           >
-            <h2>QUẢN LÝ PHIẾU GIẢM GIÁ</h2>
-            <p>Quản lý các phiếu giảm giá để thu hút khách hàng.</p>
+            <div class="discount-container">
+              <h2>QUẢN LÝ PHIẾU GIẢM GIÁ</h2>
+              <p>Quản lý các phiếu giảm giá để thu hút khách hàng.</p>
 
-            <!-- Khu vực thêm phiếu giảm giá -->
-            <div id="add-discount-area">
-              <h3>THÊM PHIẾU GIẢM GIÁ</h3>
-              <form id="discount-form">
-                <div class="form-group">
-                  <label for="discount-code">Mã giảm giá:</label>
-                  <input
-                    type="text"
-                    id="discount-code"
-                    placeholder="Nhập mã giảm giá"
-                    required
-                  />
-                </div>
-              
-                <div class="form-group">
-                  <label for="discount-percent">Mức giảm (%):</label>
-                  <input
-                    type="number"
-                    id="discount-percent"
-                    min="1"
-                    max="100"
-                    placeholder="Nhập mức giảm"
-                    required
-                  />
-                </div>
-              
-                <div class="form-group">
-                  <label for="discount-expiry">Ngày hết hạn:</label>
-                  <input type="date" id="discount-expiry" required />
-                </div>
-              
-                <div class="form-group">
-                  <button type="submit" id="add-discount-btn">
-                    THÊM PHIẾU GIẢM GIÁ
-                  </button>
-                </div>
-              </form>              
+              <!-- Khu vực thêm phiếu giảm giá -->
+              <div id="add-discount-area">
+                <h3>THÊM PHIẾU GIẢM GIÁ</h3>
+                <form id="discount-form">
+                  <div class="form-group">
+                    <label for="discount-code">Mã giảm giá:</label>
+                    <input
+                      type="text"
+                      id="discount-code"
+                      placeholder="Nhập mã giảm giá"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="discount-percent">Mức giảm (%):</label>
+                    <input
+                      type="number"
+                      id="discount-percent"
+                      min="1"
+                      max="100"
+                      placeholder="Nhập mức giảm"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="discount-expiry">Ngày hết hạn:</label>
+                    <input type="date" id="discount-expiry" required />
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" id="add-discount-btn">
+                      THÊM PHIẾU GIẢM GIÁ
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
 
             <!-- Danh sách phiếu giảm giá -->
@@ -1069,11 +1039,94 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                 </tbody>
               </table>
             </div>
+
+            <div class="super-sale-container">
+              <h2>QUẢN LÝ SẢN PHẨM SALE LỚN</h2>
+              <p>Quản lý các sản phẩm đang giảm giá cao.</p>
+
+              <!-- Khu vực thêm sản phẩm giảm giá -->
+              <div id="add-discount-area">
+                <h3>THÊM SẢN PHẨM GIẢM GIÁ</h3>
+                <form id="super-sale-form">
+                  <div class="form-group">
+                    <label for="sale-time">Thời gian giảm giá (giờ):</label>
+                    <input
+                      type="text"
+                      id="sale-time"
+                      placeholder="Nhập thời gian giảm giá (vd: 24h)"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="product-id-sale">ID Sản Phẩm:</label>
+                    <input
+                      type="text"
+                      id="product-id-sale"
+                      placeholder="Nhập ID sản phẩm"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="product-name-sale">Tên Sản Phẩm:</label>
+                    <input
+                      type="text"
+                      id="product-name-sale"
+                      placeholder="Nhập tên sản phẩm"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" id="add-saleproduct-btn">
+                      THÊM SẢN PHẨM
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Danh sách sản phẩm giảm giá -->
+              <div class="list-discount">
+                <h3>DANH SÁCH SẢN PHẨM GIẢM GIÁ</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Thời gian</th>
+                      <th>ID</th>
+                      <th>Tên Sản Phẩm</th>
+                      <th>Hành động</th>
+                    </tr>
+                  </thead>
+                  <tbody id="super-sale-list">
+                    <!-- Sản phẩm mẫu -->
+                    <tr>
+                      <td>24 giờ</td>
+                      <td>SP001</td>
+                      <td>Áo Thun Nam</td>
+                      <td>
+                        <button class="edit-btn">Chỉnh sửa</button>
+                        <button class="delete-btn">Xóa</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>12 giờ</td>
+                      <td>SP002</td>
+                      <td>Quần Jeans Nữ</td>
+                      <td>
+                        <button class="edit-btn">Chỉnh sửa</button>
+                        <button class="delete-btn">Xóa</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
 
           <!-- Tab Cài đặt thông báo -->
           <div class="tab-content" id="notification-settings">
-            <h2>Cài đặt Thông báo</h2>
+            <h2>CÀI ĐẶT THÔNG BÁO</h2>
             <p>Bật/tắt và quản lý các thông báo cho hệ thống.</p>
 
             <!-- Form Cài đặt thông báo -->
@@ -1101,14 +1154,14 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
               <div class="form-group">
                 <button type="submit">Lưu cài đặt</button>
               </div>
-            </form>            
+            </form>
 
             <div class="notification-layout">
               <!-- Khu vực thêm thông báo -->
               <div id="add-notification-area">
-                <h3>Thêm Thông báo Mới</h3>
+                <h3>Thêm thông báo mới</h3>
                 <form id="notification-form">
-                  <label for="notification-content">Nội dung Thông báo:</label>
+                  <label for="notification-content">Nội dung thông báo: </label>
                   <textarea
                     id="notification-content"
                     rows="5"
@@ -1116,7 +1169,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                     required
                   ></textarea>
 
-                  <label for="notification-time">Thời gian Gửi:</label>
+                  <label for="notification-time">Thời gian gửi:</label>
                   <input
                     type="datetime-local"
                     id="notification-time"
@@ -1165,7 +1218,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
               </div>
             </div>
           </div>
-          
+
           <!-- Tab Quản lý tài khoản -->
           <div
             class="tab-content"
@@ -1211,9 +1264,20 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
               </form>
             </div>
 
+            <div class="header-tab">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="product-search"
+                  placeholder="Tìm kiếm tài khoản..."
+                />
+                <button id="search-btn-account">Tìm kiếm</button>
+              </div>
+            </div>
+
             <!-- Danh sách tài khoản -->
             <div id="account-list">
-              <h3>Danh sách Tài khoản</h3>
+              <h3>DANH SÁCH TÀI KHOẢN</h3>
               <table>
                 <thead>
                   <tr>
@@ -1251,10 +1315,28 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
           </div>
         </div>
       </div>
+
+      <div class="notification-container hidden">
+        <div class="noti-header">
+          <p>Thông báo</p>
+        </div>
+        <div class="noti-content">
+          <div class="none-noti" style="display: none">
+            <i class="fa-regular fa-bell"></i>
+            <p>Chưa có thông báo nào</p>
+          </div>
+
+          <ul class="notification-list-header">
+            <!-- Thông báo sẽ được thêm vào đây qua JavaScript -->
+          </ul>
+        </div>
+      </div>
       <div id="notification" class="notification hidden"></div>
       <div id="custom-confirm" class="custom-confirm hidden">
         <div class="custom-confirm-content">
-          <p id="confirm-message">Bạn có chắc chắn muốn thực hiện hành động này?</p>
+          <p id="confirm-message">
+            Bạn có chắc chắn muốn thực hiện hành động này?
+          </p>
           <div class="custom-confirm-actions">
             <button id="confirm-ok" class="btn-ok">Đồng ý</button>
             <button id="confirm-cancel" class="btn-cancel">Hủy</button>
@@ -1264,5 +1346,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
     </div>
     <script type="module" src="./js/admin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   </body>
 </html>
