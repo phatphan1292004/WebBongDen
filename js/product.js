@@ -142,7 +142,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const subcategoryList = categoryItem.querySelector(".subcategory-list");
       subcategories.forEach((subcategory) => {
         const subcategoryItem = document.createElement("li");
-        subcategoryItem.textContent = subcategory.name;
+  
+        // Thêm thẻ <a> cho từng danh mục con
+        subcategoryItem.innerHTML = `<a href="${subcategory.url || '#'}">${subcategory.name}</a>`;
         subcategoryList.appendChild(subcategoryItem);
       });
   
@@ -151,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
       cateHeader.addEventListener("click", () => {
         const isVisible = subcategoryList.style.display === "block";
         subcategoryList.style.display = isVisible ? "none" : "block";
+        cateHeader.querySelector("i").classList.toggle("active");
       });
   
       // Thêm danh mục chính vào danh sách

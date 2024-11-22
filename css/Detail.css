@@ -32,6 +32,10 @@ p {
   padding: 0;
 }
 
+
+.navbar {
+  padding: 0;
+}
 .category .category-products {
   padding: 0 !important;
 }
@@ -274,9 +278,13 @@ section .shop_grid_area {
 /* Phong cách chung cho sidebar */
 .shop_sidebar_area {
   background-color: #f8f9fa;
-  padding: 20px;
+  padding: 10px;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+  padding: 0;
 }
 
 /* Phong cách tiêu đề của widget */
@@ -532,4 +540,92 @@ section .shop_grid_area {
 
 .single-product-wrapper.hide {
   opacity: 0;
+}
+
+#pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 15px;
+  font-family: 'Arial', sans-serif;
+}
+
+
+#pagination-controls button {
+  width: 70px;
+  font-weight: 600;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #dadada;
+}
+
+.category-container {
+  padding: 10px;
+  background-color: #fff;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #dee2d6;
+  font-weight: 500;
+}
+
+.category-header p {
+  font-size: 18px;
+  padding-left: 10px;
+  font-weight: 500;
+}
+
+.category-list>li {
+  padding: 16px 4px;
+  border-bottom: 1px solid #dee2d6;
+}
+
+.cate-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Mặc định, ẩn danh sách con */
+.subcategory-list {
+  height: 0; /* Ẩn danh sách con */
+  overflow: hidden; /* Ẩn phần tử bị tràn */
+  transition: height 0.2s ease; 
+}
+
+/* Khi danh sách con được mở */
+.subcategory-list.show {
+  height: auto; /* Dễ dàng điều chỉnh chiều cao của danh sách khi mở */
+  margin-top: 15px; /* Khoảng cách giữa thẻ cha và danh sách con */
+}
+
+/* Cài đặt cho các mục con */
+.subcategory-list > li {
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.subcategory-list > li:hover {
+  background-color: #f2f2f2;
+}
+
+
+.subcategory-list a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* Hiệu ứng xoay icon khi mở */
+.cate-item i {
+  transition: transform 0.3s ease; /* Hiệu ứng mượt mà khi xoay */
+}
+
+/* Khi thẻ cha được chọn, icon sẽ xoay */
+.cate-item i.active {
+  transform: rotate(180deg);
 }

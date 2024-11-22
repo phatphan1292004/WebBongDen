@@ -24,6 +24,7 @@
       referrerpolicy="no-referrer"
     />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- jQuery UI -->
 
     <link
@@ -45,6 +46,11 @@
       integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/paginationjs/dist/pagination.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/paginationjs/dist/pagination.css"
+    />
   </head>
   <body>
     <!-- Header -->
@@ -69,151 +75,12 @@
               <div class="col-12 col-md-4 col-lg-3 d-none d-md-block">
                 <div class="shop_sidebar_area">
                   <!-- ##### Single Widget ##### -->
-                  <div class="widget catagory mb-50">
-                    <!-- Widget Title -->
-                    <h4 class="widget-title mb-30">DANH MỤC SẢN PHẨM</h4>
-
-                    <!--  Catagories  -->
-                    <div class="catagories-menu">
-                      <ul id="menu-content2" class="menu-content">
-                        <!-- ĐÈN CHÙM -->
-                        <li
-                          data-toggle="collapse"
-                          data-target="#clothing"
-                          class="category-item"
-                        >
-                          <a href="javascript:void(0);">ĐÈN CHÙM</a>
-                          <ul class="sub-menu" id="clothing">
-                            <li><a href="#">ĐÈN CHÙM TRUNG HOA</a></li>
-                            <li><a href="#">ĐÈN CHÙM KHÁCH SẠN</a></li>
-                            <li><a href="#">ĐÈN CHÙM PHÒNG ĂN</a></li>
-                            <li><a href="#">ĐÈN CHÙM PHÒNG NGỦ</a></li>
-                            <li><a href="#">ĐÈN CHÙM PHÒNG KHÁCH</a></li>
-                            <li><a href="#">ĐÈN CHÙM THÔNG TẦNG</a></li>
-                            <li><a href="#">ĐÈN CHÙM NẾN</a></li>
-                            <li><a href="#">ĐÈN CHÙM ĐỒNG</a></li>
-                            <li><a href="#">ĐÈN CHÙM CỔ ĐIỂN</a></li>
-                            <li><a href="#">ĐÈN CHÙM PHA LÊ </a></li>
-                            <li><a href="#">ĐÈN CHÙM HIỆN ĐẠI</a></li>
-                          </ul>
-                        </li>
-                        <!-- Single Item -->
-                        <li
-                          data-toggle="collapse"
-                          data-target="#shoes"
-                          class="category-item"
-                        >
-                          <a href="javascript:void(0);">ĐÈN THẢ</a>
-                          <ul class="sub-menu" id="shoes">
-                            <li><a href="#">ĐÈN THẢ TRUNG HOA</a></li>
-                            <li><a href="#">TRANG TRÍ NHÀ HÀNG</a></li>
-                            <li><a href="#">ĐÈN THẢ PHÒNG ĂN</a></li>
-                            <li><a href="#">ĐÈN THẢ PHỎNG NGỦ</a></li>
-                            <li><a href="#">ĐÈN THẢ PHÒNG KHÁCH</a></li>
-                            <li><a href="#">ĐÈN THẢ THÔNG TẦNG</a></li>
-                            <li><a href="#">ĐÈN THẢ ĐỒNG</a></li>
-                            <li><a href="#">ĐÈN THẢ PHA LÊ</a></li>
-                            <li><a href="#">ĐÈN THẢ CỔ ĐIỂN</a></li>
-                            <li><a href="#">ĐNÈ THẢ HIỆN ĐẠI</a></li>
-                          </ul>
-                        </li>
-                        <!-- Single Item -->
-                        <li
-                          data-toggle="collapse"
-                          data-target="#accessories"
-                          class="category-item"
-                        >
-                          <a href="javascript:void(0);">ĐÈN ỐP TRẦN</a>
-                          <ul class="sub-menu" id="accessories">
-                            <li><a href="#">ĐÈN TRẦN TRUNG HOA</a></li>
-                            <li><a href="#">ĐÈN TRẦN MÂM TRÒN</a></li>
-                            <li><a href="#">ĐÈN TRẦN MÂM VUÔNG</a></li>
-                            <li><a href="#">ĐÈN ỐP TRẦN GỖ</a></li>
-                            <li><a href="#">ĐÈN ỐP TRẦN PHA LÊ</a></li>
-                            <li><a href="#">ĐÈN ỐP ĐỒNG</a></li>
-                            <li><a href="#">ĐỀN ỐP TRẦN CỔ ĐIỂN</a></li>
-                            <li><a href="#">ĐÈN ỐP TRẦN HIỆN ĐẠI</a></li>
-                          </ul>
-                        </li>
-                        <!-- ĐÈN CHÙM -->
-                        <li
-                          data-toggle="collapse"
-                          data-target="#clothing"
-                          class="category-item"
-                        >
-                          <a href="javascript:void(0);">ĐÈN QUẠT</a>
-                          <ul class="sub-menu" id="clothing">
-                            <li><a href="#">ĐÈN QUẠT SẢI CÁNH</a></li>
-                            <li><a href="#">ĐÈN QUẠT GIẤU CÁNH</a></li>
-                            <li><a href="#">ĐÈN QUẠT PHA LÊ</a></li>
-                            <li><a href="#">ĐÈN QUẠT CỔ ĐIỂN</a></li>
-                            <li><a href="#">ĐÈN QUẠT HIỆN ĐẠI</a></li>
-                          </ul>
-                        </li>
-                        <!-- ĐÈN CHÙM -->
-                        <li
-                          data-toggle="collapse"
-                          data-target="#clothing"
-                          class="category-item"
-                        >
-                          <a href="javascript:void(0);">ĐÈN VÁCH</a>
-                          <ul class="sub-menu" id="clothing">
-                            <li><a href="#">ĐÈN SOI TRANH</a></li>
-                            <li><a href="#">ĐÈN VÁCH NGOÀI TRỜI</a></li>
-                            <li><a href="#">ĐÈN VÁCH ĐỒNG</a></li>
-                            <li><a href="#">ĐÈN VÁCH PHA LÊ</a></li>
-                            <li><a href="#">ĐÈN VÁCH CỔ ĐIỂN</a></li>
-                            <li><a href="#">ĐÈN VÁCH HIỆN ĐẠI</a></li>
-                          </ul>
-                        </li>
-                        <!-- ĐÈN CHÙM -->
-                        <li
-                          data-toggle="collapse"
-                          data-target="#clothing"
-                          class="category-item"
-                        >
-                          <a href="javascript:void(0);">ĐÈN BÀN</a>
-                          <ul class="sub-menu" id="clothing">
-                            <li><a href="#"> ĐÈN BÀN LÀM VIỆC</a></li>
-                            <li><a href="#">ĐÈN BÀN PHÒNG KHÁCH</a></li>
-                            <li><a href="#">ĐÈN BÀN PHÒNG NGỦ</a></li>
-                            <li><a href="#">ĐÈN BÀN ĐỒNG</a></li>
-                            <li><a href="#"> ĐÈN BÀN GỐM</a></li>
-                            <li><a href="#"> ĐÈN BÀN PHA LÊ</a></li>
-                            <li><a href="#">ĐÈN BÀN HIỆN ĐẠI</a></li>
-                            <li><a href="#"> ĐÈN BÀN CỔ ĐIỂN</a></li>
-                          </ul>
-                        </li>
-                        <!-- ĐÈN CHÙM -->
-                        <li
-                          data-toggle="collapse"
-                          data-target="#clothing"
-                          class="category-item"
-                        >
-                          <a href="javascript:void(0);">ĐÈN Cây</a>
-                          <ul class="sub-menu" id="clothing">
-                            <li><a href="#"> ĐÈN CÂY ĐỒNG</a></li>
-                            <li><a href="#"> ĐÈN CÂY PHA LÊ</a></li>
-                            <li><a href="#">ĐÈN CÂY HIỆN ĐẠI</a></li>
-                            <li><a href="#">ĐÈN CÂY CỔ ĐIỂN</a></li>
-                          </ul>
-                        </li>
-                        <!-- ĐÈN CHÙM -->
-                        <li
-                          data-toggle="collapse"
-                          data-target="#clothing"
-                          class="category-item"
-                        >
-                          <a href="javascript:void(0);">ĐÈN KHÁC</a>
-                          <ul class="sub-menu" id="clothing">
-                            <li><a href="#"> PHỤ KIỆN</a></li>
-                            <li><a href="#">ĐÈN NGOÀI TRỜI</a></li>
-                            <li><a href="#"> ĐÈN CẦY LED</a></li>
-                            <li><a href="#">ĐÈN ÂM TRẦN</a></li>
-                          </ul>
-                        </li>
-                      </ul>
+                  <div class="category-container">
+                    <div class="category-header">
+                      <i class="fa-solid fa-list"></i>
+                      <p>Danh mục</p>
                     </div>
+                    <ul class="category-list"></ul>
                   </div>
                 </div>
                 <div class="news-latest box-layer mb-3">
@@ -259,7 +126,8 @@
                           <a
                             href="/tin-tuc/den-hoa-my-thi-cong-den-trang-tri-cho-trung-tam-thuong-mai-aeon-mall-le-chan-hai-phong-n87.html"
                           >
-                          Những mẫu đèn chùm pha lê hiện đại sang trọng cho nội thất
+                            Những mẫu đèn chùm pha lê hiện đại sang trọng cho
+                            nội thất
                           </a>
                         </div>
                         <div class="date">
@@ -283,7 +151,7 @@
                           <a
                             href="/tin-tuc/den-hoa-my-thi-cong-den-trang-tri-cho-trung-tam-thuong-mai-aeon-mall-le-chan-hai-phong-n87.html"
                           >
-                          60+ MẪU ĐÈN TRANG TRÍ PHÒNG KHÁCH CAO CẤP
+                            60+ MẪU ĐÈN TRANG TRÍ PHÒNG KHÁCH CAO CẤP
                           </a>
                         </div>
                         <div class="date">
@@ -307,7 +175,7 @@
                           <a
                             href="/tin-tuc/den-hoa-my-thi-cong-den-trang-tri-cho-trung-tam-thuong-mai-aeon-mall-le-chan-hai-phong-n87.html"
                           >
-                          50+ mẫu đèn trang trí quán cafe độc đáo hot nhất
+                            50+ mẫu đèn trang trí quán cafe độc đáo hot nhất
                           </a>
                         </div>
                         <div class="date">
@@ -331,7 +199,8 @@
                           <a
                             href="/tin-tuc/den-hoa-my-thi-cong-den-trang-tri-cho-trung-tam-thuong-mai-aeon-mall-le-chan-hai-phong-n87.html"
                           >
-                          Khuyến mãi đèn trang trí nghệ thuật mừng ngày quốc tế phụ nữ 8-3
+                            Khuyến mãi đèn trang trí nghệ thuật mừng ngày quốc
+                            tế phụ nữ 8-3
                           </a>
                         </div>
                         <div class="date">
@@ -339,8 +208,6 @@
                         </div>
                       </div>
                     </div>
-
-                   
                   </div>
                 </div>
               </div>
@@ -377,9 +244,9 @@
                     </div>
                   </div>
 
-                  <div class="row">
-                    <!-- Single Product -->
-                    <!-- <div class="col-6 col-md-4 col-lg-3 mb-4">
+                  <!-- <div class="row"> -->
+                  <!-- Single Product -->
+                  <!-- <div class="col-6 col-md-4 col-lg-3 mb-4">
                       <div class="single-product-wrapper">
                         <div class="product-item">
                           <div class="img">
@@ -586,25 +453,14 @@
                         </div>
                       </div>
                     </div> -->
-                    <div id="product-container" class="row"></div>
+                  <!-- </div> -->
+                  <div id="product-container" class="row"></div>
+                  <div id="pagination-controls">
+                    <button id="prev">Previous</button>
+                    <span id="pagination-info"></span>
+                    <button id="next">Next</button>
                   </div>
-                  
                 </div>
-                <nav aria-label="navigation">
-                  <ul class="pagination mt-50 mb-70">
-                    <li class="page-item">
-                      <a class="page-link" href="#" id="prev-page"><i class="fas fa-angle-left"></i></a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#" data-page="1">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" data-page="2">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#" data-page="3">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#" data-page="21">21</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" id="next-page"><i class="fas fa-angle-right"></i></a>
-                    </li>
-                  </ul>
-                </nav>
               </div>
             </div>
           </div>
@@ -614,9 +470,12 @@
       <footer id="footer"></footer>
     </div>
 
-   <!-- Các file script được tải theo đúng thứ tự -->
-   <script type="module" src="./js/data.js"></script>  <!-- Tải data.js đầu tiên -->
-   <script type="module" src="./js/script.js"></script>  <!-- Sau đó tải script.js -->
-   <script type="module" src="./js/Detail.js"></script>  <!-- Tải Detail.js cuối cùng -->
+    <!-- Các file script được tải theo đúng thứ tự -->
+    <script type="module" src="./js/data.js"></script>
+    <!-- Tải data.js đầu tiên -->
+    <script type="module" src="./js/script.js"></script>
+    <!-- Sau đó tải script.js -->
+    <script type="module" src="./js/Detail.js"></script>
+    <!-- Tải Detail.js cuối cùng -->
   </body>
 </html>

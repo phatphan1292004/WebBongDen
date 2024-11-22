@@ -1,4 +1,4 @@
-
+import { cateData, subcateData, productData } from "./data.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // Kiểm tra xem có phần tử .category-item > a trong DOM không
@@ -997,22 +997,47 @@ document.addEventListener("DOMContentLoaded", function () {
     
   ];
 
-  const itemsPerPage = 20; // Hiển thị 20 sản phẩm mỗi trang
-  let currentPage = 1; // Trang hiện tại
 
-  // Hàm hiển thị sản phẩm theo trang
-  function displayProducts(page) {
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = page * itemsPerPage;
-    const productsToDisplay = products.slice(startIndex, endIndex);
 
-    // Lấy container và làm mới nội dung
-    let container = document.getElementById("product-container");
-    container.innerHTML = "";
+  // // Hàm hiển thị sản phẩm theo trang
+  // function displayProducts(page) {
+  //   const startIndex = (page - 1) * itemsPerPage;
+  //   const endIndex = page * itemsPerPage;
+  //   const productsToDisplay = products.slice(startIndex, endIndex);
 
-    // Hiển thị các sản phẩm trên trang
-    productsToDisplay.forEach((product) => {
-      container.innerHTML += `
+  //   // Lấy container và làm mới nội dung
+  //   let container = document.getElementById("product-container");
+  //   container.innerHTML = "";
+
+  //   // Hiển thị các sản phẩm trên trang
+  //   productsToDisplay.forEach((product) => {
+  //     container.innerHTML += `
+  //       <div class="col-6 col-md-4 col-lg-3 mb-4">
+  //         <div class="single-product-wrapper">
+  //           <div class="product-item">
+  //             <div class="img">
+  //               <img src="${product.image1}" alt="${product.name}" />
+  //             </div>
+  //             <div class="product-info">
+  //               <div class="product-name">${product.name}</div>
+  //               <p class="original-price">${product.oldPrice}</p>
+  //               <div class="price-discount">
+  //                 <p class="product-price">${product.newPrice}</p>
+  //                 <p class="discount-percentage">${product.discount}</p>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     `;
+  //   });
+  // }
+
+  const renderProducts = (products) => {
+    const container = document.getElementById("product-container");
+    container.innerHTML = products
+      .map((product) => {
+        return `
         <div class="col-6 col-md-4 col-lg-3 mb-4">
           <div class="single-product-wrapper">
             <div class="product-item">
@@ -1030,66 +1055,101 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
           </div>
         </div>
+        `;
+      })
+      .join(""); // Ghép tất cả các phần tử thành một chuỗi HTML
+  };
+  
+  // Gọi hàm render để hiển thị sản phẩm
+  renderProducts(products);
+  
+  const pageSize = 20; // Số sản phẩm mỗi trang
+  let currentPage = 1;
+
+  const renderPage = () => {
+  const start = (currentPage - 1) * pageSize;
+  const end = start + pageSize;
+  const pageData = products.slice(start, end);
+  renderProducts(pageData);
+
+  // Hiển thị số trang
+  document.getElementById("pagination-info").textContent = `Page ${currentPage} of ${Math.ceil(products.length / pageSize)}`;
+  };
+
+  document.getElementById("prev").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderPage();
+  }
+  });
+
+  document.getElementById("next").addEventListener("click", () => {
+  if (currentPage < Math.ceil(products.length / pageSize)) {
+    currentPage++;
+    renderPage();
+  }
+  });
+
+// Lần đầu tiên hiển thị
+  renderPage();
+
+  const categoryItems = document.querySelectorAll('.cate-item');
+  categoryItems.forEach(item => {
+      item.addEventListener('click', function() {
+          const subcategoryList = this.nextElementSibling; // Lấy danh sách con kế tiếp
+          const icon = this.querySelector('i'); // Lấy phần tử icon
+          
+          // Toggle lớp show cho .subcategory-list
+          subcategoryList.classList.toggle('show');
+          
+          // Toggle lớp active cho icon để xoay mũi tên
+          icon.classList.toggle('active');
+      });
+  });
+
+  function renderCategoryList(cateData, subcateData) {
+    const categoryList = document.querySelector(".category-list");
+  
+    cateData.forEach((category) => {
+      // Tạo phần tử `<li>` cho danh mục chính
+      const categoryItem = document.createElement("li");
+      categoryItem.innerHTML = `
+        <div class="cate-item">
+          <p>${category.name}</p>
+          <i class="fa-solid fa-caret-down"></i>
+        </div>
+        <ul class="subcategory-list"></ul>
       `;
+  
+      // Lọc danh mục con theo `idCate`
+      const subcategories = subcateData.filter(
+        (subcategory) => subcategory.idCate === category.id
+      );
+  
+      // Render danh mục con
+      const subcategoryList = categoryItem.querySelector(".subcategory-list");
+      subcategories.forEach((subcategory) => {
+        const subcategoryItem = document.createElement("li");
+  
+        // Thêm thẻ <a> cho từng danh mục con
+        subcategoryItem.innerHTML = `<a href="${subcategory.url || '#'}">${subcategory.name}</a>`;
+        subcategoryList.appendChild(subcategoryItem);
+      });
+  
+      // Thêm sự kiện ẩn/hiện danh mục con khi click
+      const cateHeader = categoryItem.querySelector(".cate-item");
+      cateHeader.addEventListener("click", () => {
+        subcategoryList.classList.toggle('show');
+        cateHeader.querySelector("i").classList.toggle("active");
+      });
+  
+      // Thêm danh mục chính vào danh sách
+      categoryList.appendChild(categoryItem);
     });
   }
-
-  // Hiển thị trang đầu tiên khi tải trang
-  displayProducts(currentPage);
-
-  // Xử lý sự kiện nhấn vào các trang
-  document.querySelectorAll(".page-link[data-page]").forEach(function (pageLink) {
-    pageLink.addEventListener("click", function (e) {
-      e.preventDefault();
-      currentPage = parseInt(this.getAttribute("data-page"));
-      displayProducts(currentPage);
-    });
-  });
-
-  // Xử lý sự kiện nhấn vào nút "Previous"
-  document.getElementById("prev-page").addEventListener("click", function (e) {
-    e.preventDefault();
-    if (currentPage > 1) {
-      currentPage--;
-      displayProducts(currentPage);
-    }
-  });
-
-  // Xử lý sự kiện nhấn vào nút "Next"
-  document.getElementById("next-page").addEventListener("click", function (e) {
-    e.preventDefault();
-    const totalPages = Math.ceil(products.length / itemsPerPage);
-    if (currentPage < totalPages) {
-      currentPage++;
-      displayProducts(currentPage);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // Cuộn mượt
-    });
-      
-    }
-  });
+  
+  renderCategoryList(cateData, subcateData);  
 });
 
-// Lấy tất cả các liên kết trong phần phân trang
-const pageLinks = document.querySelectorAll('.page-link');
 
-// Thêm sự kiện click vào từng liên kết
-pageLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-        e.preventDefault(); // Ngăn hành động mặc định của liên kết
-        const page = this.getAttribute('data-page'); // Lấy số trang từ data-page
-        
-        if (page) {
-            // Gọi hàm cuộn lên đầu trang
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth' // Cuộn mượt
-            });
-
-            // Xử lý logic để hiển thị nội dung trang tương ứng (tùy thuộc vào cách bạn phân trang)
-            console.log(`Chuyển đến trang ${page}`); // Thay bằng logic phân trang thực tế
-        }
-    });
-});
 
