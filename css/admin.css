@@ -1,5 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
 
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border: 1px solid #007bff !important;
+  background-color: #f9f9f9 !important;
+}
+
 /* Code header */
 .wrapper .header {
   display: flex;
@@ -12,8 +20,8 @@
   position: fixed;
   width: 100%;
   height: 66px;
+  z-index: 1000;
   background-color: #fff;
-  /* position: relative; */
 }
 
 .wrapper .header-right {
@@ -41,14 +49,13 @@
   position: absolute;
   z-index: 10000000;
   right: 75px;
-  top: 100%;
+  top: 65px;
   transform: translateY(-10px);
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .notification-container .noti-content {
-  padding: 15px;
   max-height: 420px;
   overflow-y: auto; 
 }
@@ -86,34 +93,32 @@ text-align: center;
   border-bottom: 1px solid #dadada;
 }
 
-.notification-list {
+.notification-list-header {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.notification-list li {
+.notification-list-header li {
   padding: 15px;
   background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
-.notification-list .noti-title {
+.notification-list-header .noti-title {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 10px;
   color: #000;
 }
 
-.notification-list .noti-message {
+.notification-list-header .noti-message {
   font-size: 13px;
   color: #333;
   margin-bottom: 10px;
 }
 
-.notification-list .noti-time {
+.notification-list-header .noti-time {
   font-size: 11px;
   color: #999;
   display: block;
@@ -524,7 +529,7 @@ text-align: center;
 }
 
 #search-btn-product,
-#search-btn-cus, #search-btn-order {
+#search-btn-cus, #search-btn-order, #search-btn-account {
   padding: 8px 15px;
   background-color: #007bff;
   color: white;
@@ -592,11 +597,6 @@ text-align: center;
   background-color: #e6e6e6;
 }
 
-/* Style cho bảng sản phẩm */
-.tab-content .product-table {
-  width: 100%;
-  border-collapse: collapse;
-}
 
 .tab-content th,
 .tab-content td {
@@ -613,10 +613,13 @@ text-align: center;
   font-size: 15px;
 }
 
-.tab-content .product-table td {
+.tab-content td {
   max-width: 200px !important;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 14px;
+  color: #343a40;
+  white-space: nowrap;
 }
 
 .tab-content .product-table td .row-image-item {
@@ -625,13 +628,6 @@ text-align: center;
     object-fit: cover;
 }
 
-.tab-content td {
-  font-size: 14px;
-  color: #343a40;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .product-table td .delete-product {
   color: #dda0a3;
@@ -640,12 +636,6 @@ text-align: center;
   border-radius: 3px;
 }
 
-.product-table td .edit-product {
-  background-color: #e6f9f7;
-  color: #8adfd0;
-  padding: 8px 20px;
-  border-radius: 3px;
-}
 
 .product-table img {
   width: 50px;
@@ -758,7 +748,7 @@ text-align: center;
 .tab-container {
   width: 100%;
   max-width: 100%;
-  overflow-x: auto; /* Tránh tràn ngang */
+  /* overflow-x: auto;  */
 }
 
 table {
@@ -766,16 +756,19 @@ table {
   width: 100%;
 }
 
-.tab-container th {
+.tab-container thead {
   position: sticky;
+  width: 100%;
   top: 0;
+  left: 0;
+  z-index: 10;
   background-color: #fafafa;
 }
 
-.main-content .tab-content .tab-container {
+/* .main-content .tab-content .tab-container {
   overflow-y: scroll;
   max-height: 550px;
-}
+} */
 
 .main-content .tab-content .tab-container::-webkit-scrollbar {
   width: 10px;
@@ -1516,9 +1509,18 @@ table {
 
 
 /* Tiêu đề */
+#discount-management .discount-header {
+  display: flex;
+  gap: 40px;
+}
+
+#discount-management .discount-header .discount-container {
+  width: 50%;
+}
+
 #discount-management h2 {
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 600;
   color: #333;
   margin-bottom: 10px;
 }
@@ -1527,63 +1529,87 @@ table {
 #discount-management p {
   font-size: 14px;
   color: #555;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
 }
 
-#discount-management #discount-form {
+/* Gộp các bộ chọn để dùng chung CSS */
+#discount-management #discount-form,
+#discount-management #super-sale-form
+{
   display: flex;
   gap: 40px;
-  align-items: center;
+  align-items: end;
 }
 
-#add-discount-area {
+#add-discount-area,
+.super-sale-container #add-discount-area {
   padding-bottom: 40px;
   border-bottom: 1px solid #dadada;
 }
 
-#discount-management .list-discount {
+#discount-management .list-discount,
+.super-sale-container .list-discount,
+#discount-management #supersale-form,
+.super-sale-container #supersale-form {
   margin-top: 40px;
 }
 
-#discount-management #discount-form .form-group input {
+#discount-management #discount-form .form-group,
+.super-sale-container #super-sale-form .form-group {
+  width: 100%;
+}
+
+#discount-management #discount-form .form-group input,
+.super-sale-container #super-sale-form .form-group input {
   padding: 0 15px;
-  width: 200px;
+  width: 300px;
   height: 40px;
   border-radius: 4px;
   border: 1px solid #dadada;
 }
 
-#discount-management h3 {
+#discount-management #discount-form .form-group label,
+.super-sale-container #super-sale-form .form-group label {
+  width: 200px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+#discount-management h3,
+.super-sale-container h3 {
   font-size: 17px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-
 /* Nút bấm */
-#discount-management button {
+#discount-management button,
+.super-sale-form button {
   padding: 10px 20px;
   font-size: 14px;
   color: #fff;
   background-color: #007bff;
   border: none;
+  margin-left: 30px;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 36px;
   transition: background-color 0.3s ease;
 }
 
-#discount-management button:hover {
+#discount-management button:hover,
+.super-sale-form button:hover {
   background-color: #0056b3;
 }
 
-#discount-management button:disabled {
+#discount-management button:disabled,
+.super-sale-form button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
 /* Bảng Dữ Liệu */
-#discount-management table {
+#discount-management table,
+.super-sale-container table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
@@ -1591,27 +1617,33 @@ table {
 }
 
 #discount-management table th,
-#discount-management table td {
+.super-sale-container table th,
+#discount-management table td,
+.super-sale-container table td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
 }
 
-#discount-management table th {
+#discount-management table th,
+.super-sale-container table th {
   background-color: #f4f4f4;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-#discount-management table tr:nth-child(even) {
+#discount-management table tr:nth-child(even),
+.super-sale-container table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-#discount-management table tr:hover {
+#discount-management table tr:hover,
+.super-sale-container table tr:hover {
   background-color: #f1f1f1;
 }
 
 /* Căn chỉnh hành động trong bảng */
-#discount-management table td button {
+#discount-management table td button,
+.super-sale-container table td button {
   padding: 5px 10px;
   font-size: 12px;
   color: #fff;
@@ -1623,22 +1655,30 @@ table {
   transition: background-color 0.3s ease;
 }
 
-#discount-management table td button:hover {
+#discount-management table td button:hover,
+.super-sale-container table td button:hover {
   background-color: #0056b3;
 }
 
-#discount-management table td button:last-child {
+#discount-management table td button:last-child,
+.super-sale-container table td button:last-child {
   background-color: #dc3545;
 }
 
-#discount-management table td button:last-child:hover {
+#discount-management table td button:last-child:hover,
+.super-sale-container table td button:last-child:hover {
   background-color: #a71d2a;
+}
+
+#discount-management .super-sale-container,
+.super-sale-container {
+  margin-top: 70px;
 }
 
 
 #notification-settings h2 {
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 600;
   color: #333;
   margin-bottom: 10px;
 }
@@ -1695,8 +1735,7 @@ table {
 
 #add-notification-area h3 {
   font-size: 18px;
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
   margin-bottom: 10px;
 }
 
@@ -1732,8 +1771,8 @@ table {
 
 .notification-list h3 {
   font-size: 18px;
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
+  color: #000;
   margin-bottom: 10px;
 }
 
@@ -1768,7 +1807,7 @@ table {
 
 .notification-list table th {
   background-color: #f4f4f4;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .notification-list table tr:nth-child(even) {
@@ -1822,21 +1861,19 @@ table {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 #add-account-area h3 {
   font-size: 18px;
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
   margin-bottom: 10px;
 }
 
 #add-account-area label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
+  font-weight: 600;
 }
 
 #add-account-area input,
@@ -1890,7 +1927,7 @@ table {
 
 #account-list table th {
   background-color: #f4f4f4;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 #account-list table tr:nth-child(even) {
@@ -2042,3 +2079,54 @@ table {
 .notification-bell.shake {
   animation: bell-shake 0.5s ease-in-out;
 }
+
+#product-table {
+  width: 100%; /* Chiếm toàn bộ chiều rộng container */
+  table-layout: auto; /* Cột tự động điều chỉnh theo nội dung */
+  border-collapse: collapse; /* Gộp viền bảng */
+}
+
+.tab-content th, .tab-content td {
+  padding: 10px !important; /* Khoảng cách trong ô */
+  text-align: left; /* Căn chữ bên trái */
+  white-space: nowrap; /* Không xuống dòng chữ */
+}
+
+.tab-content tr {
+  border-bottom: 1px solid #dadada;
+}
+
+.dataTables_wrapper {
+  width: 100%; /* Đảm bảo wrapper của DataTables rộng */
+  margin: 0 auto; /* Căn giữa nếu cần */
+}
+
+/* Code cho phần footer phân trang */
+
+.dataTables_wrapper .dataTables_info {
+  padding-top: 40px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  padding-top: 30px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.dataTables_wrapper .dataTables_paginate span .paginate_button {
+  border-radius: 100%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.dataTables_wrapper .dataTables_paginate span {
+  display: flex;
+  gap: 5px;
+}
+
+
