@@ -94,10 +94,19 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background-color: #f9f9f9; /* Thêm màu nền để kiểm tra */
+    height: 100vh; /* Đảm bảo sidebar có chiều cao */
+    overflow-y: auto; /* Nếu nội dung vượt quá chiều cao */
 }
 
+<<<<<<< Updated upstream
 .sidebar-new .recent-news,
 .sidebar-new .featured-products {
+=======
+
+.sidebar .recent-news,
+.sidebar .featured-products {
+>>>>>>> Stashed changes
     background-color: #fff;
     padding: 15px;
     border-radius: 5px;
