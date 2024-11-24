@@ -234,6 +234,10 @@ section .shop_grid_area {
   margin: 0 5px;
 }
 
+.login {
+  height: 40px;
+}
+
 .page-link {
   display: flex;
   align-items: center;
@@ -560,12 +564,12 @@ ul {
   background-color: #dadada;
 }
 
-.category-container {
+.category-container .category-container {
   padding: 10px;
   background-color: #fff;
 }
 
-.category-header {
+.category-container .category-header {
   display: flex;
   align-items: center;
   padding: 10px 0;
@@ -629,3 +633,5 @@ ul {
 .cate-item i.active {
   transform: rotate(180deg);
 }
+
+

@@ -269,7 +269,7 @@
   margin-left: auto;
 }
 
-.header .navbar .navbar-list li > a {
+.header .navbar .navbar-list > li > a {
   display: block;
   padding: 10px 26px;
   font-size: 14px;
@@ -329,10 +329,16 @@
   margin: 10px 0;
 }
 
-.header .navbar-list .dropdown .category-item:hover {
+.header .navbar-list .dropdown .category-item a:hover {
   color: #e30019;
   cursor: pointer;
   border-radius: 4px;
+}
+
+
+.header .navbar-list .dropdown .category-item a {
+  text-decoration: none;
+  color: black;
 }
 
 

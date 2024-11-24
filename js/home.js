@@ -107,7 +107,7 @@ window.addEventListener("load", function () {
                   .filter((subcate) => subcate.idCate === category.id)
                   .map(
                     (subcate) =>
-                      `<li class="category-item">${subcate.name}</li>`
+                     `<li class="category-item"><a href="Detail.html" class="category-link">${subcate.name}</a></li>`
                   )
                   .join("")}
             </ul>

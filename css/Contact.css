@@ -1,15 +1,29 @@
-.main {
-    display: flex;
-    justify-content: center; /* Căn giữa các phần tử con */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    height: 65vh;
+
+
+.main .breadcrumb {
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 40px;
+    margin-top: 20px;
 }
+.main .breadcrumb a {
+    text-decoration: none;
+    color: #000;
+}
+
+.main .breadcrumb a:hover {
+    color: red;
+}
+.main .breadcrumb .separator {
+    margin: 0 5px;
+}
+
 .contact-container {
     display: flex;
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    width: 1200px;
+    width: 1240px;
     margin: 20px auto;
     background-color: #fff;
     border-radius: 4px;

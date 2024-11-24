@@ -1139,7 +1139,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Thêm sự kiện ẩn/hiện danh mục con khi click
       const cateHeader = categoryItem.querySelector(".cate-item");
       cateHeader.addEventListener("click", () => {
-        subcategoryList.classList.toggle('show');
+        subcategoryList.classList.toggle('show'); 
         cateHeader.querySelector("i").classList.toggle("active");
       });
   

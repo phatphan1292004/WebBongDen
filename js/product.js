@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const subcategoryItem = document.createElement("li");
   
         // Thêm thẻ <a> cho từng danh mục con
-        subcategoryItem.innerHTML = `<a href="${subcategory.url || '#'}">${subcategory.name}</a>`;
+        subcategoryItem.innerHTML = `<a href="${'Detail.html' || '#'}">${subcategory.name}</a>`;
         subcategoryList.appendChild(subcategoryItem);
       });
   

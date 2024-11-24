@@ -17,10 +17,6 @@ body {
     gap: 20px;
 }
 
-.main {
-    margin-top: 40px;
-}
-
 
 .main-news {
     flex: 3;
@@ -30,18 +26,11 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 .new-item {
-    margin: 15px 0; /* Khoảng cách bên ngoài giữa các div */
-    padding: 15px; /* Khoảng cách bên trong */
-    border: 1px solid #ddd; /* Viền mỏng và nhẹ nhàng */
-    border-radius: 8px; /* Bo góc cho mềm mại */
-    background-color: #f9f9f9; /* Màu nền nhẹ để làm nổi bật nội dung */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng nhẹ */
+    margin-bottom: 30px;
+    display: flex;
+    gap: 25px;
 }
 
-.new-item:hover {
-    background-color: #f0f0f0; /* Thay đổi màu nền khi hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tăng đổ bóng khi hover */
-}
 
 
 .main-news .title {
@@ -64,13 +53,7 @@ body {
     margin-bottom: 15px;
 }
 
-.new-item {
-    display: flex;
-    gap: 16px; /* Khoảng cách giữa hình và nội dung */
-    border: 1px solid #ddd;
-    padding: 16px;
-    background-color: #fff;
-  }
+
   
   .item-image {
     flex-shrink: 0; /* Ngăn hình ảnh bị co lại */
@@ -93,20 +76,12 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background-color: #f9f9f9; /* Thêm màu nền để kiểm tra */
-    height: 100vh; /* Đảm bảo sidebar có chiều cao */
-    overflow-y: auto; /* Nếu nội dung vượt quá chiều cao */
+    gap: 20px;  
 }
 
-<<<<<<< Updated upstream
+
 .sidebar-new .recent-news,
 .sidebar-new .featured-products {
-=======
-
-.sidebar .recent-news,
-.sidebar .featured-products {
->>>>>>> Stashed changes
     background-color: #fff;
     padding: 15px;
     border-radius: 5px;
@@ -115,6 +90,7 @@ body {
 
 .sidebar-new h3 {
     font-size: 18px;
+    font-weight: 600;
     margin-bottom: 15px;
 }
 
@@ -147,38 +123,32 @@ body {
 
 .pagination {
     display: flex;
-    justify-content: center;
     align-items: center;
-    list-style: none;
-    padding: 10px;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  
+  .pagination button {
+    width: 70px;
+    height: 40px;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    font-size: 14px;
     border-radius: 5px;
-    background-color: #f8f8f8;
-}
-
-.pagination a {
-    color: #000;
-    padding: 10px 15px;
-    margin: 0 2px;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-}
-
-.pagination a:hover {
+    color: #333;
+  }
+  
+  .pagination button:disabled {
     background-color: #ddd;
-}
-
-.pagination a.active {
-    background-color: #777;
-    color: #fff;
-    border-color: #777;
-}
-
-.pagination a.prev,
-.pagination a.next {
-    font-weight: 600;
-}
+    cursor: not-allowed;
+  }
+  
+  .pagination .page-info {
+    font-size: 14px;
+    color: #333;
+  }
 
 .news-lastest-item {
     display: flex;
@@ -215,3 +185,20 @@ body {
     font-size: 12px;
 }
 
+.main .breadcrumb {
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+.main .breadcrumb a {
+    text-decoration: none;
+    color: #000;
+}
+
+.main .breadcrumb a:hover {
+    color: red;
+}
+.main .breadcrumb .separator {
+    margin: 0 5px;
+}
