@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "Thống kê doanh thu",
   ];
   const saveProductBtn = document.getElementById("save-product");
-  const overlay = document.getElementById("overlay");
-  const cancelAdd = document.querySelector(".fa-xmark");
+  const overlays = document.querySelectorAll(".overlay");
+  const cancelAdd = document.querySelectorAll(".fa-xmark");
   const productTableBody = document.getElementById("product-table-body");
   const cusTableBody = document.getElementById("customer-table-body");
 
@@ -158,13 +158,33 @@ document.addEventListener("DOMContentLoaded", function () {
     "customerName"
   );
 
-  document.querySelector(".add-product").addEventListener("click", function () {
-    overlay.classList.add("active");
+  //Bật overlay
+  function toggleOverlayByIndex(overlays, index) {
+    overlays.forEach((overlay) => {
+      if (parseInt(overlay.getAttribute("data-index")) === index) {
+        overlay.classList.add("active");
+      } else {
+        overlay.classList.remove("active");
+      }
+    });
+  }
+  
+
+  // tắt overlay
+  cancelAdd.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll(".overlay").forEach((overlay) => {
+        overlay.classList.remove("active");
+      });
+
+      // Reset form (nếu cần thiết)
+      const productForm = document.getElementById("product-form");
+      if (productForm) productForm.reset();
+    });
   });
 
-  cancelAdd.addEventListener("click", function () {
-    overlay.classList.remove("active");
-    document.getElementById("product-form").reset();
+  document.querySelector(".add-product").addEventListener("click", function () {
+    toggleOverlayByIndex(overlays, 0);
   });
 
   saveProductBtn.addEventListener("click", () => {
@@ -238,18 +258,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   cusTableBody.addEventListener("click", function (e) {
     if (e.target && e.target.classList.contains("view-details")) {
-      document
-        .getElementById("purchase-history-overlay")
-        .classList.add("active");
+      toggleOverlayByIndex(overlays, 1);
     }
   });
-  document
-    .getElementById("close-purchase-history-details")
-    .addEventListener("click", function () {
-      document
-        .getElementById("purchase-history-overlay")
-        .classList.remove("active");
-    });
 
   loadCustomerTable();
 
@@ -297,7 +308,6 @@ document.addEventListener("DOMContentLoaded", function () {
         <td>${order.expectedDeliveryDate}</td>
         <td>${order.address}</td>
         <td>${order.status}</td>
-        <td>${order.paymentMethod}</td>
         <td><button class="view-details">Chi tiết</button></td>
         <td>
           ${
@@ -319,15 +329,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   orderTableBody.addEventListener("click", function (event) {
     if (event.target && event.target.classList.contains("view-details")) {
-      document.getElementById("overlay2").classList.add("active");
+      toggleOverlayByIndex(overlays, 2);
     }
   });
-
-  document
-    .getElementById("close-invoice-details")
-    .addEventListener("click", function () {
-      document.getElementById("overlay2").classList.remove("active");
-    });
 
   const sortSelect = document.getElementById("sort-select-order");
   const sortButton = document.getElementById("sort-btn-order");
@@ -916,7 +920,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Kiểm tra dữ liệu nhập vào
       if (!discountCode || !discountPercent || !discountExpiry) {
-        showNotification("Vui lòng điền đầy đủ thông tin phiếu giảm giá!");
+        showNotification("Vui lòng điền đầy đủ thông tin phiếu giảm giá!", "error");
         return;
       }
 
@@ -1050,104 +1054,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Code phần Noti Setting
-  const notificationForm = document.getElementById("notification-form");
-  const notificationContentInput = document.getElementById(
-    "notification-content"
-  );
-  const notificationTimeInput = document.getElementById("notification-time");
-  const notificationList = document.getElementById("notification-list");
-  const sendNotificationBtn = document.getElementById("send-notification-btn");
-  const formOptionNoti = document.getElementById("form-option-noti");
-
-  // **1. Lưu cài đặt thông báo**
-  formOptionNoti.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const emailNotification = formOptionNoti.querySelector(
-      "input[type='checkbox']:checked"
-    );
-    const browserNotification = formOptionNoti.querySelector(
-      "input[type='checkbox']:not(:checked)"
-    );
-    const frequency = document.getElementById("notification-frequency").value;
-
-    console.log("Cài đặt Thông báo:");
-    console.log("Email Notification:", emailNotification ? "Bật" : "Tắt");
-    console.log("Browser Notification:", browserNotification ? "Bật" : "Tắt");
-    console.log("Tần suất:", frequency);
-
-    alert("Cài đặt thông báo đã được lưu.");
-  });
-
-  // **2. Thêm hoặc cập nhật thông báo**
-  notificationForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const content = notificationContentInput.value.trim();
-    const time = notificationTimeInput.value.trim();
-
-    if (!content || !time) {
-      showNotification("Vui lòng nhập đầy đủ nội dung và thời gian thông báo!");
-      return;
-    }
-
-    if (editingRow) {
-      // Cập nhật thông báo
-      editingRow.cells[1].textContent = content;
-      editingRow.cells[2].textContent = time;
-      showNotification("Thông báo đã được cập nhật.");
-      sendNotificationBtn.textContent = "Gửi Thông báo";
-      editingRow = null;
-    } else {
-      // Thêm thông báo mới
-      const newRow = document.createElement("tr");
-      const newId = notificationList.querySelectorAll("tr").length + 1;
-
-      newRow.innerHTML = `
-        <td>${newId}</td>
-        <td>${content}</td>
-        <td>${time}</td>
-        <td>
-          <button class="edit-btn">Chỉnh sửa</button>
-          <button class="delete-btn">Xóa</button>
-        </td>
-      `;
-
-      notificationList.appendChild(newRow);
-      showNotification("Thông báo mới đã được thêm.");
-    }
-
-    // Reset form
-    notificationForm.reset();
-  });
-
-  // **3. Chỉnh sửa và xóa thông báo**
-  notificationList.addEventListener("click", function (e) {
-    if (e.target.classList.contains("edit-btn")) {
-      const row = e.target.closest("tr");
-      editingRow = row;
-
-      // Điền thông tin vào form để chỉnh sửa
-      notificationContentInput.value = row.cells[1].textContent;
-      notificationTimeInput.value = row.cells[2].textContent;
-      sendNotificationBtn.textContent = "Cập nhật Thông báo";
-    }
-
-    if (e.target.classList.contains("delete-btn")) {
-      const row = e.target.closest("tr");
-      const notificationId = row.cells[0].textContent;
-
-      showCustomConfirm(
-        `Bạn có chắc chắn muốn xóa thông báo ID ${notificationId}?`,
-        function () {
-          row.remove();
-          showNotification(`Thông báo ID ${notificationId} đã bị xóa.`);
-        }
-      );
-    }
-  });
-
   function showCustomConfirm(message, onConfirm) {
     confirmMessage.textContent = message;
     customConfirm.classList.remove("hidden");
@@ -1165,11 +1071,32 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function showNotification(message, status = "success") {
-    notification.textContent = message;
-    notification.classList.remove("success", "error", "warning");
-    notification.classList.add("show");
-    notification.classList.add(status);
-    notification.classList.remove("hidden");
+    const notification = document.getElementById("notification");
+    const notificationMessage = document.getElementById("noti-message");
+    const notificationImg = document.getElementById("noti-img");
+
+    // Cập nhật nội dung và trạng thái
+    notificationMessage.textContent = message;
+
+    // Thay đổi icon tùy thuộc vào trạng thái
+    switch (status) {
+      case "success":
+        notificationImg.src = "./img/adminpage/checked.png";
+        break;
+      case "error":
+        notificationImg.src = "./img/adminpage/error.png";
+        break;
+      case "warning":
+        notificationImg.src = "./img/adminpage/warning.png";
+        break;
+      default:
+        notificationImg.src = "./img/adminpage/info.png";
+        break;
+    }
+
+    // Cập nhật lớp CSS
+    notification.classList.remove("success", "error", "warning", "hidden");
+    notification.classList.add("show", status);
 
     // Ẩn thông báo sau 3 giây
     setTimeout(() => {
@@ -1387,7 +1314,6 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: "expectedDeliveryDate" },
         { data: "address" },
         { data: "status" },
-        { data: "paymentMethod" },
         {
           data: null,
           render: function (data) {
@@ -1438,7 +1364,9 @@ document.addEventListener("DOMContentLoaded", function () {
       // Lấy giá trị từ các input
       const saleTime = document.getElementById("sale-time").value.trim();
       const productId = document.getElementById("product-id-sale").value.trim();
-      const productName = document.getElementById("product-name-sale").value.trim();
+      const productName = document
+        .getElementById("product-name-sale")
+        .value.trim();
 
       // Kiểm tra dữ liệu rỗng
       if (!saleTime || !productId || !productName) {
@@ -1462,7 +1390,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       tableBody.appendChild(newRow);
 
-      showNotification("Thêm sản phẩm thành công")
+      showNotification("Thêm sản phẩm thành công");
       // Xóa nội dung các input sau khi thêm
       document.getElementById("sale-time").value = "";
       document.getElementById("product-id-sale").value = "";
@@ -1477,10 +1405,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Xóa sản phẩm
       if (e.target.classList.contains("delete-btn")) {
-        showCustomConfirm("Bạn có chắc mún xóa sản phẩm này", function() {
+        showCustomConfirm("Bạn có chắc mún xóa sản phẩm này", function () {
           row.remove();
           showNotification("Bạn đã xóa thành công");
-        })
+        });
       }
 
       // Chỉnh sửa sản phẩm
@@ -1506,4 +1434,81 @@ document.addEventListener("DOMContentLoaded", function () {
           productNameCell.textContent = newProductName;
       }
     });
+
+  // Dữ liệu mẫu cho Discount
+const discountProducts = {
+  SALE20: ["Sản phẩm A", "Sản phẩm B", "Sản phẩm C"],
+  NEWYEAR30: ["Sản phẩm D", "Sản phẩm E"],
+};
+
+// Dữ liệu mẫu cho Super Sale
+const superSaleData = [
+  {
+    id: "CT000",
+    startDate: "2024-11-01",
+    endDate: "2024-11-30",
+    programName: "Siêu Sale Tháng 11",
+    products: ["SP001 - Áo thun", "SP002 - Quần jeans", "SP003 - Giày thể thao"],
+  },
+  {
+    id: "CT001",
+    startDate: "2024-12-01",
+    endDate: "2024-12-25",
+    programName: "Giáng Sinh Rực Rỡ",
+    products: ["SP004 - Váy nữ", "SP005 - Áo khoác"],
+  },
+];
+
+// Đóng overlay
+function closeOverlay() {
+  const overlays = document.querySelectorAll(".overlay");
+  overlays.forEach((overlay) => {
+    overlay.classList.remove("active");
+  });
+}
+
+// Gắn sự kiện cho nút đóng
+document.querySelectorAll(".close-overlay-btn").forEach((btn) => {
+  btn.addEventListener("click", closeOverlay);
+});
+
+// Gán sự kiện cho Discount
+document.querySelectorAll("#discount-list .view-details").forEach((item) => {
+  item.addEventListener("click", () => {
+    const discountCode = item.closest("tr").querySelector("td").innerText;
+
+    // Cập nhật thông tin trong modal Discount
+    document.getElementById("modal-discount-code").innerText = `Mã giảm giá: ${discountCode}`;
+    const products = discountProducts[discountCode] || ["Không có sản phẩm"];
+    document.getElementById("modal-product-list").innerHTML = products
+      .map((product) => `<li>${product}</li>`)
+      .join("");
+
+    // Hiển thị overlay Discount (index 3)
+    toggleOverlayByIndex(overlays, 3);
+  });
+});
+
+// Gán sự kiện cho Super Sale
+document.querySelectorAll("#super-sale-list .view-details").forEach((item) => {
+  item.addEventListener("click", () => {
+    const saleData = superSaleData.find(
+      (data) => data.id === item.closest("tr").querySelector("td").innerText
+    );
+
+    if (saleData) {
+      // Cập nhật thông tin trong modal Super Sale
+      document.getElementById("sale-program-id").innerText = saleData.id;
+      document.getElementById("sale-start-date").innerText = saleData.startDate;
+      document.getElementById("sale-end-date").innerText = saleData.endDate;
+      document.getElementById("sale-program-name").innerText = saleData.programName;
+      document.getElementById("sale-product-list").innerHTML = saleData.products
+        .map((product) => `<li>${product}</li>`)
+        .join("");
+
+      // Hiển thị overlay Super Sale (index 4)
+      toggleOverlayByIndex(overlays, 4);
+    }
+  });
+});
 });

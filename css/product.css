@@ -646,14 +646,14 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 30px;
     margin-top: 60px;
-  }
+}
   
   /* Tiêu đề phần đánh giá */
   .review-product h2 {
-    font-size: 28px;
+    font-size: 20px;
     margin-bottom: 20px;
     font-weight: 600;
-    color: #333;
+    color: #000;
     text-align: center;
   }
   
@@ -668,7 +668,7 @@
   
   .review-notice p {
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     color: #555;
   }
   
@@ -748,7 +748,7 @@
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 14px;
     resize: vertical;
     outline: none;
     transition: border-color 0.3s ease;
@@ -789,7 +789,7 @@
   
   .comments-section p {
     color: #888;
-    font-size: 16px;
+    font-size: 14px;
   }
   
   textarea:focus {

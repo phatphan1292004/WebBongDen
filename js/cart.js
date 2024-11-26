@@ -192,6 +192,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     searchIcon.style.display = "block";
   });
 
+<<<<<<< HEAD
   const headerUser = document.querySelector(".header-user");
   const loginBtn = document.getElementById("login-header-btn");
 
@@ -205,4 +206,46 @@ document.addEventListener("DOMContentLoaded", async function () {
     headerUser.style.display = "none";
     loginBtn.style.display = "block";
   }
+=======
+  // Code phần tăng giảm số lượng giỏ hàng
+  // Lấy tất cả các nút tăng và giảm
+  const increaseButtons = document.querySelectorAll(".quantity-btn.increase");
+  const decreaseButtons = document.querySelectorAll(".quantity-btn.decrease");
+
+  // Xử lý nút tăng
+  increaseButtons.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      const quantityInput = event.target.parentElement.querySelector(".quantity-input");
+      let currentValue = parseInt(quantityInput.value);
+      quantityInput.value = currentValue + 1;
+    });
+  });
+
+  // Xử lý nút giảm
+  decreaseButtons.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      const quantityInput = event.target.parentElement.querySelector(".quantity-input");
+      let currentValue = parseInt(quantityInput.value);
+      if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
+      }
+    });
+  });
+
+  // Xóa sp
+  const deleteButtons = document.querySelectorAll(".delete-item");
+
+  // Thêm sự kiện click cho từng nút "Xóa"
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      // Lấy thẻ <li> gần nhất chứa nút "Xóa" được nhấn
+      const listItem = event.target.closest(".product-item");
+
+      // Hiển thị thông báo xác nhận
+      if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+        listItem.remove(); // Xóa thẻ <li> khỏi DOM
+      }
+    });
+  });
+>>>>>>> 22130206_PhanVanPhat
 });
