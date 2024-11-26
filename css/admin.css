@@ -669,13 +669,8 @@ text-align: center;
 
 /* Form Add Product */
 /* Lớp overlay mờ */
-<<<<<<< HEAD
 
-.main-content .tab-content .overlay,
-.overlay2 {
-=======
 .main-content .tab-content .overlay {
->>>>>>> 22130206_PhanVanPhat
   position: fixed;
   z-index: 10000;
   top: 0;
