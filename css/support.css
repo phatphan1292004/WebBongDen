@@ -40,7 +40,7 @@ margin-right: 11px;
 }
 /* css cho search */
 .content .search{
-    width: 998px;
+    width: 100%;
     margin: 0 auto;
     margin-top: 50px;
     background: #509cdb;
