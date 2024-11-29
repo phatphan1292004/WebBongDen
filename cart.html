@@ -27,7 +27,7 @@
       <div class="main">
         <a class="direction" style="margin: 20px 140px; display: block; text-decoration: none; color: black;" href="index.html">
           <i class="fa-solid fa-arrow-left"></i>
-          Mua thêm sản phẩm
+          <span id="direction-cart">Mua thêm sản phẩm</span>
         </a>
         <div class="nav">
           <div class="nav-item" data-tab="cart">Giỏ hàng</div>
@@ -336,6 +336,17 @@
         </div>
       </div>
       <footer id="footer"></footer>
+      <div id="custom-confirm" class="custom-confirm hidden">
+        <div class="custom-confirm-content">
+          <p id="confirm-message">
+            Bạn có chắc chắn muốn thực hiện hành động này?
+          </p>
+          <div class="custom-confirm-actions">
+            <button id="confirm-ok" class="btn-ok">Đồng ý</button>
+            <button id="confirm-cancel" class="btn-cancel">Hủy</button>
+          </div>
+        </div>
+      </div>
     </div>
     <script type="module" src="./js/script.js"></script>
     <script type="module" src="./js/cart.js"></script>

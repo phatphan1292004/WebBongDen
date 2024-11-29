@@ -52,7 +52,7 @@
             <div class="nav-item" data-index="0">
               <div class="nav-item-left">
                 <i class="fa-solid fa-tachometer-alt"></i>
-                <p style="font-weight: 500">Dashboard</p>
+                <p>Tổng quan</p>
               </div>
             </div>
 
@@ -94,18 +94,18 @@
                   <i class="fas fa-chevron-down dropdown-arrow"></i>
                 </div>
               </div>
+              <!-- Submenu-->
+              <ul class="submenu-admin" id="submenu-admin">
+                <li class="menu-item" data-target="discount-management">
+                  <i class="fa-solid fa-tags"></i><a href="#">Giảm giá</a>
+                </li>
+
+                <li class="menu-item" data-target="account-management">
+                  <i class="fa-solid fa-user"></i
+                  ><a href="#">Quản lý tài khoản</a>
+                </li>
+              </ul>
             </div>
-            <!-- Submenu-->
-            <ul class="submenu-admin" id="submenu-admin">
-              <li class="menu-item" data-target="discount-management">
-                <i class="fa-solid fa-tags"></i><a href="#">Giảm giá</a>
-              </li>
-            
-              <li class="menu-item" data-target="account-management">
-                <i class="fa-solid fa-user"></i
-                ><a href="#">Quản lý tài khoản</a>
-              </li>
-            </ul>
           </div>
 
           <div class="sidebar-bottom" id="sign-up">
@@ -392,8 +392,69 @@
             </div>
 
             <div class="card-container2">
-              <div class="">Doanh thu trong năm</div>
-              <canvas id="revenueChart" width="400" height="200"></canvas>
+              <div class="revenue-year">
+                <div class="revenue-year-header">Doanh thu trong năm</div>
+                <canvas id="revenueChart"></canvas>
+              </div>
+
+              <div class="review-customer">
+                <div class="review-header">Đánh giá</div>
+                <div class="review-content">
+                  <div class="review-item">
+                    <div class="img-user">
+                      <img
+                        src="https://images.unsplash.com/photo-1663893364107-a6ecd06cf615?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="User Image"
+                      />
+                    </div>
+                    <div class="user-info">
+                      <h4>Sarah Graves</h4>
+                      <p>Highly recommend</p>
+                    </div>
+                    <div class="rating">★★★★★</div>
+                  </div>
+                  <div class="review-item">
+                    <div class="img-user">
+                      <img
+                        src="https://images.unsplash.com/photo-1640960543409-dbe56ccc30e2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="User Image"
+                      />
+                    </div>
+                    <div class="user-info">
+                      <h4>Garbease sha</h4>
+                      <p>Awesome Pro</p>
+                    </div>
+                    <div class="rating">★★★★☆</div>
+                  </div>
+
+                  <div class="review-item">
+                    <div class="img-user">
+                      <img
+                        src="https://images.unsplash.com/photo-1633957897986-70e83293f3ff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="User Image"
+                      />
+                    </div>
+                    <div class="user-info">
+                      <h4>Sarah Graves</h4>
+                      <p>Highly recommend</p>
+                    </div>
+                    <div class="rating">★★★★★</div>
+                  </div>
+                  <div class="review-item">
+                    <div class="img-user">
+                      <img
+                        src="https://images.unsplash.com/photo-1636041282694-aa4e52370419?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="User Image"
+                      />
+                    </div>
+                    <div class="user-info">
+                      <h4>Garbease sha</h4>
+                      <p>Awesome Pro</p>
+                    </div>
+                    <div class="rating">★★★★☆</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -401,7 +462,7 @@
             <div class="product-stats">
               <div class="stat-card">
                 <div class="card-image">
-                  <img src="./img/adminpage/product.png" alt="">
+                  <img src="./img/adminpage/product.png" alt="" />
                 </div>
                 <div class="card-content">
                   <h3>Tổng sản phẩm trong kho</h3>
@@ -410,7 +471,7 @@
               </div>
               <div class="stat-card">
                 <div class="card-image">
-                  <img src="./img/adminpage/category.png" alt="">
+                  <img src="./img/adminpage/category.png" alt="" />
                 </div>
                 <div class="card-content">
                   <h3>Số loại sản phẩm</h3>
@@ -419,7 +480,7 @@
               </div>
               <div class="stat-card">
                 <div class="card-image">
-                  <img src="./img/adminpage/out-of-stock.png" alt="">
+                  <img src="./img/adminpage/out-of-stock.png" alt="" />
                 </div>
                 <div class="card-content">
                   <h3>Sản phẩm hết hàng</h3>
@@ -428,7 +489,7 @@
               </div>
               <div class="stat-card">
                 <div class="card-image">
-                  <img src="./img/adminpage/new-product.png" alt="">
+                  <img src="./img/adminpage/new-product.png" alt="" />
                 </div>
                 <div class="card-content">
                   <h3>Sản phẩm mới nhất</h3>
@@ -447,6 +508,11 @@
                   />
                   <button id="search-btn-product">Tìm kiếm</button>
                 </div>
+                <button class="add-category">
+                  <i class="fa-solid fa-plus"></i>
+                  Thêm loại sản phẩm
+                </button>
+
                 <button class="add-product">
                   <i class="fa-solid fa-plus"></i>
                   Thêm sản phẩm
@@ -458,31 +524,178 @@
                 <div class="add-product-form" id="add-product-form">
                   <div class="form-header">
                     <p>Thêm sản phẩm mới</p>
-                    <i class="fa-solid fa-xmark"></i>
+                    <button class="close-btn" id="close-form">
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
                   </div>
                   <form id="product-form">
-                    <label for="product-id">Id:</label>
-                    <input type="text" id="product-id" required />
+                    <div class="form-grid">
+                      <!-- Cột 1 -->
+                      <div class="form-column">
+                        <!-- ID sản phẩm -->
+                        <div class="form-group">
+                          <label for="product-id">ID Sản phẩm:</label>
+                          <input
+                            type="text"
+                            id="product-id"
+                            placeholder="Nhập ID sản phẩm"
+                            required
+                          />
+                        </div>
 
-                    <label for="product-image">Link Hình ảnh:</label>
-                    <input type="text" id="product-image" required />
+                        <!-- Hình ảnh sản phẩm -->
+                        <div class="form-group">
+                          <label for="product-image">Link Hình ảnh:</label>
+                          <input
+                            type="text"
+                            id="product-image"
+                            placeholder="Nhập link hình ảnh"
+                            required
+                          />
+                        </div>
 
-                    <label for="product-name">Tên sản phẩm:</label>
-                    <input type="text" id="product-name" required />
+                        <!-- Tên sản phẩm -->
+                        <div class="form-group">
+                          <label for="product-name">Tên sản phẩm:</label>
+                          <input
+                            type="text"
+                            id="product-name"
+                            placeholder="Nhập tên sản phẩm"
+                            required
+                          />
+                        </div>
 
-                    <label for="product-price">Giá:</label>
-                    <input type="text" id="product-price" required />
+                        <!-- Giá sản phẩm -->
+                        <div class="form-group">
+                          <label for="product-price">Giá sản phẩm:</label>
+                          <input
+                            type="number"
+                            id="product-price"
+                            placeholder="Nhập giá sản phẩm"
+                            required
+                          />
+                        </div>
+                      </div>
 
-                    <label for="product-category">Loại sản phẩm:</label>
-                    <input type="text" id="product-category" required />
+                      <!-- Cột 2 -->
+                      <div class="form-column">
+                        <!-- Loại sản phẩm -->
+                        <div class="form-group">
+                          <label for="product-category"
+                            >Danh mục sản phẩm:</label
+                          >
+                          <select id="product-category" required>
+                            <option value="">Chọn danh mục</option>
+                          </select>
+                        </div>
 
-                    <label for="product-date">Ngày thêm:</label>
-                    <input type="date" id="product-date" required />
+                        <div class="form-group">
+                          <label for="product-subcategory"
+                            >Tên loại sản phẩm:</label
+                          >
+                          <input
+                            type="text"
+                            id="product-subcategory"
+                            placeholder="Nhập tên loại sản phẩm chính xác"
+                            required
+                          />
+                        </div>
 
-                    <button type="button" id="save-product">
-                      Lưu sản phẩm
-                    </button>
+                        <!-- Ngày thêm sản phẩm -->
+                        <div class="form-group">
+                          <label for="product-date">Ngày thêm:</label>
+                          <input type="date" id="product-date" required />
+                        </div>
+
+                        <!-- Mô tả sản phẩm -->
+                        <div class="form-group">
+                          <label for="product-desc">Mô tả sản phẩm:</label>
+                          <textarea
+                            id="product-desc"
+                            placeholder="Nhập mô tả sản phẩm"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Nút lưu -->
+                    <div class="form-group">
+                      <button type="button" id="save-product" class="save-btn">
+                        Lưu sản phẩm
+                      </button>
+                    </div>
                   </form>
+                </div>
+              </div>
+
+              <div class="overlay" id="overlay" data-index="1">
+                <div class="categories-container">
+                  <!-- Nút Đóng lại -->
+                  <div class="top-actions">
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
+
+                  <div class="categories-content">
+                    <!-- Danh sách danh mục -->
+                    <div class="categories-list">
+                      <h3>Danh sách danh mục</h3>
+                      <ul id="category-list">
+                        <!-- Các danh mục -->
+                      </ul>
+                    </div>
+
+                    <!-- Form thêm danh mục -->
+                    <div class="add-category-form">
+                      <h3>Thêm danh mục mới</h3>
+                      <form id="category-form">
+                        <label for="category-id">ID:</label>
+                        <input
+                          type="text"
+                          id="category-id"
+                          class="form-input"
+                          required
+                        />
+
+                        <label for="category-name">Tên danh mục:</label>
+                        <input
+                          type="text"
+                          id="category-name"
+                          class="form-input"
+                          required
+                        />
+
+                        <label for="parent-category">Danh mục cha:</label>
+                        <input
+                          type="text"
+                          id="parent-category"
+                          class="form-input"
+                        />
+
+                        <label for="stock-quantity">Số lượng tồn:</label>
+                        <input
+                          type="number"
+                          id="stock-quantity"
+                          class="form-input"
+                          required
+                        />
+
+                        <label for="category-desc">Mô tả:</label>
+                        <textarea
+                          id="category-desc"
+                          class="form-textarea"
+                          rows="3"
+                        ></textarea>
+
+                        <button
+                          type="button"
+                          id="add-category-btn"
+                          class="add-category-button"
+                        >
+                          Thêm danh mục
+                        </button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -557,7 +770,7 @@
                       </p>
                       <p>
                         <strong>Mã sản phẩm:</strong>
-                        <span id="product-id">#5353</span>
+                        <span id="product-id-details">#5353</span>
                       </p>
                     </div>
                   </div>
@@ -580,7 +793,7 @@
                 <div class="stats-container">
                   <div class="stat-box">
                     <div class="stat-image">
-                      <img src="./img/adminpage/sales.png" alt="">
+                      <img src="./img/adminpage/sales.png" alt="" />
                     </div>
                     <div class="stat-text">
                       <p>Số lượng bán được</p>
@@ -589,7 +802,7 @@
                   </div>
                   <div class="stat-box">
                     <div class="stat-image">
-                      <img src="./img/adminpage/inventory.png" alt="">
+                      <img src="./img/adminpage/inventory.png" alt="" />
                     </div>
                     <div class="stat-text">
                       <p>Số lượng tồn kho</p>
@@ -598,7 +811,7 @@
                   </div>
                   <div class="stat-box">
                     <div class="stat-image">
-                      <img src="./img/adminpage/star.png" alt="">
+                      <img src="./img/adminpage/star.png" alt="" />
                     </div>
                     <div class="stat-text">
                       <p>Rating</p>
@@ -607,7 +820,7 @@
                   </div>
                   <div class="stat-box">
                     <div class="stat-image">
-                      <img src="./img/adminpage/chat.png" alt="">
+                      <img src="./img/adminpage/chat.png" alt="" />
                     </div>
                     <div class="stat-text">
                       <p>Đánh giá</p>
@@ -722,6 +935,76 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                       style="display: none"
                     />
                   </div>
+                  <div>
+                    <strong>Số lượng tồn kho:</strong>
+                    <span id="product-stock-view">213</span>
+                    <input
+                      type="text"
+                      id="edit-product-stock"
+                      value="213"
+                      style="display: none"
+                    />
+                  </div>
+                  <div>
+                    <strong>Đánh giá:</strong>
+                    <span id="product-rating-view"></span>
+                    <input
+                      type="text"
+                      id="edit-product-rating"
+                      value="5"
+                      style="display: none"
+                    />
+                  </div>
+                  <div>
+                    <strong>Thời gian bảo hành:</strong>
+                    <span id="product-warranty-view"></span>
+                    <input
+                      type="text"
+                      id="edit-product-warranty"
+                      value="12 tháng"
+                      style="display: none"
+                    />
+                  </div>
+                  <div>
+                    <strong>Chất liệu:</strong>
+                    <span id="product-material-view"></span>
+                    <input
+                      type="text"
+                      id="edit-product-material"
+                      value="Nhôm"
+                      style="display: none"
+                    />
+                  </div>
+                  <div>
+                    <strong>Màu sắc:</strong>
+                    <span id="product-color-view"></span>
+                    <input
+                      type="text"
+                      id="edit-product-color"
+                      value="Trắng"
+                      style="display: none"
+                    />
+                  </div>
+                  <div>
+                    <strong>Tuổi thọ:</strong>
+                    <span id="product-lifespan-view"></span>
+                    <input
+                      type="text"
+                      id="edit-product-lifespan"
+                      value="5 năm"
+                      style="display: none"
+                    />
+                  </div>
+                  <div>
+                    <strong>Công suất:</strong>
+                    <span id="product-power-view">60W</span>
+                    <input
+                      type="text"
+                      id="edit-product-power"
+                      value="60W"
+                      style="display: none"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -732,44 +1015,48 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
               <!-- Khối 1 -->
               <div class="stat-box">
                 <div class="stat-image">
-                  <img src="./img/adminpage/client.png" alt="">
+                  <img src="./img/adminpage/client.png" alt="" />
                 </div>
                 <div class="stat-text">
                   <h3>Tổng khách hàng trong tháng</h3>
-                  <span id="monthly-total-customers">0</span> <!-- Đổi id -->
+                  <span id="monthly-total-customers">0</span>
+                  <!-- Đổi id -->
                 </div>
               </div>
               <!-- Khối 2 -->
               <div class="stat-box">
                 <div class="stat-image">
-                  <img src="./img/adminpage/demand.png" alt="">
+                  <img src="./img/adminpage/demand.png" alt="" />
                 </div>
                 <div class="stat-text">
                   <h3>Khách hàng mới</h3>
-                  <span id="new-customers-today">0</span> <!-- Đổi id -->
+                  <span id="new-customers-today">0</span>
+                  <!-- Đổi id -->
                 </div>
               </div>
               <!-- Khối 3 -->
               <div class="stat-box">
                 <div class="stat-image">
-                  <img src="./img/adminpage/rating.png" alt="">
+                  <img src="./img/adminpage/rating.png" alt="" />
                 </div>
                 <div class="stat-text">
                   <h3>Khách hàng thường xuyên</h3>
-                  <span id="regular-customers">0/5</span> <!-- Đổi id -->
+                  <span id="regular-customers">0/5</span>
+                  <!-- Đổi id -->
                 </div>
               </div>
               <!-- Khối 4 -->
               <div class="stat-box">
                 <div class="stat-image">
-                  <img src="./img/adminpage/chat.png" alt="">
+                  <img src="./img/adminpage/chat.png" alt="" />
                 </div>
                 <div class="stat-text">
                   <h3>Phản hồi từ khách hàng</h3>
-                  <span id="customer-feedback-count">0 đánh giá</span> <!-- Đổi id -->
+                  <span id="customer-feedback-count">0 đánh giá</span>
+                  <!-- Đổi id -->
                 </div>
               </div>
-            </div>            
+            </div>
 
             <div class="header-tab">
               <div class="search-container">
@@ -822,7 +1109,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
               </table>
             </div>
 
-            <div class="overlay" data-index="1">
+            <div class="overlay" data-index="2">
               <div class="purchase-history-details">
                 <div class="purchase-history-header">
                   <p>LỊCH SỬ MUA HÀNG</p>
@@ -914,35 +1201,38 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
               <!-- Khối 1 -->
               <div class="stat-box">
                 <div class="stat-image">
-                  <img src="./img/adminpage/shopping-list.png" alt="">
+                  <img src="./img/adminpage/shopping-list.png" alt="" />
                 </div>
                 <div class="stat-text">
                   <h3>Tổng đơn hàng</h3>
-                  <span id="total-orders">0</span> <!-- Đổi id -->
+                  <span id="total-orders">0</span>
+                  <!-- Đổi id -->
                 </div>
               </div>
               <!-- Khối 2 -->
               <div class="stat-box">
                 <div class="stat-image">
-                  <img src="./img/adminpage/pending.png" alt="">
+                  <img src="./img/adminpage/pending.png" alt="" />
                 </div>
                 <div class="stat-text">
                   <h3>Đơn hàng chưa xử lý</h3>
-                  <span id="pending-orders">0</span> <!-- Đổi id -->
+                  <span id="pending-orders">0</span>
+                  <!-- Đổi id -->
                 </div>
               </div>
               <!-- Khối 3 -->
               <div class="stat-box">
                 <div class="stat-image">
-                  <img src="./img/adminpage/fast-delivery.png" alt="">
+                  <img src="./img/adminpage/fast-delivery.png" alt="" />
                 </div>
                 <div class="stat-text">
                   <h3>Đơn hàng đang giao</h3>
-                  <span id="in-transit-orders">0</span> <!-- Đổi id -->
+                  <span id="in-transit-orders">0</span>
+                  <!-- Đổi id -->
                 </div>
               </div>
             </div>
-            
+
             <div class="header-tab">
               <div class="search-container">
                 <input
@@ -957,6 +1247,8 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                 <select id="sort-select-order" class="sort-select">
                   <option value="" disabled selected>Tất cả</option>
                   <option value="pending-orders">Đơn hàng chưa duyệt</option>
+                  <option value="in-progress-orders">Đang giao hàng</option>
+                  <option value="completed-orders">Đã giao</option>
                 </select>
 
                 <button id="sort-btn-order" class="sort-button">
@@ -965,7 +1257,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
               </div>
             </div>
 
-            <div class="overlay" id="overlay" data-index="2">
+            <div class="overlay" id="overlay" data-index="3">
               <div class="invoice-details">
                 <div class="invoice-header">
                   <p>CHI TIẾT HÓA ĐƠN</p>
@@ -1102,9 +1394,6 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
               </div>
             </div>
           </div>
-
-          <div class="tab-content" id="system-admin"></div>
-
           <div
             class="tab-content"
             id="discount-management"
@@ -1142,8 +1431,13 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
 
                   <div class="form-group">
                     <label for="product-discount">ID sản phẩm:</label>
-                    <input type="text" id="product-discount" required placeholder="Nhập ID Sp"/>
-                  </div>                  
+                    <input
+                      type="text"
+                      id="product-discount"
+                      required
+                      placeholder="Nhập ID Sp"
+                    />
+                  </div>
 
                   <div class="form-group">
                     <label for="discount-expiry">Ngày hết hạn:</label>
@@ -1221,16 +1515,12 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                       required
                     />
                   </div>
-                
+
                   <div class="form-group">
                     <label for="end-date">Ngày kết thúc:</label>
-                    <input
-                      type="date"
-                      id="end-date"
-                      required
-                    />
+                    <input type="date" id="end-date" required />
                   </div>
-                
+
                   <div class="form-group">
                     <label for="program-name">Tên chương trình:</label>
                     <input
@@ -1240,23 +1530,23 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                       required
                     />
                   </div>
-                
+
                   <div class="form-group">
-                    <label for="product-id">ID sản phẩm:</label>
+                    <label for="product-id-sale">ID sản phẩm:</label>
                     <input
                       type="text"
-                      id="product-id"
+                      id="product-id-sale"
                       placeholder="Nhập ID sản phẩm"
                       required
                     />
                   </div>
-                
+
                   <div class="form-group">
                     <button type="submit" id="add-saleproduct-btn">
                       THÊM SẢN PHẨM
                     </button>
                   </div>
-                </form>                
+                </form>
               </div>
 
               <!-- Danh sách sản phẩm giảm giá -->
@@ -1302,12 +1592,11 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                       </td>
                     </tr>
                   </tbody>
-                  
                 </table>
               </div>
             </div>
 
-            <div class="overlay" data-index="3">
+            <div class="overlay" data-index="4">
               <div class="modal">
                 <h2 id="modal-discount-code">Mã giảm giá: SALE20</h2>
                 <div class="product-list">
@@ -1318,15 +1607,27 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                 </div>
                 <button class="close-overlay-btn">Đóng</button>
               </div>
-            </div>         
-            <div class="overlay" data-index="4">
+            </div>
+            <div class="overlay" data-index="5">
               <div class="modal">
                 <h2 id="sale-modal-title">Chi tiết chương trình</h2>
                 <div class="product-list">
-                  <p><strong>ID Chương trình:</strong> <span id="sale-program-id"></span></p>
-                  <p><strong>Ngày bắt đầu:</strong> <span id="sale-start-date"></span></p>
-                  <p><strong>Ngày kết thúc:</strong> <span id="sale-end-date"></span></p>
-                  <p><strong>Tên chương trình:</strong> <span id="sale-program-name"></span></p>
+                  <p>
+                    <strong>ID Chương trình:</strong>
+                    <span id="sale-program-id"></span>
+                  </p>
+                  <p>
+                    <strong>Ngày bắt đầu:</strong>
+                    <span id="sale-start-date"></span>
+                  </p>
+                  <p>
+                    <strong>Ngày kết thúc:</strong>
+                    <span id="sale-end-date"></span>
+                  </p>
+                  <p>
+                    <strong>Tên chương trình:</strong>
+                    <span id="sale-program-name"></span>
+                  </p>
                   <h3>Danh sách sản phẩm:</h3>
                   <ul id="sale-product-list">
                     <!-- Sản phẩm sẽ được thêm động -->
@@ -1335,7 +1636,6 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                 <button class="close-overlay-btn">Đóng</button>
               </div>
             </div>
-               
           </div>
 
           <!-- Tab Quản lý tài khoản -->
@@ -1351,43 +1651,87 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
             </p>
 
             <!-- Khu vực thêm tài khoản -->
-            <div id="add-account-area">
-              <h3>THÊM TÀI KHOẢN MỚI</h3>
-              <form id="account-form">
-                <label for="account-username">Tên đăng nhập:</label>
-                <input
-                  type="text"
-                  id="account-username"
-                  placeholder="Nhập tên đăng nhập"
-                  required
-                />
+            <div class="account-management">
+              <!-- Form thêm tài khoản mới -->
+              <div class="account-form">
+                <h3>THÊM TÀI KHOẢN MỚI</h3>
+                <form id="add-account-form">
+                  <!-- Tên đăng nhập -->
+                  <div class="form-group">
+                    <label for="username">Tên đăng nhập:</label>
+                    <input
+                      type="text"
+                      id="username"
+                      name="username"
+                      placeholder="Nhập tên đăng nhập"
+                      required
+                    />
+                  </div>
 
-                <label for="account-email">Email:</label>
-                <input
-                  type="email"
-                  id="account-email"
-                  placeholder="Nhập email"
-                  required
-                />
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Nhập email"
+                      required
+                    />
+                  </div>
 
-                <label for="account-role">Phân quyền:</label>
-                <select id="account-role" required>
-                  <option value="admin">Quản trị viên</option>
-                  <option value="editor">Người chỉnh sửa</option>
-                  <option value="viewer">Khách hàng</option>
-                </select>
+                  <!-- Mật khẩu -->
+                  <div class="form-group">
+                    <label for="password">Mật khẩu:</label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="Nhập mật khẩu"
+                      required
+                    />
+                  </div>
 
-                <button type="submit" id="add-account-btn">
-                  Thêm Tài khoản
-                </button>
-              </form>
+                  <!-- Xác nhận mật khẩu -->
+                  <div class="form-group">
+                    <label for="confirm-password">Xác nhận mật khẩu:</label>
+                    <input
+                      type="password"
+                      id="confirm-password"
+                      name="confirm-password"
+                      placeholder="Xác nhận mật khẩu"
+                      required
+                    />
+                  </div>
+
+                  <!-- Vai trò -->
+                  <div class="form-group">
+                    <label for="role">Phân quyền:</label>
+                    <select id="role" name="role" required>
+                      <option value="" disabled selected>Chọn vai trò</option>
+                      <option value="admin">Quản trị viên</option>
+                      <option value="editor">Người chỉnh sửa</option>
+                      <option value="customer">Khách hàng</option>
+                    </select>
+                  </div>
+
+                  <!-- Nút thêm tài khoản -->
+                  <button
+                    type="submit"
+                    id="add-account-btn"
+                    class="primary-button"
+                  >
+                    Thêm tài khoản
+                  </button>
+                </form>
+              </div>
             </div>
 
             <div class="header-tab">
               <div class="search-container">
                 <input
                   type="text"
-                  id="product-search"
+                  id="account-search"
                   placeholder="Tìm kiếm tài khoản..."
                 />
                 <button id="search-btn-account">Tìm kiếm</button>
@@ -1407,28 +1751,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                     <th>Hành động</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>admin01</td>
-                    <td>admin01@example.com</td>
-                    <td>Quản trị viên</td>
-                    <td>
-                      <button class="edit-btn">Chỉnh sửa</button>
-                      <button class="delete-btn">Xóa</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>editor02</td>
-                    <td>editor02@example.com</td>
-                    <td>Người chỉnh sửa</td>
-                    <td>
-                      <button class="edit-btn">Chỉnh sửa</button>
-                      <button class="delete-btn">Xóa</button>
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody></tbody>
               </table>
             </div>
           </div>
@@ -1452,12 +1775,16 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
       </div>
       <div id="notification" class="notification hidden">
         <div class="noti-img">
-          <img id="noti-img" src="./img/adminpage/checked.png" alt="Notification Icon">
+          <img
+            id="noti-img"
+            src="./img/adminpage/checked.png"
+            alt="Notification Icon"
+          />
         </div>
         <div class="noti-content">
           <span id="noti-message">This is a notification message!</span>
         </div>
-      </div>      
+      </div>
       <div id="custom-confirm" class="custom-confirm hidden">
         <div class="custom-confirm-content">
           <p id="confirm-message">
