@@ -192,7 +192,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     searchIcon.style.display = "block";
   });
 
-<<<<<<< HEAD
   const headerUser = document.querySelector(".header-user");
   const loginBtn = document.getElementById("login-header-btn");
 
@@ -206,7 +205,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     headerUser.style.display = "none";
     loginBtn.style.display = "block";
   }
-=======
+
   // Code phần tăng giảm số lượng giỏ hàng
   // Lấy tất cả các nút tăng và giảm
   const increaseButtons = document.querySelectorAll(".quantity-btn.increase");
@@ -247,5 +246,4 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     });
   });
->>>>>>> 22130206_PhanVanPhat
 });
