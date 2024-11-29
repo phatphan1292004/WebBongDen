@@ -8,13 +8,21 @@
 .wrapper .sidebar {
   position: fixed;
   top: 0;
-  left: -250px; /* Sidebar initially hidden */
-  width: 250px;
+  left: -400px; /* Sidebar initially hidden */
+  width: 300px;
   height: 100%;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--color-black);
+  color: #fff;
   transition: 0.3s;
-  z-index: 1000000; /* Make sure sidebar is above other content */
+  z-index: 100000000000; /* Make sure sidebar is above other content */
+}
+
+.wrapper .sidebar .sidebar-header img {
+  margin: 0 auto;
+}
+
+.wrapper .sidebar .sidebar-header {
+  border-bottom: 1px solid #dadada;
 }
 
 .wrapper .sidebar-list {
@@ -29,7 +37,7 @@
 
 .wrapper .sidebar a {
   font-size: 14px;
-  color: black;
+  color: #fff;
   font-weight: 500;
   text-decoration: none;
   display: block;
@@ -48,7 +56,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: none; /* Hidden by default */
-  z-index: 10000; /* Make overlay above content but below sidebar */
+  z-index: 10000000; /* Make overlay above content but below sidebar */
 }
 
 /* Active classes for showing sidebar and overlay */
@@ -647,13 +655,17 @@
   .header .header-top .info {
     margin-left: 0;
     padding: 8px;
-    background-color: red;  
     border-radius: 4px;
   }
 
   .header .header-top .info .info-item {
     margin-left: 0;
   }
+
+  .header .header-top .info .info-item:nth-child(1) {
+    display: none;
+  }
+
 
   .header-right a {
     margin-left: 0 !important;

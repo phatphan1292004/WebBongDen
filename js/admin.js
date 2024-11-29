@@ -19,13 +19,15 @@ document.addEventListener("DOMContentLoaded", function () {
     "Khách hàng",
     "Đơn hàng",
     "Doanh thu",
+    "Hệ thống",
   ];
   const fullTexts = [
     "Dashboard",
-    "Quản lý sản phẩm",
+    "Quản lý kho hàng",
     "Quản lý khách hàng",
     "Quản lý đơn hàng",
     "Thống kê doanh thu",
+    "Hệ thống",
   ];
   const saveProductBtn = document.getElementById("save-product");
   const overlays = document.querySelectorAll(".overlay");
@@ -46,23 +48,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Tab navigation
   navItems.forEach((item) => {
-    item.addEventListener("click", () => {
+    item.addEventListener("click", (e) => {
       const index = item.getAttribute("data-index");
-      tabContents.forEach((content) => {
-        content.style.display = "none";
-      });
-      navItems.forEach((nav) => {
-        nav.classList.remove("active");
-      });
-      tabContents[index].style.display = "block";
-      item.classList.add("active");
-
-      tabContents.forEach((tab) => {
-        tab.classList.remove("active"); // Xóa class active
-      });
+        if(index < 5) {
+          tabContents.forEach((content) => {
+            content.style.display = "none";
+          });
+          navItems.forEach((nav) => {
+            nav.classList.remove("active");
+          });
+          tabContents[index].style.display = "block";
+          item.classList.add("active");
+    
+          tabContents.forEach((tab) => {
+            tab.classList.remove("active"); // Xóa class active
+          });
+        }
 
       if (index == 5) {
-        document.getElementById("submenu-admin").classList.toggle("open");
+        navItems.forEach((nav) => {
+          nav.classList.remove("active");
+        });
+        document.getElementById("submenu-admin").classList.add("open");
       } else if (index < 5) {
         document.getElementById("submenu-admin").classList.remove("open");
       }
@@ -168,7 +175,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-  
 
   // tắt overlay
   cancelAdd.forEach((btn) => {
@@ -186,6 +192,11 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector(".add-product").addEventListener("click", function () {
     toggleOverlayByIndex(overlays, 0);
   });
+  document
+    .querySelector(".add-category")
+    .addEventListener("click", function () {
+      toggleOverlayByIndex(overlays, 1);
+    });
 
   saveProductBtn.addEventListener("click", () => {
     const productId = document.getElementById("product-id").value;
@@ -258,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   cusTableBody.addEventListener("click", function (e) {
     if (e.target && e.target.classList.contains("view-details")) {
-      toggleOverlayByIndex(overlays, 1);
+      toggleOverlayByIndex(overlays, 2);
     }
   });
 
@@ -329,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   orderTableBody.addEventListener("click", function (event) {
     if (event.target && event.target.classList.contains("view-details")) {
-      toggleOverlayByIndex(overlays, 2);
+      toggleOverlayByIndex(overlays, 3);
     }
   });
 
@@ -337,8 +348,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const sortButton = document.getElementById("sort-btn-order");
   // Hàm lọc danh sách đơn hàng
   sortButton.addEventListener("click", function () {
-    const sortValue = sortSelect.value;
-    let filteredOrders = [...orderData];
+    const sortValue = sortSelect.value; // Lấy giá trị từ select
+    let filteredOrders = [...orderData]; // Tạo bản sao dữ liệu đơn hàng
 
     switch (sortValue) {
       case "pending-orders": // Đơn hàng chưa duyệt
@@ -346,10 +357,23 @@ document.addEventListener("DOMContentLoaded", function () {
           (order) => order.status === "Chờ xử lý"
         );
         break;
+      case "in-progress-orders": // Đơn hàng đang giao
+        filteredOrders = filteredOrders.filter(
+          (order) => order.status === "Đang giao"
+        );
+        break;
+      case "completed-orders": // Đơn hàng đã giao
+        filteredOrders = filteredOrders.filter(
+          (order) => order.status === "Đã giao"
+        );
+        break;
       default:
+        // Nếu không chọn gì, hiển thị tất cả
+        filteredOrders = [...orderData];
         break;
     }
 
+    // Gọi hàm để hiển thị đơn hàng sau khi lọc
     loadOrderTable(filteredOrders);
   });
 
@@ -701,109 +725,60 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelector(".product-stats").style.display = "flex";
     });
 
+  // Hàm chuyển sang chế độ chỉnh sửa
   document
     .getElementById("edit-product-btn")
     .addEventListener("click", function () {
-      // Chuyển tất cả các trường sang chế độ chỉnh sửa (ẩn span và hiển thị input)
-      document.getElementById("edit-product-id").style.display = "block";
-      document.getElementById("edit-product-image").style.display = "block";
-      document.getElementById("edit-product-name").style.display = "block";
-      document.getElementById("edit-product-price").style.display = "block";
-      document.getElementById("edit-product-category").style.display = "block";
-      document.getElementById("edit-product-status").style.display = "block";
-      document.getElementById("edit-product-description").style.display =
-        "block";
-      document.getElementById("edit-product-date").style.display = "block";
-      document.getElementById("edit-product-discount").style.display = "block";
+      // Lấy tất cả các phần tử `span` và `input` bên trong div .details-content
+      const detailsContent = document.querySelector(".details-content");
 
-      document.getElementById("product-id-view").style.display = "none";
-      document.getElementById("product-image-view").style.display = "none";
-      document.getElementById("product-name-view").style.display = "none";
-      document.getElementById("product-price-view").style.display = "none";
-      document.getElementById("product-category-view").style.display = "none";
-      document.getElementById("product-status-view").style.display = "none";
-      document.getElementById("product-description-view").style.display =
-        "none";
-      document.getElementById("product-date-view").style.display = "none";
-      document.getElementById("product-discount-view").style.display = "none";
+      const spans = detailsContent.querySelectorAll("span");
+      const inputs = detailsContent.querySelectorAll("input, textarea");
 
-      // Hiển thị nút Save
+      // Ẩn tất cả các `span` (view) và hiển thị tất cả các `input` (edit)
+      spans.forEach((span) => {
+        span.style.display = "none";
+      });
+
+      inputs.forEach((input) => {
+        input.style.display = "block";
+      });
+
+      // Hiển thị nút Lưu, Ẩn nút Chỉnh sửa
       document.getElementById("save-product-btn").style.display = "block";
       document.getElementById("edit-product-btn").style.display = "none";
     });
 
+  // Hàm lưu thay đổi
   document
     .getElementById("save-product-btn")
     .addEventListener("click", function () {
-      // Lưu lại giá trị trong các input
-      const productId = document.getElementById("edit-product-id").value;
-      const productImage = document.getElementById("edit-product-image").value;
-      const productName = document.getElementById("edit-product-name").value;
-      const productPrice = document.getElementById("edit-product-price").value;
-      const productCategory = document.getElementById(
-        "edit-product-category"
-      ).value;
-      const productStatus = document.getElementById(
-        "edit-product-status"
-      ).value;
-      const productDescription = document.getElementById(
-        "edit-product-description"
-      ).value;
-      const productDate = document.getElementById("edit-product-date").value;
-      const productDiscount = document.getElementById(
-        "edit-product-discount"
-      ).value;
+      // Lấy tất cả các phần tử `span` và `input` bên trong div .details-content
+      const detailsContent = document.querySelector(".details-content");
 
-      // Cập nhật lại các phần tử để hiển thị thông tin đã sửa
-      document.getElementById("product-id-view").textContent = productId;
-      document.getElementById("product-image-view").textContent = productImage;
-      document.getElementById("product-name-view").textContent = productName;
-      document.getElementById("product-price-view").textContent = productPrice;
-      document.getElementById("product-category-view").textContent =
-        productCategory;
-      document.getElementById("product-status-view").textContent =
-        productStatus;
-      document.getElementById("product-description-view").textContent =
-        productDescription;
-      document.getElementById("product-date-view").textContent = productDate;
-      document.getElementById("product-discount-view").textContent =
-        productDiscount;
+      const spans = detailsContent.querySelectorAll("span");
+      const inputs = detailsContent.querySelectorAll("input, textarea");
 
-      // Chuyển lại các input và textarea thành ẩn
-      document.getElementById("edit-product-id").style.display = "none";
-      document.getElementById("edit-product-image").style.display = "none";
-      document.getElementById("edit-product-name").style.display = "none";
-      document.getElementById("edit-product-price").style.display = "none";
-      document.getElementById("edit-product-category").style.display = "none";
-      document.getElementById("edit-product-status").style.display = "none";
-      document.getElementById("edit-product-description").style.display =
-        "none";
-      document.getElementById("edit-product-date").style.display = "none";
-      document.getElementById("edit-product-discount").style.display = "none";
+      // Cập nhật giá trị từ `input` sang `span`
+      inputs.forEach((input) => {
+        const correspondingSpan = input.previousElementSibling; // Lấy span liền trước input
+        if (correspondingSpan) {
+          correspondingSpan.textContent = input.value;
+        }
+      });
 
-      // Hiển thị các phần tử thông tin ở dạng inline-block
-      document.getElementById("product-id-view").style.display = "inline-block";
-      document.getElementById("product-image-view").style.display =
-        "inline-block";
-      document.getElementById("product-name-view").style.display =
-        "inline-block";
-      document.getElementById("product-price-view").style.display =
-        "inline-block";
-      document.getElementById("product-category-view").style.display =
-        "inline-block";
-      document.getElementById("product-status-view").style.display =
-        "inline-block";
-      document.getElementById("product-description-view").style.display =
-        "inline-block";
-      document.getElementById("product-date-view").style.display =
-        "inline-block";
-      document.getElementById("product-discount-view").style.display =
-        "inline-block";
+      // Hiển thị lại tất cả các `span` và ẩn tất cả các `input`
+      spans.forEach((span) => {
+        span.style.display = "inline";
+      });
 
-      // Ẩn nút Save và hiện lại nút Edit
+      inputs.forEach((input) => {
+        input.style.display = "none";
+      });
+
+      // Hiển thị nút Chỉnh sửa, Ẩn nút Lưu
       document.getElementById("save-product-btn").style.display = "none";
-      document.getElementById("edit-product-btn").style.display =
-        "inline-block";
+      document.getElementById("edit-product-btn").style.display = "block";
     });
 
   const menuItems = document.querySelectorAll(".submenu-admin .menu-item");
@@ -812,25 +787,26 @@ document.addEventListener("DOMContentLoaded", function () {
     item.addEventListener("click", () => {
       // Loại bỏ class active khỏi tất cả menu-items
       menuItems.forEach((menuItem) => menuItem.classList.remove("active"));
-
+  
       // Thêm class active vào menu-item hiện tại
       item.classList.add("active");
-
+  
       // Lấy target từ data-target
       const targetId = item.getAttribute("data-target");
-
+  
       // Ẩn tất cả tab-content
       tabContents.forEach((tab) => {
-        tab.classList.remove("active");
+        tab.classList.remove("active");  // Loại bỏ class active khỏi tất cả tab contents
+        tab.style.display = 'none';  // Ẩn tất cả tab content
       });
-
       // Hiển thị tab-content tương ứng
       const targetTab = document.getElementById(targetId);
       if (targetTab) {
-        targetTab.classList.add("active"); // Thêm class active
+        targetTab.classList.add("active");  // Thêm class active cho tab content
+        targetTab.style.display = 'block';  // Hiển thị tab content
       }
     });
-  });
+  });  
 
   // Code trang phiếu khuyến mãi ------------------------------------------
 
@@ -920,7 +896,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Kiểm tra dữ liệu nhập vào
       if (!discountCode || !discountPercent || !discountExpiry) {
-        showNotification("Vui lòng điền đầy đủ thông tin phiếu giảm giá!", "error");
+        showNotification(
+          "Vui lòng điền đầy đủ thông tin phiếu giảm giá!",
+          "error"
+        );
         return;
       }
 
@@ -950,109 +929,192 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // End phiếu khuyến mãi  ==================
 
-  // Xử lí phần quản lí tài khoản
-  const accountForm = document.getElementById("account-form");
-  const accountUsernameInput = document.getElementById("account-username");
-  const accountEmailInput = document.getElementById("account-email");
-  const accountRoleSelect = document.getElementById("account-role");
-  const addAccountBtn = document.getElementById("add-account-btn");
+  // Xử lý phần tài khoản
+  const accountForm = document.getElementById("add-account-form");
+  const usernameInput = document.getElementById("username");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const confirmPasswordInput = document.getElementById("confirm-password");
+  const roleSelect = document.getElementById("role");
+  const searchInput = document.getElementById("account-search");
+  const searchButton = document.getElementById("search-btn-account");
   const accountListTable = document.querySelector("#account-list tbody");
+  let accounts = [
+    { id: 1, username: "admin01", email: "admin01@example.com", role: "admin" },
+    {
+      id: 2,
+      username: "editor02",
+      email: "editor02@example.com",
+      role: "editor",
+    },
+  ];
+  renderAccountList();
 
+  // 1. Thêm hoặc cập nhật tài khoản
   accountForm.addEventListener("submit", function (e) {
-    e.preventDefault(); // Ngăn chặn form submit mặc định
+    e.preventDefault(); // Ngăn chặn hành vi submit mặc định
 
-    console.log("a");
-    const username = accountUsernameInput.value.trim();
-    const email = accountEmailInput.value.trim();
-    const role = accountRoleSelect.value;
+    const username = usernameInput.value.trim();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+    const confirmPassword = confirmPasswordInput.value.trim();
+    const role = roleSelect.value;
 
-    if (!username || !email || !role) {
-      showNotification("Vui lòng điền đầy đủ thông tin tài khoản!", "error");
+    // Kiểm tra thông tin đầu vào
+    if (!username || !email || !password || !confirmPassword || !role) {
+      showNotification("Vui lòng điền đầy đủ thông tin!", "error");
       return;
     }
 
-    if (addAccountBtn.textContent.trim() === "Thêm Tài khoản") {
+    // Kiểm tra mật khẩu khớp nhau
+    if (password !== confirmPassword) {
+      showNotification("Mật khẩu và xác nhận mật khẩu không khớp!", "error");
+      return;
+    }
+
+    if (!editingRow) {
       // Thêm tài khoản mới
-      const newRow = document.createElement("tr");
-      const newId = accountListTable.querySelectorAll("tr").length + 1;
-
-      newRow.innerHTML = `
-        <td>${newId}</td>
-        <td>${username}</td>
-        <td>${email}</td>
-        <td>${
-          role === "admin"
-            ? "Quản trị viên"
-            : role === "editor"
-            ? "Người chỉnh sửa"
-            : "Người xem"
-        }</td>
-        <td>
-          <button class="edit-btn">Chỉnh sửa</button>
-          <button class="delete-btn">Xóa</button>
-        </td>`;
-
-      accountListTable.appendChild(newRow);
-      showNotification("Đã thêm tài khoản thành công!");
-    } else if (addAccountBtn.textContent === "Cập nhật Tài khoản") {
+      const newAccount = {
+        id: accounts.length + 1,
+        username,
+        email,
+        role,
+      };
+      accounts.push(newAccount);
+      showNotification("Tài khoản mới đã được thêm thành công!", "success");
+    } else {
       // Cập nhật tài khoản
-      if (editingRow) {
-        editingRow.cells[1].textContent = username;
-        editingRow.cells[2].textContent = email;
-        editingRow.cells[3].textContent =
-          role === "admin"
-            ? "Quản trị viên"
-            : role === "editor"
-            ? "Người chỉnh sửa"
-            : "Khách hàng";
+      const accountId = editingRow.dataset.id;
+      const account = accounts.find((acc) => acc.id === parseInt(accountId));
 
-        showNotification("Cập nhật tài khoản thành công!");
-        addAccountBtn.textContent = "Thêm Tài khoản";
+      if (account) {
+        account.username = username;
+        account.email = email;
+        account.role = role;
+        showNotification("Tài khoản đã được cập nhật thành công!", "success");
         editingRow = null;
       }
     }
 
-    // Reset form
     accountForm.reset();
+    renderAccountList();
   });
 
-  // Xử lý sự kiện "Chỉnh sửa" và "Xóa"
+  // 2. Hiển thị danh sách tài khoản
+  function renderAccountList(filteredAccounts = accounts) {
+    accountListTable.innerHTML = ""; // Xóa danh sách cũ
+
+    filteredAccounts.forEach((account) => {
+      const row = document.createElement("tr");
+      row.dataset.id = account.id;
+
+      row.innerHTML = `
+      <td>${account.id}</td>
+      <td>${account.username}</td>
+      <td>${account.email}</td>
+      <td>${getRoleName(account.role)}</td>
+      <td>
+        <button class="edit-btn">Chỉnh sửa</button>
+        <button class="delete-btn">Xóa</button>
+      </td>
+    `;
+
+      accountListTable.appendChild(row);
+    });
+  }
+
+  // 3. Xử lý nút "Chỉnh sửa" và "Xóa"
   accountListTable.addEventListener("click", function (e) {
+    const row = e.target.closest("tr");
+    const accountId = row ? row.dataset.id : null;
+
     if (e.target.classList.contains("edit-btn")) {
+      document.querySelector('.primary-button').textContent = 'Chỉnh sửa';
       // Chỉnh sửa tài khoản
-      const row = e.target.closest("tr");
-      editingRow = row;
+      const account = accounts.find((acc) => acc.id === parseInt(accountId));
+      if (account) {
+        usernameInput.value = account.username;
+        emailInput.value = account.email;
+        roleSelect.value = account.role;
 
-      // Điền thông tin tài khoản vào form
-      accountUsernameInput.value = row.cells[1].textContent;
-      accountEmailInput.value = row.cells[2].textContent;
-
-      const roleText = row.cells[3].textContent;
-      accountRoleSelect.value =
-        roleText === "Quản trị viên"
-          ? "admin"
-          : roleText === "Người chỉnh sửa"
-          ? "editor"
-          : "viewer";
-
-      // Thay đổi nút thành "Cập nhật Tài khoản"
-      addAccountBtn.textContent = "Cập nhật Tài khoản";
+        editingRow = row; 
+      }
     }
 
     if (e.target.classList.contains("delete-btn")) {
       // Xóa tài khoản
-      const row = e.target.closest("tr");
-      const username = row.cells[1].textContent;
-
-      showCustomConfirm(
-        `Bạn có chắc chắn muốn xóa tài khoản ${username}?`,
-        function () {
-          row.remove();
-          showNotification(`Đã xóa tài khoản ${username}`);
-        }
-      );
+      const account = accounts.find((acc) => acc.id === parseInt(accountId));
+      if (account) {
+        showCustomConfirm(
+          `Bạn có chắc chắn muốn xóa tài khoản ${account.username}?`,
+          function () {
+            accounts = accounts.filter((acc) => acc.id !== parseInt(accountId));
+            renderAccountList();
+            showNotification("Tài khoản đã được xóa thành công!", "success");
+          }
+        );
+      }
     }
   });
+
+  // 4. Tìm kiếm tài khoản
+  searchButton.addEventListener("click", function () {
+    const searchText = searchInput.value.trim().toLowerCase();
+    const filteredAccounts = accounts.filter(
+      (acc) =>
+        acc.username.toLowerCase().includes(searchText) ||
+        acc.email.toLowerCase().includes(searchText) ||
+        getRoleName(acc.role).toLowerCase().includes(searchText)
+    );
+
+    renderAccountList(filteredAccounts);
+  });
+
+  // Định nghĩa tên vai trò
+  function getRoleName(role) {
+    if (role === "admin") return "Quản trị viên";
+    if (role === "editor") return "Người chỉnh sửa";
+    if (role === "customer") return "Khách hàng";
+    return "Không xác định";
+  }
+
+  // Hiển thị thông báo
+  function showNotification(message, type = "success") {
+    const notification = document.createElement("div");
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.remove();
+    }, 3000); // Tự động ẩn sau 3 giây
+  }
+
+  // Hiển thị hộp thoại xác nhận
+  function showCustomConfirm(message, onConfirm) {
+    const confirmBox = document.createElement("div");
+    confirmBox.className = "custom-confirm";
+
+    confirmBox.innerHTML = `
+    <p>${message}</p>
+    <div class="confirm-actions">
+      <button id="confirm-yes" class="confirm-btn">Có</button>
+      <button id="confirm-no" class="confirm-btn">Không</button>
+    </div>
+  `;
+
+    document.body.appendChild(confirmBox);
+
+    document.getElementById("confirm-yes").addEventListener("click", () => {
+      onConfirm();
+      confirmBox.remove();
+    });
+
+    document.getElementById("confirm-no").addEventListener("click", () => {
+      confirmBox.remove();
+    });
+  }
 
   function showCustomConfirm(message, onConfirm) {
     confirmMessage.textContent = message;
@@ -1436,79 +1498,142 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   // Dữ liệu mẫu cho Discount
-const discountProducts = {
-  SALE20: ["Sản phẩm A", "Sản phẩm B", "Sản phẩm C"],
-  NEWYEAR30: ["Sản phẩm D", "Sản phẩm E"],
-};
+  const discountProducts = {
+    SALE20: ["Sản phẩm A", "Sản phẩm B", "Sản phẩm C"],
+    NEWYEAR30: ["Sản phẩm D", "Sản phẩm E"],
+  };
 
-// Dữ liệu mẫu cho Super Sale
-const superSaleData = [
-  {
-    id: "CT000",
-    startDate: "2024-11-01",
-    endDate: "2024-11-30",
-    programName: "Siêu Sale Tháng 11",
-    products: ["SP001 - Áo thun", "SP002 - Quần jeans", "SP003 - Giày thể thao"],
-  },
-  {
-    id: "CT001",
-    startDate: "2024-12-01",
-    endDate: "2024-12-25",
-    programName: "Giáng Sinh Rực Rỡ",
-    products: ["SP004 - Váy nữ", "SP005 - Áo khoác"],
-  },
-];
+  // Dữ liệu mẫu cho Super Sale
+  const superSaleData = [
+    {
+      id: "CT000",
+      startDate: "2024-11-01",
+      endDate: "2024-11-30",
+      programName: "Siêu Sale Tháng 11",
+      products: [
+        "SP001 - Áo thun",
+        "SP002 - Quần jeans",
+        "SP003 - Giày thể thao",
+      ],
+    },
+    {
+      id: "CT001",
+      startDate: "2024-12-01",
+      endDate: "2024-12-25",
+      programName: "Giáng Sinh Rực Rỡ",
+      products: ["SP004 - Váy nữ", "SP005 - Áo khoác"],
+    },
+  ];
 
-// Đóng overlay
-function closeOverlay() {
-  const overlays = document.querySelectorAll(".overlay");
-  overlays.forEach((overlay) => {
-    overlay.classList.remove("active");
+  // Đóng overlay
+  function closeOverlay() {
+    const overlays = document.querySelectorAll(".overlay");
+    overlays.forEach((overlay) => {
+      overlay.classList.remove("active");
+    });
+  }
+
+  // Gắn sự kiện cho nút đóng
+  document.querySelectorAll(".close-overlay-btn").forEach((btn) => {
+    btn.addEventListener("click", closeOverlay);
   });
-}
 
-// Gắn sự kiện cho nút đóng
-document.querySelectorAll(".close-overlay-btn").forEach((btn) => {
-  btn.addEventListener("click", closeOverlay);
-});
+  // Gán sự kiện cho Discount
+  document.querySelectorAll("#discount-list .view-details").forEach((item) => {
+    item.addEventListener("click", () => {
+      const discountCode = item.closest("tr").querySelector("td").innerText;
 
-// Gán sự kiện cho Discount
-document.querySelectorAll("#discount-list .view-details").forEach((item) => {
-  item.addEventListener("click", () => {
-    const discountCode = item.closest("tr").querySelector("td").innerText;
-
-    // Cập nhật thông tin trong modal Discount
-    document.getElementById("modal-discount-code").innerText = `Mã giảm giá: ${discountCode}`;
-    const products = discountProducts[discountCode] || ["Không có sản phẩm"];
-    document.getElementById("modal-product-list").innerHTML = products
-      .map((product) => `<li>${product}</li>`)
-      .join("");
-
-    // Hiển thị overlay Discount (index 3)
-    toggleOverlayByIndex(overlays, 3);
-  });
-});
-
-// Gán sự kiện cho Super Sale
-document.querySelectorAll("#super-sale-list .view-details").forEach((item) => {
-  item.addEventListener("click", () => {
-    const saleData = superSaleData.find(
-      (data) => data.id === item.closest("tr").querySelector("td").innerText
-    );
-
-    if (saleData) {
-      // Cập nhật thông tin trong modal Super Sale
-      document.getElementById("sale-program-id").innerText = saleData.id;
-      document.getElementById("sale-start-date").innerText = saleData.startDate;
-      document.getElementById("sale-end-date").innerText = saleData.endDate;
-      document.getElementById("sale-program-name").innerText = saleData.programName;
-      document.getElementById("sale-product-list").innerHTML = saleData.products
+      // Cập nhật thông tin trong modal Discount
+      document.getElementById(
+        "modal-discount-code"
+      ).innerText = `Mã giảm giá: ${discountCode}`;
+      const products = discountProducts[discountCode] || ["Không có sản phẩm"];
+      document.getElementById("modal-product-list").innerHTML = products
         .map((product) => `<li>${product}</li>`)
         .join("");
 
-      // Hiển thị overlay Super Sale (index 4)
+      // Hiển thị overlay Discount (index 3)
       toggleOverlayByIndex(overlays, 4);
-    }
+    });
   });
-});
+
+  // Gán sự kiện cho Super Sale
+  document
+    .querySelectorAll("#super-sale-list .view-details")
+    .forEach((item) => {
+      item.addEventListener("click", () => {
+        const saleData = superSaleData.find(
+          (data) => data.id === item.closest("tr").querySelector("td").innerText
+        );
+
+        if (saleData) {
+          // Cập nhật thông tin trong modal Super Sale
+          document.getElementById("sale-program-id").innerText = saleData.id;
+          document.getElementById("sale-start-date").innerText =
+            saleData.startDate;
+          document.getElementById("sale-end-date").innerText = saleData.endDate;
+          document.getElementById("sale-program-name").innerText =
+            saleData.programName;
+          document.getElementById("sale-product-list").innerHTML =
+            saleData.products.map((product) => `<li>${product}</li>`).join("");
+
+          // Hiển thị overlay Super Sale (index 4)
+          toggleOverlayByIndex(overlays, 5);
+        }
+      });
+    });
+
+  function renderCategories() {
+    const categoryList = document.getElementById("category-list");
+    categoryList.innerHTML = "";
+
+    // Duyệt qua cateData để hiển thị danh mục chính
+    cateData.forEach((category) => {
+      const li = document.createElement("li");
+
+      // Thêm danh mục chính
+      li.innerHTML = `
+          <span>${category.name}</span>
+          <ul class="subcategory-list"></ul>`;
+
+      // Thêm sự kiện click để hiển thị/ẩn danh mục con
+      li.addEventListener("click", () => {
+        const subcategoryList = li.querySelector(".subcategory-list");
+        subcategoryList.classList.toggle("show");
+      });
+
+      categoryList.appendChild(li);
+
+      // Tìm và thêm các loại sản phẩm thuộc danh mục này
+      const subcategoryList = li.querySelector(".subcategory-list");
+      const subcategories = subcateData.filter(
+        (sub) => sub.idCate === category.id
+      );
+      subcategories.forEach((sub) => {
+        const subLi = document.createElement("li");
+        subLi.innerHTML = `
+          <span>${sub.name}</span>
+          <button class="delete-subcategory-btn" data-id="${sub.id}">x</button>
+        `;
+        subcategoryList.appendChild(subLi);
+
+        // Thêm sự kiện xóa cho nút "x" của danh mục con
+        subLi
+          .querySelector(".delete-subcategory-btn")
+          .addEventListener("click", (e) => {
+            e.stopPropagation(); // Ngăn không cho sự kiện click lan ra ngoài
+            const indexToRemove = subcateData.findIndex(
+              (item) => item.id === sub.id
+            );
+            if (indexToRemove > -1) {
+              subcateData.splice(indexToRemove, 1);
+              renderCategories(); // Render lại danh sách sau khi xóa
+            }
+          });
+      });
+    });
+  }
+
+  // Khởi tạo danh sách ban đầu
+  renderCategories();
 });

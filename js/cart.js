@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  const tabHistory = [];
-  let canChangeTab = false;
-
   //Lay ds tinh huyen xa
   const fetchData = async (url) => {
     const response = await fetch(url);
@@ -51,6 +48,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
       }
     });
+  
+
+
 
   // Hàm kiểm tra input có hợp lệ hay không
   const validateInput = (input) => {
@@ -70,97 +70,114 @@ document.addEventListener("DOMContentLoaded", async function () {
       input.addEventListener("change", () => validateInput(input));
     });
 
-  const navList = document.querySelectorAll(".nav-item");
+    const navList = document.querySelectorAll(".nav-item");
+    const tabHistory = ["cart"]; 
+    let canChangeTab = false; 
+    const direction = document.getElementById("direction-cart")
+    
+    // Show tab khi có thay đổi
+    function showTab(tabName) {
 
-  //showTab khi có thay đổi
-  function showTab(tabName) {
-    document
-      .querySelectorAll(".tab-content, .nav-item")
-      .forEach((el) => el.classList.remove("active", "highlight"));
-    document.getElementById(tabName)?.classList.add("active");
-    document
-      .querySelector(`.nav-item[data-tab="${tabName}"]`)
-      ?.classList.add("active");
-
-    const tabIndex = tabHistory.indexOf(tabName);
-    if (tabIndex === -1) {
-      tabHistory.push(tabName);
-    } else {
-      tabHistory.splice(tabIndex + 1);
-    }
-
-    navList.forEach((item) => {
-      if (tabHistory.includes(item.getAttribute("data-tab"))) {
-        item.classList.add("highlight", "completed"); // Thêm lớp "completed" khi tab hoàn thành
-      } else {
-        item.classList.remove("highlight", "completed");
+      document.querySelectorAll(".tab-content, .nav-item").forEach((el) => el.classList.remove("active", "highlight"));
+    
+      const tabContent = document.getElementById(tabName);
+      if (tabContent) {
+        tabContent.classList.add("active"); // Hiển thị tab hiện tại
       }
-    });
-  }
-
-  navList.forEach((item) => {
-    item.addEventListener("click", (event) => {
-      if (canChangeTab) {
-        showTab(item.getAttribute("data-tab"));
-      } else {
-        event.preventDefault();
+    
+      const navItem = document.querySelector(`.nav-item[data-tab="${tabName}"]`);
+      if (navItem) {
+        navItem.classList.add("active"); // Làm nổi bật tab hiện tại
       }
-    });
-  });
-
-  showTab("cart");
-
-  const buyBtn = document.querySelectorAll(".buy-btn");
-
-  buyBtn.forEach((button) => {
-    button.addEventListener("click", () => {
-      const currentTab = document.querySelector(".tab-content.active");
-      const nextTab = currentTab?.nextElementSibling;
-
-      if (currentTab?.id === "order-info") {
-        const inputs = currentTab.querySelectorAll(
-          "input[required], select[required]"
-        );
-        let isAllValid = true;
-        const provinceSelect = document.getElementById("province");
-        const districtSelect = document.getElementById("district");
-        const wardSelect = document.getElementById("ward");
-
-        const province =
-          provinceSelect.options[provinceSelect.selectedIndex]?.text || "";
-        const district =
-          districtSelect.options[districtSelect.selectedIndex]?.text || "";
-        const ward = wardSelect.options[wardSelect.selectedIndex]?.text || "";
-
-        const fullAddress = `${
-          document.getElementById("number-address").value
-        }, ${ward}, ${district}, ${province}`;
-
-        document.querySelector(".customer-name").textContent =
-          document.getElementById("cus-name").value;
-        document.querySelector(".customer-phone").textContent =
-          document.getElementById("cus-tele").value;
-        document.querySelector(".customer-address").textContent = fullAddress;
-
-        inputs.forEach((input) => {
-          validateInput(input);
-          if (!input.classList.contains("valid")) {
-            isAllValid = false;
-          }
-        });
-
-        if (isAllValid && nextTab) {
-          canChangeTab = true;
-          showTab(nextTab.id);
+    
+      // Thêm tab vào lịch sử nếu chưa có
+      const tabIndex = tabHistory.indexOf(tabName);
+      if (tabIndex === -1) {
+        tabHistory.push(tabName);
+      } else {
+        tabHistory.splice(tabIndex + 1); // Xóa các tab tiếp theo nếu quay lại tab trước đó
+      }
+    
+      // Cập nhật trạng thái các tab (hoàn thành, highlight...)
+      navList.forEach((item) => {
+        const itemTabName = item.getAttribute("data-tab");
+        if (tabHistory.includes(itemTabName)) {
+          item.classList.add("highlight", "completed");
         } else {
-          alert("Vui lòng điền đầy đủ và hợp lệ thông tin!");
+          item.classList.remove("highlight", "completed");
         }
-      } else if (nextTab) {
-        canChangeTab = true;
-        showTab(nextTab.id);
-      }
+      });
+      if (tabName !== 'cart') {
+        console.log('aa');
+        direction.textContent = "Quay lại";
+    }    
+      console.log(tabHistory);
+    }
+    
+    // Lắng nghe sự kiện click vào các tab
+    navList.forEach((item) => {
+      item.addEventListener("click", (event) => {
+        const tabName = item.getAttribute("data-tab");
+    
+        // Chỉ cho phép chuyển đến tab nếu tab đó đã được mở trong lịch sử và là tab tiếp theo hoặc tab "cart"
+        if (canChangeTab && tabHistory.includes(tabName)) {
+          showTab(tabName); // Chuyển tab nếu đủ điều kiện
+        } else {
+          event.preventDefault(); // Ngăn chặn chuyển tab nếu chưa hoàn thành
+        }
+      });
     });
-  });
+    
+    // Mặc định hiển thị tab "cart"
+    showTab("cart");
+    
+    // Lắng nghe sự kiện click vào nút "Mua ngay"
+    const buyBtn = document.querySelectorAll(".buy-btn");
+    
+    buyBtn.forEach((button) => {
+      button.addEventListener("click", () => {
+        const currentTab = document.querySelector(".tab-content.active");
+        const nextTab = currentTab?.nextElementSibling;
+    
+        if (currentTab?.id === "order-info") {
+          const inputs = currentTab.querySelectorAll("input[required], select[required]");
+          let isAllValid = true;
+          const provinceSelect = document.getElementById("province");
+          const districtSelect = document.getElementById("district");
+          const wardSelect = document.getElementById("ward");
+    
+          const province = provinceSelect.options[provinceSelect.selectedIndex]?.text || "";
+          const district = districtSelect.options[districtSelect.selectedIndex]?.text || "";
+          const ward = wardSelect.options[wardSelect.selectedIndex]?.text || "";
+    
+          const fullAddress = `${document.getElementById("number-address").value}, ${ward}, ${district}, ${province}`;
+    
+          document.querySelector(".customer-name").textContent = document.getElementById("cus-name").value;
+          document.querySelector(".customer-phone").textContent = document.getElementById("cus-tele").value;
+          document.querySelector(".customer-address").textContent = fullAddress;
+    
+          // Kiểm tra tính hợp lệ của các input
+          inputs.forEach((input) => {
+            validateInput(input);
+            if (!input.classList.contains("valid")) {
+              isAllValid = false;
+            }
+          });
+    
+          // Chuyển tab nếu thông tin hợp lệ
+          if (isAllValid && nextTab) {
+            canChangeTab = true; // Cho phép chuyển tab
+            showTab(nextTab.id); // Chuyển sang tab tiếp theo
+          } else {
+            alert("Vui lòng điền đầy đủ và hợp lệ thông tin!");
+          }
+        } else if (nextTab) {
+          canChangeTab = true; 
+          showTab(nextTab.id);
+        }
+      });
+    });
+    
 
   const menuToggle = document.getElementById("menu-toggle");
   const sidebar = document.getElementById("sidebar");
@@ -225,11 +242,28 @@ document.addEventListener("DOMContentLoaded", async function () {
     button.addEventListener("click", (event) => {
       // Lấy thẻ <li> gần nhất chứa nút "Xóa" được nhấn
       const listItem = event.target.closest(".product-item");
-
-      // Hiển thị thông báo xác nhận
-      if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+      showCustomConfirm("Bạn có muốn xóa sản phẩm này", function() {
         listItem.remove(); // Xóa thẻ <li> khỏi DOM
-      }
+      })
     });
   });
+  const customConfirm = document.getElementById("custom-confirm");
+  const confirmMessage = document.getElementById("confirm-message");
+  const confirmOk = document.getElementById("confirm-ok");
+  const confirmCancel = document.getElementById("confirm-cancel");
+  function showCustomConfirm(message, onConfirm) {
+    confirmMessage.textContent = message;
+    customConfirm.classList.remove("hidden");
+
+    // Xử lý sự kiện khi nhấn "Đồng ý"
+    confirmOk.onclick = function () {
+      customConfirm.classList.add("hidden");
+      onConfirm();
+    };
+
+    // Xử lý sự kiện khi nhấn "Hủy"
+    confirmCancel.onclick = function () {
+      customConfirm.classList.add("hidden");
+    };
+  }
 });
