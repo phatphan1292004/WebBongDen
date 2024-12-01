@@ -96,10 +96,7 @@
                 <button>Tiếp tục mua hàng</button>
               </div> -->
 
-              <div
-                class="order-table-container"
-                id="orderTableContainer"
-              >
+              <div class="order-table-container" id="orderTableContainer">
                 <table class="order-table">
                   <thead>
                     <tr>
@@ -112,8 +109,7 @@
                       <th>Thao tác</th>
                     </tr>
                   </thead>
-                  <tbody id="orderTableBody">
-                  </tbody>
+                  <tbody id="orderTableBody"></tbody>
                 </table>
               </div>
             </div>
@@ -147,41 +143,63 @@
                   <div>
                     <input type="email" id="email" name="email" required />
                     <a href="#">Thay đổi</a>
-            <!-- đổi mật khẩu -->
-             <div
-             id="change_password"
-             class="content_section"
-             style="display: none;"
-             >
-             <div class="change_password_header">
-              <h1>ĐỔI MẬT KHẨU</h1>
-              <div class="title">Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</div>
+                  </div>
+                </div>
+              </form>
             </div>
-            <form class="change_password_form">
-              <div class="dlex">
-                <label for="oldPassword">Mật khẩu cũ:</label>
-                <div>
-                  <input type="password" id="oldPassword" placeholder="Nhập mật khẩu hiện tại" required />
+            <!-- đổi mật khẩu -->
+            <div
+              id="change_password"
+              class="content_section"
+              style="display: none"
+            >
+              <div class="change_password_header">
+                <h1>ĐỔI MẬT KHẨU</h1>
+                <div class="title">
+                  Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho
+                  người khác
                 </div>
               </div>
+              <form class="change_password_form">
+                <div class="dlex">
+                  <label for="oldPassword">Mật khẩu cũ:</label>
+                  <div>
+                    <input
+                      type="password"
+                      id="oldPassword"
+                      placeholder="Nhập mật khẩu hiện tại"
+                      required
+                    />
+                  </div>
+                </div>
 
-              <div class="dlex">
-                <label for="newPassword">Mật khẩu mới:</label>
-                <div>
-                  <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới" required />
+                <div class="dlex">
+                  <label for="newPassword">Mật khẩu mới:</label>
+                  <div>
+                    <input
+                      type="password"
+                      id="newPassword"
+                      placeholder="Nhập mật khẩu mới"
+                      required
+                    />
+                  </div>
                 </div>
-              </div>
-              
-              <div class="dlex">
-                <label for="confirm_password">Nhập lại mật khẩu:</label>
-                <div>
-                  <input type="password" id="confirm_password" placeholder="Nhập lại mật khẩu mới" required />
+
+                <div class="dlex">
+                  <label for="confirm_password">Nhập lại mật khẩu:</label>
+                  <div>
+                    <input
+                      type="password"
+                      id="confirm_password"
+                      placeholder="Nhập lại mật khẩu mới"
+                      required
+                    />
+                  </div>
                 </div>
-              </div>
                 <button class="submit" type="submit">Xác nhận</button>
               </form>
-            <p id="message" class="message"></p>
-             </div>
+              <p id="message" class="message"></p>
+            </div>
             <!-- Thông tin tài khoản -->
             <div
               id="information_account"
@@ -248,4 +266,3 @@
     <script type="module" src="./js/script.js"></script>
   </body>
 </html>
-

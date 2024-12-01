@@ -148,9 +148,7 @@
     color: white;
     font-weight: 500;
 }
-<<<<<<< HEAD
 
-=======
 /* code cho đổi mật khẩu của user */
 .content .content_section .change_password_header{
     border-bottom: 1px solid #efefef;
@@ -204,7 +202,7 @@
     font-size: 14px;
     color: red;
 }
->>>>>>> 22130160_TranCongLy
+
 /* Code đơn hàng của user */
 .content .content_section .order_header h2 {
     font-size: 18px;
