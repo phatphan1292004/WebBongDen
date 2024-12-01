@@ -45,6 +45,12 @@
                     <i class="fa-solid fa-bars-progress"></i>
                     <a href="#">Quản lý đơn hàng</a>
                   </li>
+
+                  <li onclick="showContent('change_password')">
+                    <i class="fa-solid fa-lock"></i>
+                    <a href="#">Đổi mật khẩu</a>
+                  </li>
+
                   <li onclick="logout()">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <a href="#" id="logoutLink">Đăng xuất</a>
@@ -107,6 +113,39 @@
                 </table>
               </div>
             </div>
+            <!-- đổi mật khẩu -->
+             <div
+             id="change_password"
+             class="content_section"
+             style="display: none;"
+             >
+             <div class="change_password_header">
+              <h1>Đổi mật khẩu</h1>
+              <div>Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</div>
+            </div>
+            <form class="change_password_form">
+              <div class="old_password">
+                <label for="oldPassword">Mật khẩu cũ:</label>
+                <div>
+                  <input type="password" id="oldPassword" name="oldPassword" required />
+                </div>
+              </div>
+
+              <div class="new_password">
+                <label for="newPassword">Mật khẩu mới:</label>
+                <div>
+                  <input type="password" id="newPassword" name="newPassword" required />
+                </div>
+              </div>
+              
+              <div class="new_password">
+                <label for="newPassword">Nhập lại mật khẩu:</label>
+                <div>
+                  <input type="newPassword" id="newPassword" name="newPassword" required />
+                </div>
+              </div>
+            </form>
+             </div>
             <!-- Thông tin tài khoản -->
             <div
               id="information_account"
@@ -129,14 +168,6 @@
                   <div>
                     <input type="radio" name="gender" checked /> Nam
                     <input type="radio" name="gender" checked /> Nữ
-                  </div>
-                </div>
-
-                <div class="email-cus dlex">
-                  <label for="email">Email:</label>
-                  <div>
-                    <input type="email" id="email" name="email" readonly />
-                    <a href="#">Thay đổi</a>
                   </div>
                 </div>
 
