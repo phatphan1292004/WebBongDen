@@ -45,6 +45,12 @@
                     <i class="fa-solid fa-bars-progress"></i>
                     <a href="#">Quản lý đơn hàng</a>
                   </li>
+
+                  <li onclick="showContent('change_password')">
+                    <i class="fa-solid fa-lock"></i>
+                    <a href="#">Đổi mật khẩu</a>
+                  </li>
+
                   <li onclick="logout()">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <a href="#" id="logoutLink">Đăng xuất</a>
@@ -82,7 +88,11 @@
                 </div>
               </div>
               <!-- <div id="noOrders" class="no_orders">
+
                 <p>Quý khách chưa có đơn hàng nào.</p>
+
+                <p>Quý khách chưa có đơn hàng nào.</p>  
+
                 <button>Tiếp tục mua hàng</button>
               </div> -->
 
@@ -137,13 +147,71 @@
                   <div>
                     <input type="email" id="email" name="email" required />
                     <a href="#">Thay đổi</a>
+            <!-- đổi mật khẩu -->
+             <div
+             id="change_password"
+             class="content_section"
+             style="display: none;"
+             >
+             <div class="change_password_header">
+              <h1>ĐỔI MẬT KHẨU</h1>
+              <div class="title">Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</div>
+            </div>
+            <form class="change_password_form">
+              <div class="dlex">
+                <label for="oldPassword">Mật khẩu cũ:</label>
+                <div>
+                  <input type="password" id="oldPassword" placeholder="Nhập mật khẩu hiện tại" required />
+                </div>
+              </div>
+
+              <div class="dlex">
+                <label for="newPassword">Mật khẩu mới:</label>
+                <div>
+                  <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới" required />
+                </div>
+              </div>
+              
+              <div class="dlex">
+                <label for="confirm_password">Nhập lại mật khẩu:</label>
+                <div>
+                  <input type="password" id="confirm_password" placeholder="Nhập lại mật khẩu mới" required />
+                </div>
+              </div>
+                <button class="submit" type="submit">Xác nhận</button>
+              </form>
+            <p id="message" class="message"></p>
+             </div>
+            <!-- Thông tin tài khoản -->
+            <div
+              id="information_account"
+              class="content_section"
+              style="display: none"
+            >
+              <div class="information_header">
+                <h2>THÔNG TIN TÀI KHOẢN</h2>
+              </div>
+              <form class="info-form">
+                <div class="user-name dlex">
+                  <label for="username">Họ tên:</label>
+                  <div>
+                    <input type="text" id="username" name="username" required />
+                  </div>
+                </div>
+
+                <div class="sex dlex">
+                  <label class="lableSex">Giới tính:</label>
+                  <div>
+                    <input type="radio" name="gender" checked /> Nam
+                    <input type="radio" name="gender" checked /> Nữ
                   </div>
                 </div>
 
                 <div class="phone-cus dlex">
                   <label for="phone">Số điện thoại:</label>
                   <div>
-                    <input type="tel" id="phone" name="phone" required />
+                    <input type="tel" id="phone" name="phone" readonly />
+
                     <a href="#">Thay đổi</a>
                   </div>
                 </div>
@@ -180,3 +248,4 @@
     <script type="module" src="./js/script.js"></script>
   </body>
 </html>
+
