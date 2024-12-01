@@ -124,27 +124,29 @@
               <div class="title">Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</div>
             </div>
             <form class="change_password_form">
-              <div class="old_password dlex">
+              <div class="dlex">
                 <label for="oldPassword">Mật khẩu cũ:</label>
                 <div>
-                  <input type="password" id="oldPassword" name="oldPassword" required />
+                  <input type="password" id="oldPassword" placeholder="Nhập mật khẩu hiện tại" required />
                 </div>
               </div>
 
-              <div class="new_password dlex">
+              <div class="dlex">
                 <label for="newPassword">Mật khẩu mới:</label>
                 <div>
-                  <input type="password" id="newPassword" name="newPassword" required />
+                  <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới" required />
                 </div>
               </div>
               
-              <div class="new_password dlex">
-                <label for="newPassword">Nhập lại mật khẩu:</label>
+              <div class="dlex">
+                <label for="confirm_password">Nhập lại mật khẩu:</label>
                 <div>
-                  <input type="password" id="newPassword" name="newPassword" required />
+                  <input type="password" id="confirm_password" placeholder="Nhập lại mật khẩu mới" required />
                 </div>
               </div>
-            </form>
+                <button class="submit" type="submit">Xác nhận</button>
+              </form>
+            <p id="message" class="message"></p>
              </div>
             <!-- Thông tin tài khoản -->
             <div

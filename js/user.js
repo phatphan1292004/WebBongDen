@@ -103,4 +103,35 @@ function populateDays() {
                 //                                               });
 
   }
+  //hàm hiển thị thông báo
+  function showMessage(message, type) {
+    const messageElement = document.getElementById("message");
+    messageElement.textContent = message;
+    messageElement.style.color = type === "success" ? "green" : "red";
+}
+// hàm sử lí nút button đổi mật khẩu
+const changePasswordForm = document.getElementById("change_password_form").value;
+const oldPassword = document.getElementById("oldPassword").value;
+const newPassword = document.getElementById("newPassword").value;
+const confirmPassword = document.getElementById("confirm_password").value;
+changePasswordForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  // cho sẵn mật khẩu cũ trước
+  const mockCurrentPassword = "oldPassword123";
+  // kiểm tra mật khẩu nhập vào có đúng không
+  if (oldPassword !== mockCurrentPassword) {
+      showMessage("Mật khẩu không chính xác.", "error");
+      return;
+  }
+  // kiểm tra nhập lại mật khẩu mới có đúng không
+  if (newPassword !== confirmPassword) {
+      showMessage("New passwords do not match.", "error");
+      return;
+  }
+
+  // Password successfully changed
+  showMessage("Password changed successfully!", "success");
+});
+
+
 
