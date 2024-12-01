@@ -148,7 +148,52 @@
     color: white;
     font-weight: 500;
 }
+/* code cho đổi mật khẩu của user */
+.content .content_section .change_password_header{
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 10px;
+}
+.content .content_section .change_password_header h1{
+    font-size: 18px !important;
+    font-weight: 600;
+    line-height: 2rem;
 
+}
+.content .content_section .change_password_header .title{
+    color: rgba(0, 0, 0, .54);
+    font-size: 14px;
+    line-height: 1.5rem;
+    margin-top: 4px;
+}
+.dlex {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.change_password_form {
+    margin-top: 30px;
+}
+
+.change_password_form label {
+    width: 30%;
+    text-align: right;
+}
+
+.change_password_form .dlex div {
+    width: 70%;
+}
+
+.change_password_form .dlex input[type="password"] {
+    padding: 0 15px;
+    height: 36px;
+    border-radius: 4px;
+    border: 1px solid #dadada;
+    width: 80%;
+}
 /* Code đơn hàng của user */
 .content .content_section .order_header h2 {
     font-size: 18px;
