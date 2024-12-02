@@ -214,11 +214,11 @@ window.addEventListener("load", function () {
   const mobileSearchBar = document.getElementById("mobile-search-bar");
   const closeSearchBtn = document.getElementById("close-search-button");
 
-  searchIcon.addEventListener("click", (event) => {
-    event.preventDefault();
-    mobileSearchBar.classList.add("active");
-    searchIcon.style.display = "none";
-  });
+  // searchIcon.addEventListener("click", (event) => {
+  //   event.preventDefault();
+  //   mobileSearchBar.classList.add("active");
+  //   searchIcon.style.display = "none";
+  // });
 
   closeSearchBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -281,11 +281,21 @@ window.addEventListener("load", function () {
 
   // Code phần click vào sp chuyển tới trang product
   const listProductItems = document.querySelectorAll(".product-item");
-
+  const listProductHotItems = document.querySelectorAll(".product-hot-item");
   listProductItems.forEach((item) => {
     item.addEventListener("click", function () {
       // Chuyển hướng sang trang product.html
       window.location.href = "product.html";
     });
+  });
+  listProductHotItems.forEach((item) => {
+    item.addEventListener("click", function () {
+      // Chuyển hướng sang trang product.html
+      window.location.href = "product.html";
+    });
+  });
+
+  document.getElementById('search-form').addEventListener('submit', function() {
+    window.location.href = "product.html";
   });
 });

@@ -585,6 +585,7 @@ ul {
 
 .category-list>li {
   padding: 16px 4px;
+  cursor: pointer;
   border-bottom: 1px solid #dee2d6;
 }
 

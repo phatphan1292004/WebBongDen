@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "Khách hàng",
     "Đơn hàng",
     "Doanh thu",
-    "Hệ thống",
+    "Khuyến mãi",
+    "Tài khoản",
   ];
   const fullTexts = [
     "Dashboard",
@@ -27,7 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "Quản lý khách hàng",
     "Quản lý đơn hàng",
     "Thống kê doanh thu",
-    "Hệ thống",
+    "Quản lý khuyến mãi",
+    "Quản lý tài khoản",
   ];
   const saveProductBtn = document.getElementById("save-product");
   const overlays = document.querySelectorAll(".overlay");
@@ -50,29 +52,18 @@ document.addEventListener("DOMContentLoaded", function () {
   navItems.forEach((item) => {
     item.addEventListener("click", (e) => {
       const index = item.getAttribute("data-index");
-        if(index < 5) {
-          tabContents.forEach((content) => {
-            content.style.display = "none";
-          });
-          navItems.forEach((nav) => {
-            nav.classList.remove("active");
-          });
-          tabContents[index].style.display = "block";
-          item.classList.add("active");
-    
-          tabContents.forEach((tab) => {
-            tab.classList.remove("active"); // Xóa class active
-          });
-        }
+      tabContents.forEach((content) => {
+        content.style.display = "none";
+      });
+      navItems.forEach((nav) => {
+        nav.classList.remove("active");
+      });
+      tabContents[index].style.display = "block";
+      item.classList.add("active");
 
-      if (index == 5) {
-        navItems.forEach((nav) => {
-          nav.classList.remove("active");
-        });
-        document.getElementById("submenu-admin").classList.add("open");
-      } else if (index < 5) {
-        document.getElementById("submenu-admin").classList.remove("open");
-      }
+      tabContents.forEach((tab) => {
+        tab.classList.remove("active"); // Xóa class active
+      });
     });
   });
 
@@ -780,34 +771,6 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("save-product-btn").style.display = "none";
       document.getElementById("edit-product-btn").style.display = "block";
     });
-
-  const menuItems = document.querySelectorAll(".submenu-admin .menu-item");
-
-  menuItems.forEach((item) => {
-    item.addEventListener("click", () => {
-      // Loại bỏ class active khỏi tất cả menu-items
-      menuItems.forEach((menuItem) => menuItem.classList.remove("active"));
-  
-      // Thêm class active vào menu-item hiện tại
-      item.classList.add("active");
-  
-      // Lấy target từ data-target
-      const targetId = item.getAttribute("data-target");
-  
-      // Ẩn tất cả tab-content
-      tabContents.forEach((tab) => {
-        tab.classList.remove("active");  // Loại bỏ class active khỏi tất cả tab contents
-        tab.style.display = 'none';  // Ẩn tất cả tab content
-      });
-      // Hiển thị tab-content tương ứng
-      const targetTab = document.getElementById(targetId);
-      if (targetTab) {
-        targetTab.classList.add("active");  // Thêm class active cho tab content
-        targetTab.style.display = 'block';  // Hiển thị tab content
-      }
-    });
-  });  
-
   // Code trang phiếu khuyến mãi ------------------------------------------
 
   // Gán sự kiện cho các nút "Xóa"
@@ -1029,7 +992,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const accountId = row ? row.dataset.id : null;
 
     if (e.target.classList.contains("edit-btn")) {
-      document.querySelector('.primary-button').textContent = 'Chỉnh sửa';
+      document.querySelector(".primary-button").textContent = "Chỉnh sửa";
       // Chỉnh sửa tài khoản
       const account = accounts.find((acc) => acc.id === parseInt(accountId));
       if (account) {
@@ -1037,7 +1000,7 @@ document.addEventListener("DOMContentLoaded", function () {
         emailInput.value = account.email;
         roleSelect.value = account.role;
 
-        editingRow = row; 
+        editingRow = row;
       }
     }
 
@@ -1260,7 +1223,7 @@ document.addEventListener("DOMContentLoaded", function () {
       destroy: true, // Xóa cấu hình DataTables cũ nếu có
       autoWidth: false, // Tắt tự động điều chỉnh chiều rộng
       paging: true, // Kích hoạt phân trang
-      pageLength: 20, // Hiển thị 20 dòng mỗi trang
+      pageLength: 10, // Hiển thị 20 dòng mỗi trang
       columns: [
         { data: "id" }, // Id
         {
@@ -1368,7 +1331,7 @@ document.addEventListener("DOMContentLoaded", function () {
       destroy: true,
       autoWidth: false,
       paging: true,
-      pageLength: 12,
+      pageLength: 10,
       columns: [
         { data: "id" },
         { data: "customerName" },

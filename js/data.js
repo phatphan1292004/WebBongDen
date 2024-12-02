@@ -187,122 +187,108 @@ export const productData = [
   {
     id: "001",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03814",
-    urlImage:
-      "./img/dc1.jpg",
+    urlImage: "./img/dc01.jpg",
     price: "3000000",
     discountPercent: "0.1",
     idCate: "DM01",
     nameCate: "Đèn chùm",
-    dateCreate: "12-9-2023",
+    dateCreate: "12-9-2023"
   },
   {
     id: "002",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03815",
-    urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/8991den-chum-trang-tri-noi-that-phong-cach-my-dc03813-01.jpg",
+    urlImage: "./img/dc02.jpg",
     price: "4500000",
     discountPercent: "0.15",
     idCate: "DM01",
     nameCate: "Đèn chùm",
-    dateCreate: "15-10-2023",
+    dateCreate: "15-10-2023"
   },
   {
     id: "003",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03816",
-    urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/5647den-chum-trang-tri-noi-that-phong-cach-my-dc03812-01.jpg",
+    urlImage: "./img/dc03.jpg",
     price: "2200000",
     discountPercent: "0.05",
     idCate: "DM01",
     nameCate: "Đèn chùm",
-    dateCreate: "20-10-2023",
+    dateCreate: "20-10-2023"
   },
   {
     id: "004",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03817",
-    urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/837den-chum-trang-tri-noi-that-phong-cach-my-dc03811-07.jpg",
+    urlImage: "./img/dc04.jpg",
     price: "3500000",
     discountPercent: "0.2",
     idCate: "DM01",
     nameCate: "Đèn chùm",
-    dateCreate: "22-10-2023",
+    dateCreate: "22-10-2023"
   },
   {
     id: "005",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03818",
-    urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/3414den-op-tran-pha-le-trang-tri-noi-that-phong-cach-hien-dai-do01558-01.jpg",
+    urlImage: "./img/dc05.jpg",
     price: "1500000",
     discountPercent: "0.05",
     idCate: "DM01",
     nameCate: "Đèn chùm",
-    dateCreate: "25-10-2023",
+    dateCreate: "25-10-2023"
   },
   {
     id: "006",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03819",
-    urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/8155den-quat-trang-tri-noi-that-phong-cach-hien-dai-dq00907-01.jpg",
-    price: "2000000", // Đã thay đổi giá
-    discountPercent: "0.15", // Đã thay đổi phần trăm giảm
+    urlImage: "./img/dc06.jpg",
+    price: "2000000",
+    discountPercent: "0.15",
     idCate: "DM01",
     nameCate: "Đèn chùm",
-    dateCreate: "30-10-2023",
+    dateCreate: "30-10-2023"
   },
-
   {
     id: "007",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03219",
-    urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/7022den-chum-trang-tri-noi-that-phong-cach-my-dc03809-06.jpg",
-    price: "2200000", // Đã thay đổi giá
-    discountPercent: "0.2", // Đã thay đổi phần trăm giảm
+    urlImage: "./img/dc07.jpg",
+    price: "2200000",
+    discountPercent: "0.2",
     idCate: "DM01",
     nameCate: "Đèn chùm",
-    dateCreate: "30-10-2023",
+    dateCreate: "30-10-2023"
   },
-
   {
     id: "008",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03819",
-    urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/1984den-chum-trang-tri-noi-that-phong-cach-my-dc03808-04.jpg",
-    price: "2100000", // Đã thay đổi giá
-    discountPercent: "0.12", // Đã thay đổi phần trăm giảm
+    urlImage: "./img/dc08.jpg",
+    price: "2100000",
+    discountPercent: "0.12",
     idCate: "DM01",
     nameCate: "Đèn chùm",
-    dateCreate: "30-10-2023",
+    dateCreate: "30-10-2023"
   },
-
   {
     id: "009",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03819",
-    urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/2051den-chum-trang-tri-noi-that-phong-cach-my-hien-dai-dc03782-02.jpg",
-    price: "2500000", // Đã thay đổi giá
-    discountPercent: "0.18", // Đã thay đổi phần trăm giảm
+    urlImage: "./img/dc09.jpg",
+    price: "2500000",
+    discountPercent: "0.18",
     idCate: "DM01",
     nameCate: "Đèn chùm",
-    dateCreate: "30-10-2023",
+    dateCreate: "30-10-2023"
   },
-
   {
     id: "010",
     name: "Đèn chùm trang trí nội thất phong cách Mỹ DC03819",
-    urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/3433den-chum-trang-tri-noi-that-phong-cach-my-dc03780-01.jpg",
-    price: "2300000", // Đã thay đổi giá
-    discountPercent: "0.2", // Đã thay đổi phần trăm giảm
+    urlImage: "./img/dc10.jpg",
+    price: "2300000",
+    discountPercent: "0.2",
     idCate: "DM01",
     nameCate: "Đèn chùm",
-    dateCreate: "30-10-2023",
+    dateCreate: "30-10-2023"
   },
   {
     id: "011",
     name: "Đèn thả trang trí phòng khách phong cách hiện đại DC04501",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/9006den-tha-trang-tri-noi-that-phong-cach-my-dt02994-02.jpg",
+      "./img/dt01.jpg",
     price: "2500000", // Giá linh hoạt
     discountPercent: "0.1", // Phần trăm giảm linh hoạt
     idCate: "DM02",
@@ -313,7 +299,7 @@ export const productData = [
     id: "012",
     name: "Đèn thả trang trí phòng ăn phong cách cổ điển DC04502",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/9723den-tha-trang-tri-noi-that-phong-cach-my-dt02992-04.jpg",
+      "./img/dt02.jpg",
     price: "2800000", // Giá linh hoạt
     discountPercent: "0.15", // Phần trăm giảm linh hoạt
     idCate: "DM02",
@@ -324,7 +310,7 @@ export const productData = [
     id: "013",
     name: "Đèn thả trang trí phòng ngủ phong cách Scandinavian DC04503",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/8002den-tha-trang-tri-noi-that-phong-cach-my-dt02991-03.jpg",
+      "./img/dt03.jpg",
     price: "2300000", // Giá linh hoạt
     discountPercent: "0.12", // Phần trăm giảm linh hoạt
     idCate: "DM02",
@@ -335,7 +321,7 @@ export const productData = [
     id: "014",
     name: "Đèn thả phong cách hiện đại DC04504",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/4118den-tha-trang-tri-noi-that-phong-cach-my-dt02990-03.jpg",
+      "./img/dt04.jpg",
     price: "3000000", // Giá linh hoạt
     discountPercent: "0.18", // Phần trăm giảm linh hoạt
     idCate: "DM02",
@@ -346,7 +332,7 @@ export const productData = [
     id: "015",
     name: "Đèn thả trang trí nhà bếp phong cách tối giản DC04505",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/9507den-tha-den-san-trang-tri-noi-that-phong-cach-my-dt02993-06.jpg",
+      "./img/dt05.jpg",
     price: "2200000", // Giá linh hoạt
     discountPercent: "0.2", // Phần trăm giảm linh hoạt
     idCate: "DM02",
@@ -357,7 +343,7 @@ export const productData = [
     id: "016",
     name: "Đèn thả phong cách đương đại DC04506",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/1990den-tha-trang-tri-noi-that-phong-cach-tan-co-dien-dt02961-05.jpg",
+      "./img/dt06.jpg",
     price: "2700000", // Giá linh hoạt
     discountPercent: "0.1", // Phần trăm giảm linh hoạt
     idCate: "DM02",
@@ -368,7 +354,7 @@ export const productData = [
     id: "017",
     name: "Đèn thả trang trí phòng khách phong cách hiện đại DC04507",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/3100den-tha-trang-tri-noi-that-phong-cach-chau-au-sang-trong-dt02962-01.jpg",
+      "./img/dt07.jpg",
     price: "2600000", // Giá linh hoạt
     discountPercent: "0.14", // Phần trăm giảm linh hoạt
     idCate: "DM02",
@@ -379,7 +365,7 @@ export const productData = [
     id: "018",
     name: "Đèn thả trang trí phòng ngủ phong cách cổ điển DC04508",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/6391den-tha-thiet-ke-trang-tri-noi-that-phong-cach-hien-dai-dt02958-01.jpg",
+      "./img/dt08.jpg",
     price: "2900000", // Giá linh hoạt
     discountPercent: "0.25", // Phần trăm giảm linh hoạt
     idCate: "DM02",
@@ -390,7 +376,7 @@ export const productData = [
     id: "019",
     name: "Đèn thả phòng bếp phong cách cổ điển DC04509",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/1534den-tha-pha-le-trang-tri-noi-that-phong-cach-hien-dai-dt02959-01.jpg",
+      "./img/dt09.jpg",
     price: "2400000", // Giá linh hoạt
     discountPercent: "0.22", // Phần trăm giảm linh hoạt
     idCate: "DM02",
@@ -401,7 +387,7 @@ export const productData = [
     id: "020",
     name: "Đèn thả trang trí phòng khách sang trọng DC04510",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/2834den-tha-dia-bay-trang-tri-noi-that-phong-cach-hien-dai-dt02957-03.jpg",
+      "./img/dt10.jpg",
     price: "3500000", // Giá linh hoạt
     discountPercent: "0.3", // Phần trăm giảm linh hoạt
     idCate: "DM02",
@@ -412,7 +398,7 @@ export const productData = [
     id: "021",
     name: "Đèn bàn trang trí phòng làm việc phong cách hiện đại DB04511",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/5258den-ban-trang-tri-noi-that-phong-cach-my-db02101-03.jpg",
+      "./img/db01.jpg",
     price: "1200000", // Giá linh hoạt
     discountPercent: "0.15", // Phần trăm giảm linh hoạt
     idCate: "DM03",
@@ -423,7 +409,7 @@ export const productData = [
     id: "022",
     name: "Đèn bàn trang trí phòng ngủ phong cách cổ điển DB04512",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/5107den-ban-trang-tri-noi-that-phong-cach-my-db02102-01.jpg",
+      "./img/db02.jpg",
     price: "1600000", // Giá linh hoạt
     discountPercent: "0.2", // Phần trăm giảm linh hoạt
     idCate: "DM03",
@@ -434,7 +420,7 @@ export const productData = [
     id: "023",
     name: "Đèn bàn trang trí phòng khách phong cách Scandinavian DB04513",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/4992den-ban-trang-tri-noi-that-phong-cach-my-db02099-04.jpg",
+      "./img/db03.jpg",
     price: "1400000", // Giá linh hoạt
     discountPercent: "0.1", // Phần trăm giảm linh hoạt
     idCate: "DM03",
@@ -445,7 +431,7 @@ export const productData = [
     id: "024",
     name: "Đèn bàn trang trí nội thất phong cách đương đại DB04514",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/842den-ban-doc-sach-trang-tri-noi-that-phong-cach-my-retro-db01999-03.jpg",
+      "./img/db04.jpg",
     price: "1800000", // Giá linh hoạt
     discountPercent: "0.18", // Phần trăm giảm linh hoạt
     idCate: "DM03",
@@ -456,7 +442,7 @@ export const productData = [
     id: "025",
     name: "Đèn bàn trang trí văn phòng phong cách tối giản DB04515",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/8088den-ban-trang-tri-phong-be-gai-phong-cach-tan-co-dien-db02001-03.jpg",
+      "./img/db05.jpg",
     price: "2000000", // Giá linh hoạt
     discountPercent: "0.25", // Phần trăm giảm linh hoạt
     idCate: "DM03",
@@ -467,7 +453,7 @@ export const productData = [
     id: "026",
     name: "Đèn ốp trần phòng khách phong cách hiện đại OT04516",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/138den-op-tran-trang-tri-noi-that-phong-cach-nhat-do01559-05.jpg",
+      "./img/db06.jpg",
     price: "2500000", // Giá linh hoạt
     discountPercent: "0.2", // Phần trăm giảm linh hoạt
     idCate: "DM04",
@@ -478,7 +464,7 @@ export const productData = [
     id: "027",
     name: "Đèn ốp trần phòng ngủ phong cách sang trọng OT04517",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/3414den-op-tran-pha-le-trang-tri-noi-that-phong-cach-hien-dai-do01558-01.jpg",
+      "./img/db07.jpg",
     price: "3000000", // Giá linh hoạt
     discountPercent: "0.15", // Phần trăm giảm linh hoạt
     idCate: "DM04",
@@ -489,7 +475,7 @@ export const productData = [
     id: "028",
     name: "Đèn ốp trần văn phòng phong cách tối giản OT04518",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/3510den-op-tran-pha-le-trang-tri-noi-that-phong-cach-hien-dai-do01552-02.jpg",
+      "./img/db08.jpg",
     price: "2200000", // Giá linh hoạt
     discountPercent: "0.25", // Phần trăm giảm linh hoạt
     idCate: "DM04",
@@ -500,7 +486,7 @@ export const productData = [
     id: "029",
     name: "Đèn ốp trần phòng khách phong cách cổ điển OT04519",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/9139den-op-tran-trang-tri-dai-sanh-phong-cach-hien-dai-do01554-04.jpg",
+      "./img/db09.jpg",
     price: "2800000", // Giá linh hoạt
     discountPercent: "0.18", // Phần trăm giảm linh hoạt
     idCate: "DM04",
@@ -511,7 +497,7 @@ export const productData = [
     id: "030",
     name: "Đèn ốp trần trang trí nội thất phong cách đương đại OT04520",
     urlImage:
-      "https://denhoamy.vn/upload/attachment/thumb/8607den-op-tran-pha-le-trang-tri-noi-that-phong-cach-hien-dai-do01551-02.jpg",
+      "./img/db10.jpg",
     price: "3500000", // Giá linh hoạt
     discountPercent: "0.3", // Phần trăm giảm linh hoạt
     idCate: "DM04",
@@ -521,7 +507,7 @@ export const productData = [
   {
     id: "031",
     name: "Đèn quạt trần trang trí phòng khách phong cách hiện đại QV04521",
-    urlImage: "https://denhoamy.vn/upload/attachment/thumb/4813den-quat-sai-canh-trang-tri-noi-that-phong-cach-hien-dai-dq00906-01.jpg",
+    urlImage:  "./img/dq01.jpg",
     price: "4200000", // Giá linh hoạt
     discountPercent: "0.15", // Phần trăm giảm linh hoạt
     idCate: "DM05",
@@ -531,7 +517,7 @@ export const productData = [
   {
     id: "032",
     name: "Đèn quạt trần phòng ngủ sang trọng QV04522",
-    urlImage: "https://denhoamy.vn/upload/attachment/thumb/1464den-quat-5-canh-la-co-trang-tri-noi-that-phong-cach-indochine-dq00909-02.jpg",
+    urlImage: "./img/dq02.jpg",
     price: "4500000", // Giá linh hoạt
     discountPercent: "0.18", // Phần trăm giảm linh hoạt
     idCate: "DM05",
@@ -541,7 +527,7 @@ export const productData = [
   {
     id: "033",
     name: "Đèn quạt trần phòng bếp QV04523",
-    urlImage: "https://denhoamy.vn/upload/attachment/thumb/8155den-quat-trang-tri-noi-that-phong-cach-hien-dai-dq00907-01.jpg",
+    urlImage: "./img/dq03.jpg",
     price: "3800000", // Giá linh hoạt
     discountPercent: "0.2", // Phần trăm giảm linh hoạt
     idCate: "DM05",
@@ -551,7 +537,7 @@ export const productData = [
   {
     id: "034",
     name: "Đèn quạt trần phòng khách phong cách vintage QV04524",
-    urlImage: "https://denhoamy.vn/upload/attachment/thumb/8728den-quat-giau-canh-trang-tri-phong-cach-hien-dai-dq00904-01.jpg",
+    urlImage: "./img/dq04.jpg",
     price: "4000000", // Giá linh hoạt
     discountPercent: "0.12", // Phần trăm giảm linh hoạt
     idCate: "DM05",
@@ -561,7 +547,7 @@ export const productData = [
   {
     id: "035",
     name: "Đèn quạt trần hiện đại cho không gian mở QV04525",
-    urlImage: "https://denhoamy.vn/upload/attachment/thumb/7674den-quat-giau-canh-trang-tri-noi-that-phong-cach-hien-dai-dq00902-01.jpg",
+    urlImage: "./img/dq05.jpg",
     price: "5000000", // Giá linh hoạt
     discountPercent: "0.25", // Phần trăm giảm linh hoạt
     idCate: "DM05",
@@ -572,7 +558,7 @@ export const productData = [
   {
     id: "036",
     name: "Đèn LED trang trí phòng ngủ phong cách đơn giản DK04526",
-    urlImage: "https://denhoamy.vn/upload/attachment/thumb/3461den-cot-trang-tri-cong-vien-via-he-phong-cach-trung-hoa-dn00733-04.jpg",
+    urlImage: "./img/dq06.jpg",
     price: "1200000", // Giá linh hoạt
     discountPercent: "0.1", // Phần trăm giảm linh hoạt
     idCate: "DM06",
@@ -582,7 +568,7 @@ export const productData = [
   {
     id: "037",
     name: "Đèn LED chiếu sáng nội thất sang trọng DK04527",
-    urlImage: "https://denhoamy.vn/upload/attachment/thumb/4798den-cam-co-nang-luong-mat-troi-dn00731-01.jpg",
+    urlImage: "./img/dq07.jpg",
     price: "1500000", // Giá linh hoạt
     discountPercent: "0.2", // Phần trăm giảm linh hoạt
     idCate: "DM06",
@@ -592,7 +578,7 @@ export const productData = [
   {
     id: "038",
     name: "Đèn bàn LED phong cách cổ điển DK04528",
-    urlImage: "https://denhoamy.vn/upload/attachment/thumb/1174den-ngoai-troi-soi-thuy-tinh-trang-tri-san-vuon-bai-co-phong-cach-trung-hoa-dn00718-03.jpg",
+    urlImage: "./img/dq08.jpg",
     price: "900000", // Giá linh hoạt
     discountPercent: "0.15", // Phần trăm giảm linh hoạt
     idCate: "DM06",
@@ -602,7 +588,7 @@ export const productData = [
   {
     id: "039",
     name: "Đèn bàn trang trí phong cách nghệ thuật DK04529",
-    urlImage: "https://denhoamy.vn/upload/attachment/thumb/7366den-tuong-ngoai-troi-chong-tham-nuoc-dn00719-06.jpg",
+    urlImage: "./img/dq09.jpg",
     price: "1800000", // Giá linh hoạt
     discountPercent: "0.12", // Phần trăm giảm linh hoạt
     idCate: "DM06",
@@ -612,7 +598,7 @@ export const productData = [
   {
     id: "040",
     name: "Đèn ngủ LED phong cách hiện đại DK04530",
-    urlImage: "https://denhoamy.vn/upload/attachment/thumb/7226den-led-am-tran-cob-sieu-sang-trang-tri-noi-that-phong-cach-hien-dai-da00088-04.jpg",
+    urlImage: "./img/dq10.jpg",
     price: "1300000", // Giá linh hoạt
     discountPercent: "0.2", // Phần trăm giảm linh hoạt
     idCate: "DM06",

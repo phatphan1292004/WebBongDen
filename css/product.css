@@ -107,10 +107,6 @@
     color: #ccc;
 }
 
-.main .product-detail .product-availability {
-    color: #28a745; 
-}
-
 .main .product-detail .buy-product {
     background-color: #e30019;
     color: white;
@@ -224,6 +220,10 @@
 .category-list>li {
     padding: 16px 4px;
     border-bottom: 1px solid #dee2d6;
+}
+
+.category-list li {
+  cursor: pointer;
 }
 
 .cate-item {
@@ -366,6 +366,10 @@
     border-radius: 3px;
     overflow: hidden;
 }
+
+.product-item .img {
+  overflow: hidden;
+}
   
 .product-info2 {
     display: flex;
@@ -387,6 +391,7 @@
 
   .product-info2 .product-price {
     color: red;
+    font-weight: 500;
     font-size: 16px;
   }
 

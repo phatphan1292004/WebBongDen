@@ -1713,8 +1713,7 @@ table {
 
 #product-management-content .product-details .product-info .edit-button,
 #product-management-content .product-details .product-info .save-button {
-  width: 80px;
-  padding: 10px 0;
+  padding: 10px 20px;
   border-radius: 4px;
   color: white;
   background-color: #007bff;
