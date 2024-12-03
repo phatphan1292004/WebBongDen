@@ -36,21 +36,19 @@
             </div>
             <div class="menu-user">
               <nav>
-                <ul>
-                  <li onclick="showContent('information_account')">
+                <ul class="menu-user">
+                  <li data-section="information_account" class="active" onclick="showContent('information_account')">
                     <i class="fa-solid fa-user"></i>
                     <a href="#">Thông tin tài khoản</a>
                   </li>
-                  <li onclick="showContent('order')">
+                  <li data-section="order" onclick="showContent('order')">
                     <i class="fa-solid fa-bars-progress"></i>
                     <a href="#">Quản lý đơn hàng</a>
                   </li>
-
-                  <li onclick="showContent('change_password')">
+                  <li data-section="change_password" onclick="showContent('change_password')">
                     <i class="fa-solid fa-lock"></i>
                     <a href="#">Đổi mật khẩu</a>
                   </li>
-
                   <li onclick="logout()">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <a href="#" id="logoutLink">Đăng xuất</a>
@@ -164,23 +162,29 @@
                     <input type="text" id="username" name="username" required />
                   </div>
                 </div>
-
+              
                 <div class="sex dlex">
                   <label class="lableSex">Giới tính:</label>
                   <div>
-                    <input type="radio" name="gender" checked /> Nam
-                    <input type="radio" name="gender" checked /> Nữ
+                    <input type="radio" name="gender" id="male" /> Nam
+                    <input type="radio" name="gender" id="female" /> Nữ
                   </div>
                 </div>
-
+              
                 <div class="phone-cus dlex">
                   <label for="phone">Số điện thoại:</label>
                   <div>
-                    <input type="tel" id="phone" name="phone" readonly />
-                    <a href="#">Thay đổi</a>
+                    <input type="tel" id="phone" name="phone"/>
                   </div>
                 </div>
-
+              
+                <div class="phone-cus dlex">
+                  <label for="address">Địa chỉ:</label>
+                  <div>
+                    <input type="text" id="address" name="address"/>
+                  </div>
+                </div>
+              
                 <div class="bYear dlex">
                   <label>Ngày sinh:</label>
                   <div class="DMY">
@@ -195,11 +199,17 @@
                     </select>
                   </div>
                 </div>
-
-                <div class="submit">
-                  <button onclick="luuThongTin()" type="submit">Lưu</button>
+              
+                <div class="info-btn">
+                  <div class="submit">
+                    <button type="button" id="save-info">Lưu</button>
+                  </div>
+              
+                  <div class="submit">
+                    <button type="button" id="edit-info">Sửa thông tin</button>
+                  </div>
                 </div>
-              </form>
+              </form>              
               <p id="saveMessage" style="display: none; color: green">
                 Hồ sơ của bạn đã được lưu!
               </p>

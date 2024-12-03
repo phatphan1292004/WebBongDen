@@ -58,6 +58,10 @@
     cursor: pointer;
 }
 
+.sidebar-info-customer .menu-user ul li.active {
+    background-color: #f2f2f2;
+}
+
 .sidebar-info-customer .menu-user ul li a {
     text-decoration: none;
     margin-left: 10px;
@@ -97,7 +101,7 @@
 
 .info-form label {
     width: 30%;
-    text-align: right;
+    text-align: left;
 }
 
 .info-form .dlex div {
@@ -141,12 +145,12 @@
     justify-content: center;
     align-items: center;
     color: white;
-    margin: 40px auto;
 }
 
 .content .submit button {
     color: white;
     font-weight: 500;
+    width: 100%;
 }
 /* code cho đổi mật khẩu của user */
 .content .content_section .change_password_header{
@@ -301,4 +305,12 @@
 
 .footer {
     margin-top: 0;
+}
+
+.info-btn {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 30px;
+    margin-top: 20px;
 }
