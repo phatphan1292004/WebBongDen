@@ -18,7 +18,7 @@
             <div style="display: flex; align-items: center">
                 <i class="fa-solid fa-bars" id="menu-toggle"></i>
                 <a href="index.html" class="logo">
-                    <img src="./img/logo2.png" alt="" />
+                    <img src="../assets/img/logo2.png" alt="Description">
                 </a>
             </div>
             <div class="search-bar">

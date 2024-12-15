@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Code phần rating
-    const ratingItems = document.querySelectorAll(".rating-item");
+  const ratingItems = document.querySelectorAll(".rating-item");
   const selectedRatingDisplay = document.querySelector(".selected-rating");
 
   // Xử lý sự kiện hover
@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
       cateHeader.addEventListener("click", () => {
         const isVisible = subcategoryList.style.display === "block";
         subcategoryList.style.display = isVisible ? "none" : "block";
+        subcategoryList.style.height = subcategoryList.style.height === "0px" ? "auto" : "0px";
         cateHeader.querySelector("i").classList.toggle("active");
       });
   
