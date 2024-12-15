@@ -25,8 +25,8 @@
             href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet"
     />
-    <link rel="stylesheet" href="./css/login.css" />
-    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/login.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
 </head>
 <body>
 <div class="wrapper">
@@ -47,7 +47,7 @@
                             id="cus-username"
                             placeholder=" "
                     />
-                    <label for="name" class="form-label">Tài khoản</label>
+                    <label for="cus-username" class="form-label">Tài khoản</label>
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
                             id="cus-password"
                             placeholder=" "
                     />
-                    <label for="name" class="form-label">Mật khẩu</label>
+                    <label for="cus-password" class="form-label">Mật khẩu</label>
                 </div>
             </div>
             <div class="form-footer">
@@ -120,5 +120,5 @@
     <p id="notification-message"></p>
 </div>
 </body>
-<script src="js/login.js"></script>
+<script src="${pageContext.request.contextPath}/assets/Js/login.js"></script>
 </html>
