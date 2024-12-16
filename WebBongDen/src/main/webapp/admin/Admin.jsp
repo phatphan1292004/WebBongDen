@@ -721,29 +721,27 @@
                             </tr>
                             </thead>
                             <tbody id="product-table-body">
-                            <!-- <tr>
-                               <td>001</td>
-                               <td>
-                                 <a href="https://via.placeholder.com/50" target="_blank"
-                                   >https://via.placeholder.com/50</a
-                                 >
-                               </td>
-                               <td>Sản phẩm 1</td>
-                               <td>200.000 VNĐ</td>
-                               <td>Đèn LED</td>
-                               <td>01/12/2024</td>
-                               <td><button class="view-details">Xem chi tiết</button></td>
-                               <td>
-                                 <button class="edit-product">
-                                   <i class="fa-regular fa-pen-to-square"></i>
-                                 </button>
-                               </td>
-                               <td>
-                                 <button class="delete-product">
-                                   <i class="fa-regular fa-trash-can"></i>
-                                 </button>
-                               </td>
-                             </tr> -->
+                                <tr>
+                                   <td>001</td>
+                                   <td>
+                                     <a href="https://via.placeholder.com/50" target="_blank"
+                                       >https://via.placeholder.com/50</a
+                                     >
+                                   </td>
+                                   <td>Sản phẩm 1</td>
+                                   <td>200.000 VNĐ</td>
+                                   <td>Đèn LED</td>
+                                   <td>01/12/2024</td>
+                                   <td><button class="view-details">Xem chi tiết</button></td>
+                                   <td>
+                                     <button class="edit-product">
+                                       <i class="fa-regular fa-pen-to-square"></i>
+                                     </button>
+                                       <button class="delete-product">
+                                           <i class="fa-regular fa-trash-can"></i>
+                                       </button>
+                                   </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -1100,17 +1098,17 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                         </tr>
                         </thead>
                         <tbody id="customer-table-body">
-                        <!-- <tr>
-                            <td>C001</td>
-                            <td>Nguyễn An</td>
-                            <td>nguyenan@example.com</td>
-                            <td>0123456789</td>
-                            <td>123 Đường Lê Lợi, Quận 1, TP.HCM</td>
-                            <td>15/10/2023</td>
-                            <td>
-                              <button class="view-details">Xem chi tiết</button>
-                            </td>
-                          </tr> -->
+                            <tr>
+                                <td>C001</td>
+                                <td>Nguyễn An</td>
+                                <td>nguyenan@example.com</td>
+                                <td>0123456789</td>
+                                <td>123 Đường Lê Lợi, Quận 1, TP.HCM</td>
+                                <td>15/10/2023</td>
+                                <td>
+                                  <button class="view-details">Xem chi tiết</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1363,7 +1361,25 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                             <th>Thao tác</th>
                         </tr>
                         </thead>
-                        <tbody id="order-table-body"></tbody>
+                        <tbody id="order-table-body">
+                            <tr>
+                                <td>101</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>2024-12-16</td>
+                                <td>2024-12-20</td>
+                                <td>123 Đường ABC, Quận 1, TP.HCM</td>
+                                <td>Chờ xử lý</td>
+                                <td><button class="view-details">Chi tiết</button></td>
+                                <td>
+                                    <button class="approve-order" onclick="approveOrder('101')">
+                                        <i class="fa-solid fa-check"></i>
+                                    </button>
+                                    <button class="reject-order" onclick="rejectOrder('101')">
+                                        <i class="fa-solid fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -124,14 +124,14 @@ window.addEventListener("load", function () {
   //       alt="Đèn chùm tiffany trang trí nội thất DC03596"
   //     />
   //   </div>
-
+  //
   //   <div class="product-info">
   //     <div class="product-name">
   //       Đèn chùm tiffany trang trí nội thất DC03596
   //     </div>
-
+  //
   //     <p class="original-price">3.000.000 VND</p>
-
+  //
   //     <div class="price-discount">
   //       <p class="product-price">2.000.000 VND</p>
   //       <p class="discount-percentage">-33%</p>
@@ -140,91 +140,56 @@ window.addEventListener("load", function () {
   // </li>
 
   // Lọc sản phẩm dựa trên danh mục
-  function getProductsByCategory(category) {
-    return productData.filter((item) => item.nameCate === category);
-  }
+  // function getProductsByCategory(category) {
+  //   return productData.filter((item) => item.nameCate === category);
+  // }
+  //
+  // function renderProducts(category, index) {
+  //   const filteredProducts = getProductsByCategory(category);
+  //
+  //   const productList = document.getElementsByClassName("list-product")[index];
+  //   productList.innerHTML = "";
+  //
+  //   filteredProducts.forEach((item) => {
+  //     const categoryItem = document.createElement("li");
+  //     categoryItem.classList.add("product-item");
+  //
+  //     const originalPrice = parseInt(item.price);
+  //     const discountPercent = parseFloat(item.discountPercent);
+  //     const discountedPrice = originalPrice * (1 - discountPercent);
+  //
+  //     const productListHTML = `
+  //         <div class="img">
+  //             <img src="${item.urlImage}" alt="${item.name}" />
+  //         </div>
+  //
+  //         <div class="product-info">
+  //             <div class="product-name">
+  //                 ${item.name}
+  //             </div>
+  //
+  //             <p class="original-price">${originalPrice.toLocaleString()} VND</p>
+  //
+  //             <div class="price-discount">
+  //                 <p class="product-price">${discountedPrice.toLocaleString()} VND</p>
+  //                 <p class="discount-percentage">${(
+  //                   discountPercent * 100
+  //                 ).toFixed(0)}%</p>
+  //             </div>
+  //         </div>
+  //     `;
+  //
+  //     categoryItem.innerHTML = productListHTML;
+  //     productList.appendChild(categoryItem);
+  //   });
+  // }
 
-  function renderProducts(category, index) {
-    const filteredProducts = getProductsByCategory(category);
-
-    const productList = document.getElementsByClassName("list-product")[index];
-    productList.innerHTML = "";
-
-    filteredProducts.forEach((item) => {
-      const categoryItem = document.createElement("li");
-      categoryItem.classList.add("product-item");
-
-      const originalPrice = parseInt(item.price);
-      const discountPercent = parseFloat(item.discountPercent);
-      const discountedPrice = originalPrice * (1 - discountPercent);
-
-      const productListHTML = `
-          <div class="img">
-              <img src="${item.urlImage}" alt="${item.name}" />
-          </div>
-  
-          <div class="product-info">
-              <div class="product-name">
-                  ${item.name}
-              </div>
-  
-              <p class="original-price">${originalPrice.toLocaleString()} VND</p>
-  
-              <div class="price-discount">
-                  <p class="product-price">${discountedPrice.toLocaleString()} VND</p>
-                  <p class="discount-percentage">${(
-                    discountPercent * 100
-                  ).toFixed(0)}%</p>
-              </div>
-          </div>
-      `;
-
-      categoryItem.innerHTML = productListHTML;
-      productList.appendChild(categoryItem);
-    });
-  }
-
-  renderProducts("Đèn chùm", 0);
-  renderProducts("Đèn thả", 1);
-  renderProducts("Đèn bàn", 2);
-  renderProducts("Đèn ốp trần", 3);
-  renderProducts("Đèn quạt", 4);
-  renderProducts("Đèn khác", 5);
-
-  // Code cho mobile
-
-  // JavaScript to toggle the sidebar and overlay visibility
-  const menuToggle = document.getElementById("menu-toggle");
-  const sidebar = document.getElementById("sidebar");
-  const overlay = document.getElementById("overlay");
-
-  // Function to open sidebar
-  menuToggle.addEventListener("click", function () {
-    sidebar.classList.add("active"); // Show sidebar
-    overlay.classList.add("active"); // Show overlay
-  });
-
-  // Function to close sidebar when overlay is clicked
-  overlay.addEventListener("click", function () {
-    sidebar.classList.remove("active"); // Hide sidebar
-    overlay.classList.remove("active"); // Hide overlay
-  });
-
-  const searchIcon = document.querySelector(".search-btn");
-  const mobileSearchBar = document.getElementById("mobile-search-bar");
-  const closeSearchBtn = document.getElementById("close-search-button");
-
-  // searchIcon.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   mobileSearchBar.classList.add("active");
-  //   searchIcon.style.display = "none";
-  // });
-
-  closeSearchBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    mobileSearchBar.classList.remove("active");
-    searchIcon.style.display = "block";
-  });
+  // renderProducts("Đèn chùm", 0);
+  // renderProducts("Đèn thả", 1);
+  // renderProducts("Đèn bàn", 2);
+  // renderProducts("Đèn ốp trần", 3);
+  // renderProducts("Đèn quạt", 4);
+  // renderProducts("Đèn khác", 5);
 
   const saleEndTime = new Date("Nov 18, 2024 00:00:00").getTime();
 

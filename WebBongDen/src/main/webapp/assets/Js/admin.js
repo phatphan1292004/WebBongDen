@@ -71,91 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
   navItems[0].classList.add("active"); // Activate the first tab by default
 
   // Trang product========================================
-
-  // Load product table
-  function loadProductTable(products = productData) {
-    productTableBody.innerHTML = "";
-    products.forEach((item) => {
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-                <td>${item.id}</td>
-                <td>
-                      <img src="${item.urlImage}" alt="" class = "row-image-item">
-                </td>
-                <td>${item.name}</td>
-                <td>${item.price}</td>
-                <td>${item.nameCate}</td>
-                <td>${item.dateCreate}</td>
-                <td><button class="view-details view-details-product">Xem chi tiết</button></td>
-                <td>
-                    <button class="delete-product" data-id="${item.id}">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </button>
-                </td>
-            `;
-      productTableBody.appendChild(newRow);
-    });
-  }
-  // Tái sử dụng hàm search chỉ cho tên sản phẩm
-  // Tái sử dụng hàm search cho cả sản phẩm và khách hàng
-  function searchProducts(
-    searchBtnId,
-    searchInputId,
-    data,
-    loadFunction,
-    searchField
-  ) {
-    document.getElementById(searchBtnId).addEventListener("click", () => {
-      const searchTerm = document
-        .getElementById(searchInputId)
-        .value.toLowerCase();
-      const filteredData = data.filter((item) =>
-        item[searchField].toLowerCase().includes(searchTerm)
-      );
-      loadFunction(filteredData); // Gọi hàm load với dữ liệu đã lọc
-    });
-  }
-
-  function loadCustomerTable(cus = customerData) {
-    cusTableBody.innerHTML = "";
-    cus.forEach((item) => {
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-                <td>${item.id}</td>
-                <td>${item.name}</td>
-                <td>${item.email}</td>
-                <td>${item.phone}</td>
-                <td>${item.address}</td>
-                <td>${item.registeredDate}</td>
-                <td><button class="view-details">Xem chi tiết</button></td>
-            `;
-      cusTableBody.appendChild(newRow);
-    });
-  }
-
-  // Gọi hàm tìm kiếm cho sản phẩm chỉ theo tên
-  searchProducts(
-    "search-btn-product",
-    "product-search",
-    productData,
-    loadProductTable,
-    "name"
-  );
-  searchProducts(
-    "search-btn-cus",
-    "customer-search",
-    customerData,
-    loadCustomerTable,
-    "name"
-  );
-  searchProducts(
-    "search-btn-order",
-    "order-search",
-    orderData,
-    loadOrderTable,
-    "customerName"
-  );
-
   //Bật overlay
   function toggleOverlayByIndex(overlays, index) {
     overlays.forEach((overlay) => {
@@ -189,50 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
       toggleOverlayByIndex(overlays, 1);
     });
 
-  saveProductBtn.addEventListener("click", () => {
-    const productId = document.getElementById("product-id").value;
-    const productImage = document.getElementById("product-image").value;
-    const productName = document.getElementById("product-name").value;
-    const productPrice = document.getElementById("product-price").value;
-    const productCategory = document.getElementById("product-category").value;
-    const productDate = document.getElementById("product-date").value;
-
-    productData.push({
-      id: productId,
-      name: productName,
-      urlImage: productImage,
-      price: productPrice,
-      discountPercent: "",
-      desc: "",
-      idCate: "01",
-      cateName: productCategory,
-      dateCreate: productDate,
-    });
-
-    loadProductTable();
-
-    document.getElementById("product-form").reset();
-    overlay.classList.remove("active");
-  });
-
-  // Xóa row khi ấn vào nút xóa
-  document
-    .querySelector("#product-table-body")
-    .addEventListener("click", function (e) {
-      const deleteButton = e.target.closest(".delete-product");
-      if (deleteButton) {
-        const productId = deleteButton.getAttribute("data-id");
-        showCustomConfirm(
-          `Bạn có chắc chắn muốn xóa đơn hàng ID: ${productId}?`,
-          function () {
-            deleteProductById(productId);
-            showNotification(`Sản phẩm với ID ${productId} đã bị xóa.`);
-            loadProductTable(productData);
-          }
-        );
-      }
-    });
-
   function deleteProductById(productId) {
     const index = productData.findIndex((product) => product.id === productId);
     if (index !== -1) {
@@ -240,23 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Trang khách hàng
-  function loadCustomerTable(cus = customerData) {
-    cusTableBody.innerHTML = "";
-    cus.forEach((item) => {
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-                <td>${item.id}</td>
-                <td>${item.name}</td>
-                <td>${item.email}</td>
-                <td>${item.phone}</td>
-                <td>${item.address}</td>
-                <td>${item.registeredDate}</td>
-                <td><button class="view-details">Xem chi tiết</button></td>
-            `;
-      cusTableBody.appendChild(newRow);
-    });
-  }
 
   cusTableBody.addEventListener("click", function (e) {
     if (e.target && e.target.classList.contains("view-details")) {
@@ -264,122 +118,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  loadCustomerTable();
-
-  function sortCustomers(option) {
-    const sortedCustomers = [...customerData];
-    switch (option) {
-      case "date-desc":
-        sortedCustomers.sort(
-          (a, b) => new Date(b.registeredDate) - new Date(a.registeredDate)
-        );
-        break;
-      default:
-        console.log("Tùy chọn không hợp lệ.");
-        break;
-    }
-    loadCustomerTable(sortedCustomers);
-  }
-
-  // Thêm sự kiện cho nút sắp xếp
-  document
-    .querySelector("#sort-btn-cus")
-    .addEventListener("click", function () {
-      const selectedOption = document.querySelector(
-        "#sort-select-customer"
-      ).value;
-      if (selectedOption) {
-        sortCustomers(selectedOption);
-      } else {
-        showNotification("Vui lòng chọn một tùy chọn sắp xếp.", "error");
-      }
-    });
-
   // Trang đơn hàng ===========================================================
   const orderTableBody = document.getElementById("order-table-body");
 
-  function loadOrderTable(orders = orderData) {
-    orderTableBody.innerHTML = "";
-
-    orders.forEach((order) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${order.id}</td>
-        <td>${order.customerName}</td>
-        <td>${order.orderDate}</td>
-        <td>${order.expectedDeliveryDate}</td>
-        <td>${order.address}</td>
-        <td>${order.status}</td>
-        <td><button class="view-details">Chi tiết</button></td>
-        <td>
-          ${
-            order.status === "Chờ xử lý"
-              ? `
-            <button class="approve-order" onclick="approveOrder('${order.id}')"><i class="fa-solid fa-check"></i></button>
-            <button class="reject-order" onclick="rejectOrder('${order.id}')"><i class="fa-solid fa-times"></i></button>
-          `
-              : ""
-          }
-        </td>
-      `;
-      orderTableBody.appendChild(row);
-    });
-  }
-
-  // Ví dụ gọi hàm loadOrderTable để hiển thị `orderData`
-  loadOrderTable(orderData);
 
   orderTableBody.addEventListener("click", function (event) {
     if (event.target && event.target.classList.contains("view-details")) {
       toggleOverlayByIndex(overlays, 3);
     }
   });
-
-  const sortSelect = document.getElementById("sort-select-order");
-  const sortButton = document.getElementById("sort-btn-order");
-  // Hàm lọc danh sách đơn hàng
-  sortButton.addEventListener("click", function () {
-    const sortValue = sortSelect.value; // Lấy giá trị từ select
-    let filteredOrders = [...orderData]; // Tạo bản sao dữ liệu đơn hàng
-
-    switch (sortValue) {
-      case "pending-orders": // Đơn hàng chưa duyệt
-        filteredOrders = filteredOrders.filter(
-          (order) => order.status === "Chờ xử lý"
-        );
-        break;
-      case "in-progress-orders": // Đơn hàng đang giao
-        filteredOrders = filteredOrders.filter(
-          (order) => order.status === "Đang giao"
-        );
-        break;
-      case "completed-orders": // Đơn hàng đã giao
-        filteredOrders = filteredOrders.filter(
-          (order) => order.status === "Đã giao"
-        );
-        break;
-      default:
-        // Nếu không chọn gì, hiển thị tất cả
-        filteredOrders = [...orderData];
-        break;
-    }
-
-    // Gọi hàm để hiển thị đơn hàng sau khi lọc
-    loadOrderTable(filteredOrders);
-  });
-
-  // Hàm xử lý duyệt đơn hàng
-  window.approveOrder = function (orderId) {
-    const order = orderData.find((order) => order.id === orderId);
-
-    if (order) {
-      order.status = "Đã duyệt";
-      showNotification(`Đơn hàng ID: ${orderId} đã được duyệt!`);
-      loadOrderTable(orderData);
-    } else {
-      showNotification(`Không tìm thấy đơn hàng với ID: ${orderId}`, "error");
-    }
-  };
 
   window.rejectOrder = function (orderId) {
     showCustomConfirm(
@@ -392,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
           orderData.splice(index, 1); // Xóa phần tử tại vị trí index
         }
         showNotification(`Đơn hàng ID: ${orderId} đã bị xóa!`);
-        loadOrderTable(orderData); // Cập nhật lại bảng
+        // loadOrderTable(orderData); // Cập nhật lại bảng
       }
     );
   };
@@ -1213,172 +960,170 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Phân trang cho kho hàng
-  $(document).ready(function () {
-    // Kiểm tra và xóa <thead> cũ nếu tồn tại
-    $("#product-table thead").not(":first").remove();
+  // $(document).ready(function () {
+  //   // Kiểm tra và xóa <thead> cũ nếu tồn tại
+  //   $("#product-table thead").not(":first").remove();
 
     // Khởi tạo DataTables
-    $("#product-table").DataTable({
-      data: productData, // Dữ liệu từ file data.js
-      destroy: true, // Xóa cấu hình DataTables cũ nếu có
-      autoWidth: false, // Tắt tự động điều chỉnh chiều rộng
-      paging: true, // Kích hoạt phân trang
-      pageLength: 10, // Hiển thị 20 dòng mỗi trang
-      columns: [
-        { data: "id" }, // Id
-        {
-          data: "urlImage", // Hình ảnh
-          render: function (data) {
-            return `<img src="${data}" alt="Product Image" style="width: 50px; height: 50px;">`;
-          },
-        },
-        { data: "name" }, // Tên sản phẩm
-        {
-          data: "price", // Giá
-          render: function (data) {
-            return parseInt(data).toLocaleString("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            });
-          },
-        },
-        { data: "nameCate" }, // Loại sản phẩm
-        { data: "dateCreate" }, // Ngày thêm
-        {
-          data: null, // Thao tác
-          render: function (data, type, row) {
-            return `
-             <button class="view-details view-details-product">Xem chi tiết</button>
-            `;
-          },
-        },
-        {
-          data: null,
-          render: function (data, type, row) {
-            return `
-            
-                    <button class="delete-product" data-id="${row.id}">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </button>
-            `;
-          },
-        },
-      ],
+  //   $("#product-table").DataTable({
+  //     data: productData, // Dữ liệu từ file data.js
+  //     destroy: true, // Xóa cấu hình DataTables cũ nếu có
+  //     autoWidth: false, // Tắt tự động điều chỉnh chiều rộng
+  //     paging: true, // Kích hoạt phân trang
+  //     pageLength: 10, // Hiển thị 20 dòng mỗi trang
+  //     columns: [
+  //       { data: "id" }, // Id
+  //       {
+  //         data: "urlImage", // Hình ảnh
+  //         render: function (data) {
+  //           return `<img src="${data}" alt="Product Image" style="width: 50px; height: 50px;">`;
+  //         },
+  //       },
+  //       { data: "name" }, // Tên sản phẩm
+  //       {
+  //         data: "price", // Giá
+  //         render: function (data) {
+  //           return parseInt(data).toLocaleString("vi-VN", {
+  //             style: "currency",
+  //             currency: "VND",
+  //           });
+  //         },
+  //       },
+  //       { data: "nameCate" }, // Loại sản phẩm
+  //       { data: "dateCreate" }, // Ngày thêm
+  //       {
+  //         data: null, // Thao tác
+  //         render: function (data, type, row) {
+  //           return `
+  //            <button class="view-details view-details-product">Xem chi tiết</button>
+  //           `;
+  //         },
+  //       },
+  //       {
+  //         data: null,
+  //         render: function (data, type, row) {
+  //           return `
+  //
+  //                   <button class="delete-product" data-id="${row.id}">
+  //                       <i class="fa-regular fa-trash-can"></i>
+  //                   </button>
+  //           `;
+  //         },
+  //       },
+  //     ],
+  //
+  //     lengthChange: false,
+  //     searching: false,
+  //     ordering: true,
+  //     info: true,
+  //     language: {
+  //       paginate: {
+  //         previous: "Trước",
+  //         next: "Tiếp",
+  //       },
+  //       info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",
+  //     },
+  //     initComplete: function () {
+  //       // Kiểm tra và xóa <thead> trùng lặp sau khi DataTables khởi tạo
+  //       $("#product-table thead").not(":first").remove();
+  //     },
+  //   });
+  // });
 
-      lengthChange: false,
-      searching: false,
-      ordering: true,
-      info: true,
-      language: {
-        paginate: {
-          previous: "Trước",
-          next: "Tiếp",
-        },
-        info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",
-      },
-      initComplete: function () {
-        // Kiểm tra và xóa <thead> trùng lặp sau khi DataTables khởi tạo
-        $("#product-table thead").not(":first").remove();
-      },
-    });
-  });
-
-  // Phân trang cho khách hàng
-  $(document).ready(function () {
-    // Cấu hình DataTables
-    $(".customer-table").DataTable({
-      data: customerData, // Dữ liệu đầu vào
-      autoWidth: false,
-      paging: true, // Kích hoạt phân trang
-      pageLength: 10, // Hiển thị 20 dòng mỗi trang
-      columns: [
-        { data: "id", title: "Id" }, // Id khách hàng
-        { data: "name", title: "Tên khách hàng" }, // Tên khách hàng
-        { data: "email", title: "Email" }, // Email
-        { data: "phone", title: "Số điện thoại" }, // Số điện thoại
-        { data: "address", title: "Địa chỉ" }, // Địa chỉ
-        { data: "registeredDate", title: "Ngày đăng ký" }, // Ngày đăng ký
-        {
-          data: null,
-          render: function (data, type, row) {
-            return `
-            <button class="view-details">Xem chi tiết</button>
-            `;
-          },
-        },
-      ],
-      paging: true,
-      pageLength: 10,
-      lengthChange: false,
-      searching: false,
-      ordering: true,
-      info: true,
-      language: {
-        paginate: {
-          previous: "Trước",
-          next: "Tiếp",
-        },
-        info: "Hiển thị _START_ đến _END_ của _TOTAL_ khách hàng",
-      },
-    });
-  });
-
-  // Phân trang cho hóa đơn
-  $(document).ready(function () {
-    // Khởi tạo DataTables
-    $("#order-table").DataTable({
-      data: orderData,
-      destroy: true,
-      autoWidth: false,
-      paging: true,
-      pageLength: 10,
-      columns: [
-        { data: "id" },
-        { data: "customerName" },
-        { data: "orderDate" },
-        { data: "expectedDeliveryDate" },
-        { data: "address" },
-        { data: "status" },
-        {
-          data: null,
-          render: function (data) {
-            return `<button class="view-details">Chi tiết</button>`;
-          },
-        },
-        {
-          data: null, // Thao tác
-          render: function (data, type, row) {
-            if (row.status === "Chờ xử lý") {
-              return `
-                <button class="approve-order" onclick="approveOrder('${row.id}')">
-                  <i class="fa-solid fa-check"></i>
-                </button>
-                <button class="reject-order" onclick="rejectOrder('${row.id}')">
-                  <i class="fa-solid fa-times"></i>
-                </button>
-              `;
-            } else {
-              return "";
-            }
-          },
-        },
-      ],
-      lengthChange: false,
-      searching: false,
-      ordering: true,
-      info: true,
-      language: {
-        paginate: {
-          previous: "Trước",
-          next: "Tiếp",
-        },
-        info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",
-      },
-      initComplete: function () {
-        $("#product-table thead").not(":first").remove();
-      },
-    });
-  });
+  // // Phân trang cho khách hàng
+  // $(document).ready(function () {
+  //   // Cấu hình DataTables
+  //   $(".customer-table").DataTable({
+  //     data: customerData, // Dữ liệu đầu vào
+  //     autoWidth: false,
+  //     paging: true, // Kích hoạt phân trang
+  //     pageLength: 10, // Hiển thị 20 dòng mỗi trang
+  //     columns: [
+  //       { data: "id", title: "Id" }, // Id khách hàng
+  //       { data: "name", title: "Tên khách hàng" }, // Tên khách hàng
+  //       { data: "email", title: "Email" }, // Email
+  //       { data: "phone", title: "Số điện thoại" }, // Số điện thoại
+  //       { data: "address", title: "Địa chỉ" }, // Địa chỉ
+  //       { data: "registeredDate", title: "Ngày đăng ký" }, // Ngày đăng ký
+  //       {
+  //         data: null,
+  //         render: function (data, type, row) {
+  //           return `
+  //           <button class="view-details">Xem chi tiết</button>
+  //           `;
+  //         },
+  //       },
+  //     ],
+  //     lengthChange: false,
+  //     searching: false,
+  //     ordering: true,
+  //     info: true,
+  //     language: {
+  //       paginate: {
+  //         previous: "Trước",
+  //         next: "Tiếp",
+  //       },
+  //       info: "Hiển thị _START_ đến _END_ của _TOTAL_ khách hàng",
+  //     },
+  //   });
+  // });
+  //
+  // // Phân trang cho hóa đơn
+  // $(document).ready(function () {
+  //   // Khởi tạo DataTables
+  //   $("#order-table").DataTable({
+  //     data: orderData,
+  //     destroy: true,
+  //     autoWidth: false,
+  //     paging: true,
+  //     pageLength: 10,
+  //     columns: [
+  //       { data: "id" },
+  //       { data: "customerName" },
+  //       { data: "orderDate" },
+  //       { data: "expectedDeliveryDate" },
+  //       { data: "address" },
+  //       { data: "status" },
+  //       {
+  //         data: null,
+  //         render: function (data) {
+  //           return `<button class="view-details">Chi tiết</button>`;
+  //         },
+  //       },
+  //       {
+  //         data: null, // Thao tác
+  //         render: function (data, type, row) {
+  //           if (row.status === "Chờ xử lý") {
+  //             return `
+  //               <button class="approve-order" onclick="approveOrder('${row.id}')">
+  //                 <i class="fa-solid fa-check"></i>
+  //               </button>
+  //               <button class="reject-order" onclick="rejectOrder('${row.id}')">
+  //                 <i class="fa-solid fa-times"></i>
+  //               </button>
+  //             `;
+  //           } else {
+  //             return "";
+  //           }
+  //         },
+  //       },
+  //     ],
+  //     lengthChange: false,
+  //     searching: false,
+  //     ordering: true,
+  //     info: true,
+  //     language: {
+  //       paginate: {
+  //         previous: "Trước",
+  //         next: "Tiếp",
+  //       },
+  //       info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",
+  //     },
+  //     initComplete: function () {
+  //       $("#product-table thead").not(":first").remove();
+  //     },
+  //   });
+  // });
 
   // Xử lý sự kiện khi form được submit
   document

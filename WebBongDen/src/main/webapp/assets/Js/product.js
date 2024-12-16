@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
       cateHeader.addEventListener("click", () => {
         const isVisible = subcategoryList.style.display === "block";
         subcategoryList.style.display = isVisible ? "none" : "block";
-        subcategoryList.style.height = subcategoryList.style.height === "0px" ? "auto" : "0px";
+        subcategoryList.style.height = subcategoryList.style.height === "auto" ? "0px" : "auto";
         cateHeader.querySelector("i").classList.toggle("active");
       });
   
