@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Title</title>
@@ -110,7 +111,19 @@
                 <a href="Detail.html">DANH MỤC <i class="fa-solid fa-caret-down"></i></a>
                 <div class="submenu">
                     <ul id="category-list">
-                        <!-- Categories will go here -->
+                        <c:forEach var="category" items="${categories}">
+                            <li class="category">
+                                <p class="category-header">${category.categoryName}</p>
+                                <ul class="category-products">
+                                    <!-- Hiển thị danh mục con -->
+                                    <c:forEach var="subCategory" items="${subCategoriesMap[category.id]}">
+                                        <li class="category-item">
+                                            <a href="Detail.html" class="category-link">${subCategory.name}</a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </li>

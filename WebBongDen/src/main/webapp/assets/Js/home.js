@@ -96,25 +96,25 @@ window.addEventListener("load", function () {
   });
 
   //Load category
-  cateData.forEach((category) => {
-    const categoryItem = document.createElement("li");
-    categoryItem.classList.add("category");
-
-    const productsList = `
-            <p class="category-header">${category.name}</p>
-            <ul class="category-products">
-                ${subcateData
-                  .filter((subcate) => subcate.idCate === category.id)
-                  .map(
-                    (subcate) =>
-                     `<li class="category-item"><a href="Detail.html" class="category-link">${subcate.name}</a></li>`
-                  )
-                  .join("")}
-            </ul>
-        `;
-    categoryItem.innerHTML = productsList;
-    document.getElementById("category-list").appendChild(categoryItem);
-  });
+  // cateData.forEach((category) => {
+  //   const categoryItem = document.createElement("li");
+  //   categoryItem.classList.add("category");
+  //
+  //   const productsList = `
+  //           <p class="category-header">${category.name}</p>
+  //           <ul class="category-products">
+  //               ${subcateData
+  //                 .filter((subcate) => subcate.idCate === category.id)
+  //                 .map(
+  //                   (subcate) =>
+  //                    `<li class="category-item"><a href="Detail.html" class="category-link">${subcate.name}</a></li>`
+  //                 )
+  //                 .join("")}
+  //           </ul>
+  //       `;
+  //   categoryItem.innerHTML = productsList;
+  //   document.getElementById("category-list").appendChild(categoryItem);
+  // });
 
   //LoadProduct
   // <li class="product-item">
