@@ -9,5 +9,8 @@
         <module name="WebBongDen" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="WebBongDen" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>
