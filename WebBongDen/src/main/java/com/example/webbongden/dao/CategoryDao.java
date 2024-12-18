@@ -33,16 +33,15 @@ public class CategoryDao {
         );
     }
 
-    // Thêm mới một category
-    public void addCategory(Category category) {
-        jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO categories (category_name, stock_quantity, DESC_1) VALUES (:name, :stock, :desc)")
-                        .bind("name", category.getCategoryName())
-                        .bind("stock", category.getStockQuantity())
-                        .bind("desc", category.getDesc1())
-                        .execute()
+    public List<SubCategory> getAllSubCategories() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM sub_categories")
+                        .mapToBean(SubCategory.class)
+                        .list()
         );
     }
+
+
 
     public static void main(String[] args) {
         // Khởi tạo CategoryDao

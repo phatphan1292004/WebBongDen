@@ -20,4 +20,8 @@ public class CategorySevices {
     public List<SubCategory> getSubCategoriesByCategoryId(int categoryId) {
         return categoryDao.getSubCategoriesByCategoryId(categoryId);
     }
+
+    public List<SubCategory> getAllSubCategories() {
+        return categoryDao.getAllSubCategories();
+    }
 }

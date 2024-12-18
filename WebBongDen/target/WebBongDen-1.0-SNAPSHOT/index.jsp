@@ -158,7 +158,6 @@
         </nav>
     </header>
 
-
     <!-- Sidebar and overlay -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">

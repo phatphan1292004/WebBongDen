@@ -10,6 +10,8 @@ public class ProductImage {
         this.mainImage = mainImage;
     }
 
+    public ProductImage() {}
+
     // Getters và Setters
     public String getUrl() {
         return url;

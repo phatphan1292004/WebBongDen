@@ -175,12 +175,17 @@ text-align: center;
 
 .main .sidebar .nav-item {
   display: flex;
-  justify-content: space-between;
+  gap: 15px;
   align-items: center;
   padding: 15px;
   border-radius: 4px;
   text-align: left;
   margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 .main .sidebar .nav-item .nav-item-right {
@@ -321,7 +326,12 @@ text-align: center;
   padding-left: 240px;
 }
 
-.nav-item.active,
+.nav-link {
+  display: block;
+  border-radius: 4px;
+}
+
+.nav-link.active,
 .menu-item.active {
   background-color: #e0e0e0;
   font-weight: 500;
@@ -345,7 +355,7 @@ text-align: center;
 .main .tab-content .card-revenue {
   display: flex;
   gap: 40px;
-  max-height: 320px;
+  max-height: 358px;
 }
 
 .main .tab-content .card-revenue .top-product-list .product-item {
@@ -879,6 +889,8 @@ form label {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+
+
 .main-content .tab-content .add-product-form h3 {
   text-align: center;
   margin-bottom: 15px;
@@ -889,67 +901,149 @@ form label {
   margin-bottom: 5px;
 }
 
-.main-content .tab-content .add-product-form input,
-.main-content .tab-content .add-product-form select {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+product-form {
+  max-width: 1200px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
-/* Bố cục dạng lưới 2 cột */
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Hai cột đều nhau */
-  gap: 60px; /* Khoảng cách giữa các cột */
-}
-
-/* Mỗi cột */
-.form-column {
+/* Grid Layout */
+#product-form .form-grid {
   display: flex;
-  flex-direction: column;
-  gap: 15px; /* Khoảng cách giữa các trường trong một cột */
+  gap: 20px;
 }
 
-/* Nhóm form */
-.form-group label {
+#product-form .form-column {
+  flex: 1;
+}
+
+/* Form Group */
+#product-form .form-group {
+  margin-bottom: 15px;
+}
+
+#product-form label {
+  display: block;
   font-weight: bold;
-  font-size: 14px;
   margin-bottom: 5px;
+  color: #555;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+#product-form input[type="text"],
+#product-form input[type="number"],
+#product-form input[type="date"],
+#product-form select,
+#product-form textarea,
+#product-form input[type="file"] {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
-textarea {
+#product-form input[type="text"]:focus,
+#product-form input[type="number"]:focus,
+#product-form input[type="date"]:focus,
+#product-form textarea:focus,
+#product-form select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#product-form textarea {
+  height: 80px;
   resize: vertical;
-  min-height: 80px;
 }
 
-/* Nút lưu sản phẩm */
-.save-btn {
-  background-color: #28a745;
-  color: white;
+#product-form input[type="file"] {
+  padding: 5px;
+}
+
+/* Submit Button */
+#product-form .save-btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
   border: none;
-  padding: 12px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  width: 100%;
+  transition: background-color 0.3s ease;
 }
 
-.save-btn:hover {
-  background-color: #218838;
+#product-form .save-btn:hover {
+  background-color: #0056b3;
 }
+
+
+/*.main-content .tab-content .add-product-form input,*/
+/*.main-content .tab-content .add-product-form select {*/
+/*  width: 100%;*/
+/*  padding: 8px;*/
+/*  margin-bottom: 20px;*/
+/*  border: 1px solid #ccc;*/
+/*  border-radius: 5px;*/
+/*}*/
+
+/*!* Bố cục dạng lưới 2 cột *!*/
+/*.form-grid {*/
+/*  display: grid;*/
+/*  grid-template-columns: 1fr 1fr; !* Hai cột đều nhau *!*/
+/*  gap: 60px; !* Khoảng cách giữa các cột *!*/
+/*}*/
+
+/*!* Mỗi cột *!*/
+/*.form-column {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  gap: 15px; !* Khoảng cách giữa các trường trong một cột *!*/
+/*}*/
+
+/*!* Nhóm form *!*/
+/*.form-group label {*/
+/*  font-weight: bold;*/
+/*  font-size: 14px;*/
+/*  margin-bottom: 5px;*/
+/*}*/
+
+/*.form-group input,*/
+/*.form-group select,*/
+/*.form-group textarea {*/
+/*  width: 100%;*/
+/*  padding: 8px;*/
+/*  border: 1px solid #ddd;*/
+/*  border-radius: 5px;*/
+/*  font-size: 14px;*/
+/*}*/
+
+/*textarea {*/
+/*  resize: vertical;*/
+/*  min-height: 80px;*/
+/*}*/
+
+/*!* Nút lưu sản phẩm *!*/
+/*.save-btn {*/
+/*  background-color: #28a745;*/
+/*  color: white;*/
+/*  border: none;*/
+/*  padding: 12px;*/
+/*  border-radius: 5px;*/
+/*  cursor: pointer;*/
+/*  font-size: 16px;*/
+/*  font-weight: bold;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.save-btn:hover {*/
+/*  background-color: #218838;*/
+/*}*/
 
 
 #save-product {

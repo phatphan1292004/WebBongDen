@@ -28,9 +28,12 @@ public class CategoryFilter implements Filter {
                 List<SubCategory> subCategories = categoryServices.getSubCategoriesByCategoryId(category.getId());
                 subCategoriesMap.put(category.getId(), subCategories);
             }
+            List<SubCategory> listSubCate = categoryServices.getAllSubCategories();
+
 
             // Đặt dữ liệu vào request scope
             request.setAttribute("categories", categories);
+            request.setAttribute("listSubCate", listSubCate);
             request.setAttribute("subCategoriesMap", subCategoriesMap);
         }
 

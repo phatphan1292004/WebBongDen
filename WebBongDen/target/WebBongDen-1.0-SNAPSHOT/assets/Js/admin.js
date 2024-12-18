@@ -48,27 +48,86 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Tab navigation
-  navItems.forEach((item) => {
-    item.addEventListener("click", (e) => {
-      const index = item.getAttribute("data-index");
-      tabContents.forEach((content) => {
-        content.style.display = "none";
-      });
-      navItems.forEach((nav) => {
-        nav.classList.remove("active");
-      });
-      tabContents[index].style.display = "block";
-      item.classList.add("active");
+  const navLinks = document.querySelectorAll(".nav-link");
 
-      tabContents.forEach((tab) => {
-        tab.classList.remove("active"); // Xóa class active
-      });
+  // Hàm ẩn tất cả tab-content
+  function hideAllTabs() {
+    tabContents.forEach((tab) => {
+      tab.style.display = "none";
+    });
+  }
+
+  // Hàm kích hoạt tab dựa trên page từ URL
+  function activateTabFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const page = params.get("page"); // Lấy giá trị "page" từ URL
+
+    hideAllTabs(); // Ẩn tất cả các tab
+
+    if (page) {
+      const targetTab = document.getElementById(`${page}-content`);
+      if (targetTab) {
+        targetTab.style.display = "block"; // Hiển thị tab tương ứng
+      }
+    } else {
+      document.getElementById("dashboard-content").style.display = "block"; // Mặc định trang dashboard
+    }
+  }
+
+  // Xử lý click trên sidebar để thay đổi URL
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      navLinks.forEach((i) => {{
+        i.classList.remove(('active'));
+      }})
+      link.classList.add('active');
+
+      // Cập nhật URL mà không reload trang
+      const href = link.getAttribute("href");
+      window.history.pushState(null, "", href);
+
+      // Hiển thị tab tương ứng
+      activateTabFromURL();
     });
   });
+  navLinks[0].classList.add('active');
 
-  tabContents[0].style.display = "block"; // Show the first tab by default
-  navItems[0].classList.add("active"); // Activate the first tab by default
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get("page");
+  const id = params.get("id");
+
+// Kiểm tra nếu page là "product-management"
+  if (page === "product-management" && id) {
+    // Hiển thị chi tiết sản phẩm
+    document.getElementById("product-details").style.display = "block";
+
+    // Ẩn các phần khác
+    document.querySelector(".tab-content-container").style.display = "none";
+    document.querySelector(".product-stats").style.display = "none";
+  } else {
+    // Ẩn chi tiết sản phẩm
+    document.getElementById("product-details").style.display = "none";
+
+    // Hiển thị lại các phần khác
+    document.querySelector(".tab-content-container").style.display = "block";
+    document.querySelector(".product-stats").style.display = "flex";
+  }
+
+
+  // Kích hoạt tab khi tải trang
+  activateTabFromURL();
+
+  // const currentURL = window.location.href;
+  //
+  // navItems.forEach((item) => {
+  //   const href = item.querySelector("a").getAttribute("href");
+  //   if (currentURL.includes(href)) {
+  //     item.classList.add("active");
+  //   } else {
+  //     item.classList.remove("active");
+  //   }
+  // });
 
   // Trang product========================================
   //Bật overlay
@@ -97,19 +156,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.querySelector(".add-product").addEventListener("click", function () {
     toggleOverlayByIndex(overlays, 0);
+    const newUrl = window.location.pathname + "?page=product-management&action=add-product";
+    window.history.pushState({ path: newUrl }, "", newUrl);
+    window.location.href = newUrl;
   });
   document
     .querySelector(".add-category")
     .addEventListener("click", function () {
       toggleOverlayByIndex(overlays, 1);
     });
-
-  function deleteProductById(productId) {
-    const index = productData.findIndex((product) => product.id === productId);
-    if (index !== -1) {
-      productData.splice(index, 1); // Xóa phần tử khỏi mảng
-    }
-  }
 
 
   cusTableBody.addEventListener("click", function (e) {
@@ -443,17 +498,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-  // Code phần chi tiết sản phẩm
-  productTableBody.addEventListener("click", function (event) {
-    if (
-      event.target &&
-      event.target.classList.contains("view-details-product")
-    ) {
-      document.querySelector(".tab-content-container").style.display = "none";
-      document.querySelector(".product-details").style.display = "block";
-      document.querySelector(".product-stats").style.display = "none";
-    }
-  });
+
 
   document
     .getElementById("close-details-btn")
@@ -959,76 +1004,92 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Phân trang cho kho hàng
-  // $(document).ready(function () {
-  //   // Kiểm tra và xóa <thead> cũ nếu tồn tại
-  //   $("#product-table thead").not(":first").remove();
+  //Phân trang cho kho hàng
+  $(document).ready(function () {
+    $("#product-table").DataTable({
+      ajax: {
+        url: "/WebBongDen_war/AdminLoadProductController", // URL của Servlet trả về JSON
+        dataSrc: "", // DataTables sẽ lấy dữ liệu từ gốc JSON
+      },
+      error: function (xhr, error, thrown) {
+        console.log("Error:", error);
+        console.log("Response Text:", xhr.responseText);
+      },
+      destroy: true,
+      autoWidth: false,
+      paging: true,
+      pageLength: 10,
+      columns: [
+        { data: "id" }, // Id
+        {
+          data: "imageUrl", // Hình ảnh
+          render: function (data) {
+            return `<img src="${data}" alt="Product Image" style="width: 50px; height: 50px;">`;
+          },
+        },
+        { data: "productName" }, // Tên sản phẩm
+        {
+          data: "unitPrice", // Giá
+          render: function (data) {
+            return parseInt(data).toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            });
+          },
+        },
+        { data: "categoryName" }, // Loại sản phẩm
+        { data: "createdAt" }, // Ngày thêm
+        {
+          data: null, // Thao tác: Xem chi tiết
+          render: function (data, type, row) {
+            return `
+                <button class="view-details" data-id="${row.id}" data-page="product-management">Xem chi tiết</button>
+                `;
+          },
+        },
+        {
+          data: null, // Thao tác: Xóa
+          render: function (data, type, row) {
+            return `<button class="delete-product" data-id="${row.id}">
+                      <i class="fa-regular fa-trash-can"></i>
+                  </button>`;
+          },
+        },
+      ],
+      lengthChange: false,
+      searching: false,
+      ordering: true,
+      info: true,
+      language: {
+        paginate: {
+          previous: "Trước",
+          next: "Tiếp",
+        },
+        info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",
+      },
+    });
 
-    // Khởi tạo DataTables
-  //   $("#product-table").DataTable({
-  //     data: productData, // Dữ liệu từ file data.js
-  //     destroy: true, // Xóa cấu hình DataTables cũ nếu có
-  //     autoWidth: false, // Tắt tự động điều chỉnh chiều rộng
-  //     paging: true, // Kích hoạt phân trang
-  //     pageLength: 10, // Hiển thị 20 dòng mỗi trang
-  //     columns: [
-  //       { data: "id" }, // Id
-  //       {
-  //         data: "urlImage", // Hình ảnh
-  //         render: function (data) {
-  //           return `<img src="${data}" alt="Product Image" style="width: 50px; height: 50px;">`;
-  //         },
-  //       },
-  //       { data: "name" }, // Tên sản phẩm
-  //       {
-  //         data: "price", // Giá
-  //         render: function (data) {
-  //           return parseInt(data).toLocaleString("vi-VN", {
-  //             style: "currency",
-  //             currency: "VND",
-  //           });
-  //         },
-  //       },
-  //       { data: "nameCate" }, // Loại sản phẩm
-  //       { data: "dateCreate" }, // Ngày thêm
-  //       {
-  //         data: null, // Thao tác
-  //         render: function (data, type, row) {
-  //           return `
-  //            <button class="view-details view-details-product">Xem chi tiết</button>
-  //           `;
-  //         },
-  //       },
-  //       {
-  //         data: null,
-  //         render: function (data, type, row) {
-  //           return `
-  //
-  //                   <button class="delete-product" data-id="${row.id}">
-  //                       <i class="fa-regular fa-trash-can"></i>
-  //                   </button>
-  //           `;
-  //         },
-  //       },
-  //     ],
-  //
-  //     lengthChange: false,
-  //     searching: false,
-  //     ordering: true,
-  //     info: true,
-  //     language: {
-  //       paginate: {
-  //         previous: "Trước",
-  //         next: "Tiếp",
-  //       },
-  //       info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",
-  //     },
-  //     initComplete: function () {
-  //       // Kiểm tra và xóa <thead> trùng lặp sau khi DataTables khởi tạo
-  //       $("#product-table thead").not(":first").remove();
-  //     },
-  //   });
-  // });
+    $("#product-table").on("click", ".view-details", function () {
+      $(".product-stats").css("display", "none");
+      $(".tab-content-container").css("display", "none");
+      $("#product-details").css("display", "block");
+    });
+
+    $(document).on('click', '.view-details', function () {
+      const productId = $(this).data("id");
+      const pageType = $(this).data("page"); // Lấy tab hiện tại
+
+      // Tạo URL mới dựa trên page và ID
+      const newUrl = `admin?page=${pageType}&action=detail&id=${productId}`;
+
+      // Cập nhật URL trên trình duyệt
+      window.history.pushState(null, "", newUrl);
+
+      // Gửi request đến Servlet
+      window.location.href = newUrl;
+    });
+  });
+
 
   // // Phân trang cho khách hàng
   // $(document).ready(function () {

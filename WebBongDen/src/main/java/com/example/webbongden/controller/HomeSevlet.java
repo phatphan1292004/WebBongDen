@@ -18,11 +18,9 @@ import java.util.Map;
 @WebServlet(urlPatterns = {""})
 public class HomeSevlet extends HttpServlet {
     private static final ProductServices productServices;
-    private static final CategorySevices categoryServices;
 
     static {
         productServices = new ProductServices();
-        categoryServices = new CategorySevices();
     }
 
     @Override

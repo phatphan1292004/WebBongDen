@@ -1,4 +1,8 @@
-<%--
+<%@ page import="com.example.webbongden.dao.model.Category" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.webbongden.dao.model.SubCategory" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 12/15/2024
@@ -6,6 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -31,6 +36,14 @@
     />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        .visible {
+            display: block !important;
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper">
@@ -57,69 +70,48 @@
     <div class="main">
         <div class="sidebar">
             <div class="nav">
-                <div class="nav-item" data-index="0">
-                    <div class="nav-item-left">
+                <a href="admin?page=dashboard" class="nav-link" data-index="dashboard">
+                    <div class="nav-item">
                         <i class="fa-solid fa-tachometer-alt"></i>
                         <p>Tổng quan</p>
                     </div>
-                </div>
-
-                <div class="nav-item" data-index="1">
-                    <div class="nav-item-left">
+                </a>
+                <a href="admin?page=product-management" class="nav-link" data-index="product-management">
+                    <div class="nav-item">
                         <i class="fa-solid fa-box"></i>
                         <p>Quản lý kho hàng</p>
                     </div>
-                </div>
-
-                <div class="nav-item" data-index="2">
-                    <div class="nav-item-left">
+                </a>
+                <a href="admin?page=customer-management" class="nav-link" data-index="customer-management">
+                    <div class="nav-item">
                         <i class="fa-solid fa-users"></i>
                         <p>Quản lý khách hàng</p>
                     </div>
-                </div>
-
-                <div class="nav-item" data-index="3">
-                    <div class="nav-item-left">
+                </a>
+                <a href="admin?page=order-management" class="nav-link" data-index="order-management">
+                    <div class="nav-item">
                         <i class="fa-solid fa-receipt"></i>
                         <p>Quản lý đơn hàng</p>
                     </div>
-                </div>
-
-                <div class="nav-item" data-index="4">
-                    <div class="nav-item-left">
+                </a>
+                <a href="admin?page=revenue-statistics" class="nav-link" data-index="revenue-statistics">
+                    <div class="nav-item">
                         <i class="fa-solid fa-chart-line"></i>
                         <p>Thống kê doanh thu</p>
                     </div>
-                </div>
-
-                <div class="nav-item" data-index="5">
-                    <div class="nav-item-header">
-                        <div class="nav-item-left">
-                            <i class="fa-solid fa-tags"></i>
-                            <p>Quản lý khuyến mãi</p>
-                        </div>
+                </a>
+                <a href="admin?page=promotion" class="nav-link" data-index="promotion">
+                    <div class="nav-item">
+                        <i class="fa-solid fa-tags"></i>
+                        <p>Quản lý khuyến mãi</p>
                     </div>
-                </div>
-
-                <div class="nav-item" data-index="6">
-                    <div class="nav-item-header">
-                        <div class="nav-item-left">
-                            <i class="fa-solid fa-user"></i>
-                            <p>Quản lý tài khoản</p>
-                        </div>
+                </a>
+                <a href="admin?page=account" class="nav-link" data-index="account">
+                    <div class="nav-item">
+                        <i class="fa-solid fa-user"></i>
+                        <p>Quản lý tài khoản</p>
                     </div>
-                </div>
-                <!-- Submenu-->
-                <!-- <ul class="submenu-admin" id="submenu-admin">
-                    <li class="menu-item" data-target="discount-management">
-                      <i class="fa-solid fa-tags"></i><a href="#">Giảm giá</a>
-                    </li>
-
-                    <li class="menu-item" data-target="account-management">
-                      <i class="fa-solid fa-user"></i
-                      ><a href="#">Quản lý tài khoản</a>
-                    </li>
-                  </ul> -->
+                </a>
             </div>
 
             <div class="sidebar-bottom" id="sign-up">
@@ -468,38 +460,39 @@
                 <div class="product-stats">
                     <div class="stat-card">
                         <div class="card-image">
-                            <img src="./img/adminpage/product.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/product.png" alt="" />
                         </div>
                         <div class="card-content">
                             <h3>Tổng sản phẩm trong kho</h3>
-                            <p id="total-stock">0</p>
+                            <p id="total-stock">${totalProducts}</p>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="card-image">
-                            <img src="./img/adminpage/category.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/category.png" alt="" />
                         </div>
                         <div class="card-content">
                             <h3>Số loại sản phẩm</h3>
-                            <p id="total-categories">0</p>
+                            <p id="total-categories">${cateQuantity}</p>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="card-image">
-                            <img src="./img/adminpage/out-of-stock.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/out-of-stock.png" alt="" />
+
                         </div>
                         <div class="card-content">
                             <h3>Sản phẩm hết hàng</h3>
-                            <p id="out-of-stock">0</p>
+                            <p id="out-of-stock">${outOfStockProducts}</p>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="card-image">
-                            <img src="./img/adminpage/new-product.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/new-product.png" alt="" />
                         </div>
                         <div class="card-content">
                             <h3>Sản phẩm mới nhất</h3>
-                            <p id="latest-product">Chưa có</p>
+                            <p id="latest-product">${newProducts}</p>
                         </div>
                     </div>
                 </div>
@@ -534,38 +527,17 @@
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
                             </div>
-                            <form id="product-form">
+                            <form id="product-form" action="/admin" method="post" enctype="multipart/form-data">
                                 <div class="form-grid">
                                     <!-- Cột 1 -->
                                     <div class="form-column">
-                                        <!-- ID sản phẩm -->
-                                        <div class="form-group">
-                                            <label for="product-id">ID Sản phẩm:</label>
-                                            <input
-                                                    type="text"
-                                                    id="product-id"
-                                                    placeholder="Nhập ID sản phẩm"
-                                                    required
-                                            />
-                                        </div>
-
-                                        <!-- Hình ảnh sản phẩm -->
-                                        <div class="form-group">
-                                            <label for="product-image">Link Hình ảnh:</label>
-                                            <input
-                                                    type="text"
-                                                    id="product-image"
-                                                    placeholder="Nhập link hình ảnh"
-                                                    required
-                                            />
-                                        </div>
-
                                         <!-- Tên sản phẩm -->
                                         <div class="form-group">
                                             <label for="product-name">Tên sản phẩm:</label>
                                             <input
                                                     type="text"
                                                     id="product-name"
+                                                    name="productName"
                                                     placeholder="Nhập tên sản phẩm"
                                                     required
                                             />
@@ -577,56 +549,157 @@
                                             <input
                                                     type="number"
                                                     id="product-price"
+                                                    name="unitPrice"
                                                     placeholder="Nhập giá sản phẩm"
                                                     required
+                                            />
+                                        </div>
+
+                                        <!-- Số lượng sản phẩm -->
+                                        <div class="form-group">
+                                            <label for="product-stock">Số lượng:</label>
+                                            <input
+                                                    type="number"
+                                                    id="product-stock"
+                                                    name="stockQuantity"
+                                                    placeholder="Nhập số lượng sản phẩm"
+                                                    required
+                                            />
+                                        </div>
+
+                                        <!-- Trạng thái sản phẩm -->
+                                        <div class="form-group">
+                                            <label for="product-status">Trạng thái sản phẩm:</label>
+                                            <select id="product-status" name="productStatus" required>
+                                                <option value="">Chọn trạng thái</option>
+                                                <option value="Available">Còn hàng</option>
+                                                <option value="Unavailable">Hết hàng</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="product-category">Danh mục sản phẩm:</label>
+                                            <select id="product-category" name="categoryName" required>
+                                                <option value="">Chọn danh mục</option>
+                                                <!-- Duyệt qua danh sách categories -->
+                                                <%
+                                                    List<SubCategory> subCategories = (List<SubCategory>) request.getAttribute("listSubCate");
+                                                    if (subCategories != null) {
+                                                        for (SubCategory category : subCategories) {
+                                                %>
+                                                <option value="<%= category.getId() %>">
+                                                    <%= category.getName() %>
+                                                </option>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
+                                            </select>
+                                        </div>
+
+                                        <!-- Ngày thêm sản phẩm -->
+                                        <div class="form-group">
+                                            <label for="product-date">Ngày thêm:</label>
+                                            <input type="date" id="product-date" name="createdAt" required />
+                                        </div>
+                                        <!-- Hình ảnh sản phẩm -->
+                                        <div class="form-group">
+                                            <label for="product-images">Hình ảnh sản phẩm:</label>
+                                            <input
+                                                    type="file"
+                                                    id="product-images"
+                                                    name="images"
+                                                    multiple
                                             />
                                         </div>
                                     </div>
 
                                     <!-- Cột 2 -->
                                     <div class="form-column">
-                                        <!-- Loại sản phẩm -->
-                                        <div class="form-group">
-                                            <label for="product-category"
-                                            >Danh mục sản phẩm:</label
-                                            >
-                                            <select id="product-category" required>
-                                                <option value="">Chọn danh mục</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="product-subcategory"
-                                            >Tên loại sản phẩm:</label
-                                            >
-                                            <input
-                                                    type="text"
-                                                    id="product-subcategory"
-                                                    placeholder="Nhập tên loại sản phẩm chính xác"
-                                                    required
-                                            />
-                                        </div>
-
-                                        <!-- Ngày thêm sản phẩm -->
-                                        <div class="form-group">
-                                            <label for="product-date">Ngày thêm:</label>
-                                            <input type="date" id="product-date" required />
-                                        </div>
 
                                         <!-- Mô tả sản phẩm -->
                                         <div class="form-group">
                                             <label for="product-desc">Mô tả sản phẩm:</label>
                                             <textarea
                                                     id="product-desc"
+                                                    name="description"
                                                     placeholder="Nhập mô tả sản phẩm"
                                             ></textarea>
+                                        </div>
+
+                                        <!-- Thời gian bảo hành -->
+                                        <div class="form-group">
+                                            <label for="product-warranty">Thời gian bảo hành:</label>
+                                            <input
+                                                    type="text"
+                                                    id="product-warranty"
+                                                    name="warrantyPeriod"
+                                                    placeholder="Nhập thời gian bảo hành"
+                                            />
+                                        </div>
+
+                                        <!-- Màu sắc ánh sáng -->
+                                        <div class="form-group">
+                                            <label for="product-light-color">Màu ánh sáng:</label>
+                                            <input
+                                                    type="text"
+                                                    id="product-light-color"
+                                                    name="lightColor"
+                                                    placeholder="Nhập màu ánh sáng"
+                                            />
+                                        </div>
+
+                                        <!-- Chất liệu sản phẩm -->
+                                        <div class="form-group">
+                                            <label for="product-material">Chất liệu:</label>
+                                            <input
+                                                    type="text"
+                                                    id="product-material"
+                                                    name="material"
+                                                    placeholder="Nhập chất liệu sản phẩm"
+                                            />
+                                        </div>
+
+                                        <!-- Điện áp sản phẩm -->
+                                        <div class="form-group">
+                                            <label for="product-voltage">Điện áp:</label>
+                                            <input
+                                                    type="text"
+                                                    id="product-voltage"
+                                                    name="voltage"
+                                                    placeholder="Nhập điện áp sản phẩm"
+                                            />
+                                        </div>
+
+                                        <!-- Tuổi thọ sử dụng -->
+                                        <div class="form-group">
+                                            <label for="product-usage-age">Tuổi thọ sử dụng:</label>
+                                            <input
+                                                    type="text"
+                                                    id="product-usage-age"
+                                                    name="usageAge"
+                                                    placeholder="Nhập tuổi thọ sản phẩm"
+                                            />
+                                        </div>
+
+                                        <!-- Giảm giá -->
+                                        <div class="form-group">
+                                            <label for="product-discount">Phần trăm giảm giá:</label>
+                                            <input
+                                                    type="number"
+                                                    id="product-discount-add"
+                                                    name="discountPercent"
+                                                    placeholder="Nhập phần trăm giảm giá"
+                                                    step="0.1"
+                                                    min="0"
+                                            />
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Nút lưu -->
                                 <div class="form-group">
-                                    <button type="button" id="save-product" class="save-btn">
+                                    <button type="submit" id="save-product" class="save-btn">
                                         Lưu sản phẩm
                                     </button>
                                 </div>
@@ -721,39 +794,25 @@
                             </tr>
                             </thead>
                             <tbody id="product-table-body">
-                                <tr>
-                                   <td>001</td>
-                                   <td>
-                                     <a href="https://via.placeholder.com/50" target="_blank"
-                                       >https://via.placeholder.com/50</a
-                                     >
-                                   </td>
-                                   <td>Sản phẩm 1</td>
-                                   <td>200.000 VNĐ</td>
-                                   <td>Đèn LED</td>
-                                   <td>01/12/2024</td>
-                                   <td><button class="view-details">Xem chi tiết</button></td>
-                                   <td>
-                                     <button class="edit-product">
-                                       <i class="fa-regular fa-pen-to-square"></i>
-                                     </button>
-                                       <button class="delete-product">
-                                           <i class="fa-regular fa-trash-can"></i>
-                                       </button>
-                                   </td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
                 </div>
 
+<%--                <c:if test="${not empty productDetail}">--%>
+<%--                    <div id="product-details" class="product-details">--%>
+<%--                        <h3>Chi Tiết Sản Phẩm</h3>--%>
+<%--                        <p>ID: ${productDetail.id}</p>--%>
+<%--                        <p>Tên sản phẩm: ${productDetail.productName}</p>--%>
+<%--                        <p>Giá: ${productDetail.unitPrice}</p>--%>
+<%--                    </div>--%>
+<%--                </c:if>--%>
+
                 <!-- Khung chi tiết sản phẩm -->
-                <div
-                        class="product-details"
-                        id="product-details"
-                        style="display: none"
-                >
-                    <button id="close-details-btn">
+
+                <div class="product-details" id="product-details" style="display: none;">
+                    <button id="close-details-btn" onclick="window.location.href='admin?page=product-management';">
                         <i class="fa-solid fa-arrow-left"></i> Quay lại
                     </button>
                     <!-- Phần tiêu đề và thông tin cơ bản -->
@@ -761,31 +820,22 @@
                         <div class="product-info">
                             <div class="product-info-left">
                                 <div class="product-image">
-                                    <img
-                                            id="product-image-main"
-                                            src="https://denhoamy.vn/upload/attachment/5647den-chum-trang-tri-noi-that-phong-cach-my-dc03812-01.jpg"
-                                            alt="Hình ảnh sản phẩm"
-                                    />
+                                    <img id="product-image-main" src="${productViewDetail.mainImageUrl}" alt="Hình ảnh sản phẩm" />
                                 </div>
                                 <div class="basic-details">
                                     <p>
                                         <strong>Tên sản phẩm:</strong>
-                                        <span id="product-name-details">Skinny Men Blazer</span>
+                                        <span id="product-name-details">${productViewDetail.productName}</span>
                                     </p>
                                     <p>
                                         <strong>Mã sản phẩm:</strong>
-                                        <span id="product-id-details">#5353</span>
+                                        <span id="product-id-details">${productViewDetail.id}</span>
                                     </p>
                                 </div>
                             </div>
-                            <button
-                                    id="save-product-btn"
-                                    class="save-button"
-                                    style="display: none"
-                            >
+                            <button id="save-product-btn" class="save-button" style="display: none;">
                                 <i class="fa-solid fa-pen"></i> Lưu
                             </button>
-
                             <button id="edit-product-btn" class="edit-button">
                                 <i class="fa-solid fa-pen"></i> Chỉnh sửa
                             </button>
@@ -801,7 +851,7 @@
                                 </div>
                                 <div class="stat-text">
                                     <p>Số lượng bán được</p>
-                                    <span id="sold-quantity">0</span>
+<%--                                    <span id="sold-quantity">${productViewDetail.soldQuantity}</span>--%>
                                 </div>
                             </div>
                             <div class="stat-box">
@@ -810,7 +860,7 @@
                                 </div>
                                 <div class="stat-text">
                                     <p>Số lượng tồn kho</p>
-                                    <span id="stock-quantity-product">0</span>
+                                    <span id="stock-quantity-product">${productViewDetail.stockQuantity}</span>
                                 </div>
                             </div>
                             <div class="stat-box">
@@ -819,7 +869,7 @@
                                 </div>
                                 <div class="stat-text">
                                     <p>Rating</p>
-                                    <span id="product-rating">0/5</span>
+                                    <span id="product-rating">${productViewDetail.rating}</span>
                                 </div>
                             </div>
                             <div class="stat-box">
@@ -828,7 +878,7 @@
                                 </div>
                                 <div class="stat-text">
                                     <p>Đánh giá</p>
-                                    <span id="product-reviews">0 đánh giá</span>
+<%--                                    <span id="product-reviews">${productViewDetail.reviewsCount} đánh giá</span>--%>
                                 </div>
                             </div>
                         </div>
@@ -837,177 +887,98 @@
                         <div class="details-content">
                             <div>
                                 <strong>Id:</strong>
-                                <span id="product-id-view">5353</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-id"
-                                        value="5353"
-                                        style="display: none"
-                                        readonly
-                                />
+                                <span id="product-id-view">${productViewDetail.id}</span>
+                                <input type="text" id="edit-product-id" value="${productViewDetail.id}" style="display: none" readonly />
                             </div>
 
                             <div>
                                 <strong>Hình ảnh:</strong>
-                                <span id="product-image-view"
-                                >https://denhoamy.vn/upload/attachment/5647den-chum-trang-tri-noi-that-phong-cach-my-dc03812-01.jpg</span
-                                >
-                                <input
-                                        type="text"
-                                        id="edit-product-image"
-                                        style="display: none"
-                                        accept="image/*"
-                                />
+                                <span id="product-image-view">${productViewDetail.mainImageUrl}</span>
+                                <input type="text" id="edit-product-image" style="display: none" accept="image/*" />
                             </div>
 
                             <div>
                                 <strong>Tên sản phẩm:</strong>
-                                <span id="product-name-view">Skinny Men Blazer</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-name"
-                                        value="Skinny Men Blazer"
-                                        style="display: none"
-                                />
+                                <span id="product-name-view">${productViewDetail.productName}</span>
+                                <input type="text" id="edit-product-name" value="${productViewDetail.productName}" style="display: none" />
                             </div>
 
                             <div>
                                 <strong>Giá:</strong>
-                                <span id="product-price-view">200,000 VNĐ</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-price"
-                                        value="200,000 VNĐ"
-                                        style="display: none"
-                                />
+                                <span id="product-price-view">${productViewDetail.discountedPrice} VNĐ</span>
+                                <input type="text" id="edit-product-price" value="${productViewDetail.unitPrice} VNĐ" style="display: none" />
                             </div>
 
                             <div>
                                 <strong>Loại sản phẩm:</strong>
-                                <span id="product-category-view">Thời trang nam</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-category"
-                                        value="Thời trang nam"
-                                        style="display: none"
-                                />
+                                <span id="product-category-view">${productViewDetail.categoryName}</span>
+                                <input type="text" id="edit-product-category" value="${productViewDetail.subCategoryId}" style="display: none" />
                             </div>
 
                             <div>
                                 <strong>Tình trạng:</strong>
-                                <span id="product-status-view">Còn hàng</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-status"
-                                        value="Còn hàng"
-                                        style="display: none"
-                                />
+                                <span id="product-status-view">${productViewDetail.productStatus}</span>
+                                <input type="text" id="edit-product-status" value="${productViewDetail.productStatus}" style="display: none" />
                             </div>
 
                             <div>
                                 <strong>Mô tả:</strong>
-                                <span id="product-description-view"
-                                >Blazer phong cách trẻ trung, phù hợp cho các sự
-                      kiện.</span
-                                >
-                                <textarea
-                                        id="edit-product-description"
-                                        style="display: none"
-                                >
-Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
-                                >
+                                <span id="product-description-view">${productViewDetail.description}</span>
+                                <textarea id="edit-product-description" style="display: none">${productViewDetail.description}</textarea>
                             </div>
 
                             <div>
                                 <strong>Ngày thêm:</strong>
-                                <span id="product-date-view">2024-11-15</span>
-                                <input
-                                        type="date"
-                                        id="edit-product-date"
-                                        value="2024-11-15"
-                                        style="display: none"
-                                />
+                                <span id="product-date-view">${productViewDetail.createdAt}</span>
+                                <input type="date" id="edit-product-date" value="${productViewDetail.createdAt}" style="display: none" />
                             </div>
 
                             <div>
                                 <strong>Giảm giá:</strong>
-                                <span id="product-discount-view">10%</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-discount"
-                                        value="10%"
-                                        style="display: none"
-                                />
+                                <span id="product-discount-view">${productViewDetail.discountPercent}</span>
+                                <input type="text" id="edit-product-discount" value="${productViewDetail.discountPercent}%" style="display: none" />
                             </div>
+
                             <div>
                                 <strong>Số lượng tồn kho:</strong>
-                                <span id="product-stock-view">213</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-stock"
-                                        value="213"
-                                        style="display: none"
-                                />
+                                <span id="product-stock-view">${productViewDetail.stockQuantity}</span>
+                                <input type="text" id="edit-product-stock" value="${productViewDetail.stockQuantity}" style="display: none" />
                             </div>
+
                             <div>
                                 <strong>Đánh giá:</strong>
-                                <span id="product-rating-view">5</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-rating"
-                                        value="5"
-                                        style="display: none"
-                                />
+                                <span id="product-rating-view">${productViewDetail.rating}</span>
+                                <input type="text" id="edit-product-rating" value="${productViewDetail.rating}" style="display: none" />
                             </div>
+
                             <div>
                                 <strong>Thời gian bảo hành:</strong>
-                                <span id="product-warranty-view">12 tháng</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-warranty"
-                                        value="12 tháng"
-                                        style="display: none"
-                                />
+                                <span id="product-warranty-view">${productViewDetail.warrantyPeriod}</span>
+                                <input type="text" id="edit-product-warranty" value="${productViewDetail.warrantyPeriod}" style="display: none" />
                             </div>
+
                             <div>
                                 <strong>Chất liệu:</strong>
-                                <span id="product-material-view">Nhôm</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-material"
-                                        value="Nhôm"
-                                        style="display: none"
-                                />
+                                <span id="product-material-view">${productViewDetail.material}</span>
+                                <input type="text" id="edit-product-material" value="${productViewDetail.material}" style="display: none" />
                             </div>
+
                             <div>
                                 <strong>Màu sắc:</strong>
-                                <span id="product-color-view">Trắng</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-color"
-                                        value="Trắng"
-                                        style="display: none"
-                                />
+                                <span id="product-color-view">${productViewDetail.lightColor}</span>
+                                <input type="text" id="edit-product-color" value="${productViewDetail.lightColor}" style="display: none" />
                             </div>
+
                             <div>
                                 <strong>Tuổi thọ:</strong>
-                                <span id="product-lifespan-view">5 năm</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-lifespan"
-                                        value="5 năm"
-                                        style="display: none"
-                                />
+                                <span id="product-lifespan-view">${productViewDetail.usageAge}</span>
+                                <input type="text" id="edit-product-lifespan" value="${productViewDetail.usageAge}" style="display: none" />
                             </div>
+
                             <div>
                                 <strong>Công suất:</strong>
-                                <span id="product-power-view">60W</span>
-                                <input
-                                        type="text"
-                                        id="edit-product-power"
-                                        value="60W"
-                                        style="display: none"
-                                />
+                                <span id="product-power-view">${productViewDetail.voltage}</span>
+                                <input type="text" id="edit-product-power" value="${productViewDetail.voltage}" style="display: none" />
                             </div>
                         </div>
                     </div>
@@ -1019,7 +990,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                     <!-- Khối 1 -->
                     <div class="stat-box">
                         <div class="stat-image">
-                            <img src="./img/adminpage/client.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/client.png" alt="" />
                         </div>
                         <div class="stat-text">
                             <h3>Tổng khách hàng trong tháng</h3>
@@ -1030,7 +1001,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                     <!-- Khối 2 -->
                     <div class="stat-box">
                         <div class="stat-image">
-                            <img src="./img/adminpage/demand.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/demand.png" alt="" />
                         </div>
                         <div class="stat-text">
                             <h3>Khách hàng mới</h3>
@@ -1041,7 +1012,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                     <!-- Khối 3 -->
                     <div class="stat-box">
                         <div class="stat-image">
-                            <img src="./img/adminpage/rating.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/rating.png" alt="" />
                         </div>
                         <div class="stat-text">
                             <h3>Khách hàng thường xuyên</h3>
@@ -1052,7 +1023,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                     <!-- Khối 4 -->
                     <div class="stat-box">
                         <div class="stat-image">
-                            <img src="./img/adminpage/chat.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/chat.png" alt="" />
                         </div>
                         <div class="stat-text">
                             <h3>Phản hồi từ khách hàng</h3>
@@ -1205,7 +1176,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                     <!-- Khối 1 -->
                     <div class="stat-box">
                         <div class="stat-image">
-                            <img src="./img/adminpage/shopping-list.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/shopping-list.png" alt="" />
                         </div>
                         <div class="stat-text">
                             <h3>Tổng đơn hàng</h3>
@@ -1216,7 +1187,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                     <!-- Khối 2 -->
                     <div class="stat-box">
                         <div class="stat-image">
-                            <img src="./img/adminpage/pending.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/pending.png" alt="" />
                         </div>
                         <div class="stat-text">
                             <h3>Đơn hàng chưa xử lý</h3>
@@ -1227,7 +1198,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
                     <!-- Khối 3 -->
                     <div class="stat-box">
                         <div class="stat-image">
-                            <img src="./img/adminpage/fast-delivery.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/assets/img/adminpage/fast-delivery.png" alt="" />
                         </div>
                         <div class="stat-text">
                             <h3>Đơn hàng đang giao</h3>
@@ -1418,7 +1389,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
             </div>
             <div
                     class="tab-content"
-                    id="discount-management"
+                    id="promotion-content"
                     style="display: none"
             >
                 <div class="discount-container">
@@ -1663,7 +1634,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
             <!-- Tab Quản lý tài khoản -->
             <div
                     class="tab-content"
-                    id="account-management"
+                    id="account-content"
                     style="display: none"
             >
                 <h2>QUẢN LÝ TÀI KHOẢN</h2>
@@ -1819,7 +1790,7 @@ Blazer phong cách trẻ trung, phù hợp cho các sự kiện.</textarea
         </div>
     </div>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/assets/Js/admin.js"></script>
+<script type="module" src="${pageContext.request.contextPath}/assets/Js/admin.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
