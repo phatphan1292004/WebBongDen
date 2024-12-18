@@ -26,6 +26,8 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = request.getParameter("page");
+        System.out.println("Action nhận được 1: " + request.getParameter("action"));
+
         String action = request.getParameter("action");
 
         // Thiết lập giá trị mặc định nếu tham số không tồn tại
@@ -116,7 +118,7 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Lấy tham số action từ request và loại bỏ khoảng trắng thừa
-        System.out.println("Action nhận được: " + request.getParameter("action"));
+        System.out.println("Action nhận được 2: " + request.getParameter("action"));
 
         String action = request.getParameter("action");
         if (action != null) {
