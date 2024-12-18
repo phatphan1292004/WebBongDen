@@ -16,7 +16,6 @@
     <title>Title</title>
 </head>
 <body>
-
     <div class="product-stats">
         <div class="stat-card">
             <div class="card-image">
@@ -147,7 +146,7 @@
                                         if (subCategories != null) {
                                             for (SubCategory category : subCategories) {
                                     %>
-                                    <option value="<%= category.getId() %>">
+                                    <option value="<%= category.getName() %>">
                                         <%= category.getName() %>
                                     </option>
                                     <%
@@ -157,19 +156,14 @@
                                 </select>
                             </div>
 
-                            <!-- Ngày thêm sản phẩm -->
                             <div class="form-group">
-                                <label for="product-date">Ngày thêm:</label>
-                                <input type="date" id="product-date" name="createdAt" required />
-                            </div>
-                            <!-- Hình ảnh sản phẩm -->
-                            <div class="form-group">
-                                <label for="product-images">Hình ảnh sản phẩm:</label>
+                                <label for="product-image-url">Link hình ảnh sản phẩm:</label>
                                 <input
-                                        type="file"
-                                        id="product-images"
-                                        name="images"
-                                        multiple
+                                        type="text"
+                                        id="product-image-url"
+                                        name="imageUrl"
+                                        placeholder="Nhập link hình ảnh"
+                                        required
                                 />
                             </div>
                         </div>
@@ -359,15 +353,6 @@
             </table>
         </div>
     </div>
-
-    <%--                <c:if test="${not empty productDetail}">--%>
-    <%--                    <div id="product-details" class="product-details">--%>
-    <%--                        <h3>Chi Tiết Sản Phẩm</h3>--%>
-    <%--                        <p>ID: ${productDetail.id}</p>--%>
-    <%--                        <p>Tên sản phẩm: ${productDetail.productName}</p>--%>
-    <%--                        <p>Giá: ${productDetail.unitPrice}</p>--%>
-    <%--                    </div>--%>
-    <%--                </c:if>--%>
 
     <!-- Khung chi tiết sản phẩm -->
 

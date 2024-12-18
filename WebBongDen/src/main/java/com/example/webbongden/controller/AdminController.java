@@ -14,7 +14,11 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024, // 1MB: Kích thước tối thiểu để lưu file vào bộ nhớ
+        maxFileSize = 1024 * 1024 * 10,  // 10MB: Kích thước file tối đa
+        maxRequestSize = 1024 * 1024 * 20 // 20MB: Kích thước request tối đa
+)
 @WebServlet(name = "AdminController", urlPatterns = {"/admin"})
 public class AdminController extends HttpServlet {
     private static final ProductServices productServices;
@@ -117,24 +121,10 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Lấy tham số action từ request và loại bỏ khoảng trắng thừa
-        System.out.println("Action nhận được 2: " + request.getParameter("action"));
-
         String action = request.getParameter("action");
-        if (action != null) {
-            System.out.println(" khoong null");
-            action = action.trim(); // Xử lý khoảng trắng thừa
-        }else {
-            System.out.println("null");
-        }
 
-        // Kiểm tra action hợp lệ
         if ("add-product".equals(action)) {
             addProduct(request, response);
-        } else {
-            // Nếu không phải hành động hợp lệ, chuyển hướng tới trang lỗi
-            String errorMessage = URLEncoder.encode("Hành động không hợp lệ", "UTF-8");
-            response.sendRedirect("error.jsp?message=" + errorMessage);
         }
     }
 
@@ -142,7 +132,7 @@ public class AdminController extends HttpServlet {
         try {
             // 1. Lấy dữ liệu từ request
             String productName = request.getParameter("productName");
-            String subCategoryName = request.getParameter("subCategoryName"); // Tên danh mục
+            String subCategoryName = request.getParameter("categoryName"); // Tên danh mục
             double unitPrice = Double.parseDouble(request.getParameter("unitPrice"));
             int stockQuantity = Integer.parseInt(request.getParameter("stockQuantity"));
             String productStatus = request.getParameter("productStatus");
@@ -153,6 +143,7 @@ public class AdminController extends HttpServlet {
             String voltage = request.getParameter("voltage");
             String usageAge = request.getParameter("usageAge");
             double discountPercent = Double.parseDouble(request.getParameter("discountPercent"));
+            String imageUrls = request.getParameter("imageUrls"); // Lấy link hình ảnh từ request
 
             // 2. Tạo đối tượng ProductDetail
             ProductDetail product = new ProductDetail();
@@ -169,21 +160,16 @@ public class AdminController extends HttpServlet {
             product.setDiscountPercent(discountPercent);
             product.setCreatedAt(new Date()); // Ngày tạo là hiện tại
 
-            // 3. Lấy danh sách hình ảnh từ request
-            List<Part> imageParts = request.getParts().stream()
-                    .filter(part -> "images".equals(part.getName()) && part.getSize() > 0)
-                    .toList();
-
+            // 3. Xử lý link hình ảnh từ request
             List<ProductImage> images = new ArrayList<>();
-            for (Part part : imageParts) {
-                String fileName = part.getSubmittedFileName();
-                String uploadPath = getServletContext().getRealPath("/") + "uploads";
-                part.write(uploadPath + "/" + fileName);
-
-                ProductImage image = new ProductImage();
-                image.setUrl("uploads/" + fileName);
-                image.setMainImage(images.isEmpty()); // Ảnh đầu tiên là ảnh chính
-                images.add(image);
+            if (imageUrls != null && !imageUrls.trim().isEmpty()) {
+                String[] urlArray = imageUrls.split(","); // Giả sử link được ngăn cách bởi dấu phẩy
+                for (int i = 0; i < urlArray.length; i++) {
+                    ProductImage image = new ProductImage();
+                    image.setUrl(urlArray[i].trim()); // Thêm link hình ảnh
+                    image.setMainImage(i == 0); // Ảnh đầu tiên là ảnh chính
+                    images.add(image);
+                }
             }
             product.setListImages(images);
 
@@ -192,9 +178,14 @@ public class AdminController extends HttpServlet {
 
             // 5. Xử lý phản hồi
             if (isAdded) {
-                response.sendRedirect("/admin?page=product-management&message=" + URLEncoder.encode("Thêm sản phẩm thành công", "UTF-8"));
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("{\"status\": \"success\", \"message\": \"Thêm sản phẩm thành công!\"}");
             } else {
-                response.sendRedirect("error.jsp?message=" + URLEncoder.encode("Thêm sản phẩm thất bại", "UTF-8"));
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().write("{\"status\": \"error\", \"message\": \"Thêm sản phẩm thất bại!\"}");
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

@@ -146,7 +146,7 @@
                                         if (subCategories != null) {
                                             for (SubCategory category : subCategories) {
                                     %>
-                                    <option value="<%= category.getId() %>">
+                                    <option value="<%= category.getName() %>">
                                         <%= category.getName() %>
                                     </option>
                                     <%
@@ -156,19 +156,14 @@
                                 </select>
                             </div>
 
-                            <!-- Ngày thêm sản phẩm -->
                             <div class="form-group">
-                                <label for="product-date">Ngày thêm:</label>
-                                <input type="date" id="product-date" name="createdAt" required />
-                            </div>
-                            <!-- Hình ảnh sản phẩm -->
-                            <div class="form-group">
-                                <label for="product-images">Hình ảnh sản phẩm:</label>
+                                <label for="product-image-url">Link hình ảnh sản phẩm:</label>
                                 <input
-                                        type="file"
-                                        id="product-images"
-                                        name="images"
-                                        multiple
+                                        type="text"
+                                        id="product-image-url"
+                                        name="imageUrl"
+                                        placeholder="Nhập link hình ảnh"
+                                        required
                                 />
                             </div>
                         </div>

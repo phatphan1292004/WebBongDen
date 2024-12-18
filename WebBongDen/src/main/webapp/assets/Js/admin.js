@@ -156,10 +156,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.querySelector(".add-product").addEventListener("click", function () {
     toggleOverlayByIndex(overlays, 0);
-    const newUrl = window.location.pathname + "?page=product-management&action=add-product";
-    window.history.pushState({ path: newUrl }, "", newUrl);
-    window.location.href = newUrl;
   });
+
+  // Gửi ajax
+  document.querySelector("#product-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    formData.append("action", "add-product");
+
+    fetch("admin", {
+      method: "POST",
+      body: formData
+    })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Có lỗi xảy ra!");
+          }
+          return response.json(); // Đọc phản hồi JSON từ server
+        })
+        .then(data => {
+          if (data.status === "success") {
+            alert(data.message); // Hiển thị thông báo thành công
+            window.location.href = "admin?page=product-management&message=" + encodeURIComponent(data.message);
+          } else {
+            alert("Thêm sản phẩm thất bại!");
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("Có lỗi xảy ra khi thêm sản phẩm!");
+        });
+  });
+
+
   document
     .querySelector(".add-category")
     .addEventListener("click", function () {
