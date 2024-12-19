@@ -1080,9 +1080,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //Phân trang cho kho hàng
   $(document).ready(function () {
-    $("#product-table").DataTable({
+    const table = $("#product-table").DataTable({
       ajax: {
-        url: "/WebBongDen_war/AdminLoadProductController", // URL của Servlet trả về JSON
+        url: "/WebBongDen_war/AdminLoadProductController", // URL Servlet
+        type: "GET", // Phương thức HTTP
+        data: function (d) {
+          d.searchValue = $("#product-search").val();
+        },
         dataSrc: "", // DataTables sẽ lấy dữ liệu từ gốc JSON
       },
       error: function (xhr, error, thrown) {
@@ -1161,6 +1165,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Gửi request đến Servlet
       window.location.href = newUrl;
+    });
+
+    $("#search-btn-product").on("click", function () {
+      table.ajax.reload();
     });
   });
 

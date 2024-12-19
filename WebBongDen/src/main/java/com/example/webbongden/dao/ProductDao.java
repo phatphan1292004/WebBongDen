@@ -91,6 +91,35 @@ public class ProductDao {
         );
     }
 
+    // Tìm kiếm sp theo tên, danh mục
+    public List<Product> getProductsByKeyword(String keyword) {
+        String sql = "SELECT " +
+                "p.id AS id, " +
+                "p.product_name AS productName, " +
+                "p.unit_price AS unitPrice, " +
+                "p.created_at AS createdAt, " +
+                "sc.name AS categoryName, " +
+                "COALESCE(pi.url, 'https://via.placeholder.com/50') AS imageUrl " +
+                "FROM products p " +
+                "JOIN sub_categories sc ON p.subCategory_id = sc.id " +
+                "LEFT JOIN product_images pi ON pi.product_id = p.id AND pi.main_image = TRUE " +
+                "WHERE (:keyword IS NULL OR p.product_name LIKE :keyword OR sc.name LIKE :keyword)";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("keyword", keyword != null ? "%" + keyword + "%" : null)
+                        .map((rs, ctx) -> new Product(
+                                rs.getInt("id"),
+                                rs.getString("imageUrl"),
+                                rs.getString("productName"),
+                                rs.getDouble("unitPrice"),
+                                rs.getString("categoryName"),
+                                rs.getDate("createdAt")
+                        ))
+                        .list()
+        );
+    }
+
     // Lấy tổng số lượng sp
     public int getTotalProducts() {
         String sql = "SELECT SUM(stock_quantity) FROM products";

@@ -56,4 +56,7 @@ public class ProductServices {
     public boolean deleteProduct(int productId) {
         return productDao.deleteProductById(productId);
     }
+    public List<Product> getProductsByKeyword(String a) {
+        return productDao.getProductsByKeyword(a);
+    }
  }

@@ -20,7 +20,18 @@ public class AdminLoadProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> productList = productServices.getListProductForAdminPage();
+        // Lấy tham số tìm kiếm từ request
+        String keyword = request.getParameter("searchValue");
+
+        List<Product> productList;
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            // Nếu có từ khóa tìm kiếm, gọi phương thức tìm kiếm
+            productList = productServices.getProductsByKeyword(keyword);
+        } else {
+            // Nếu không có từ khóa, lấy toàn bộ sản phẩm
+            productList = productServices.getListProductForAdminPage();
+        }
 
         // Thiết lập kiểu dữ liệu trả về là JSON
         response.setContentType("application/json");
@@ -33,6 +44,7 @@ public class AdminLoadProductController extends HttpServlet {
         // Gửi JSON về client
         response.getWriter().write(json);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
