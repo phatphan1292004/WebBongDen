@@ -52,4 +52,8 @@ public class ProductServices {
             return false;
         }
     }
-}
+
+    public boolean deleteProduct(int productId) {
+        return productDao.deleteProductById(productId);
+    }
+ }

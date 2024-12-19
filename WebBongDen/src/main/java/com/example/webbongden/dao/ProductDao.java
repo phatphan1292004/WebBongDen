@@ -18,6 +18,7 @@ public class ProductDao {
         this.jdbi = JDBIConnect.get();
     }
 
+    // Lấy ds sp theo Category
     public List<Product> getProductsByCategory(String categoryName) {
         String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
                 "pi.url AS image_url, pi.main_image " +
@@ -63,6 +64,7 @@ public class ProductDao {
         });
     }
 
+    // Lấy dssp cho trang product Admin
     public List<Product> getProductsForAdminPage() {
         String sql = "SELECT " +
                 "p.id AS id, " +
@@ -89,6 +91,7 @@ public class ProductDao {
         );
     }
 
+    // Lấy tổng số lượng sp
     public int getTotalProducts() {
         String sql = "SELECT SUM(stock_quantity) FROM products";
 
@@ -99,6 +102,7 @@ public class ProductDao {
         );
     }
 
+    //Tong danh muc
     public int getCategoryQuantity() {
         String sql = "select count(*) from categories";
 
@@ -109,6 +113,7 @@ public class ProductDao {
         );
     }
 
+    //So sp het hàng
     public int getOutOfStockProducts() {
         String sql = "SELECT COUNT(*) FROM products WHERE stock_quantity = 0";
 
@@ -119,6 +124,7 @@ public class ProductDao {
         );
     }
 
+    //Sp mới
     public int getNewProductsInLast7Days() {
         String sql = "SELECT COUNT(*) AS total FROM products WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
 
@@ -129,6 +135,7 @@ public class ProductDao {
         );
     }
 
+    //Lay ra chi tiet sp
     public ProductDetail getProductDetailById(int id) {
         String sql = "SELECT p.id, p.subCategory_id, p.product_name, p.unit_price, p.created_at, p.stock_quantity, " +
                 "p.product_status, p.rating, p.DESC_1 AS description, p.warranty_period, p.light_color, " +
@@ -168,7 +175,7 @@ public class ProductDao {
         );
     }
 
-
+    //Lay id cate khi nhap ten
     public int getSubCategoryIdByName(String subCategoryName) {
         String sql = "SELECT id FROM sub_categories WHERE name = :subCategoryName";
 
@@ -181,6 +188,7 @@ public class ProductDao {
         );
     }
 
+    //Them sp
     public boolean addProduct(ProductDetail product, String subCategoryName) {
         // Lấy subCategoryId từ tên danh mục con
         int subCategoryId = getSubCategoryIdByName(subCategoryName);
@@ -226,56 +234,43 @@ public class ProductDao {
         });
     }
 
+    //Xoa sp
+    public boolean deleteProductById(int productId) {
+        String deleteProductImagesSql = "DELETE FROM product_images WHERE product_id = :productId";
+        String deleteProductSql = "DELETE FROM products WHERE id = :productId";
 
+        return jdbi.inTransaction(handle -> {
+            // Xóa các hình ảnh liên quan đến sản phẩm trước
+            handle.createUpdate(deleteProductImagesSql)
+                    .bind("productId", productId)
+                    .execute();
 
+            // Xóa sản phẩm khỏi bảng `products`
+            int rowsDeleted = handle.createUpdate(deleteProductSql)
+                    .bind("productId", productId)
+                    .execute();
 
+            // Trả về true nếu xóa thành công (rowsDeleted > 0)
+            return rowsDeleted > 0;
+        });
+    }
 
 
     public static void main(String[] args) {
-        // Khởi tạo ProductDao
         ProductDao productDao = new ProductDao();
 
         try {
-            // Tạo sản phẩm mới để thêm vào database
-            ProductDetail newProduct = new ProductDetail(
-                    0, // ID tự động tăng
-                    0, // subCategory_id, sẽ được lấy dựa vào tên danh mục con
-                    "Đèn aaaaaa trang trí", // Tên sản phẩm
-                    300000.0, // Giá sản phẩm
-                    new java.util.Date(), // Ngày tạo
-                    20, // Số lượng tồn kho
-                    "Còn hàng", // Trạng thái sản phẩm
-                    4.7, // Rating
-                    "Đèn LED trang trí phòng khách, ánh sáng trắng", // Mô tả
-                    "24 tháng", // Thời gian bảo hành
-                    "Trắng", // Màu ánh sáng
-                    "Hợp kim nhôm", // Chất liệu
-                    "220V", // Điện áp
-                    "3 năm", // Tuổi thọ sử dụng
-                    10.0, // Giảm giá (%)
-                    new ArrayList<>(), // Danh sách hình ảnh
-                    null, // Tên danh mục, không cần thiết vì đã truyền subCategoryName
-                    null  // Hình ảnh chính (tạm thời để null)
-            );
+            int productIdToDelete = 19; // ID của sản phẩm cần xóa
+            boolean result = productDao.deleteProductById(productIdToDelete);
 
-            // Thêm hình ảnh vào sản phẩm
-            newProduct.getListImages().add(new ProductImage("https://example.com/image1.jpg", true));
-            newProduct.getListImages().add(new ProductImage("https://example.com/image2.jpg", false));
-
-            // Gọi phương thức addProduct để thêm sản phẩm vào database
-            String subCategoryName = "Đèn ngoài trời"; // Tên danh mục con đã tồn tại trong DB
-            boolean result = productDao.addProduct(newProduct, subCategoryName);
-
-            // Kiểm tra kết quả
             if (result) {
-                System.out.println("Thêm sản phẩm thành công!");
+                System.out.println("Xóa sản phẩm thành công!");
             } else {
-                System.out.println("Thêm sản phẩm thất bại!");
+                System.out.println("Không tìm thấy sản phẩm để xóa!");
             }
         } catch (Exception e) {
-            System.err.println("Lỗi khi thêm sản phẩm: " + e.getMessage());
+            System.err.println("Lỗi khi xóa sản phẩm: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
 }

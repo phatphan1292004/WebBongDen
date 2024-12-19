@@ -30,7 +30,6 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = request.getParameter("page");
-        System.out.println("Action nhận được 1: " + request.getParameter("action"));
 
         String action = request.getParameter("action");
 
@@ -122,9 +121,12 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+        System.out.println(action);
 
         if ("add-product".equals(action)) {
             addProduct(request, response);
+        }else if("delete-product".equals(action)){
+            deleteProduct(request, response);
         }
     }
 
@@ -193,6 +195,39 @@ public class AdminController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("error.jsp?message=" + URLEncoder.encode("Lỗi trong quá trình thêm sản phẩm", "UTF-8"));
+        }
+    }
+
+    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            // 1. Lấy `id` của sản phẩm từ request
+            int productId = Integer.parseInt(request.getParameter("id"));
+
+            // 3. Xóa sản phẩm bằng ProductService
+            boolean isDeleted = productServices.deleteProduct(productId);
+
+            // 4. Xử lý phản hồi
+            if (isDeleted) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("{\"status\": \"success\", \"message\": \"Xóa sản phẩm thành công!\"}");
+            } else {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().write("{\"status\": \"error\", \"message\": \"Không thể xóa sản phẩm!\"}");
+            }
+        } catch (Exception e) {
+            // Xử lý lỗi nếu có
+            e.printStackTrace();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            try {
+                response.getWriter().write("{\"status\": \"error\", \"message\": \"Đã xảy ra lỗi khi xóa sản phẩm!\"}");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
     }
 }

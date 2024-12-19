@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleOverlayByIndex(overlays, 0);
   });
 
-  // Gửi ajax
+  // Gửi ajax chuc nang them sp
   document.querySelector("#product-form").addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
           if (data.status === "success") {
             alert(data.message); // Hiển thị thông báo thành công
-            window.location.href = "admin?page=product-management&message=" + encodeURIComponent(data.message);
+            window.location.href = "admin?page=product-management";
           } else {
             alert("Thêm sản phẩm thất bại!");
           }
@@ -189,6 +189,50 @@ document.addEventListener("DOMContentLoaded", function () {
         });
   });
 
+  //Chuc nang xoa sp
+  // Gắn event listener cho bảng sản phẩm
+  document.querySelector("#product-table").addEventListener("click", function (event) {
+    if (event.target.classList.contains("delete-product")) {
+      const productId = event.target.dataset.id; // Lấy ID sản phẩm từ data-id
+
+      if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+        // Gửi yêu cầu xóa qua AJAX
+        fetch("admin", {
+          method: "POST",
+          body: new URLSearchParams({
+            action: "delete-product",
+            id: productId
+          })
+        })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error("Có lỗi xảy ra trong quá trình xóa!");
+              }
+              return response.json();
+            })
+            .then(data => {
+              if (data.status === "success") {
+                alert(data.message); // Hiển thị thông báo thành công
+
+                // Tìm dòng cha của nút xóa
+                const row = event.target.closest("tr");
+
+                if (row) {
+                  // Sử dụng DataTables API để xóa dòng
+                  const table = $('#product-table').DataTable();
+                  table.row(row).remove().draw(false); // Giữ nguyên trang và cập nhật tổng số
+                }
+              } else {
+                alert(data.message); // Thông báo lỗi từ server
+              }
+            })
+            .catch(error => {
+              console.error("Error:", error);
+              alert("Có lỗi xảy ra khi xóa sản phẩm!");
+            });
+      }
+    }
+  });
 
   document
     .querySelector(".add-category")
