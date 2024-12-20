@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
       for (let i = index + 1; i < ratingItems.length; i++) {
         ratingItems[i].classList.remove("selected");
       }
+
     });
 
     // Xử lý sự kiện click
@@ -35,49 +36,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  function renderCategoryList(cateData, subcateData) {
-    const categoryList = document.querySelector(".category-list");
-  
-    cateData.forEach((category) => {
-      // Tạo phần tử `<li>` cho danh mục chính
-      const categoryItem = document.createElement("li");
-      categoryItem.innerHTML = `
-        <div class="cate-item">
-          <p>${category.name}</p>
-          <i class="fa-solid fa-caret-down"></i>
-        </div>
-        <ul class="subcategory-list"></ul>
-      `;
-  
-      // Lọc danh mục con theo `idCate`
-      const subcategories = subcateData.filter(
-        (subcategory) => subcategory.idCate === category.id
-      );
-  
-      // Render danh mục con
-      const subcategoryList = categoryItem.querySelector(".subcategory-list");
-      subcategories.forEach((subcategory) => {
-        const subcategoryItem = document.createElement("li");
-  
-        // Thêm thẻ <a> cho từng danh mục con
-        subcategoryItem.innerHTML = `<a href="${'Detail.html' || '#'}">${subcategory.name}</a>`;
-        subcategoryList.appendChild(subcategoryItem);
+  function toggleCategoryMenu() {
+    // Lấy tất cả các danh mục chính
+    const categoryItems = document.querySelectorAll(".cate-item");
+
+    categoryItems.forEach((category) => {
+      category.addEventListener("click", function (event) {
+        event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+
+        // Tìm danh mục con liên quan
+        const subcategoryList = this.parentElement.querySelector(".subcategory-list");
+        console.log(subcategoryList)
+        if (subcategoryList) {
+          // Kiểm tra trạng thái hiển thị
+          const isVisible = subcategoryList.style.height === "auto";
+
+          // Ẩn/hiện danh mục con
+          subcategoryList.style.height = isVisible ? "0" : "auto";
+
+          // Thay đổi icon trạng thái
+          const icon = this.querySelector("i");
+          if (icon) {
+            icon.classList.toggle("active");
+          }
+        }
       });
-  
-      // Thêm sự kiện ẩn/hiện danh mục con khi click
-      const cateHeader = categoryItem.querySelector(".cate-item");
-      cateHeader.addEventListener("click", () => {
-        const isVisible = subcategoryList.style.display === "block";
-        subcategoryList.style.display = isVisible ? "none" : "block";
-        subcategoryList.style.height = subcategoryList.style.height === "auto" ? "0px" : "auto";
-        cateHeader.querySelector("i").classList.toggle("active");
-      });
-  
-      // Thêm danh mục chính vào danh sách
-      categoryList.appendChild(categoryItem);
     });
   }
-  
-  // Gọi hàm render
-  renderCategoryList(cateData, subcateData);
+
+// Gọi hàm sau khi trang đã được load
+  toggleCategoryMenu()
 });

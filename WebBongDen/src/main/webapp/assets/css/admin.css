@@ -8,6 +8,11 @@ select:focus {
   background-color: #f9f9f9 !important;
 }
 
+.overlay.visible {
+  visibility: visible; /* Hiển thị */
+  opacity: 1;          /* Không trong suốt */
+}
+
 /* Code header */
 .wrapper .header {
   display: flex;
@@ -253,7 +258,9 @@ a {
   display: block;
 }
 
-
+.main {
+  width: 100%;
+}
 
 .main .sidebar .nav-item p {
   font-size: 14px;
@@ -347,7 +354,6 @@ a {
 
 .main .main-content .tab-content {
   padding: 20px;
-  display: none;
 }
 
 /* Code dashboard */
@@ -2454,7 +2460,7 @@ table {
 #customer-table-body td,
 #order-table-body td {
   border-bottom: 1px solid #dadada !important;
-  padding: 15px 0;
+  padding: 15px;
 }
 
 

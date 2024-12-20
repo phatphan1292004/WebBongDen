@@ -288,7 +288,7 @@
                 <div class="container-sale-product">
                     <ul class="list-product-hot" id="list-product-sale">
                         <li class="product-hot-item">
-                            <a href="./user/ProductDetail.jsp">
+                            <a href="user/product-detail.jsp">
                                 <div class="img">
                                     <img
                                             src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
@@ -310,7 +310,7 @@
                         </li>
 
                         <li class="product-hot-item">
-                            <a href="./user/ProductDetail.jsp">
+                            <a href="user/product-detail.jsp">
                                 <div class="img">
                                     <img
                                             src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
@@ -332,7 +332,7 @@
                         </li>
 
                         <li class="product-hot-item">
-                            <a href="./user/ProductDetail.jsp">
+                            <a href="user/product-detail.jsp">
                                 <div class="img">
                                     <img
                                             src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
@@ -354,7 +354,7 @@
                         </li>
 
                         <li class="product-hot-item">
-                            <a href="./user/ProductDetail.jsp">
+                            <a href="user/product-detail.jsp">
                                 <div class="img">
                                     <img
                                             src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
@@ -376,7 +376,7 @@
                         </li>
 
                         <li class="product-hot-item">
-                            <a href="./user/ProductDetail.jsp">
+                            <a href="user/product-detail.jsp">
                                 <div class="img">
                                     <img
                                             src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
@@ -398,7 +398,7 @@
                         </li>
 
                         <li class="product-hot-item">
-                            <a href="./user/ProductDetail.jsp">
+                            <a href="user/product-detail.jsp">
                                 <div class="img">
                                     <img
                                             src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
@@ -571,7 +571,7 @@
                         <ul class="list-product" id="list-product1">
                             <c:forEach var="product" items="${denChumList}">
                                 <li class="product-item">
-                                    <a href="#">
+                                    <a href="home/product-detail?id=${product.id}">
                                         <div class="img">
                                             <img src="${product.imageUrl}" alt="${product.productName}" />
                                         </div>
@@ -615,7 +615,7 @@
                         <ul class="list-product" id="list-product2">
                             <c:forEach var="product" items="${denThaList}">
                                 <li class="product-item">
-                                    <a href="#">
+                                    <a href="home/product-detail?id=${product.id}">
                                         <div class="img">
                                             <img src="${product.imageUrl}" alt="${product.productName}" />
                                         </div>
@@ -659,7 +659,7 @@
                         <ul class="list-product" id="list-product3">
                             <c:forEach var="product" items="${denBanList}">
                                 <li class="product-item">
-                                    <a href="#">
+                                    <a href="home/product-detail?id=${product.id}">
                                         <div class="img">
                                             <img src="${product.imageUrl}" alt="${product.productName}" />
                                         </div>
@@ -703,7 +703,7 @@
                         <ul class="list-product" id="list-product4">
                             <c:forEach var="product" items="${denOpTranList}">
                                 <li class="product-item">
-                                    <a href="#">
+                                    <a href="home/product-detail?id=${product.id}">
                                         <div class="img">
                                             <img src="${product.imageUrl}" alt="${product.productName}" />
                                         </div>
@@ -747,7 +747,7 @@
                         <ul class="list-product" id="list-product5">
                             <c:forEach var="product" items="${denQuatList}">
                                 <li class="product-item">
-                                    <a href="#">
+                                    <a href="home/product-detail?id=${product.id}">
                                         <div class="img">
                                             <img src="${product.imageUrl}" alt="${product.productName}" />
                                         </div>
@@ -791,7 +791,7 @@
                         <ul class="list-product" id="list-product6">
                             <c:forEach var="product" items="${denKhacList}">
                                 <li class="product-item">
-                                    <a href="#">
+                                    <a href="home/product-detail?id=${product.id}">
                                         <div class="img">
                                             <img src="${product.imageUrl}" alt="${product.productName}" />
                                         </div>

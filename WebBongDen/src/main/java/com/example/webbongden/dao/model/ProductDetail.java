@@ -151,5 +151,29 @@ public class ProductDetail {
     public void setMainImageUrl(String mainImageUrl) {
         this.mainImageUrl = mainImageUrl;
     }
+
+    @Override
+    public String toString() {
+        return "ProductDetail{" +
+                "id=" + id +
+                ", subCategoryId=" + subCategoryId +
+                ", productName='" + productName + '\'' +
+                ", unitPrice=" + unitPrice +
+                ", createdAt=" + createdAt +
+                ", stockQuantity=" + stockQuantity +
+                ", productStatus='" + productStatus + '\'' +
+                ", rating=" + rating +
+                ", description='" + description + '\'' +
+                ", warrantyPeriod='" + warrantyPeriod + '\'' +
+                ", lightColor='" + lightColor + '\'' +
+                ", material='" + material + '\'' +
+                ", voltage='" + voltage + '\'' +
+                ", usageAge='" + usageAge + '\'' +
+                ", discountPercent=" + discountPercent +
+                ", listImages=" + listImages +
+                ", categoryName='" + categoryName + '\'' +
+                ", mainImageUrl='" + mainImageUrl + '\'' +
+                '}';
+    }
 }
 
