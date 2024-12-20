@@ -48,6 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+
+
   const navLinks = document.querySelectorAll(".nav-link");
 
   // Hàm ẩn tất cả tab-content
@@ -75,29 +77,85 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Xử lý click trên sidebar để thay đổi URL
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      navLinks.forEach((i) => {{
-        i.classList.remove(('active'));
-      }})
-      link.classList.add('active');
+  // Xử lý click trên sidebar để thay đổi URL
+  // Gán sự kiện click cho các link trong sidebar
+  navLinks.forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault(); // Ngăn chặn hành vi mặc định
+      const page = link.getAttribute('data-index'); // Lấy giá trị 'data-index'
+      const newUrl = `admin?page=${page}`;
 
-      // Cập nhật URL mà không reload trang
-      const href = link.getAttribute("href");
-      window.history.pushState(null, "", href);
+      // Cập nhật URL trên trình duyệt
+      window.history.pushState(null, "", newUrl);
 
-      // Hiển thị tab tương ứng
-      activateTabFromURL();
+      // Gửi request đến server
+      fetch(newUrl)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Có lỗi xảy ra khi tải nội dung!");
+            }
+            return response.text();
+          })
+          .catch(error => {
+            console.error("Error:", error);
+            alert("Không thể tải nội dung trang!");
+          });
+      window.location.href = newUrl;
     });
   });
-  navLinks[0].classList.add('active');
+  navLinks[1].classList.add('active');
+
+//   $(document).ready(function () {
+//     $(".nav-link").on("click", function (e) {
+//       e.preventDefault(); // Ngăn chặn hành động mặc định
+//
+//       const page = $(this).data("index"); // Lấy giá trị `data-index` từ liên kết
+//       const url = `admin?page=${page}`; // Tạo URL với `page`
+//
+//       // Gửi yêu cầu AJAX
+//       $.ajax({
+//         url: url,
+//         method: "GET",
+//         success: function (response) {
+//           console.log("Full HTML Response:", response);
+//
+//           // Sử dụng DOMParser để parse nội dung HTML
+//           const parser = new DOMParser();
+//           const doc = parser.parseFromString(response, "text/html");
+//
+//           // Trích xuất nội dung bên trong <body>
+//           const bodyContent = doc.body.innerHTML;
+//
+//           // Tìm phần tử cần cập nhật dựa trên `data-index`
+//           const contentArea = $(`#${page}-content`);
+//
+//           if (contentArea.length) {
+//             // Thay thế nội dung trong vùng tương ứng
+//             contentArea.html(bodyContent);
+//
+//             // Cập nhật URL trên trình duyệt mà không tải lại trang
+//             window.history.pushState(null, "", url);
+//
+//             console.log(`Nội dung của #${page}-content đã được cập nhật.`);
+//           } else {
+//             console.error(`Không tìm thấy vùng nội dung tương ứng với #${page}-content.`);
+//           }
+//         },
+//         error: function (xhr, status, error) {
+//           console.error("Lỗi xảy ra:", error);
+//           alert("Không thể tải nội dung!");
+//         },
+//       });
+//     });
+//   });
+//
+// // Đặt class 'active' cho link đầu tiên khi tải trang
+
 
   const params = new URLSearchParams(window.location.search);
   const page = params.get("page");
   const id = params.get("id");
-
-// Kiểm tra nếu page là "product-management"
+  
   if (page === "product-management" && id) {
     // Hiển thị chi tiết sản phẩm
     document.getElementById("product-details").style.display = "block";
@@ -159,35 +217,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Gửi ajax chuc nang them sp
-  document.querySelector("#product-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-    formData.append("action", "add-product");
-
-    fetch("admin", {
-      method: "POST",
-      body: formData
-    })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("Có lỗi xảy ra!");
-          }
-          return response.json(); // Đọc phản hồi JSON từ server
-        })
-        .then(data => {
-          if (data.status === "success") {
-            alert(data.message); // Hiển thị thông báo thành công
-            window.location.href = "admin?page=product-management";
-          } else {
-            alert("Thêm sản phẩm thất bại!");
-          }
-        })
-        .catch(error => {
-          console.error("Error:", error);
-          alert("Có lỗi xảy ra khi thêm sản phẩm!");
-        });
-  });
 
   //Chuc nang xoa sp
   // Gắn event listener cho bảng sản phẩm
@@ -1078,91 +1107,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  //Phân trang cho kho hàng
-  $(document).ready(function () {
-    $("#product-table").DataTable({
-      ajax: {
-        url: "/WebBongDen_war/AdminLoadProductController", // URL của Servlet trả về JSON
-        dataSrc: "", // DataTables sẽ lấy dữ liệu từ gốc JSON
-      },
-      error: function (xhr, error, thrown) {
-        console.log("Error:", error);
-        console.log("Response Text:", xhr.responseText);
-      },
-      destroy: true,
-      autoWidth: false,
-      paging: true,
-      pageLength: 10,
-      columns: [
-        { data: "id" }, // Id
-        {
-          data: "imageUrl", // Hình ảnh
-          render: function (data) {
-            return `<img src="${data}" alt="Product Image" style="width: 50px; height: 50px;">`;
-          },
-        },
-        { data: "productName" }, // Tên sản phẩm
-        {
-          data: "unitPrice", // Giá
-          render: function (data) {
-            return parseInt(data).toLocaleString("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            });
-          },
-        },
-        { data: "categoryName" }, // Loại sản phẩm
-        { data: "createdAt" }, // Ngày thêm
-        {
-          data: null, // Thao tác: Xem chi tiết
-          render: function (data, type, row) {
-            return `
-                <button class="view-details" data-id="${row.id}" data-page="product-management">Xem chi tiết</button>
-                `;
-          },
-        },
-        {
-          data: null, // Thao tác: Xóa
-          render: function (data, type, row) {
-            return `<button class="delete-product" data-id="${row.id}">
-                      <i class="fa-regular fa-trash-can"></i>
-                  </button>`;
-          },
-        },
-      ],
-      lengthChange: false,
-      searching: false,
-      ordering: true,
-      info: true,
-      language: {
-        paginate: {
-          previous: "Trước",
-          next: "Tiếp",
-        },
-        info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",
-      },
-    });
 
-    $("#product-table").on("click", ".view-details", function () {
-      $(".product-stats").css("display", "none");
-      $(".tab-content-container").css("display", "none");
-      $("#product-details").css("display", "block");
-    });
-
-    $(document).on('click', '.view-details', function () {
-      const productId = $(this).data("id");
-      const pageType = $(this).data("page"); // Lấy tab hiện tại
-
-      // Tạo URL mới dựa trên page và ID
-      const newUrl = `admin?page=${pageType}&action=detail&id=${productId}`;
-
-      // Cập nhật URL trên trình duyệt
-      window.history.pushState(null, "", newUrl);
-
-      // Gửi request đến Servlet
-      window.location.href = newUrl;
-    });
-  });
 
 
   // // Phân trang cho khách hàng
