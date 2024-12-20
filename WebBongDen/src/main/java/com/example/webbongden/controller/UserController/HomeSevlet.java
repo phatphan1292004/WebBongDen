@@ -9,7 +9,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = {""})
+@WebServlet(name = "HomeController", value = "/home")
 public class HomeSevlet extends HttpServlet {
     private static final ProductServices productServices;
 
