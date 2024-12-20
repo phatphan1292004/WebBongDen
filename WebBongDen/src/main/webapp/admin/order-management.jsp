@@ -92,9 +92,9 @@
                     <div style="display: flex; gap: 20px">
                         <select id="sort-select-order" class="sort-select">
                             <option value="" disabled selected>Tất cả</option>
-                            <option value="pending-orders">Đơn hàng chưa duyệt</option>
-                            <option value="in-progress-orders">Đang giao hàng</option>
-                            <option value="completed-orders">Đã giao</option>
+                            <option value="Pending">Đơn hàng chưa duyệt</option>
+                            <option value="InProgress">Đang giao hàng</option>
+                            <option value="Completed">Đã giao</option>
                         </select>
 
                         <button id="sort-btn-order" class="sort-button">

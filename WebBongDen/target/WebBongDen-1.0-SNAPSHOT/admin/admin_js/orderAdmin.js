@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 dataSrc: "", // DataTables sẽ lấy dữ liệu từ gốc JSON
                 data: function (d) {
                     d.searchValue = $("#order-search").val(); // Truyền giá trị tìm kiếm
+                    d.status = $("#sort-select-order").val(); // Giá trị lọc trạng thái
                 },
             },
             error: function (xhr, error, thrown) {
@@ -123,5 +124,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
             });
         }
+
+        $("#sort-btn-order").on("click", function () {
+            table.ajax.reload(); // Reload lại bảng với dữ liệu lọc mới
+        });
     })
 })

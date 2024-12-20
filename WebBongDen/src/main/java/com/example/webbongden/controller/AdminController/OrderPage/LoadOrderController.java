@@ -24,11 +24,14 @@ public class LoadOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Order> orderList;
         String keyword = request.getParameter("searchValue");
+        String status = request.getParameter("status");
         if (keyword != null && !keyword.trim().isEmpty()) {
             // Nếu có từ khóa tìm kiếm, gọi phương thức tìm kiếm
-
             orderList = orderServices.getOrdersByKeyWord(keyword);
-        } else {
+        }else if(status != null && !status.trim().isEmpty()) {
+            orderList = orderServices.filterOrderByStatus(status);
+        }
+        else {
             // Nếu không có từ khóa, lấy toàn bộ sản phẩm
             orderList = orderServices.getAllOrders();;
         }

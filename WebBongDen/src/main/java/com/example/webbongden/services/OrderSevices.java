@@ -27,4 +27,8 @@ public class OrderSevices {
     public boolean updateOrderStatus(int orderId, String status) {
         return orderDao.updateOrderStatus(orderId, status);
     }
+
+    public List<Order> filterOrderByStatus(String value) {
+        return orderDao.filterOrderByStatus(value);
+    }
 }

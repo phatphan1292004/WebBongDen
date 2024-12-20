@@ -110,13 +110,39 @@ public class OrderDao {
         );
     }
 
+    public List<Order> filterOrderByStatus(String keyword) {
+        String sql = "SELECT o.id AS orderId, c.cus_name AS customerName, " +
+                "o.created_at AS orderDate, " +
+                "o.total_price AS totalPrice, " +
+                "c.address AS address, o.order_status AS status " +
+                "FROM orders o " +
+                "JOIN accounts a ON o.account_id = a.id " +
+                "JOIN customers c ON a.customer_id = c.id " +
+                "WHERE (:keyword IS NULL OR o.order_status LIKE :keyword)";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("keyword", keyword != null ? "%" + keyword + "%" : null) // Tìm kiếm dựa vào keyword
+                        .map((rs, ctx) -> new Order(
+                                rs.getInt("orderId"),
+                                rs.getString("customerName"),
+                                rs.getDate("orderDate"),
+                                rs.getDouble("totalPrice"),
+                                rs.getString("address"),
+                                rs.getString("status"),
+                                getOrderDetailsByOrderId(rs.getInt("orderId")) // Lấy danh sách chi tiết đơn hàng
+                        ))
+                        .list()
+        );
+    }
+
     public static void main(String[] args) {
         // Khởi tạo đối tượng OrderDao
         OrderDao orderDao = new OrderDao();
 
         // Tìm kiếm đơn hàng với từ khóa
         String keyword = "Pending"; // Thay từ khóa ở đây để kiểm tra (VD: "Nguyễn Văn A" hoặc "Shipped")
-        List<Order> orders = orderDao.getOrdersByKeyword(keyword);
+        List<Order> orders = orderDao.filterOrderByStatus(keyword);
 
         // In kết quả
         System.out.println("Kết quả tìm kiếm cho từ khóa: " + keyword);
