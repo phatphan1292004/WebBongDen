@@ -1,6 +1,6 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
+    console.log('Page loaded');
+
     function toggleCategoryMenu() {
         // Lấy tất cả các danh mục chính
         const categoryItems = document.querySelectorAll(".cate-item");
@@ -11,12 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Tìm danh mục con liên quan
                 const subcategoryList = this.parentElement.querySelector(".subcategory-list");
-                console.log(subcategoryList)
-                if (subcategoryList) {
-                    // Kiểm tra trạng thái hiển thị
-                    const isVisible = subcategoryList.style.height === "auto";
+                console.log(subcategoryList);
 
-                    // Ẩn/hiện danh mục con
+                if (subcategoryList) {
+                    // Kiểm tra trạng thái hiển thị và ẩn/hiện danh mục con
+                    const isVisible = subcategoryList.style.height === "auto";
                     subcategoryList.style.height = isVisible ? "0" : "auto";
 
                     // Thay đổi icon trạng thái
@@ -29,8 +28,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-// Gọi hàm sau khi trang đã được load
-    toggleCategoryMenu()
-})
+    // Gọi hàm sau khi trang đã được load
+    toggleCategoryMenu();
 
-
+    // Kiểm tra sự kiện 'prev'
+    const prevButton = document.getElementById('prev');
+    if (prevButton) {
+        prevButton.addEventListener("click", function () {
+            console.log('Previous button clicked');
+        });
+    } else {
+        console.log("Prev button not found");
+    }
+});

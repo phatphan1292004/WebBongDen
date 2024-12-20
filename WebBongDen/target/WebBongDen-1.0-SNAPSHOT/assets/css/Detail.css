@@ -1,6 +1,9 @@
 /* Wrapper and General Header */
 /* Phần fix lại */
-
+a {
+  color: black;
+  text-decoration: none;
+}
 .main .breadcrumb {
     font-size: 16px;
     color: #000;
@@ -633,6 +636,11 @@ ul {
 /* Khi thẻ cha được chọn, icon sẽ xoay */
 .cate-item i.active {
   transform: rotate(180deg);
+}
+
+.product-item>a {
+  padding: 15px;
+  background-color: white;
 }
 
 

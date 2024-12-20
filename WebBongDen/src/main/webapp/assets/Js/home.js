@@ -1,4 +1,4 @@
-import { cateData, subcateData, productData } from "./data.js";
+
 window.addEventListener("load", function () {
   // Use SlickSlider
   $(document).ready(function () {

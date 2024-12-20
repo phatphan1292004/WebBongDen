@@ -95,18 +95,17 @@
                                     <!-- Duyệt qua danh sách categories -->
                                     <c:forEach var="category" items="${categories}">
                                         <li class="a">
-                                            <a class="cate-item" href="#">
+                                            <a class="cate-item" href="javascript:void(0);">
                                                 <p>
-                                                    <span>${category.getCategoryName()}</span> <!-- Hiển thị tên danh mục -->
+                                                    <span>${category.categoryName}</span>
                                                 </p>
                                                 <i class="fa-solid fa-caret-down"></i>
                                             </a>
                                             <ul class="subcategory-list">
-                                                <!-- Duyệt qua subCategoriesMap -->
                                                 <c:forEach var="subCategory" items="${subCategoriesMap[category.id]}">
                                                     <li class="sub-category-item">
-                                                        <a href="#">
-                                                            <span>${subCategory.name}</span> <!-- Hiển thị tên sub-category -->
+                                                        <a href="CategoryController?categoryId=${category.id}&subCategoryId=${subCategory.id}">
+                                                            <span>${subCategory.name}</span>
                                                         </a>
                                                     </li>
                                                 </c:forEach>
@@ -277,216 +276,39 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="row"> -->
+                            <div class="row">
                             <!-- Single Product -->
-                            <!-- <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="single-product-wrapper">
-                                  <div class="product-item">
-                                    <div class="img">
-                                      <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/3870den-chum-trang-tri-phong-cach-trung-hoa-dc03719-02.jpg"
-                                        alt="Đèn chùm tiffany trang trí nội thất DC03596"
-                                      />
+                                <c:forEach var="product" items="${products}">
+                                    <div class="col-6 col-md-4 col-lg-3 mb-4">
+                                        <div class="product-item">
+                                            <a href="home/product-detail?id=${product.id}">
+                                                <div class="img">
+                                                    <img src="${product.imageUrl}" alt="${product.productName}" />
+                                                </div>
+
+                                                <div class="product-info">
+                                                    <div class="product-name">
+                                                            ${product.productName}
+                                                    </div>
+
+                                                    <p class="original-price">
+                                                            ${String.format('%,.0f', product.unitPrice)} VND
+                                                    </p>
+
+                                                    <div class="price-discount">
+                                                        <p class="product-price">
+                                                                ${String.format('%,.0f', product.discountedPrice)} VND
+                                                        </p>
+                                                        <p class="discount-percentage">
+                                                            -${product.discountPercent}%
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-
-                                    <div class="product-info">
-                                      <div class="product-name">
-                                        Đèn chùm trang trí phong cách Trung Hoa DC03719
-                                      </div>
-
-                                      <p class="original-price">3.000.000 VND</p>
-
-                                      <div class="price-discount">
-                                        <p class="product-price">2.000.000 VND</p>
-                                        <p class="discount-percentage">-33%</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="single-product-wrapper">
-                                  <div class="product-item">
-                                    <div class="img">
-                                      <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/604den-chum-trang-tri-noi-that-phong-cach-trung-hoa-dc03703-04.jpg"
-                                        alt="Đèn chùm tiffany trang trí nội thất DC03596"
-                                      />
-                                    </div>
-
-                                    <div class="product-info">
-                                      <div class="product-name">
-                                        Đèn chùm trang trí nội thất phong cách Trung Hoa
-                                      </div>
-
-                                      <p class="original-price">3.000.000 VND</p>
-
-                                      <div class="price-discount">
-                                        <p class="product-price">2.000.000 VND</p>
-                                        <p class="discount-percentage">-33%</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="single-product-wrapper">
-                                  <div class="product-item">
-                                    <div class="img">
-                                      <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/920den-chum-dong-trang-tri-phong-cach-trung-hoa-dc03700-03.jpg"
-                                        alt="Đèn chùm tiffany trang trí nội thất DC03596"
-                                      />
-                                    </div>
-
-                                    <div class="product-info">
-                                      <div class="product-name">
-                                        Đèn chùm tiffany trang trí nội thất DC03596
-                                      </div>
-
-                                      <p class="original-price">3.000.000 VND</p>
-
-                                      <div class="price-discount">
-                                        <p class="product-price">2.000.000 VND</p>
-                                        <p class="discount-percentage">-33%</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="single-product-wrapper">
-                                  <div class="product-item">
-                                    <div class="img">
-                                      <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/3745den-chum-bang-dong-trang-tri-noi-that-phong-cach-trung-hoa-dc03676-08.jpg"
-                                        alt="Đèn chùm tiffany trang trí nội thất DC03596"
-                                      />
-                                    </div>
-
-                                    <div class="product-info">
-                                      <div class="product-name">
-                                        Đèn chùm tiffany trang trí nội thất DC03596
-                                      </div>
-
-                                      <p class="original-price">3.000.000 VND</p>
-
-                                      <div class="price-discount">
-                                        <p class="product-price">2.000.000 VND</p>
-                                        <p class="discount-percentage">-33%</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="single-product-wrapper">
-                                  <div class="product-item">
-                                    <div class="img">
-                                      <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/9858den-chum-trang-tri-noi-that-phong-cach-trung-hoa-dc03633-03.jpg"
-                                        alt="Đèn chùm tiffany trang trí nội thất DC03596"
-                                      />
-                                    </div>
-
-                                    <div class="product-info">
-                                      <div class="product-name">
-                                        Đèn chùm tiffany trang trí nội thất DC03596
-                                      </div>
-
-                                      <p class="original-price">3.000.000 VND</p>
-
-                                      <div class="price-discount">
-                                        <p class="product-price">2.000.000 VND</p>
-                                        <p class="discount-percentage">-33%</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="single-product-wrapper">
-                                  <div class="product-item">
-                                    <div class="img">
-                                      <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/4876den-chum-trang-tri-nha-hang-phong-cach-trung-hoa-dc03602-03.jpg"
-                                        alt="Đèn chùm tiffany trang trí nội thất DC03596"
-                                      />
-                                    </div>
-
-                                    <div class="product-info">
-                                      <div class="product-name">
-                                        Đèn chùm tiffany trang trí nội thất DC03596
-                                      </div>
-
-                                      <p class="original-price">3.000.000 VND</p>
-
-                                      <div class="price-discount">
-                                        <p class="product-price">2.000.000 VND</p>
-                                        <p class="discount-percentage">-33%</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="single-product-wrapper">
-                                  <div class="product-item">
-                                    <div class="img">
-                                      <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/1334den-chum-bang-dong-trang-tri-noi-that-phong-cach-trung-hoa-hien-dai-dc03526-02.jpg"
-                                        alt="Đèn chùm tiffany trang trí nội thất DC03596"
-                                      />
-                                    </div>
-
-                                    <div class="product-info">
-                                      <div class="product-name">
-                                        Đèn chùm tiffany trang trí nội thất DC03596
-                                      </div>
-
-                                      <p class="original-price">3.000.000 VND</p>
-
-                                      <div class="price-discount">
-                                        <p class="product-price">2.000.000 VND</p>
-                                        <p class="discount-percentage">-33%</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="single-product-wrapper">
-                                  <div class="product-item">
-                                    <div class="img">
-                                      <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/6033den-chum-trang-tri-noi-that-phong-cach-indochine-dc03510-01.jpg"
-                                        alt="Đèn chùm tiffany trang trí nội thất DC03596"
-                                      />
-                                    </div>
-
-                                    <div class="product-info">
-                                      <div class="product-name">
-                                        Đèn chùm tiffany trang trí nội thất DC03596
-                                      </div>
-
-                                      <p class="original-price">3.000.000 VND</p>
-
-                                      <div class="price-discount">
-                                        <p class="product-price">2.000.000 VND</p>
-                                        <p class="discount-percentage">-33%</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div> -->
-                            <!-- </div> -->
+                                </c:forEach>
+                            </div>
                             <div id="product-container" class="row"></div>
                             <div id="pagination-controls">
                                 <button id="prev">Trước</button>
@@ -502,7 +324,51 @@
     <!-- footer -->
     <%@ include file="../reuse/footer.jsp" %>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/assets/Js/data.js"></script>
-<script type="module" src="${pageContext.request.contextPath}/assets/Js/Detail.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function toggleCategoryMenu() {
+            // Lấy tất cả các danh mục chính
+            const categoryItems = document.querySelectorAll(".cate-item");
+
+            categoryItems.forEach((category) => {
+                category.addEventListener("click", function (event) {
+                    event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+
+                    // Tìm danh mục con liên quan
+                    const subcategoryList = this.parentElement.querySelector(".subcategory-list");
+                    console.log(subcategoryList);
+
+                    if (subcategoryList) {
+                        // Kiểm tra trạng thái hiển thị và ẩn/hiện danh mục con
+                        const isVisible = subcategoryList.style.height === "auto";
+                        subcategoryList.style.height = isVisible ? "0" : "auto";
+
+                        // Thay đổi icon trạng thái
+                        const icon = this.querySelector("i");
+                        if (icon) {
+                            icon.classList.toggle("active");
+                        }
+                    }
+                });
+            });
+        }
+
+        // Gọi hàm sau khi trang đã được load
+        toggleCategoryMenu();
+
+        // Kiểm tra sự kiện 'prev'
+        const prevButton = document.getElementById('prev');
+        if (prevButton) {
+            prevButton.addEventListener("click", function () {
+                console.log('Previous button clicked');
+            });
+        } else {
+            console.log("Prev button not found");
+        }
+
+    });
+
+
+</script>s
 </body>
 </html>
