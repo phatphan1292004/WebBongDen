@@ -28,6 +28,13 @@ public class Account {
         this.role = role;
     }
 
+    public Account(int id, String username, String email, String role) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.role = role;
+    }
+
     // Getter và Setter cho từng thuộc tính
     public int getId() {
         return id;

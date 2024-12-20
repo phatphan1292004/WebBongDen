@@ -145,60 +145,66 @@
                     </table>
                 </div>
 
+
                 <div class="super-sale-container">
                     <h2>QUẢN LÝ CHƯƠNG TRÌNH GIẢM GIÁ</h2>
                     <p>Quản lý các sản phẩm đang nằm trong chương trình giảm giá</p>
 
-                    <!-- Khu vực thêm sản phẩm giảm giá -->
-                    <div id="add-program-sale-area">
-                        <h3>THÊM SẢN PHẨM GIẢM GIÁ</h3>
-                        <form id="super-sale-form">
-                            <div class="form-group">
-                                <label for="program-id">ID:</label>
-                                <input
-                                        type="text"
-                                        id="program-id"
-                                        placeholder="Nhập ID chương trình"
-                                        required
-                                />
-                            </div>
+                    <div class="add-super-sale">
+                        <!-- Khu vực thêm sản phẩm giảm giá -->
+                        <div id="add-promotion-area">
+                            <h3>THÊM CHƯƠNG TRÌNH GIẢM GIÁ</h3>
+                            <form id="promotion-form">
+                                <div class="form-group">
+                                    <label for="promotion-name">Tên Chương Trình:</label>
+                                    <input type="text" id="promotion-name" placeholder="Nhập tên chương trình" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="promotion-description">Mô Tả:</label>
+                                    <textarea id="promotion-description" placeholder="Nhập mô tả chương trình" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="promotion-end-date">Ngày Kết Thúc:</label>
+                                    <input type="date" id="promotion-end-date" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="promotion-discount">Mức Giảm Giá (%):</label>
+                                    <input type="number" id="promotion-discount" min="1" max="100" placeholder="Nhập mức giảm" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="promotion-gift">Quà Tặng:</label>
+                                    <input type="text" id="promotion-gift" placeholder="Nhập quà tặng kèm" />
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" id="add-promotion-btn">Lưu Chương Trình</button>
+                                </div>
+                            </form>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="end-date">Ngày kết thúc:</label>
-                                <input type="date" id="end-date" required />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="program-name">Tên chương trình:</label>
-                                <input
-                                        type="text"
-                                        id="program-name"
-                                        placeholder="Nhập tên chương trình"
-                                        required
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="product-id-sale">ID sản phẩm:</label>
-                                <input
-                                        type="text"
-                                        id="product-id-sale"
-                                        placeholder="Nhập ID sản phẩm"
-                                        required
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" id="add-saleproduct-btn">
-                                    THÊM SẢN PHẨM
-                                </button>
-                            </div>
-                        </form>
+                        <div id="add-product-to-promotion-area">
+                            <h3>THÊM SẢN PHẨM VÀO CHƯƠNG TRÌNH</h3>
+                            <form id="product-to-promotion-form">
+                                <div class="form-group">
+                                    <label for="promotion-id">Chọn Chương Trình:</label>
+                                    <select id="promotion-id" required>
+                                        <option value="">Chọn chương trình</option>
+                                        <!-- Các chương trình sẽ được thêm vào đây -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="product-id">ID Sản Phẩm:</label>
+                                    <input type="text" id="product-id" placeholder="Nhập ID sản phẩm" required />
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" id="add-product-to-promotion-btn">Thêm Sản Phẩm</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
                     <!-- Danh sách sản phẩm giảm giá -->
                     <div class="list-discount">
-                        <h3>DANH SÁCH SẢN PHẨM GIẢM GIÁ</h3>
+                        <h3>DANH SÁCH CHƯƠNG TRÌNH GIẢM GIÁ</h3>
                         <table>
                             <thead>
                             <tr>
