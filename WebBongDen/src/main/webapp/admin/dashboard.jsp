@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -149,38 +150,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Đèn ngủ LED phong cách hiện đại DK04530</td>
-                                    <td>150</td>
-                                    <td>1,500,000 VND</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td>Đèn bàn trang trí phong cách nghệ thuật DK04529</td>
-                                    <td>120</td>
-                                    <td>1,200,000 VND</td>
-                                    <td>30</td>
-                                </tr>
-                                <tr>
-                                    <td>Đèn LED chiếu sáng nội thất sang trọng DK04527</td>
-                                    <td>100</td>
-                                    <td>1,000,000 VND</td>
-                                    <td>20</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Đèn quạt trần hiện đại cho không gian mở QV04525
-                                    </td>
-                                    <td>90</td>
-                                    <td>900,000 VND</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>Đèn quạt trần phòng bếp QV04523</td>
-                                    <td>80</td>
-                                    <td>800,000 VND</td>
-                                    <td>5</td>
-                                </tr>
+                                <c:forEach var="product" items="${topProducts}">
+                                    <tr>
+                                        <td>${product.productName}</td>
+                                        <td>${product.quantitySold}</td>
+                                        <td>${product.formattedRevenue}</td>
+                                        <td>${product.stockQuantity}</td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -379,7 +356,7 @@
         </div>
     </div>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/assets/Js/admin.js" defer></script>
+<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/dashboardAdmin.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>

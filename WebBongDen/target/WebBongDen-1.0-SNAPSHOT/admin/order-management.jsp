@@ -51,7 +51,7 @@
                         </div>
                         <div class="stat-text">
                             <h3>Tổng đơn hàng</h3>
-                            <span id="total-orders">0</span>
+                            <span id="total-orders">${totalOrders}</span>
                             <!-- Đổi id -->
                         </div>
                     </div>

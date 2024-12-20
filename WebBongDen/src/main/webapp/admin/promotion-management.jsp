@@ -32,7 +32,7 @@
     />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/admin_css/productAdmin.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/admin_css/promotionAdmin.css">
 </head>
 <body>
 <div class="wrapper">
