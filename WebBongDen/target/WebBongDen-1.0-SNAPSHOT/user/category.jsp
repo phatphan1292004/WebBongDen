@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,7 +91,29 @@
                                     <i class="fa-solid fa-list"></i>
                                     <p>Danh mục</p>
                                 </div>
-                                <ul class="category-list"></ul>
+                                <ul class="category-list">
+                                    <!-- Duyệt qua danh sách categories -->
+                                    <c:forEach var="category" items="${categories}">
+                                        <li class="a">
+                                            <a class="cate-item" href="#">
+                                                <p>
+                                                    <span>${category.getCategoryName()}</span> <!-- Hiển thị tên danh mục -->
+                                                </p>
+                                                <i class="fa-solid fa-caret-down"></i>
+                                            </a>
+                                            <ul class="subcategory-list">
+                                                <!-- Duyệt qua subCategoriesMap -->
+                                                <c:forEach var="subCategory" items="${subCategoriesMap[category.id]}">
+                                                    <li class="sub-category-item">
+                                                        <a href="#">
+                                                            <span>${subCategory.name}</span> <!-- Hiển thị tên sub-category -->
+                                                        </a>
+                                                    </li>
+                                                </c:forEach>
+                                            </ul>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
                             </div>
                         </div>
                         <div class="news-latest box-layer mb-3">
