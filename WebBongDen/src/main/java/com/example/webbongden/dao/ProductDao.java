@@ -1,3 +1,4 @@
+
 package com.example.webbongden.dao;
 
 import com.example.webbongden.dao.db.JDBIConnect;
@@ -284,6 +285,47 @@ public class ProductDao {
         });
     }
 
+    public List<Product> getProductsBySubCategory(int subCategoryId) {
+        String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, " +
+                "COALESCE(p.discount_percent, 0) AS discount_percent, " +
+                "pi.url AS image_url, pi.main_image " +
+                "FROM products p " +
+                "JOIN sub_categories sc ON p.subCategory_id = sc.id " +
+                "LEFT JOIN product_images pi ON p.id = pi.product_id " +
+                "WHERE p.subCategory_id = :subCategoryId " +
+                "ORDER BY p.created_at DESC";
+
+        return jdbi.withHandle(handle -> {
+            Map<Integer, Product> productMap = new HashMap<>();
+            handle.createQuery(sql)
+                    .bind("subCategoryId", subCategoryId)
+                    .map((rs, ctx) -> {
+                        int productId = rs.getInt("product_id");
+                        Product product = productMap.get(productId);
+                        if (product == null) {
+                            product = new Product(
+                                    productId,
+                                    rs.getString("product_name"),
+                                    rs.getDouble("unit_price"),
+                                    rs.getDouble("discount_percent"),
+                                    new ArrayList<>()
+                            );
+                            productMap.put(productId, product);
+                        }
+                        String imageUrl = rs.getString("image_url");
+                        if (imageUrl != null) {
+                            product.getListImg().add(new ProductImage(
+                                    imageUrl,
+                                    rs.getBoolean("main_image")
+                            ));
+                        }
+                        return product;
+                    }).list();
+
+            return new ArrayList<>(productMap.values());
+        });
+    }
+
 
     public static void main(String[] args) {
         ProductDao productDao = new ProductDao();
@@ -303,3 +345,4 @@ public class ProductDao {
         }
     }
 }
+
