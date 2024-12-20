@@ -80,3 +80,4 @@ public class Product {
         return listImg.get(0).getUrl();
     }
 }
+

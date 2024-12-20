@@ -56,7 +56,12 @@ public class ProductServices {
     public boolean deleteProduct(int productId) {
         return productDao.deleteProductById(productId);
     }
+
     public List<Product> getProductsByKeyword(String a) {
         return productDao.getProductsByKeyword(a);
     }
- }
+
+    public List<Product> getProductsBySubCategory(int subCategoryId) {
+        return productDao.getProductsBySubCategory(subCategoryId); // Gọi hàm với ID của danh mục con
+    }
+}

@@ -1,6 +1,5 @@
 package com.example.webbongden.dao.db;
 
-import com.example.webbongden.dao.db.DBProperties;
 import com.example.webbongden.dao.model.User;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.jdbi.v3.core.Jdbi;
@@ -34,7 +33,7 @@ public class JDBIConnect {
     public static void main(String[] args) {
         Jdbi jdbi1 = get();
         List<User> products = jdbi1.withHandle(handle ->
-                handle.createQuery("select * from user").mapToBean(User.class).list()
+                handle.createQuery("select * from products").mapToBean(User.class).list()
         );
         System.out.println(products);
     }

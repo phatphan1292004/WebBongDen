@@ -1,3 +1,4 @@
+
 package com.example.webbongden.dao.model;
 
 public class OrderDetail {
@@ -70,4 +71,5 @@ public class OrderDetail {
         this.amount = amount;
     }
 }
+
 
