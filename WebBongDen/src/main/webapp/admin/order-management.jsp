@@ -95,6 +95,7 @@
                             <option value="Pending">Đơn hàng chưa duyệt</option>
                             <option value="InProgress">Đang giao hàng</option>
                             <option value="Completed">Đã giao</option>
+                            <option value="Cancelled">Đã hủy</option>
                         </select>
 
                         <button id="sort-btn-order" class="sort-button">
