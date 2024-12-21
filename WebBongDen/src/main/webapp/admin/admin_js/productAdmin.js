@@ -81,8 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     return response.json();
                 })
                 .then(data => {
-                    console.log("Chi tiết sản phẩm:", data); // Debug: Hiển thị dữ liệu JSON
-
                     // Cập nhật các trường trong modal
                     $("#product-id-details").text(data.id || "N/A");
                     $("#product-name-details").text(data.productName || "N/A");
@@ -90,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     $("#product-image-view").text(data.mainImageUrl || "./img/default-product.png");
                     $("#product-name-view").text(data.productName || "N/A");
                     $("#product-id-view").text(data.id || "N/A");
-                    $("#product-price-view").text(`${data.discountedPrice || 0} VNĐ`);
+                    $("#product-price-view").text(`${data.unitPrice || 0} VNĐ`);
                     $("#product-category-view").text(data.categoryName || "N/A");
                     $("#product-status-view").text(data.productStatus || "N/A");
                     $("#product-description-view").text(data.description || "N/A");
@@ -103,6 +101,23 @@ document.addEventListener("DOMContentLoaded", function () {
                     $("#product-color-view").text(data.lightColor || "N/A");
                     $("#product-lifespan-view").text(data.usageAge || "N/A");
                     $("#product-power-view").text(data.voltage || "N/A");
+
+                    $("#edit-product-image").val(data.mainImageUrl || "./img/default-product.png");
+                    $("#edit-product-name").val(data.productName || "N/A");
+                    $("#edit-product-id").val(data.id || "N/A");
+                    $("#edit-product-price").val(`${data.unitPrice || 0}`);
+                    $("#edit-product-category").val(data.categoryName || "N/A");
+                    $("#edit-product-status").val(data.productStatus || "N/A");
+                    $("#edit-product-description").val(data.description || "N/A");
+                    $("#edit-product-date").val(data.createdAt || "N/A");
+                    $("#edit-product-discount").val(`${data.discountPercent || 0}`);
+                    $("#edit-product-stock").val(data.stockQuantity || 0);
+                    $("#edit-product-rating").val(data.rating || 0);
+                    $("#edit-product-warranty").val(data.warrantyPeriod || "N/A");
+                    $("#edit-product-material").val(data.material || "N/A");
+                    $("#edit-product-color").val(data.lightColor || "N/A");
+                    $("#edit-product-lifespan").val(data.usageAge || "N/A");
+                    $("#edit-product-power").val(data.voltage || "N/A");
 
                     // Hiển thị modal
                     $("#product-details").css("display", "block");
@@ -121,16 +136,11 @@ document.addEventListener("DOMContentLoaded", function () {
             $(".tab-content-container").show();
         });
 
-
-
         $("#search-btn-product").on("click", function () {
             table.ajax.reload();
         });
     });
 
-
-
-// Gọi hàm để thêm action
 
     // Hiển thị overlay
     document.querySelector(".add-product").addEventListener("click", function () {
@@ -139,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Ẩn overlay khi nhấn ra ngoài
-
     document.querySelector(".fa-xmark").addEventListener("click", function () {
         const overlay = document.getElementById("overlay-add-product");
         overlay.classList.remove("active");
@@ -187,4 +196,67 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
+
+
+
+    document
+        .getElementById("edit-product-btn")
+        .addEventListener("click", function () {
+            // Lấy tất cả các phần tử `span` và `input` bên trong div .details-content
+            const detailsContent = document.querySelector(".details-content");
+
+            const spans = detailsContent.querySelectorAll("span");
+            const inputs = detailsContent.querySelectorAll("input, textarea");
+
+            // Ẩn tất cả các `span` (view) và hiển thị tất cả các `input` (edit)
+            spans.forEach((span) => {
+                span.style.display = "none";
+            });
+
+            inputs.forEach((input) => {
+                input.style.display = "block";
+            });
+
+            document.getElementById("edit-product-category").style.display = "block";
+
+
+            // Hiển thị nút Lưu, Ẩn nút Chỉnh sửa
+            document.getElementById("save-product-btn").style.display = "block";
+            document.getElementById("edit-product-btn").style.display = "none";
+        });
+
+    // Hàm lưu thay đổi
+    document
+        .getElementById("save-product-btn")
+        .addEventListener("click", function () {
+            // Lấy tất cả các phần tử `span` và `input` bên trong div .details-content
+            const detailsContent = document.querySelector(".details-content");
+
+            const spans = detailsContent.querySelectorAll("span");
+            const inputs = detailsContent.querySelectorAll("input, textarea");
+
+            // Cập nhật giá trị từ `input` sang `span`
+            inputs.forEach((input) => {
+                const correspondingSpan = input.previousElementSibling; // Lấy span liền trước input
+                if (correspondingSpan) {
+                    correspondingSpan.textContent = input.value;
+                }
+            });
+
+            // Hiển thị lại tất cả các `span` và ẩn tất cả các `input`
+            spans.forEach((span) => {
+                span.style.display = "inline";
+            });
+
+            inputs.forEach((input) => {
+                input.style.display = "none";
+            });
+
+            document.getElementById("edit-product-category").style.display = "none";
+
+            // Hiển thị nút Chỉnh sửa, Ẩn nút Lưu
+            document.getElementById("save-product-btn").style.display = "none";
+            document.getElementById("edit-product-btn").style.display = "block";
+        });
 });

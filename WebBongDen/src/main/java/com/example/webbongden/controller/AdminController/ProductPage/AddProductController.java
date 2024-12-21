@@ -39,7 +39,7 @@ public class AddProductController extends HttpServlet {
         String voltage = request.getParameter("voltage");
         String usageAge = request.getParameter("usageAge");
         double discountPercent = Double.parseDouble(request.getParameter("discountPercent"));
-        String imageUrls = request.getParameter("imageUrls");
+        String imageUrls = request.getParameter("imageUrl");
 
         ProductDetail product = new ProductDetail();
         product.setProductName(productName);

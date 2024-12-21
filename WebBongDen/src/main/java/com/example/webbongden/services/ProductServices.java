@@ -68,4 +68,8 @@ public class ProductServices {
     public List<Product> getProductsBySubCategory(int subCategoryId) {
         return productDao.getProductsBySubCategory(subCategoryId); // Gọi hàm với ID của danh mục con
     }
+
+    public boolean editProductDetail(ProductDetail productDetail) {
+        return productDao.editProductDetail(productDetail);
+    }
  }

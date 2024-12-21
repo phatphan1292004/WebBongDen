@@ -69,6 +69,7 @@ public class ProductDao {
     public List<Product> getProductsForAdminPage() {
         String sql = "SELECT " +
                 "p.id AS id, " +
+                "p.discount_percent AS discountPercent, " +
                 "p.product_name AS productName, " +
                 "p.unit_price AS unitPrice, " +
                 "p.created_at AS createdAt, " +
@@ -86,7 +87,8 @@ public class ProductDao {
                                 rs.getString("productName"),
                                 rs.getDouble("unitPrice"),
                                 rs.getString("categoryName"),
-                                rs.getDate("createdAt")
+                                rs.getDate("createdAt"),
+                                rs.getDouble("discountPercent")
                         ))
                         .list()
         );
@@ -349,6 +351,56 @@ public class ProductDao {
                     }).list();
 
             return new ArrayList<>(productMap.values());
+        });
+    }
+
+
+    public boolean editProductDetail(ProductDetail productDetail) {
+        return jdbi.inTransaction(handle -> {
+            // Cập nhật bảng `products`
+            String productSql = "UPDATE products SET " +
+                    "product_name = :productName, " +
+                    "unit_price = :unitPrice, " +
+                    "stock_quantity = :stockQuantity, " +
+                    "product_status = :productStatus, " +
+                    "rating = :rating, " +
+                    "DESC_1 = :description, " +
+                    "warranty_period = :warrantyPeriod, " +
+                    "light_color = :lightColor, " +
+                    "material = :material, " +
+                    "voltage = :voltage, " +
+                    "usage_age = :usageAge, " +
+                    "discount_percent = :discountPercent, " +
+                    "subCategory_id = :subCategoryId " +
+                    "WHERE id = :id";
+
+            int updatedProduct = handle.createUpdate(productSql)
+                    .bind("id", productDetail.getId())
+                    .bind("productName", productDetail.getProductName())
+                    .bind("unitPrice", productDetail.getUnitPrice())
+                    .bind("stockQuantity", productDetail.getStockQuantity())
+                    .bind("productStatus", productDetail.getProductStatus())
+                    .bind("rating", productDetail.getRating())
+                    .bind("description", productDetail.getDescription())
+                    .bind("warrantyPeriod", productDetail.getWarrantyPeriod())
+                    .bind("lightColor", productDetail.getLightColor())
+                    .bind("material", productDetail.getMaterial())
+                    .bind("voltage", productDetail.getVoltage())
+                    .bind("usageAge", productDetail.getUsageAge())
+                    .bind("discountPercent", productDetail.getDiscountPercent())
+                    .bind("subCategoryId", productDetail.getSubCategoryId())
+                    .execute();
+
+            // Cập nhật bảng `product_images`
+            String imageSql = "UPDATE product_images SET url = :mainImageUrl " +
+                    "WHERE product_id = :id AND main_image = true";
+
+            int updatedImage = handle.createUpdate(imageSql)
+                    .bind("id", productDetail.getId())
+                    .bind("mainImageUrl", productDetail.getMainImageUrl())
+                    .execute();
+
+            return updatedProduct > 0 && updatedImage > 0;
         });
     }
 
