@@ -20,7 +20,16 @@ public class LoadAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Account> accountList;
-        accountList = accountSevices.getAllAccounts();
+
+        String keyword = request.getParameter("searchValue");
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            accountList = accountSevices.getAccountByUserName(keyword);
+        }
+        else {
+            accountList = accountSevices.getAllAccounts();
+        }
+
         // Thiết lập kiểu dữ liệu trả về là JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

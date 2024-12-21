@@ -47,7 +47,11 @@
           <!-- Form thêm tài khoản mới -->
           <div class="account-form">
             <h3>THÊM TÀI KHOẢN MỚI</h3>
-            <form id="add-account-form">
+            <form id="add-account-form" action="add-account" method="post">
+              <div class="form-group">
+                <label for="cus_name">Tên khách hàng:</label>
+                <input type="text" id="cus_name" name="cusName" placeholder="Nhập tên khách hàng" required />
+              </div>
               <!-- Tên đăng nhập -->
               <div class="form-group">
                 <label for="username">Tên đăng nhập:</label>
@@ -84,17 +88,6 @@
                 />
               </div>
 
-              <!-- Xác nhận mật khẩu -->
-              <div class="form-group">
-                <label for="confirm-password">Xác nhận mật khẩu:</label>
-                <input
-                        type="password"
-                        id="confirm-password"
-                        name="confirm-password"
-                        placeholder="Xác nhận mật khẩu"
-                        required
-                />
-              </div>
 
               <!-- Vai trò -->
               <div class="form-group">

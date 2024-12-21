@@ -111,6 +111,20 @@ public class UserDao {
         );
     }
 
+    public int addCustomer(String cusName) {
+        String sql = "INSERT INTO customers (cus_name) VALUES (:cusName)";
+
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("cusName", cusName) // Gán giá trị cus_name
+                        .executeAndReturnGeneratedKeys("id") // Lấy ID tự động sinh
+                        .mapTo(Integer.class)
+                        .findOne()
+                        .orElse(-1) // Trả về -1 nếu thêm thất bại
+        );
+    }
+
+
     public static void main(String[] args) {
         // Tạo đối tượng UserDao
         UserDao userDao = new UserDao();

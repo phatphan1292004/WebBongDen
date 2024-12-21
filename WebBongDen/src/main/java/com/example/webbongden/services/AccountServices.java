@@ -15,4 +15,16 @@ public class AccountServices {
     public List<Account> getAllAccounts() {
         return accountDao.getAllAccounts();
     }
+
+    public List<Account> getAccountByUserName(String name) {
+        return accountDao.getAccountByUserName(name);
+    }
+
+    public boolean addAccount(Account account) {
+        return accountDao.addAccount(account);
+    }
+
+    public boolean deleteAccountById(int accountId) {
+        return accountDao.deleteAccountById(accountId);
+    }
 }

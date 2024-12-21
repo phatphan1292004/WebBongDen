@@ -35,6 +35,15 @@ public class Account {
         this.role = role;
     }
 
+    public Account(String email, String cusName, String username, String password, String role, int customerId) {
+        this.email = email;
+        this.cusName = cusName;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.customerId = customerId;
+    }
+
     // Getter và Setter cho từng thuộc tính
     public int getId() {
         return id;

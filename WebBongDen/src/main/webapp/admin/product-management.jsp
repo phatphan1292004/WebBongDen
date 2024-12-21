@@ -384,7 +384,7 @@
         <!-- Khung chi tiết sản phẩm -->
 
         <div class="product-details" id="product-details" style="display: none;">
-          <button id="close-details-btn" onclick="window.location.href='admin?page=product-management';">
+          <button id="close-details-btn">
             <i class="fa-solid fa-arrow-left"></i> Quay lại
           </button>
           <!-- Phần tiêu đề và thông tin cơ bản -->
@@ -392,16 +392,16 @@
             <div class="product-info">
               <div class="product-info-left">
                 <div class="product-image">
-                  <img id="product-image-main" src="${productViewDetail.mainImageUrl}" alt="Hình ảnh sản phẩm" />
+                  <img id="product-image-main" src="" alt="Hình ảnh sản phẩm" />
                 </div>
                 <div class="basic-details">
                   <p>
                     <strong>Tên sản phẩm:</strong>
-                    <span id="product-name-details">${productViewDetail.productName}</span>
+                    <span id="product-name-details"></span>
                   </p>
                   <p>
                     <strong>Mã sản phẩm:</strong>
-                    <span id="product-id-details">${productViewDetail.id}</span>
+                    <span id="product-id-details"></span>
                   </p>
                 </div>
               </div>
@@ -459,98 +459,98 @@
             <div class="details-content">
               <div>
                 <strong>Id:</strong>
-                <span id="product-id-view">${productViewDetail.id}</span>
-                <input type="text" id="edit-product-id" value="${productViewDetail.id}" style="display: none" readonly />
+                <span id="product-id-view"></span>
+                <input type="text" id="edit-product-id" value="" style="display: none" readonly />
               </div>
 
               <div>
                 <strong>Hình ảnh:</strong>
-                <span id="product-image-view">${productViewDetail.mainImageUrl}</span>
+                <span id="product-image-view"></span>
                 <input type="text" id="edit-product-image" style="display: none" accept="image/*" />
               </div>
 
               <div>
                 <strong>Tên sản phẩm:</strong>
-                <span id="product-name-view">${productViewDetail.productName}</span>
-                <input type="text" id="edit-product-name" value="${productViewDetail.productName}" style="display: none" />
+                <span id="product-name-view"></span>
+                <input type="text" id="edit-product-name" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Giá:</strong>
-                <span id="product-price-view">${productViewDetail.discountedPrice} VNĐ</span>
-                <input type="text" id="edit-product-price" value="${productViewDetail.unitPrice} VNĐ" style="display: none" />
+                <span id="product-price-view"></span>
+                <input type="text" id="edit-product-price" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Loại sản phẩm:</strong>
-                <span id="product-category-view">${productViewDetail.categoryName}</span>
-                <input type="text" id="edit-product-category" value="${productViewDetail.subCategoryId}" style="display: none" />
+                <span id="product-category-view">$</span>
+                <input type="text" id="edit-product-category" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Tình trạng:</strong>
-                <span id="product-status-view">${productViewDetail.productStatus}</span>
-                <input type="text" id="edit-product-status" value="${productViewDetail.productStatus}" style="display: none" />
+                <span id="product-status-view"></span>
+                <input type="text" id="edit-product-status" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Mô tả:</strong>
-                <span id="product-description-view">${productViewDetail.description}</span>
-                <textarea id="edit-product-description" style="display: none">${productViewDetail.description}</textarea>
+                <span id="product-description-view"></span>
+                <textarea id="edit-product-description" style="display: none"></textarea>
               </div>
 
               <div>
                 <strong>Ngày thêm:</strong>
-                <span id="product-date-view">${productViewDetail.createdAt}</span>
-                <input type="date" id="edit-product-date" value="${productViewDetail.createdAt}" style="display: none" />
+                <span id="product-date-view"></span>
+                <input type="date" id="edit-product-date" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Giảm giá:</strong>
-                <span id="product-discount-view">${productViewDetail.discountPercent}</span>
-                <input type="text" id="edit-product-discount" value="${productViewDetail.discountPercent}%" style="display: none" />
+                <span id="product-discount-view"></span>
+                <input type="text" id="edit-product-discount" value="%" style="display: none" />
               </div>
 
               <div>
                 <strong>Số lượng tồn kho:</strong>
-                <span id="product-stock-view">${productViewDetail.stockQuantity}</span>
-                <input type="text" id="edit-product-stock" value="${productViewDetail.stockQuantity}" style="display: none" />
+                <span id="product-stock-view"></span>
+                <input type="text" id="edit-product-stock" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Đánh giá:</strong>
-                <span id="product-rating-view">${productViewDetail.rating}</span>
-                <input type="text" id="edit-product-rating" value="${productViewDetail.rating}" style="display: none" />
+                <span id="product-rating-view"></span>
+                <input type="text" id="edit-product-rating" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Thời gian bảo hành:</strong>
-                <span id="product-warranty-view">${productViewDetail.warrantyPeriod}</span>
-                <input type="text" id="edit-product-warranty" value="${productViewDetail.warrantyPeriod}" style="display: none" />
+                <span id="product-warranty-view"></span>
+                <input type="text" id="edit-product-warranty" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Chất liệu:</strong>
-                <span id="product-material-view">${productViewDetail.material}</span>
-                <input type="text" id="edit-product-material" value="${productViewDetail.material}" style="display: none" />
+                <span id="product-material-view"></span>
+                <input type="text" id="edit-product-material" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Màu sắc:</strong>
-                <span id="product-color-view">${productViewDetail.lightColor}</span>
-                <input type="text" id="edit-product-color" value="${productViewDetail.lightColor}" style="display: none" />
+                <span id="product-color-view"></span>
+                <input type="text" id="edit-product-color" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Tuổi thọ:</strong>
-                <span id="product-lifespan-view">${productViewDetail.usageAge}</span>
-                <input type="text" id="edit-product-lifespan" value="${productViewDetail.usageAge}" style="display: none" />
+                <span id="product-lifespan-view"></span>
+                <input type="text" id="edit-product-lifespan" value="" style="display: none" />
               </div>
 
               <div>
                 <strong>Công suất:</strong>
-                <span id="product-power-view">${productViewDetail.voltage}</span>
-                <input type="text" id="edit-product-power" value="${productViewDetail.voltage}" style="display: none" />
+                <span id="product-power-view"></span>
+                <input type="text" id="edit-product-power" value="" style="display: none" />
               </div>
             </div>
           </div>

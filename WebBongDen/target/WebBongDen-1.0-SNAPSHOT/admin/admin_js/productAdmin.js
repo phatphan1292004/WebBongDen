@@ -68,30 +68,57 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         $("#product-table").on("click", ".view-details", function () {
-            $(".product-stats").css("display", "none");
-            $(".tab-content-container").css("display", "none");
-            $("#product-details").css("display", "block");
+            $(".product-stats").hide();
+            const productId = $(this).data("id"); // Lấy product ID từ data-id
+            console.log("Product ID:", productId); // Debug: Kiểm tra giá trị ID
 
-            // const productId = this.dataset.id;
-            // fetch("deleteProduct", {
-            //     method: "POST",
-            //     body: new URLSearchParams({
-            //         action: "show-detail",
-            //         id: productId
-            //     })
-            // })
+            // Gửi yêu cầu tới server để lấy chi tiết sản phẩm
+            fetch(`/WebBongDen_war/getProductDetails?id=${productId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Lỗi khi tải chi tiết sản phẩm");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Chi tiết sản phẩm:", data); // Debug: Hiển thị dữ liệu JSON
 
-            const productId = $(this).data("id");
-            const pageType = $(this).data("page"); // Lấy tab hiện tại
+                    // Cập nhật các trường trong modal
+                    $("#product-id-details").text(data.id || "N/A");
+                    $("#product-name-details").text(data.productName || "N/A");
+                    $("#product-image-main").attr("src", data.mainImageUrl || "./img/default-product.png");
+                    $("#product-image-view").text(data.mainImageUrl || "./img/default-product.png");
+                    $("#product-name-view").text(data.productName || "N/A");
+                    $("#product-id-view").text(data.id || "N/A");
+                    $("#product-price-view").text(`${data.discountedPrice || 0} VNĐ`);
+                    $("#product-category-view").text(data.categoryName || "N/A");
+                    $("#product-status-view").text(data.productStatus || "N/A");
+                    $("#product-description-view").text(data.description || "N/A");
+                    $("#product-date-view").text(data.createdAt || "N/A");
+                    $("#product-discount-view").text(`${data.discountPercent || 0}%`);
+                    $("#product-stock-view").text(data.stockQuantity || 0);
+                    $("#product-rating-view").text(data.rating || 0);
+                    $("#product-warranty-view").text(data.warrantyPeriod || "N/A");
+                    $("#product-material-view").text(data.material || "N/A");
+                    $("#product-color-view").text(data.lightColor || "N/A");
+                    $("#product-lifespan-view").text(data.usageAge || "N/A");
+                    $("#product-power-view").text(data.voltage || "N/A");
 
-            // Tạo URL mới dựa trên page và ID
-            const newUrl = `admin?page=${pageType}&action=detail&id=${productId}`;
+                    // Hiển thị modal
+                    $("#product-details").css("display", "block");
+                    $(".tab-content-container").css("display", "none"); // Ẩn danh sách sản phẩm
+                })
+                .catch(error => {
+                    console.error(error); // Log lỗi
+                    alert("Đã xảy ra lỗi khi tải chi tiết sản phẩm. Vui lòng thử lại!");
+                });
+        });
 
-            // Cập nhật URL trên trình duyệt
-            window.history.pushState(null, "", newUrl);
 
-            // Gửi request đến Servlet
-            window.location.href = newUrl;
+        $("#close-details-btn").on("click", function () {
+            $(".product-stats").show();
+            $("#product-details").hide();
+            $(".tab-content-container").show();
         });
 
 
@@ -102,16 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    function addActionToURL(action) {
-        // Lấy URL hiện tại
-        const currentURL = new URL(window.location.href);
-
-        // Thêm hoặc cập nhật tham số `action`
-        currentURL.searchParams.set("action", action);
-
-        // Cập nhật URL mà không reload
-        history.pushState(null, "", currentURL.toString());
-    }
 
 // Gọi hàm để thêm action
 
