@@ -1,49 +1,97 @@
 package com.example.webbongden.dao.model;
 
+import java.util.Date;
+import java.util.List;
+
 public class User {
-    private int id;
-    private String name;
-    private int age;
+    private String customerId; // ID của khách hàng (ví dụ: C001)
+    private String customerName; // Tên khách hàng
+    private String email; // Email của khách hàng
+    private String phone; // Số điện thoại
+    private String address; // Địa chỉ
+    private Date createdAt; // Ngày đăng ký
+    private List<Order> orderHistory; // Danh sách lịch sử mua hàng
 
-    public User(){
-
-    }
-    public User(int id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
+    // Constructor tổng hợp
+    public User(String customerId, String customerName, String email, String phone, String address, Date createdAt, List<Order> orderHistory) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.createdAt = createdAt;
+        this.orderHistory = orderHistory;
     }
 
-    public int getAge() {
-        return age;
+    // Getter và Setter
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public List<Order> getOrderHistory() {
+        return orderHistory;
+    }
+
+    public void setOrderHistory(List<Order> orderHistory) {
+        this.orderHistory = orderHistory;
+    }
+
+    // Phương thức toString để hiển thị thông tin
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
+        return "CustomerAccount{" +
+                "customerId='" + customerId + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", createdAt=" + createdAt +
+                ", orderHistory=" + orderHistory +
                 '}';
     }
 }
+

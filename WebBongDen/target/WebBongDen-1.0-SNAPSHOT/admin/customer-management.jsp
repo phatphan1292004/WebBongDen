@@ -99,16 +99,6 @@
                         />
                         <button id="search-btn-cus">Tìm kiếm</button>
                     </div>
-
-                    <div class="sort-dropdown">
-                        <select id="sort-select-customer" class="sort-select">
-                            <option value="" disabled selected>Chọn</option>
-                            <option value="date-desc">Đăng kí gần đây</option>
-                        </select>
-                        <button id="sort-btn-cus" class="sort-button">
-                            <i class="fa-solid fa-sort"></i> Sắp xếp
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Bảng danh sách khách hàng -->
@@ -126,17 +116,17 @@
                         </tr>
                         </thead>
                         <tbody id="customer-table-body">
-                        <tr>
-                            <td>C001</td>
-                            <td>Nguyễn An</td>
-                            <td>nguyenan@example.com</td>
-                            <td>0123456789</td>
-                            <td>123 Đường Lê Lợi, Quận 1, TP.HCM</td>
-                            <td>15/10/2023</td>
-                            <td>
-                                <button class="view-details">Xem chi tiết</button>
-                            </td>
-                        </tr>
+<%--                        <tr>--%>
+<%--                            <td>C001</td>--%>
+<%--                            <td>Nguyễn An</td>--%>
+<%--                            <td>nguyenan@example.com</td>--%>
+<%--                            <td>0123456789</td>--%>
+<%--                            <td>123 Đường Lê Lợi, Quận 1, TP.HCM</td>--%>
+<%--                            <td>15/10/2023</td>--%>
+<%--                            <td>--%>
+<%--                                <button class="view-details">Xem chi tiết</button>--%>
+<%--                            </td>--%>
+<%--                        </tr>--%>
                         </tbody>
                     </table>
                 </div>
@@ -230,7 +220,7 @@
         </div>
     </div>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/productAdmin.js" defer></script>
+<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/cusAdmin.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </body>

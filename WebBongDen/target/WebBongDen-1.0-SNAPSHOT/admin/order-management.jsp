@@ -51,7 +51,7 @@
                         </div>
                         <div class="stat-text">
                             <h3>Tổng đơn hàng</h3>
-                            <span id="total-orders">0</span>
+                            <span id="total-orders">${totalOrders}</span>
                             <!-- Đổi id -->
                         </div>
                     </div>
@@ -92,9 +92,10 @@
                     <div style="display: flex; gap: 20px">
                         <select id="sort-select-order" class="sort-select">
                             <option value="" disabled selected>Tất cả</option>
-                            <option value="pending-orders">Đơn hàng chưa duyệt</option>
-                            <option value="in-progress-orders">Đang giao hàng</option>
-                            <option value="completed-orders">Đã giao</option>
+                            <option value="Pending">Đơn hàng chưa duyệt</option>
+                            <option value="InProgress">Đang giao hàng</option>
+                            <option value="Completed">Đã giao</option>
+                            <option value="Cancelled">Đã hủy</option>
                         </select>
 
                         <button id="sort-btn-order" class="sort-button">
@@ -228,7 +229,7 @@
         </div>
     </div>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/productAdmin.js" defer></script>
+<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/orderAdmin.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </body>

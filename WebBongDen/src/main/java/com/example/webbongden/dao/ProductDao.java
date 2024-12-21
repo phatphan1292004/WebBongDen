@@ -1,10 +1,10 @@
-
 package com.example.webbongden.dao;
 
 import com.example.webbongden.dao.db.JDBIConnect;
 import com.example.webbongden.dao.model.Product;
 import com.example.webbongden.dao.model.ProductDetail;
 import com.example.webbongden.dao.model.ProductImage;
+import com.example.webbongden.dao.model.TopProduct;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Query;
 import java.util.ArrayList;
@@ -285,6 +285,32 @@ public class ProductDao {
         });
     }
 
+    public List<TopProduct> getTopSellingProducts() {
+        String sql = "SELECT " +
+                "p.product_name AS productName, " +
+                "SUM(od.quantity) AS quantitySold, " +
+                "SUM(od.quantity * od.unit_price) AS totalRevenue, " +
+                "p.stock_quantity AS stockQuantity " +
+                "FROM products p " +
+                "JOIN order_details od ON p.id = od.product_id " +
+                "JOIN orders o ON od.order_id = o.id " +
+                "WHERE o.order_status = 'Completed' " +
+                "GROUP BY p.id, p.product_name, p.stock_quantity " +
+                "ORDER BY quantitySold DESC " +
+                "LIMIT 5";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .map((rs, ctx) -> new TopProduct(
+                                rs.getString("productName"),
+                                rs.getInt("quantitySold"),
+                                rs.getDouble("totalRevenue"),
+                                rs.getInt("stockQuantity")
+                        ))
+                        .list()
+        );
+    }
+
     public List<Product> getProductsBySubCategory(int subCategoryId) {
         String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, " +
                 "COALESCE(p.discount_percent, 0) AS discount_percent, " +
@@ -326,23 +352,17 @@ public class ProductDao {
         });
     }
 
-
     public static void main(String[] args) {
         ProductDao productDao = new ProductDao();
+        List<TopProduct> topProducts = productDao.getTopSellingProducts();
 
-        try {
-            int productIdToDelete = 19; // ID của sản phẩm cần xóa
-            boolean result = productDao.deleteProductById(productIdToDelete);
-
-            if (result) {
-                System.out.println("Xóa sản phẩm thành công!");
-            } else {
-                System.out.println("Không tìm thấy sản phẩm để xóa!");
-            }
-        } catch (Exception e) {
-            System.err.println("Lỗi khi xóa sản phẩm: " + e.getMessage());
-            e.printStackTrace();
+        System.out.println("Top sản phẩm bán chạy:");
+        for (TopProduct product : topProducts) {
+            System.out.println("Tên sản phẩm: " + product.getProductName());
+            System.out.println("Số lượng bán: " + product.getQuantitySold());
+            System.out.println("Tổng tiền thu được: " + product.getFormattedRevenue());
+            System.out.println("Số lượng tồn kho: " + product.getStockQuantity());
+            System.out.println("----------------------------------");
         }
     }
 }
-

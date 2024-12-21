@@ -458,27 +458,27 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function showDateInputs(value) {
-    var monthInputGroup = document.getElementById("month-input-group");
+      var monthInputGroup = document.getElementById("month-input-group");
 
-    if (value === "monthly") {
-      monthInputGroup.style.display = "block";
-    } else {
-      monthInputGroup.style.display = "none";
+      if (value === "monthly") {
+        monthInputGroup.style.display = "block";
+      } else {
+        monthInputGroup.style.display = "none";
+      }
     }
-  }
 
-  document
-    .getElementById("statistic-type")
-    .addEventListener("change", function () {
-      var value = this.value;
-      showDateInputs(value);
-    });
+    document
+        .getElementById("statistic-type")
+        .addEventListener("change", function () {
+          var value = this.value;
+          showDateInputs(value);
+        });
 
-  // Hàm xử lý khi nhấn nút "Xem Thống Kê"
-  // Hàm xử lý khi nhấn nút "Xem Thống Kê"
-  function processInput() {
-    var year = document.getElementById("month").value; // lấy giá trị năm
-    var statisticType = document.getElementById("statistic-type").value; // lấy loại thống kê (theo tháng hay theo năm)
+    // Hàm xử lý khi nhấn nút "Xem Thống Kê"
+    // Hàm xử lý khi nhấn nút "Xem Thống Kê"
+    function processInput() {
+      var year = document.getElementById("month").value; // lấy giá trị năm
+      var statisticType = document.getElementById("statistic-type").value; // lấy loại thống kê (theo tháng hay theo năm)
 
     if (statisticType === "monthly" && !year) {
       alert("Vui lòng nhập năm.");
