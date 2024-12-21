@@ -133,7 +133,7 @@
         <!-- Danh sách tài khoản -->
         <div id="account-list">
           <h3>DANH SÁCH TÀI KHOẢN</h3>
-          <table>
+          <table id="account-table">
             <thead>
             <tr>
               <th>ID</th>

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     $(document).ready(function () {
-        const table = $("#account-list").DataTable({
+        const table = $("#account-table").DataTable({
             ajax: {
                 url: "/WebBongDen_war/list-account", // URL Servlet trả về JSON
                 type: "GET", // Phương thức HTTP
@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 {
                     data: null, // Hành động: Nút xem chi tiết
                     render: function (data, type, row) {
-                        return `<button class="view-details" data-index="${row.id}">Xem chi tiết</button>`;
+                        return `
+                        <button class="edit-details" data-index="${row.id}">Chỉnh sửa</button>
+                        <button class="delete-details" data-index="${row.id}">Xóa</button>`
                     },
                 },
             ],
