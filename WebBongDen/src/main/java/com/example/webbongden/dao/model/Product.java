@@ -79,5 +79,13 @@ public class Product {
         }
         return listImg.get(0).getUrl();
     }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }
 
