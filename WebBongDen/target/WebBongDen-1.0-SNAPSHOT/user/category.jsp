@@ -257,21 +257,18 @@
                                         <!-- Sorting -->
                                         <div class="product-sorting d-flex align-items-center">
                                             <p>Sắp xếp :</p>
-                                            <form action="#" method="get">
-                                                <select name="select" id="sortByselect">
-                                                    <option
-                                                            value="value"
-                                                            onclick="sortProductsByPrice()"
-                                                    >
-                                                        Giá từ cao đến nhất
-                                                    </option>
-                                                    <option value="value">Giá từ thấp đén cao</option>
-                                                    <option value="value">Mới nhất</option>
-                                                    <option value="value">Sản phẩm bán chạy</option>
+                                            <form action="CategoryController" method="get" id="sortingForm">
+                                                <select name="select" id="sortByselect" onchange="submitForm()">
+                                                    <option value="">-- Chọn sắp xếp --</option> <!-- Thêm option mặc định không có giá trị -->
+                                                    <option value="price_desc">Giá từ cao đến thấp</option>
+                                                    <option value="price_asc">Giá từ thấp đến cao</option>
+                                                    <option value="newest">Mới nhất</option>
+                                                    <option value="best_selling">Sản phẩm bán chạy</option>
                                                 </select>
-                                                <input type="submit" class="d-none" value="" />
                                             </form>
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -367,8 +364,13 @@
         }
 
     });
+    // Hàm xử lý sự kiện khi thay đổi lựa chọn
 
+    function submitForm() {
+        var form = document.getElementById("sortingForm");
+        form.submit(); // Gửi form đi khi thay đổi lựa chọn
+    }
 
-</script>s
+</script>
 </body>
 </html>
