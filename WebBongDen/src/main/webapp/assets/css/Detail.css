@@ -498,7 +498,7 @@ ul {
     text-overflow: ellipsis;
     margin-bottom: 10px;
   }
-  
+
 
 .post-content .title a {
   color: #333;
@@ -597,7 +597,7 @@ ul {
 .subcategory-list {
   height: 0; /* Ẩn danh sách con */
   overflow: hidden; /* Ẩn phần tử bị tràn */
-  transition: height 0.2s ease; 
+  transition: height 0.2s ease;
 }
 
 /* Khi danh sách con được mở */
