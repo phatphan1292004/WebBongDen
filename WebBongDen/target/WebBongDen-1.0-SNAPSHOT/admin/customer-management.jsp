@@ -50,7 +50,7 @@
                             <img src="${pageContext.request.contextPath}/assets/img/adminpage/client.png" alt="" />
                         </div>
                         <div class="stat-text">
-                            <h3>Tổng khách hàng trong tháng</h3>
+                            <h3>Tổng khách hàng</h3>
                             <span id="monthly-total-customers">0</span>
                             <!-- Đổi id -->
                         </div>

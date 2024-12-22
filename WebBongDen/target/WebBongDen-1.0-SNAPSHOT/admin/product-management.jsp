@@ -73,7 +73,7 @@
             </div>
             <div class="card-content">
               <h3>Số loại sản phẩm</h3>
-              <p id="total-categories">${cateQuantity}</p>
+              <p id="total-categories">${categoryQuantity}</p>
             </div>
           </div>
           <div class="stat-card">
@@ -92,7 +92,7 @@
             </div>
             <div class="card-content">
               <h3>Sản phẩm mới nhất</h3>
-              <p id="latest-product">${newProducts}</p>
+              <p id="latest-product">${newProductsInLast7Days}</p>
             </div>
           </div>
         </div>

@@ -20,4 +20,8 @@ public class UserSevices {
     public List<User> searchCustomerByName(String name) {
         return userDao.searchCustomerByName(name);
     }
+
+    public int getTotalUser() {
+        return userDao.getTotalCustomers();
+    }
 }

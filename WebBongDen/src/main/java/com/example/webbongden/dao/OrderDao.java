@@ -18,8 +18,8 @@ public class OrderDao {
         String sql = "SELECT COUNT(*) " +
                 "FROM orders " +
                 "WHERE created_at BETWEEN " +
-                "DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-01'), INTERVAL 1 MONTH) " +
-                "AND LAST_DAY(DATE_SUB(NOW(), INTERVAL 1 MONTH))";
+                "DATE_FORMAT(NOW(), '%Y-%m-01') " + // Ngày đầu tháng hiện tại
+                "AND LAST_DAY(NOW())"; // Ngày cuối tháng hiện tại
 
         return jdbi.withHandle(handle ->
                 handle.createQuery(sql)
@@ -28,7 +28,55 @@ public class OrderDao {
         );
     }
 
-        public List<Order> getListOrders() {
+    public int totalPendingOrders() {
+        String sql = "SELECT COUNT(*) " +
+                "FROM orders " +
+                "WHERE order_status = 'pending'";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapTo(int.class)
+                        .one()
+        );
+    }
+
+    public int totalShippingOrders() {
+        String sql = "SELECT COUNT(*) " +
+                "FROM orders " +
+                "WHERE order_status = 'shipping'";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapTo(int.class)
+                        .one()
+        );
+    }
+
+    public List<Order> getOrdersInLastMonth() {
+        String sql = "SELECT o.id AS orderId, " +
+                "       c.cus_name AS customerName, " +
+                "       o.created_at AS orderDate, " +
+                "       o.order_status AS status " +
+                "FROM orders o " +
+                "JOIN accounts a ON o.account_id = a.id " +
+                "JOIN customers c ON a.customer_id = c.id " +
+                "WHERE o.created_at BETWEEN " +
+                "      DATE_FORMAT(NOW(), '%Y-%m-01') " + // Ngày đầu tháng hiện tại
+                "      AND LAST_DAY(NOW())"; // Ngày cuối tháng hiện tại
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .map((rs, ctx) -> new Order(
+                                rs.getInt("orderId"),
+                                rs.getString("customerName"),
+                                rs.getDate("orderDate"),
+                                rs.getString("status")
+                        ))
+                        .list()
+        );
+    }
+
+    public List<Order> getListOrders() {
             String sql = "SELECT o.id AS orderId, c.cus_name AS customerName, " +
                     "o.created_at AS orderDate, " +
                     "o.total_price AS totalPrice, " +
@@ -136,43 +184,68 @@ public class OrderDao {
         );
     }
 
+    public double getTotalRevenue() {
+        String sql = "SELECT SUM(total_price) AS totalRevenue FROM orders";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapTo(double.class)
+                        .one()
+        );
+    }
+
+
+
     public static void main(String[] args) {
-        // Khởi tạo đối tượng OrderDao
+//        // Khởi tạo đối tượng OrderDao
+//        OrderDao orderDao = new OrderDao();
+//
+//        // Tìm kiếm đơn hàng với từ khóa
+//        String keyword = "Pending"; // Thay từ khóa ở đây để kiểm tra (VD: "Nguyễn Văn A" hoặc "Shipped")
+//        List<Order> orders = orderDao.filterOrderByStatus(keyword);
+//
+//        // In kết quả
+//        System.out.println("Kết quả tìm kiếm cho từ khóa: " + keyword);
+//        if (orders.isEmpty()) {
+//            System.out.println("Không tìm thấy đơn hàng nào phù hợp!");
+//        } else {
+//            for (Order order : orders) {
+//                System.out.println("Order ID: " + order.getId());
+//                System.out.println("Customer Name: " + order.getCustomerName());
+//                System.out.println("Order Date: " + order.getCreatedAt());
+//                System.out.println("Total Price: " + order.getTotalPrice());
+//                System.out.println("Address: " + order.getAddress());
+//                System.out.println("Status: " + order.getOrderStatus());
+//
+//                // In chi tiết đơn hàng nếu có
+//                List<OrderDetail> orderDetails = order.getOrderDetails();
+//                if (orderDetails != null && !orderDetails.isEmpty()) {
+//                    System.out.println("Order Details:");
+//                    for (OrderDetail detail : orderDetails) {
+//                        System.out.println("\tProduct ID: " + detail.getProductId());
+//                        System.out.println("\tQuantity: " + detail.getQuantity());
+//                        System.out.println("\tUnit Price: " + detail.getUnitPrice());
+//                        System.out.println("\tDiscount: " + detail.getItemDiscount());
+//                        System.out.println("\tAmount: " + detail.getAmount());
+//                    }
+//                } else {
+//                    System.out.println("No order details found for this order.");
+//                }
+//                System.out.println("------------------------------");
+//            }
+//        }
         OrderDao orderDao = new OrderDao();
+        System.out.println(orderDao.totalOrderInLastedMonth());
+        List<Order> orders = orderDao.getOrdersInLastMonth();
 
-        // Tìm kiếm đơn hàng với từ khóa
-        String keyword = "Pending"; // Thay từ khóa ở đây để kiểm tra (VD: "Nguyễn Văn A" hoặc "Shipped")
-        List<Order> orders = orderDao.filterOrderByStatus(keyword);
-
-        // In kết quả
-        System.out.println("Kết quả tìm kiếm cho từ khóa: " + keyword);
-        if (orders.isEmpty()) {
-            System.out.println("Không tìm thấy đơn hàng nào phù hợp!");
-        } else {
-            for (Order order : orders) {
-                System.out.println("Order ID: " + order.getId());
-                System.out.println("Customer Name: " + order.getCustomerName());
-                System.out.println("Order Date: " + order.getCreatedAt());
-                System.out.println("Total Price: " + order.getTotalPrice());
-                System.out.println("Address: " + order.getAddress());
-                System.out.println("Status: " + order.getOrderStatus());
-
-                // In chi tiết đơn hàng nếu có
-                List<OrderDetail> orderDetails = order.getOrderDetails();
-                if (orderDetails != null && !orderDetails.isEmpty()) {
-                    System.out.println("Order Details:");
-                    for (OrderDetail detail : orderDetails) {
-                        System.out.println("\tProduct ID: " + detail.getProductId());
-                        System.out.println("\tQuantity: " + detail.getQuantity());
-                        System.out.println("\tUnit Price: " + detail.getUnitPrice());
-                        System.out.println("\tDiscount: " + detail.getItemDiscount());
-                        System.out.println("\tAmount: " + detail.getAmount());
-                    }
-                } else {
-                    System.out.println("No order details found for this order.");
-                }
-                System.out.println("------------------------------");
-            }
+        // Hiển thị kết quả
+        System.out.println("Danh sách đơn hàng trong tháng trước:");
+        for (Order order : orders) {
+            System.out.println("ID: " + order.getId());
+            System.out.println("Tên khách hàng: " + order.getCustomerName());
+            System.out.println("Ngày đặt: " + order.getCreatedAt());
+            System.out.println("Trạng thái: " + order.getOrderStatus());
+            System.out.println("-----------------------");
         }
     }
 }

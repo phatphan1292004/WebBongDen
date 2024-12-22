@@ -8,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -33,7 +34,6 @@
     />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/admin_css/productAdmin.css">
 </head>
 <body>
 <div class="wrapper">
@@ -50,9 +50,8 @@
                             <div class="top-card">
                                 <div class="top-card-title">
                                     <p>Tổng doanh thu</p>
-                                    <div class="percentage up">↑ 6.71%</div>
                                 </div>
-                                <div class="value">107950.00</div>
+                                <div class="value">${totalRevenue}</div>
                             </div>
 
                             <div class="bottom-card">
@@ -72,9 +71,8 @@
                             <div class="top-card">
                                 <div class="top-card-title">
                                     <p>Số đơn hàng</p>
-                                    <div class="percentage down">↓ 3.26%</div>
                                 </div>
-                                <div class="value">16</div>
+                                <div class="value">${totalOrders}</div>
                             </div>
 
                             <div class="bottom-card">
@@ -94,9 +92,8 @@
                             <div class="top-card">
                                 <div class="top-card-title">
                                     <p>Số khách hàng</p>
-                                    <div class="percentage down">↓ 2.71%</div>
                                 </div>
-                                <div class="value">5</div>
+                                <div class="value">${totalUser}</div>
                             </div>
 
                             <div class="bottom-card">
@@ -116,7 +113,6 @@
                             <div class="top-card">
                                 <div class="top-card-title">
                                     <p>Lượt truy cập</p>
-                                    <div class="percentage na">↑ N/A</div>
                                 </div>
                                 <div class="value">N/A</div>
                             </div>
@@ -169,111 +165,31 @@
                         <div class="recent-order-header">
                             <p>Đơn hàng gần đây</p>
                         </div>
-                        <table class="order-table">
+                        <table class="order-table" id="order-table-dashboard">
                             <thead>
-                            <tr>
-                                <th>ID Khách Hàng</th>
-                                <th>Khách Hàng</th>
-                                <th>Ngày Đặt</th>
-                                <th>Trạng Thái</th>
-                            </tr>
+                                <tr>
+                                    <th>ID Đơn Hàng</th>
+                                    <th>Khách Hàng</th>
+                                    <th>Ngày Đặt</th>
+                                    <th>Trạng Thái</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>#CUST001</td>
-                                <td class="customer-info">
-                                    <img
-                                            src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww"
-                                            alt="Avatar"
-                                            class="customer-avatar"
-                                    />
-                                    <span>Phạm Minh Duy</span>
-                                </td>
-                                <td>10/11/2024</td>
-                                <td class="status completed">
-                                    <span>Hoàn thành</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>#CUST002</td>
-                                <td class="customer-info">
-                                    <img
-                                            src="https://images.unsplash.com/photo-1623582854588-d60de57fa33f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
-                                            alt="Avatar"
-                                            class="customer-avatar"
-                                    />
-                                    <span>Nguyễn Thị Lan</span>
-                                </td>
-                                <td>09/11/2024</td>
-                                <td class="status pending">
-                                    <span>Đang chờ</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>#CUST003</td>
-                                <td class="customer-info">
-                                    <img
-                                            src="https://images.unsplash.com/photo-1663893364107-a6ecd06cf615?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
-                                            alt="Avatar"
-                                            class="customer-avatar"
-                                    />
-                                    <span>Lê Anh Tuấn</span>
-                                </td>
-                                <td>08/11/2024</td>
-                                <td class="status canceled">
-                                    <span>Đã hủy</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>#CUST004</td>
-                                <td class="customer-info">
-                                    <img
-                                            src="https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
-                                            alt="Avatar"
-                                            class="customer-avatar"
-                                    />
-                                    <span>Trần Quốc Khang</span>
-                                </td>
-                                <td>07/11/2024</td>
-                                <td class="status completed">
-                                    <span>Hoàn thành</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>#CUST005</td>
-                                <td class="customer-info">
-                                    <img
-                                            src="https://media.istockphoto.com/id/1401980646/photo/3d-rendered-classic-sculpture-metaverse-avatar-with-network-of-low-poly-glowing-purple-lines.webp?a=1&b=1&s=612x612&w=0&k=20&c=ktqSUQjjCAu9keEW0BYhrnVSiOZQWqk7kv_x29NmHP0="
-                                            alt="Avatar"
-                                            class="customer-avatar"
-                                    />
-                                    <span>Võ Minh Tâm</span>
-                                </td>
-                                <td>06/11/2024</td>
-                                <td class="status pending">
-                                    <span>Đang chờ</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>#CUST006</td>
-                                <td class="customer-info">
-                                    <img
-                                            src="https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
-                                            alt="Avatar"
-                                            class="customer-avatar"
-                                    />
-                                    <span>Đinh Thị Kim</span>
-                                </td>
-                                <td>05/11/2024</td>
-                                <td class="status canceled">
-                                    <span>Đã hủy</span>
-                                </td>
-                            </tr>
+                                <c:if test="${not empty orderLastMonth}">
+                                    <c:forEach var="order" items="${orderLastMonth}">
+                                        <tr>
+                                            <td>${order.id}</td>
+                                            <td>${order.customerName}</td>
+                                            <td>${order.formattedCreateAt}</td>
+                                            <td>${order.orderStatus}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${empty orderLastMonth}">
+                                    <tr>
+                                        <td colspan="4">Không có đơn hàng nào trong tháng này.</td>
+                                    </tr>
+                                </c:if>
                             </tbody>
                         </table>
                     </div>
@@ -307,7 +223,6 @@
                                     <h4>Sarah Graves</h4>
                                     <p>Highly recommend</p>
                                 </div>
-                                <div class="rating">★★★★★</div>
                             </div>
                             <div class="review-item">
                                 <div class="img-user">
@@ -320,7 +235,6 @@
                                     <h4>Garbease sha</h4>
                                     <p>Awesome Pro</p>
                                 </div>
-                                <div class="rating">★★★★☆</div>
                             </div>
 
                             <div class="review-item">
@@ -334,7 +248,6 @@
                                     <h4>Sarah Graves</h4>
                                     <p>Highly recommend</p>
                                 </div>
-                                <div class="rating">★★★★★</div>
                             </div>
                             <div class="review-item">
                                 <div class="img-user">
@@ -347,7 +260,6 @@
                                     <h4>Garbease sha</h4>
                                     <p>Awesome Pro</p>
                                 </div>
-                                <div class="rating">★★★★☆</div>
                             </div>
                         </div>
                     </div>

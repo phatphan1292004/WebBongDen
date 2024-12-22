@@ -124,6 +124,15 @@ public class UserDao {
         );
     }
 
+    public int getTotalCustomers() {
+        String sql = "SELECT COUNT(*) FROM customers";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapTo(int.class) // Map kết quả COUNT(*) về kiểu int
+                        .one() // Lấy duy nhất một giá trị
+        );
+    }
 
     public static void main(String[] args) {
         // Tạo đối tượng UserDao

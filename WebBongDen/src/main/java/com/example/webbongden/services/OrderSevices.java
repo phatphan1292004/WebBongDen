@@ -16,8 +16,20 @@ public class OrderSevices {
         return orderDao.totalOrderInLastedMonth();
     }
 
+    public int getPendingOrders() {
+        return orderDao.totalPendingOrders();
+    }
+
+    public int getShippingOrders() {
+        return orderDao.totalShippingOrders();
+    }
+
     public List<Order> getAllOrders() {
         return orderDao.getListOrders();
+    }
+
+    public List<Order> getOrdersInLastMonth() {
+        return orderDao.getOrdersInLastMonth();
     }
 
     public List<Order> getOrdersByKeyWord(String value) {
@@ -30,5 +42,9 @@ public class OrderSevices {
 
     public List<Order> filterOrderByStatus(String value) {
         return orderDao.filterOrderByStatus(value);
+    }
+
+    public double getTotalRevenue() {
+        return orderDao.getTotalRevenue();
     }
 }

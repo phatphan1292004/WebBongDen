@@ -1,17 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 12/19/2024
-  Time: 5:17 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>Title</title>
-  </head>
-  <body>
-  <header class="header">
+<header class="header">
     <div class="header-left">
       <i class="fa-solid fa-bars"></i>
       <a href="index.html" class="header-logo">
@@ -29,6 +16,5 @@
         />
       </div>
     </div>
-  </header>
-  </body>
-</html>
+</header>
+

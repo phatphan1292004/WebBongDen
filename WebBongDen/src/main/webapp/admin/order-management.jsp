@@ -62,7 +62,7 @@
                         </div>
                         <div class="stat-text">
                             <h3>Đơn hàng chưa xử lý</h3>
-                            <span id="pending-orders">0</span>
+                            <span id="pending-orders">${totalOrdersPending}</span>
                             <!-- Đổi id -->
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="stat-text">
                             <h3>Đơn hàng đang giao</h3>
-                            <span id="in-transit-orders">0</span>
+                            <span id="in-transit-orders">${totalOrdersShipping}</span>
                             <!-- Đổi id -->
                         </div>
                     </div>

@@ -406,15 +406,16 @@ public class ProductDao {
 
     public static void main(String[] args) {
         ProductDao productDao = new ProductDao();
-        List<TopProduct> topProducts = productDao.getTopSellingProducts();
-
-        System.out.println("Top sản phẩm bán chạy:");
-        for (TopProduct product : topProducts) {
-            System.out.println("Tên sản phẩm: " + product.getProductName());
-            System.out.println("Số lượng bán: " + product.getQuantitySold());
-            System.out.println("Tổng tiền thu được: " + product.getFormattedRevenue());
-            System.out.println("Số lượng tồn kho: " + product.getStockQuantity());
-            System.out.println("----------------------------------");
-        }
+//        List<TopProduct> topProducts = productDao.getTopSellingProducts();
+//
+//        System.out.println("Top sản phẩm bán chạy:");
+//        for (TopProduct product : topProducts) {
+//            System.out.println("Tên sản phẩm: " + product.getProductName());
+//            System.out.println("Số lượng bán: " + product.getQuantitySold());
+//            System.out.println("Tổng tiền thu được: " + product.getFormattedRevenue());
+//            System.out.println("Số lượng tồn kho: " + product.getStockQuantity());
+//            System.out.println("----------------------------------");
+//        }
+        System.out.println(productDao.getCategoryQuantity());
     }
 }
