@@ -18,6 +18,49 @@ public class ProductDao {
     public ProductDao() {
         this.jdbi = JDBIConnect.get();
     }
+    public List<Product> getAllProduct() {
+        String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
+                "pi.url AS image_url, pi.main_image " +
+                "FROM products p " +
+                "JOIN sub_categories sc ON p.subCategory_id = sc.id " +
+                "JOIN categories c ON sc.category_id = c.id " +
+                "LEFT JOIN product_images pi ON p.id = pi.product_id " +
+                "ORDER BY p.created_at DESC "
+                ;
+
+        return jdbi.withHandle(handle -> {
+            Query query = handle.createQuery(sql);
+            Map<Integer, Product> productMap = new HashMap<>();
+
+            query.map((rs, ctx) -> {
+                int productId = rs.getInt("product_id");
+                Product product = productMap.get(productId);
+
+                if (product == null) {
+                    product = new Product(
+                            productId,
+                            rs.getString("product_name"),
+                            rs.getDouble("unit_price"),
+                            rs.getDouble("discount_percent"),
+                            new ArrayList<>()
+                    );
+                    productMap.put(productId, product);
+                }
+
+                String imageUrl = rs.getString("image_url");
+                if (imageUrl != null) {
+                    product.getListImg().add(new ProductImage(
+                            imageUrl,
+                            rs.getBoolean("main_image")
+                    ));
+                }
+
+                return product;
+            }).list();
+
+            return new ArrayList<>(productMap.values());
+        });
+    }
 
     // Lấy ds sp theo Category
     public List<Product> getProductsByCategory(String categoryName) {
@@ -329,7 +372,10 @@ public class ProductDao {
 
     public static void main(String[] args) {
         ProductDao productDao = new ProductDao();
-
+        List<Product> list = productDao.getAllProduct();
+        for (Product o : list){
+            System.out.println(o);
+        }
         try {
             int productIdToDelete = 19; // ID của sản phẩm cần xóa
             boolean result = productDao.deleteProductById(productIdToDelete);
