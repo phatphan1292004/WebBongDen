@@ -1,10 +1,16 @@
 package com.example.webbongden.dao;
 import com.example.webbongden.dao.db.JDBIConnect;
 import com.example.webbongden.dao.model.Category;
+import com.example.webbongden.dao.model.Product;
+import com.example.webbongden.dao.model.ProductImage;
 import com.example.webbongden.dao.model.SubCategory;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.statement.Query;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CategoryDao {
     private final Jdbi jdbi;
@@ -13,6 +19,8 @@ public class CategoryDao {
     public CategoryDao() {
         this.jdbi = JDBIConnect.get();
     }
+
+    // Lấy tất cả sản phẩm
 
     // Lấy danh sách tất cả categories
     public List<Category> getAllCategories() {
