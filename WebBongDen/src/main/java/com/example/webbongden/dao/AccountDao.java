@@ -114,6 +114,19 @@ public class AccountDao {
         );
     }
 
+    //Kiểm tra tài khoản có trong Database k
+    public Account authenticate(String username, String password) {
+        String sql = "SELECT id, username, password, role FROM accounts WHERE username = :username AND password = :password";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("username", username)
+                        .bind("password", password)
+                        .mapToBean(Account.class)
+                        .findOne() // Trả về Optional<Account>
+                        .orElse(null) // Trả về null nếu không tìm thấy
+        );
+    }
 
     public static void main(String[] args) {
         AccountDao accountDao = new AccountDao();

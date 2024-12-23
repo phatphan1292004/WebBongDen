@@ -27,4 +27,8 @@ public class AccountServices {
     public boolean deleteAccountById(int accountId) {
         return accountDao.deleteAccountById(accountId);
     }
+
+    public Account authenticate(String username, String password) {
+        return accountDao.authenticate(username, password);
+    }
 }

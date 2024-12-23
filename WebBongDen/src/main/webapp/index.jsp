@@ -1,5 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%
+    HttpSession httpSession  = request.getSession(false); // Lấy session hiện tại (nếu có)
+    String username = (String) httpSession.getAttribute("username");
+    Boolean isLoggedIn = (Boolean) httpSession.getAttribute("isLoggedIn");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,41 +94,51 @@
                         <p>(<span class="quantity-product">0</span>)</p>
                     </a>
 
-                    <div class="header-user">
-                        <img
-                                src="https://images.unsplash.com/photo-1636041282694-aa4e52370419?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                alt=""
-                                class="avt-user"
-                        />
 
-                        <div class="user-info-dropdown">
-                            <div class="dropdown-header">
-                                <img src="./img/icon-dropdownuser.png" alt="" />
-                                <p>Xin chào <span>Phat Phan.</span></p>
-                            </div>
-                            <div class="dropdown-content">
-                                <div class="dropdown-item">
-                                    <i class="fa fa-user"></i>
-                                    <a href="user.html">Thông tin cá nhân</a>
-                                </div>
+                    <%
+                        if (username != null) { // Người dùng đã đăng nhập
+                    %>
+                        <div class="header-user" style="display:block;">
+                            <img
+                                    src="https://images.unsplash.com/photo-1636041282694-aa4e52370419?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                    alt=""
+                                    class="avt-user"
+                            />
 
-                                <div class="dropdown-item">
-                                    <i class="fa-regular fa-eye"></i>
-                                    <a href="user.html">Đơn hàng gần đây</a>
+                            <div class="user-info-dropdown">
+                                <div class="dropdown-header">
+                                    <img src="./img/icon-dropdownuser.png" alt="" />
+                                    <p>Xin chào <span><%= username != null ? username : "Khách" %>.</span></p>
                                 </div>
-                            </div>
-                            <div class="dropdown-footer">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                <a href="index.html">Đăng xuất</a>
+                                <div class="dropdown-content">
+                                    <div class="dropdown-item">
+                                        <i class="fa fa-user"></i>
+                                        <a href="user.html">Thông tin cá nhân</a>
+                                    </div>
+
+                                    <div class="dropdown-item">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <a href="user.html">Đơn hàng gần đây</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown-footer">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    <a href="/WebBongDen_war/LogoutController">Đăng xuất</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <a href="./user/login.jsp" id="login-header-btn">
-                        <button class="login" id="login-btn">
-                            <i class="fas fa-user"></i>
-                            <span>Đăng nhập</span>
-                        </button>
-                    </a>
+                    <%
+                    } else { // Người dùng chưa đăng nhập
+                    %>
+                        <a href="/WebBongDen_war/login" id="login-header-btn" style="display: block">
+                            <button class="login" id="login-btn">
+                                <i class="fas fa-user"></i>
+                                <span>Đăng nhập</span>
+                            </button>
+                        </a>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
         </div>
