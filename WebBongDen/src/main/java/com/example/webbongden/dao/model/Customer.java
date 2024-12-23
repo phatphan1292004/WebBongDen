@@ -10,9 +10,19 @@ public class Customer {
     private Date birthday; // Ngày sinh
     private String address; // Địa chỉ
     private String phone; // Số điện thoại
+    private String note;
 
     // Constructor không tham số
+    public Customer(int id, String cusName, String address, String phone, String note) {
+        this.id = id;
+        this.cusName = cusName;
+        this.address = address;
+        this.phone = phone;
+        this.note = note;
+    }
+
     public Customer() {
+
     }
 
     // Constructor đầy đủ tham số
@@ -41,6 +51,14 @@ public class Customer {
 
     public void setCusName(String cusName) {
         this.cusName = cusName;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public String getIdNumber() {

@@ -1,5 +1,6 @@
 package com.example.webbongden.controller.UserController;
 
+import com.example.webbongden.dao.model.Account;
 import com.example.webbongden.dao.model.Cart;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -16,6 +17,12 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
+        Account account = (Account) session.getAttribute("account");
+        if (account == null) {
+            // Nếu không có thông tin Account trong session, chuyển hướng đến trang đăng nhập
+            response.sendRedirect("/WebBongDen_war/login");
+            return;
+        }
 
         // Gửi giỏ hàng sang JSP
         request.setAttribute("cart", cart);

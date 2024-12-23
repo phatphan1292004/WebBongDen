@@ -45,6 +45,14 @@ public class Cart {
         return formatter.format(totalPrice);
     }
 
+    public double getTotalPriceNumber() {
+        double totalPrice = 0.0;
+        for (CartItem cartItem : cartItems) {
+            totalPrice += cartItem.getAmount();
+        }
+        return totalPrice;
+    }
+
     public List<CartItem> getItems() {
         if (cartItems == null) {
             cartItems = new ArrayList<>();

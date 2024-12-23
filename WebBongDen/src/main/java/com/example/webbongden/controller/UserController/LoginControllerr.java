@@ -28,6 +28,7 @@ public class LoginControllerr extends HttpServlet {
         if (account != null) {
             // Lưu thông tin tài khoản vào session
             HttpSession session = request.getSession();
+            session.setAttribute("account", account);
             session.setAttribute("username", account.getUsername());
             session.setAttribute("role", account.getRole());
 

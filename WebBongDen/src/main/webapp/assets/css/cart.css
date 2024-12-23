@@ -449,7 +449,7 @@ input.invalid, select.invalid {
   color: white;
 }
 
-.quantity-selector form {
+.quantity-selector form{
   display: flex;
 }
 

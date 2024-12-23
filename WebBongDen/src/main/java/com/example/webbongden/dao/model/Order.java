@@ -13,6 +13,10 @@ public class Order {
     private String address;          // Địa chỉ giao hàng
     private String orderStatus;      // Trạng thái đơn hàng
     private List<OrderDetail> orderDetails; // Danh sách chi tiết đơn hàng (nếu cần)
+    private double shippingFee;
+    private String shippingMethod;
+    private int accountId;
+    private String note;
 
     // Constructors
     public Order() {}
@@ -34,6 +38,41 @@ public class Order {
         this.orderStatus = orderStatus;
         this.orderDetails = orderDetails;
     }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+
+    public Double getShippingFee() {
+        return shippingFee;
+    }
+
+    public void setShippingFee(Double shippingFee) {
+        this.shippingFee = shippingFee;
+    }
+
+    public String getShippingMethod() {
+        return shippingMethod;
+    }
+
+
+    public void setShippingMethod(String shippingMethod) {
+        this.shippingMethod = shippingMethod;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+
+    public void setNote(String shippingMethod) {
+        this.note = shippingMethod;
+    }
+
 
     // Getters and Setters
     public int getId() {

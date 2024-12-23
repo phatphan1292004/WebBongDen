@@ -1,6 +1,8 @@
 package com.example.webbongden.dao;
 
 import com.example.webbongden.dao.db.JDBIConnect;
+import com.example.webbongden.dao.model.Customer;
+import com.example.webbongden.dao.model.Invoices;
 import com.example.webbongden.dao.model.Order;
 import com.example.webbongden.dao.model.OrderDetail;
 import org.jdbi.v3.core.Jdbi;
@@ -195,6 +197,53 @@ public class OrderDao {
     }
 
 
+    //Tạo hóa đơn
+    public int createOrderFromInvoice(Invoices invoice, Customer customer) {
+        String sql = "INSERT INTO orders (invoice_id, account_id, created_at, total_price, order_status, shipping_fee, shipping_method) " +
+                "VALUES (:invoiceId, :accountId, :createdAt, :totalPrice, 'Pending', NULL, NULL)";
+
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("invoiceId", invoice.getId())
+                        .bind("accountId", invoice.getAccountId())
+                        .bind("createdAt", invoice.getCreatedAt())
+                        .bind("totalPrice", invoice.getTotalPrice())
+                        .executeAndReturnGeneratedKeys("id")
+                        .mapTo(int.class)
+                        .one()
+        );
+    }
+
+    public void createOrderDetails(int orderId, List<OrderDetail> orderDetails) {
+        String sql = "INSERT INTO order_details (order_id, product_id, quantity, unit_price, item_discount, amount) " +
+                "VALUES (:orderId, :productId, :quantity, :unitPrice, :itemDiscount, :amount)";
+
+        jdbi.useHandle(handle -> {
+            for (OrderDetail detail : orderDetails) { // Lặp qua từng chi tiết đơn hàng
+                // Kiểm tra xem bản ghi đã tồn tại chưa
+                boolean exists = handle.createQuery("SELECT COUNT(*) FROM order_details WHERE order_id = :orderId AND product_id = :productId")
+                        .bind("orderId", orderId)
+                        .bind("productId", detail.getProductId())
+                        .mapTo(int.class)
+                        .one() > 0;
+
+                if (!exists) {
+                    // Nếu chưa tồn tại, thêm mới
+                    handle.createUpdate(sql)
+                            .bind("orderId", orderId)
+                            .bind("productId", detail.getProductId())
+                            .bind("quantity", detail.getQuantity())
+                            .bind("unitPrice", detail.getUnitPrice())
+                            .bind("itemDiscount", detail.getItemDiscount())
+                            .bind("amount", detail.getAmount())
+                            .execute();
+                } else {
+                    // Nếu tồn tại, in log để kiểm tra
+                    System.out.println("Duplicate entry found for order_id=" + orderId + ", product_id=" + detail.getProductId());
+                }
+            }
+        });
+    }
 
     public static void main(String[] args) {
 //        // Khởi tạo đối tượng OrderDao
