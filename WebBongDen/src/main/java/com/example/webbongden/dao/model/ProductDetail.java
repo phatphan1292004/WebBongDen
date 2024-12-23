@@ -1,7 +1,9 @@
 package com.example.webbongden.dao.model;
 
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ProductDetail {
     private int id;
@@ -174,6 +176,11 @@ public class ProductDetail {
                 ", categoryName='" + categoryName + '\'' +
                 ", mainImageUrl='" + mainImageUrl + '\'' +
                 '}';
+    }
+
+    public String getFormattedDiscountedPrice() {
+        NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
+        return formatter.format(unitPrice - (unitPrice * discountPercent / 100)); // Ví dụ: "1.140.000"
     }
 }
 

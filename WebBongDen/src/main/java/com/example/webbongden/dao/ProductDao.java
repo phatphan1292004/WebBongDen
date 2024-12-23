@@ -404,18 +404,61 @@ public class ProductDao {
         });
     }
 
-    public static void main(String[] args) {
-        ProductDao productDao = new ProductDao();
-//        List<TopProduct> topProducts = productDao.getTopSellingProducts();
-//
-//        System.out.println("Top sản phẩm bán chạy:");
-//        for (TopProduct product : topProducts) {
-//            System.out.println("Tên sản phẩm: " + product.getProductName());
-//            System.out.println("Số lượng bán: " + product.getQuantitySold());
-//            System.out.println("Tổng tiền thu được: " + product.getFormattedRevenue());
-//            System.out.println("Số lượng tồn kho: " + product.getStockQuantity());
-//            System.out.println("----------------------------------");
-//        }
-        System.out.println(productDao.getCategoryQuantity());
+    public Product getProductById(int id) {
+        String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
+                "pi.url AS image_url, pi.main_image " +
+                "FROM products p " +
+                "LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.main_image = TRUE " + // Lấy hình ảnh chính
+                "WHERE p.id = :id";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("id", id)
+                        .map((rs, ctx) -> {
+                            // Tạo đối tượng Product từ kết quả
+                            Product product = new Product(
+                                    rs.getInt("product_id"),
+                                    rs.getString("product_name"),
+                                    rs.getDouble("unit_price"),
+                                    rs.getDouble("discount_percent"),
+                                    new ArrayList<>()
+                            );
+
+                            // Thêm hình ảnh chính nếu có
+                            String imageUrl = rs.getString("image_url");
+                            if (imageUrl != null) {
+                                product.getListImg().add(new ProductImage(imageUrl, true));
+                            }
+
+                            return product;
+                        })
+                        .findOne() // Chỉ cần lấy một kết quả
+                        .orElse(null) // Trả về null nếu không tìm thấy sản phẩm
+        );
     }
+
+
+    public static void main(String[] args) {
+        // Khởi tạo ProductDao
+        ProductDao productDao = new ProductDao();
+
+        // Test phương thức getProductById
+        int testProductId = 1; // Thay đổi ID sản phẩm này theo dữ liệu trong database
+        Product product = productDao.getProductById(testProductId);
+
+        // Kiểm tra kết quả
+        if (product != null) {
+            System.out.println("Product ID: " + product.getId());
+            System.out.println("Product Name: " + product.getProductName());
+            System.out.println("Unit Price: " + product.getUnitPrice());
+            System.out.println("Discount Percent: " + product.getDiscountPercent());
+            System.out.println("Images:");
+            for (ProductImage image : product.getListImg()) {
+                System.out.println(" - " + image.getUrl() + (image.isMainImage() ? " (main)" : ""));
+            }
+        } else {
+            System.out.println("Product not found for ID: " + testProductId);
+        }
+    }
+
 }

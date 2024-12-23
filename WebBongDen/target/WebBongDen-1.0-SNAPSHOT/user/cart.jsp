@@ -1,10 +1,21 @@
+<%@ page import="com.example.webbongden.dao.model.Cart" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="com.example.webbongden.dao.model.CartItem" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%--
+
   Created by IntelliJ IDEA.
   User: Admin
   Date: 12/15/2024
   Time: 10:21 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%
+    HttpSession cartSession = request.getSession(); // Lấy session hiện tại (nếu có)
+    Cart cart = (Cart) cartSession.getAttribute("cart"); // Lấy giỏ hàng từ session
+%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -49,110 +60,78 @@
                 <div class="container-top">
                     <div class="product">
                         <ul class="list-product">
+<%--                            <li class="product-item">--%>
+<%--                                <div class="box">--%>
+<%--                                    <div class="product-img">--%>
+<%--                                        <img--%>
+<%--                                                src="https://denhoamy.vn/upload/attachment/thumb/3650den-chum-trang-tri-noi-that-phong-cach-my-dc03810-03.jpg"--%>
+<%--                                                alt=""--%>
+<%--                                        />--%>
+<%--                                    </div>--%>
+<%--                                    <div class="delete-item">Xóa</div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="product-detail">--%>
+<%--                                    <div class="product-name">--%>
+<%--                                        Đèn chùm trang trí nội thất phong cách Mỹ DC03810--%>
+<%--                                    </div>--%>
+<%--                                    <p class="product-note">--%>
+<%--                                        Tặng: Phiếu giảm giá 20% khi hóa đơn tiếp theo trên 1.500.000VND--%>
+<%--                                    </p>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="product-qp">--%>
+<%--                                    <div class="product-price">2.499.999VND</div>--%>
+<%--                                    <div class="quantity-selector">--%>
+<%--                                        <button class="quantity-btn decrease">-</button>--%>
+<%--                                        <input--%>
+<%--                                                type="number"--%>
+<%--                                                class="quantity-input"--%>
+<%--                                                value="1"--%>
+<%--                                                min="1"--%>
+<%--                                        />--%>
+<%--                                        <button class="quantity-btn increase">+</button>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </li>--%>
+
+                            <% if (cart == null || cart.getItems().isEmpty()) { %>
+                            <p>Giỏ hàng của bạn trống.</p>
+                            <% } else { %>
+                            <% for (CartItem item : cart.getItems()) { %>
                             <li class="product-item">
                                 <div class="box">
                                     <div class="product-img">
-                                        <img
-                                                src="https://denhoamy.vn/upload/attachment/thumb/3650den-chum-trang-tri-noi-that-phong-cach-my-dc03810-03.jpg"
-                                                alt=""
-                                        />
+                                        <img src="<%= item.getImageUrl() %>" alt="<%= item.getProductName() %>">
                                     </div>
-                                    <div class="delete-item">Xóa</div>
+                                    <div class="delete-item">
+                                        <a href="delete-cart-item?productId=<%= item.getProductId() %>" class="delete-btn">Xóa</a>
+                                    </div>
                                 </div>
-
                                 <div class="product-detail">
-                                    <div class="product-name">
-                                        Đèn chùm trang trí nội thất phong cách Mỹ DC03810
-                                    </div>
-                                    <p class="product-note">
-                                        Tặng: Phiếu giảm giá 20% khi hóa đơn tiếp theo trên 1.500.000VND
-                                    </p>
+                                    <div class="product-name"><%= item.getProductName() %></div>
                                 </div>
-
                                 <div class="product-qp">
-                                    <div class="product-price">2.499.999VND</div>
+                                    <div class="product-price"><%= item.getFormattedPrice() %> VND</div>
                                     <div class="quantity-selector">
-                                        <button class="quantity-btn decrease">-</button>
-                                        <input
-                                                type="number"
-                                                class="quantity-input"
-                                                value="1"
-                                                min="1"
-                                        />
-                                        <button class="quantity-btn increase">+</button>
+                                        <form action="update-cart" method="post">
+                                            <input type="hidden" name="productId" value="<%= item.getProductId() %>" />
+                                            <button class="quantity-btn decrease" type="button" onclick="updateQuantity(this, -1)">-</button>
+                                            <input
+                                                    type="number"
+                                                    name="quantity"
+                                                    class="quantity-input"
+                                                    value="<%= item.getQuantity() %>"
+                                                    min="1"
+                                                    onchange="this.form.submit()"
+                                            />
+                                            <button class="quantity-btn increase" type="button" onclick="updateQuantity(this, 1)">+</button>
+                                        </form>
                                     </div>
                                 </div>
                             </li>
-
-                            <li class="product-item">
-                                <div class="box">
-                                    <div class="product-img">
-                                        <img
-                                                src="https://denhoamy.vn/upload/attachment/thumb/2036den-chum-tiffany-trang-tri-noi-that-dc03784-01.jpg"
-                                                alt=""
-                                        />
-                                    </div>
-                                    <div class="delete-item">Xóa</div>
-                                </div>
-
-                                <div class="product-detail">
-                                    <div class="product-name">
-                                        Đèn chùm Tiffany trang trí nội thất DC03784
-                                    </div>
-                                    <p class="product-note">
-                                        Lắp đặt miễn phí trong bán kính 20km
-                                    </p>
-                                </div>
-
-                                <div class="product-qp">
-                                    <div class="product-price">1.990.000VND</div>
-                                    <div class="quantity-selector">
-                                        <button class="quantity-btn decrease">-</button>
-                                        <input
-                                                type="number"
-                                                class="quantity-input"
-                                                value="1"
-                                                min="1"
-                                        />
-                                        <button class="quantity-btn increase">+</button>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="product-item">
-                                <div class="box">
-                                    <div class="product-img">
-                                        <img
-                                                src="https://denhoamy.vn/upload/attachment/3771den-chum-trang-tri-phong-cach-dong-que-my-dc03768-02.jpg"
-                                                alt=""
-                                        />
-                                    </div>
-                                    <div class="delete-item">Xóa</div>
-                                </div>
-
-                                <div class="product-detail">
-                                    <div class="product-name">
-                                        Đèn chùm trang trí phong cách đồng quê Mỹ DC03768
-                                    </div>
-                                    <p class="product-note">
-                                        Tặng phiếu giảm giá 5% cho sản phẩm kế tiếp.
-                                    </p>
-                                </div>
-
-                                <div class="product-qp">
-                                    <div class="product-price">2.500.000VND</div>
-                                    <div class="quantity-selector">
-                                        <button class="quantity-btn decrease">-</button>
-                                        <input
-                                                type="number"
-                                                class="quantity-input"
-                                                value="1"
-                                                min="1"
-                                        />
-                                        <button class="quantity-btn increase">+</button>
-                                    </div>
-                                </div>
-                            </li>
+                            <% } %>
+                            <% } %>
                         </ul>
                         <div class="a"></div>
                     </div>
@@ -160,16 +139,16 @@
                 <div class="container-bottom">
                     <div class="result">
                         <div class="b">
-                            <p>Phí vận chuyển:</p>
+                            <p>Phí vận chuyển: 0</p>
                             <p>Miễn phí</p>
                         </div>
                         <div class="b">
                             <p>Tổng tiền:</p>
-                            <p class="total-price">3.652.000 V ND</p>
+                            <p class="total-price"><%= cart != null ? cart.getTotalPrice() : 0 %> VND</p>
                         </div>
                     </div>
 
-                    <button class="buy-btn">ĐẶT HÀNG NGAY</button>
+                    <button class="buy-btn" data-tab="order-info">ĐẶT HÀNG NGAY</button>
                 </div>
             </div>
             <div class="tab-content" id="order-info">
@@ -261,7 +240,7 @@
                                 <p class="total-price">3.652.000 V ND</p>
                             </div>
                         </div>
-                        <button class="buy-btn">ĐẶT HÀNG NGAY</button>
+                        <button class="buy-btn" data-tab="payment">ĐẶT HÀNG NGAY</button>
                         <p style="font-size: 12px">
                             Bạn có thể chọn hình thức thanh toán sau khi đặt hàng.
                         </p>
@@ -332,7 +311,7 @@
                             <p class="total-price">3.652.000 V ND</p>
                         </div>
                     </div>
-                    <button class="buy-btn">ĐẶT HÀNG NGAY</button>
+                    <button class="buy-btn" data-tab="finish">ĐẶT HÀNG NGAY</button>
                 </div>
             </div>
             <div class="tab-content" id="finish" style="padding: 70px 0">

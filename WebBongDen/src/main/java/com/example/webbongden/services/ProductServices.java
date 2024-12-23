@@ -72,4 +72,8 @@ public class ProductServices {
     public boolean editProductDetail(ProductDetail productDetail) {
         return productDao.editProductDetail(productDetail);
     }
+
+    public Product getProductById(int productId) {
+        return productDao.getProductById(productId);
+    }
  }
