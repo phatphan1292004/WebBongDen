@@ -274,7 +274,6 @@
                             </div>
 
                             <div class="row">
-                            <!-- Single Product -->
                                 <c:forEach var="product" items="${products}">
                                     <div class="col-6 col-md-4 col-lg-3 mb-4">
                                         <div class="product-item">
@@ -282,16 +281,13 @@
                                                 <div class="img">
                                                     <img src="${product.imageUrl}" alt="${product.productName}" />
                                                 </div>
-
                                                 <div class="product-info">
                                                     <div class="product-name">
                                                             ${product.productName}
                                                     </div>
-
                                                     <p class="original-price">
                                                             ${String.format('%,.0f', product.unitPrice)} VND
                                                     </p>
-
                                                     <div class="price-discount">
                                                         <p class="product-price">
                                                                 ${String.format('%,.0f', product.discountedPrice)} VND
@@ -306,14 +302,25 @@
                                     </div>
                                 </c:forEach>
                             </div>
-                            <div id="product-container" class="row"></div>
+
                             <div id="pagination-controls">
-                                <button id="prev">Trước</button>
-                                <span id="pagination-info"></span>
-                                <button id="next">Tiếp</button>
+                                <c:if test="${currentPage > 1}">
+                                    <a href="products?page=${currentPage - 1}&select=${param.select}&subCategoryId=${param.subCategoryId}">
+                                        Trước
+                                    </a>
+                                </c:if>
+
+                                <span>Trang ${currentPage} / ${totalPages}</span>
+
+                                <c:if test="${currentPage < totalPages}">
+                                    <a href="products?page=${currentPage + 1}&select=${param.select}&subCategoryId=${param.subCategoryId}">
+                                        Tiếp
+                                    </a>
+                                </c:if>
                             </div>
+
+
                         </div>
-                    </div>
                 </div>
             </div>
         </section>

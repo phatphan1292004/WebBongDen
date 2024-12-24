@@ -5,6 +5,7 @@ import com.example.webbongden.dao.db.JDBIConnect;
 import com.example.webbongden.dao.model.Product;
 import com.example.webbongden.dao.model.ProductDetail;
 import com.example.webbongden.dao.model.ProductImage;
+import com.example.webbongden.dao.model.TopProduct;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Query;
 import java.util.ArrayList;
@@ -61,6 +62,41 @@ public class ProductDao {
             return new ArrayList<>(productMap.values());
         });
     }
+    // lấy ds sap theo trang
+    public List<Product> getProductsByPage(int page, int pageSize) {
+        String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
+                "pi.url AS image_url, pi.main_image " +
+                "FROM products p " +
+                "LEFT JOIN product_images pi ON p.id = pi.product_id " +
+                "ORDER BY p.created_at DESC " +
+                "LIMIT :limit OFFSET :offset";
+
+        int offset = (page - 1) * pageSize;
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("limit", pageSize)
+                        .bind("offset", offset)
+                        .map((rs, ctx) -> {
+                            Product product = new Product(
+                                    rs.getInt("product_id"),
+                                    rs.getString("product_name"),
+                                    rs.getDouble("unit_price"),
+                                    rs.getDouble("discount_percent"),
+                                    new ArrayList<>()
+                            );
+
+                            String imageUrl = rs.getString("image_url");
+                            if (imageUrl != null) {
+                                product.getListImg().add(new ProductImage(
+                                        imageUrl,
+                                        rs.getBoolean("main_image")
+                                ));
+                            }
+                            return product;
+                        }).list()
+        );
+    }
 
     // Lấy ds sp theo Category
     public List<Product> getProductsByCategory(String categoryName) {
@@ -106,6 +142,47 @@ public class ProductDao {
 
             return new ArrayList<>(productMap.values());
         });
+    }
+    public List<TopProduct> getTopSellingProducts() {
+        String sql = "SELECT p.product_name, " +
+                "SUM(o.quantity) AS quantity_sold, " +
+                "SUM(o.quantity * p.unit_price) AS total_revenue, " +
+                "p.stock_quantity " +
+                "FROM products p " +
+                "JOIN order_items o ON p.id = o.product_id " +
+                "GROUP BY p.id " +
+                "ORDER BY total_revenue DESC";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .map((rs, ctx) -> new TopProduct(
+                                rs.getString("product_name"),
+                                rs.getInt("quantity_sold"),
+                                rs.getDouble("total_revenue"),
+                                rs.getInt("stock_quantity")
+                        ))
+                        .list()
+        );
+    }
+    public boolean editProductDetail(ProductDetail productDetail) {
+        String sql = "UPDATE products SET " +
+                "product_name = :productName, " +
+                "unit_price = :unitPrice, " +
+                "discount_percent = :discountPercent, " +
+                "stock_quantity = :stockQuantity, " +
+                "description = :description " +
+                "WHERE id = :id";
+
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("productName", productDetail.getProductName())
+                        .bind("unitPrice", productDetail.getUnitPrice())
+                        .bind("discountPercent", productDetail.getDiscountPercent())
+                        .bind("stockQuantity", productDetail.getStockQuantity())
+                        .bind("description", productDetail.getDescription())
+                        .bind("id", productDetail.getId())
+                        .execute() > 0
+        );
     }
 
     // Lấy dssp cho trang product Admin

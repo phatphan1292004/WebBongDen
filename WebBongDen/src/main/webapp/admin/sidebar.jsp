@@ -10,6 +10,11 @@
 <head>
     <title>Title</title>
 </head>
+<style>
+    .active {
+        background-color: red;
+    }
+</style>
 <body>
 <div class="sidebar">
     <div class="nav">
@@ -62,5 +67,31 @@
         <p>Đăng xuất</p>
     </div>
 </div>
+<script>
+    const listNav = document.querySelectorAll(".nav-link");
+
+    // Lấy giá trị 'page' từ query string
+    const currentPage = new URLSearchParams(window.location.search).get('page');
+
+    // Nếu không có 'page' trong URL, mặc định là 'dashboard'
+    const defaultPage = 'dashboard';
+
+    // Gắn class 'active' vào item tương ứng
+    listNav.forEach((item) => {
+        if (item.dataset.index === (currentPage || defaultPage)) {
+            item.classList.add('active');
+        }
+    });
+
+    // Thêm sự kiện click để chuyển trạng thái 'active'
+    listNav.forEach((item) => {
+        item.addEventListener('click', function () {
+            listNav.forEach(i => {
+                i.classList.remove('active');
+            });
+            item.classList.add('active');
+        });
+    });
+</script>
 </body>
 </html>

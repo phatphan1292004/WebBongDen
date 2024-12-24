@@ -49,109 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  // Hàm ẩn tất cả tab-content
-  function hideAllTabs() {
-    tabContents.forEach((tab) => {
-      tab.style.display = "none";
-    });
-  }
-
-  // Hàm kích hoạt tab dựa trên page từ URL
-  function activateTabFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    const page = params.get("page"); // Lấy giá trị "page" từ URL
-
-    hideAllTabs(); // Ẩn tất cả các tab
-
-    if (page) {
-      const targetTab = document.getElementById(`${page}-content`);
-      if (targetTab) {
-        targetTab.style.display = "block"; // Hiển thị tab tương ứng
-      }
-    } else {
-      document.getElementById("dashboard-content").style.display = "block"; // Mặc định trang dashboard
-    }
-  }
-
-  // Xử lý click trên sidebar để thay đổi URL
-  // Xử lý click trên sidebar để thay đổi URL
-  // Gán sự kiện click cho các link trong sidebar
-  navLinks.forEach(link => {
-    link.addEventListener('click', event => {
-      event.preventDefault(); // Ngăn chặn hành vi mặc định
-      const page = link.getAttribute('data-index'); // Lấy giá trị 'data-index'
-      const newUrl = `admin?page=${page}`;
-
-      // Cập nhật URL trên trình duyệt
-      window.history.pushState(null, "", newUrl);
-
-      // Gửi request đến server
-      fetch(newUrl)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error("Có lỗi xảy ra khi tải nội dung!");
-            }
-            return response.text();
-          })
-          .catch(error => {
-            console.error("Error:", error);
-            alert("Không thể tải nội dung trang!");
-          });
-      window.location.href = newUrl;
-    });
-  });
-  navLinks[1].classList.add('active');
-
-//   $(document).ready(function () {
-//     $(".nav-link").on("click", function (e) {
-//       e.preventDefault(); // Ngăn chặn hành động mặc định
-//
-//       const page = $(this).data("index"); // Lấy giá trị `data-index` từ liên kết
-//       const url = `admin?page=${page}`; // Tạo URL với `page`
-//
-//       // Gửi yêu cầu AJAX
-//       $.ajax({
-//         url: url,
-//         method: "GET",
-//         success: function (response) {
-//           console.log("Full HTML Response:", response);
-//
-//           // Sử dụng DOMParser để parse nội dung HTML
-//           const parser = new DOMParser();
-//           const doc = parser.parseFromString(response, "text/html");
-//
-//           // Trích xuất nội dung bên trong <body>
-//           const bodyContent = doc.body.innerHTML;
-//
-//           // Tìm phần tử cần cập nhật dựa trên `data-index`
-//           const contentArea = $(`#${page}-content`);
-//
-//           if (contentArea.length) {
-//             // Thay thế nội dung trong vùng tương ứng
-//             contentArea.html(bodyContent);
-//
-//             // Cập nhật URL trên trình duyệt mà không tải lại trang
-//             window.history.pushState(null, "", url);
-//
-//             console.log(`Nội dung của #${page}-content đã được cập nhật.`);
-//           } else {
-//             console.error(`Không tìm thấy vùng nội dung tương ứng với #${page}-content.`);
-//           }
-//         },
-//         error: function (xhr, status, error) {
-//           console.error("Lỗi xảy ra:", error);
-//           alert("Không thể tải nội dung!");
-//         },
-//       });
-//     });
-//   });
-//
-// // Đặt class 'active' cho link đầu tiên khi tải trang
-
-
   const params = new URLSearchParams(window.location.search);
   const page = params.get("page");
   const id = params.get("id");
@@ -220,48 +117,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //Chuc nang xoa sp
   // Gắn event listener cho bảng sản phẩm
-  document.querySelector("#product-table").addEventListener("click", function (event) {
-    if (event.target.classList.contains("delete-product")) {
-      const productId = event.target.dataset.id; // Lấy ID sản phẩm từ data-id
-
-      if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
-        // Gửi yêu cầu xóa qua AJAX
-        fetch("admin", {
-          method: "POST",
-          body: new URLSearchParams({
-            action: "delete-product",
-            id: productId
-          })
-        })
-            .then(response => {
-              if (!response.ok) {
-                throw new Error("Có lỗi xảy ra trong quá trình xóa!");
-              }
-              return response.json();
-            })
-            .then(data => {
-              if (data.status === "success") {
-                alert(data.message); // Hiển thị thông báo thành công
-
-                // Tìm dòng cha của nút xóa
-                const row = event.target.closest("tr");
-
-                if (row) {
-                  // Sử dụng DataTables API để xóa dòng
-                  const table = $('#product-table').DataTable();
-                  table.row(row).remove().draw(false); // Giữ nguyên trang và cập nhật tổng số
-                }
-              } else {
-                alert(data.message); // Thông báo lỗi từ server
-              }
-            })
-            .catch(error => {
-              console.error("Error:", error);
-              alert("Có lỗi xảy ra khi xóa sản phẩm!");
-            });
-      }
-    }
-  });
+  // document.querySelector("#product-table").addEventListener("click", function (event) {
+  //   if (event.target.classList.contains("delete-product")) {
+  //     const productId = event.target.dataset.id; // Lấy ID sản phẩm từ data-id
+  //
+  //     if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+  //       // Gửi yêu cầu xóa qua AJAX
+  //       fetch("admin", {
+  //         method: "POST",
+  //         body: new URLSearchParams({
+  //           action: "delete-product",
+  //           id: productId
+  //         })
+  //       })
+  //           .then(response => {
+  //             if (!response.ok) {
+  //               throw new Error("Có lỗi xảy ra trong quá trình xóa!");
+  //             }
+  //             return response.json();
+  //           })
+  //           .then(data => {
+  //             if (data.status === "success") {
+  //               alert(data.message); // Hiển thị thông báo thành công
+  //
+  //               // Tìm dòng cha của nút xóa
+  //               const row = event.target.closest("tr");
+  //
+  //               if (row) {
+  //                 // Sử dụng DataTables API để xóa dòng
+  //                 const table = $('#product-table').DataTable();
+  //                 table.row(row).remove().draw(false); // Giữ nguyên trang và cập nhật tổng số
+  //               }
+  //             } else {
+  //               alert(data.message); // Thông báo lỗi từ server
+  //             }
+  //           })
+  //           .catch(error => {
+  //             console.error("Error:", error);
+  //             alert("Có lỗi xảy ra khi xóa sản phẩm!");
+  //           });
+  //     }
+  //   }
+  // });
 
   document
     .querySelector(".add-category")
@@ -458,27 +355,27 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function showDateInputs(value) {
-    var monthInputGroup = document.getElementById("month-input-group");
+      var monthInputGroup = document.getElementById("month-input-group");
 
-    if (value === "monthly") {
-      monthInputGroup.style.display = "block";
-    } else {
-      monthInputGroup.style.display = "none";
+      if (value === "monthly") {
+        monthInputGroup.style.display = "block";
+      } else {
+        monthInputGroup.style.display = "none";
+      }
     }
-  }
 
-  document
-    .getElementById("statistic-type")
-    .addEventListener("change", function () {
-      var value = this.value;
-      showDateInputs(value);
-    });
+    document
+        .getElementById("statistic-type")
+        .addEventListener("change", function () {
+          var value = this.value;
+          showDateInputs(value);
+        });
 
-  // Hàm xử lý khi nhấn nút "Xem Thống Kê"
-  // Hàm xử lý khi nhấn nút "Xem Thống Kê"
-  function processInput() {
-    var year = document.getElementById("month").value; // lấy giá trị năm
-    var statisticType = document.getElementById("statistic-type").value; // lấy loại thống kê (theo tháng hay theo năm)
+    // Hàm xử lý khi nhấn nút "Xem Thống Kê"
+    // Hàm xử lý khi nhấn nút "Xem Thống Kê"
+    function processInput() {
+      var year = document.getElementById("month").value; // lấy giá trị năm
+      var statisticType = document.getElementById("statistic-type").value; // lấy loại thống kê (theo tháng hay theo năm)
 
     if (statisticType === "monthly" && !year) {
       alert("Vui lòng nhập năm.");

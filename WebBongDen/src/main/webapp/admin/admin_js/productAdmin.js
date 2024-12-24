@@ -68,52 +68,79 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         $("#product-table").on("click", ".view-details", function () {
-            $(".product-stats").css("display", "none");
-            $(".tab-content-container").css("display", "none");
-            $("#product-details").css("display", "block");
+            $(".product-stats").hide();
+            const productId = $(this).data("id"); // Lấy product ID từ data-id
+            console.log("Product ID:", productId); // Debug: Kiểm tra giá trị ID
 
-            // const productId = this.dataset.id;
-            // fetch("deleteProduct", {
-            //     method: "POST",
-            //     body: new URLSearchParams({
-            //         action: "show-detail",
-            //         id: productId
-            //     })
-            // })
+            // Gửi yêu cầu tới server để lấy chi tiết sản phẩm
+            fetch(`/WebBongDen_war/getProductDetails?id=${productId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Lỗi khi tải chi tiết sản phẩm");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Cập nhật các trường trong modal
+                    $("#product-id-details").text(data.id || "N/A");
+                    $("#product-name-details").text(data.productName || "N/A");
+                    $("#product-image-main").attr("src", data.mainImageUrl || "./img/default-product.png");
+                    $("#product-image-view").text(data.mainImageUrl || "./img/default-product.png");
+                    $("#product-name-view").text(data.productName || "N/A");
+                    $("#product-id-view").text(data.id || "N/A");
+                    $("#product-price-view").text(`${data.unitPrice || 0} VNĐ`);
+                    $("#product-category-view").text(data.categoryName || "N/A");
+                    $("#product-status-view").text(data.productStatus || "N/A");
+                    $("#product-description-view").text(data.description || "N/A");
+                    $("#product-date-view").text(data.createdAt || "N/A");
+                    $("#product-discount-view").text(`${data.discountPercent || 0}%`);
+                    $("#product-stock-view").text(data.stockQuantity || 0);
+                    $("#product-rating-view").text(data.rating || 0);
+                    $("#product-warranty-view").text(data.warrantyPeriod || "N/A");
+                    $("#product-material-view").text(data.material || "N/A");
+                    $("#product-color-view").text(data.lightColor || "N/A");
+                    $("#product-lifespan-view").text(data.usageAge || "N/A");
+                    $("#product-power-view").text(data.voltage || "N/A");
 
-            const productId = $(this).data("id");
-            const pageType = $(this).data("page"); // Lấy tab hiện tại
+                    $("#edit-product-image").val(data.mainImageUrl || "./img/default-product.png");
+                    $("#edit-product-name").val(data.productName || "N/A");
+                    $("#edit-product-id").val(data.id || "N/A");
+                    $("#edit-product-price").val(`${data.unitPrice || 0}`);
+                    $("#edit-product-category").val(data.categoryName || "N/A");
+                    $("#edit-product-status").val(data.productStatus || "N/A");
+                    $("#edit-product-description").val(data.description || "N/A");
+                    $("#edit-product-date").val(data.createdAt || "N/A");
+                    $("#edit-product-discount").val(`${data.discountPercent || 0}`);
+                    $("#edit-product-stock").val(data.stockQuantity || 0);
+                    $("#edit-product-rating").val(data.rating || 0);
+                    $("#edit-product-warranty").val(data.warrantyPeriod || "N/A");
+                    $("#edit-product-material").val(data.material || "N/A");
+                    $("#edit-product-color").val(data.lightColor || "N/A");
+                    $("#edit-product-lifespan").val(data.usageAge || "N/A");
+                    $("#edit-product-power").val(data.voltage || "N/A");
 
-            // Tạo URL mới dựa trên page và ID
-            const newUrl = `admin?page=${pageType}&action=detail&id=${productId}`;
-
-            // Cập nhật URL trên trình duyệt
-            window.history.pushState(null, "", newUrl);
-
-            // Gửi request đến Servlet
-            window.location.href = newUrl;
+                    // Hiển thị modal
+                    $("#product-details").css("display", "block");
+                    $(".tab-content-container").css("display", "none"); // Ẩn danh sách sản phẩm
+                })
+                .catch(error => {
+                    console.error(error); // Log lỗi
+                    alert("Đã xảy ra lỗi khi tải chi tiết sản phẩm. Vui lòng thử lại!");
+                });
         });
 
 
+        $("#close-details-btn").on("click", function () {
+            $(".product-stats").show();
+            $("#product-details").hide();
+            $(".tab-content-container").show();
+        });
 
         $("#search-btn-product").on("click", function () {
             table.ajax.reload();
         });
     });
 
-
-    function addActionToURL(action) {
-        // Lấy URL hiện tại
-        const currentURL = new URL(window.location.href);
-
-        // Thêm hoặc cập nhật tham số `action`
-        currentURL.searchParams.set("action", action);
-
-        // Cập nhật URL mà không reload
-        history.pushState(null, "", currentURL.toString());
-    }
-
-// Gọi hàm để thêm action
 
     // Hiển thị overlay
     document.querySelector(".add-product").addEventListener("click", function () {
@@ -122,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Ẩn overlay khi nhấn ra ngoài
-
     document.querySelector(".fa-xmark").addEventListener("click", function () {
         const overlay = document.getElementById("overlay-add-product");
         overlay.classList.remove("active");
@@ -170,4 +196,67 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
+
+
+
+    document
+        .getElementById("edit-product-btn")
+        .addEventListener("click", function () {
+            // Lấy tất cả các phần tử `span` và `input` bên trong div .details-content
+            const detailsContent = document.querySelector(".details-content");
+
+            const spans = detailsContent.querySelectorAll("span");
+            const inputs = detailsContent.querySelectorAll("input, textarea");
+
+            // Ẩn tất cả các `span` (view) và hiển thị tất cả các `input` (edit)
+            spans.forEach((span) => {
+                span.style.display = "none";
+            });
+
+            inputs.forEach((input) => {
+                input.style.display = "block";
+            });
+
+            document.getElementById("edit-product-category").style.display = "block";
+
+
+            // Hiển thị nút Lưu, Ẩn nút Chỉnh sửa
+            document.getElementById("save-product-btn").style.display = "block";
+            document.getElementById("edit-product-btn").style.display = "none";
+        });
+
+    // Hàm lưu thay đổi
+    document
+        .getElementById("save-product-btn")
+        .addEventListener("click", function () {
+            // Lấy tất cả các phần tử `span` và `input` bên trong div .details-content
+            const detailsContent = document.querySelector(".details-content");
+
+            const spans = detailsContent.querySelectorAll("span");
+            const inputs = detailsContent.querySelectorAll("input, textarea");
+
+            // Cập nhật giá trị từ `input` sang `span`
+            inputs.forEach((input) => {
+                const correspondingSpan = input.previousElementSibling; // Lấy span liền trước input
+                if (correspondingSpan) {
+                    correspondingSpan.textContent = input.value;
+                }
+            });
+
+            // Hiển thị lại tất cả các `span` và ẩn tất cả các `input`
+            spans.forEach((span) => {
+                span.style.display = "inline";
+            });
+
+            inputs.forEach((input) => {
+                input.style.display = "none";
+            });
+
+            document.getElementById("edit-product-category").style.display = "none";
+
+            // Hiển thị nút Chỉnh sửa, Ẩn nút Lưu
+            document.getElementById("save-product-btn").style.display = "none";
+            document.getElementById("edit-product-btn").style.display = "block";
+        });
 });

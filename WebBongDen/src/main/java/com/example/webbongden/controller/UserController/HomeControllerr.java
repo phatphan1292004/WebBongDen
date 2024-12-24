@@ -9,8 +9,8 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "HomeController", value = "/home")
-public class HomeSevlet extends HttpServlet {
+@WebServlet(name = "HomeControllerr", value = "/home")
+public class HomeControllerr extends HttpServlet {
     private static final ProductServices productServices;
 
     static {
@@ -34,9 +34,8 @@ public class HomeSevlet extends HttpServlet {
         request.setAttribute("denQuatList", denQuatList);
         request.setAttribute("denKhacList", denKhacList);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-        dispatcher.forward(request, response);
-
+        System.out.println("Forwarding to register.jsp...");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     @Override

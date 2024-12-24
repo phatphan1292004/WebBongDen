@@ -1,6 +1,7 @@
 package com.example.webbongden.dao.model;
 
-import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,14 @@ public class Order {
     // Constructors
     public Order() {}
 
-    public Order(int id, String customerName, Date createdAt, double totalPrice,
+    public Order(int id, String customerName, java.util.Date createdAt, String orderStatus) {
+        this.id = id;
+        this.customerName = customerName;
+        this.createdAt = createdAt;
+        this.orderStatus = orderStatus;
+    }
+
+    public Order(int id, String customerName, java.util.Date createdAt, double totalPrice,
                  String address, String orderStatus, List<OrderDetail> orderDetails) {
         this.id = id;
         this.customerName = customerName;
@@ -83,5 +91,11 @@ public class Order {
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
     }
+
+    public String getFormattedCreateAt() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(this.createdAt);
+    }
+
 }
 

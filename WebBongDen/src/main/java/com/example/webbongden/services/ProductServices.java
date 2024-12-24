@@ -4,6 +4,7 @@ import com.example.webbongden.dao.ProductDao;
 import com.example.webbongden.dao.db.JDBIConnect;
 import com.example.webbongden.dao.model.Product;
 import com.example.webbongden.dao.model.ProductDetail;
+import com.example.webbongden.dao.model.TopProduct;
 
 import java.util.Comparator;
 import java.util.List;
@@ -88,12 +89,19 @@ public class ProductServices {
     public boolean deleteProduct(int productId) {
         return productDao.deleteProductById(productId);
     }
-
     public List<Product> getProductsByKeyword(String a) {
         return productDao.getProductsByKeyword(a);
+    }
+
+    public List<TopProduct> getTopProducts() {
+        return productDao.getTopSellingProducts();
     }
 
     public List<Product> getProductsBySubCategory(int subCategoryId) {
         return productDao.getProductsBySubCategory(subCategoryId); // Gọi hàm với ID của danh mục con
     }
-}
+
+    public boolean editProductDetail(ProductDetail productDetail) {
+        return productDao.editProductDetail(productDetail);
+    }
+ }

@@ -33,6 +33,17 @@ public class Product {
         this.listImg = List.of(new ProductImage(imageUrl, true));
     }
 
+    public Product(int id, String imageUrl, String productName, double unitPrice, String categoryName, java.sql.Date createdAt, double discountPercent) {
+        this.id = id;
+        this.productName = productName;
+        this.unitPrice = unitPrice;
+        this.categoryName = categoryName;
+        this.createdAt = createdAt;
+        this.discountPercent = discountPercent;
+        // Khởi tạo listImg với một hình ảnh đầu tiên từ URL
+        this.listImg = List.of(new ProductImage(imageUrl, true));
+    }
+
 
     // Tính giá sau khi giảm
     public double getDiscountedPrice() {

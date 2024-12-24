@@ -47,7 +47,11 @@
           <!-- Form thêm tài khoản mới -->
           <div class="account-form">
             <h3>THÊM TÀI KHOẢN MỚI</h3>
-            <form id="add-account-form">
+            <form id="add-account-form" action="add-account" method="post">
+              <div class="form-group">
+                <label for="cus_name">Tên khách hàng:</label>
+                <input type="text" id="cus_name" name="cusName" placeholder="Nhập tên khách hàng" required />
+              </div>
               <!-- Tên đăng nhập -->
               <div class="form-group">
                 <label for="username">Tên đăng nhập:</label>
@@ -84,17 +88,6 @@
                 />
               </div>
 
-              <!-- Xác nhận mật khẩu -->
-              <div class="form-group">
-                <label for="confirm-password">Xác nhận mật khẩu:</label>
-                <input
-                        type="password"
-                        id="confirm-password"
-                        name="confirm-password"
-                        placeholder="Xác nhận mật khẩu"
-                        required
-                />
-              </div>
 
               <!-- Vai trò -->
               <div class="form-group">
@@ -133,7 +126,7 @@
         <!-- Danh sách tài khoản -->
         <div id="account-list">
           <h3>DANH SÁCH TÀI KHOẢN</h3>
-          <table>
+          <table id="account-table">
             <thead>
             <tr>
               <th>ID</th>
@@ -143,14 +136,16 @@
               <th>Hành động</th>
             </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+
+            </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/productAdmin.js" defer></script>
+<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/accountAdmin.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </body>
