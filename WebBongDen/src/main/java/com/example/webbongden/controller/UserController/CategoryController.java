@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -20,22 +21,25 @@ public class CategoryController extends HttpServlet {
     static {
         productServices = new ProductServices();
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lấy các tham số từ request
         String subCategoryIdParam = request.getParameter("subCategoryId");
         String sortBy = request.getParameter("select");
+        String pageParam = request.getParameter("page");
+
 
         List<Product> products;
 
+        // Lọc sản phẩm theo danh mục con nếu có
         if (subCategoryIdParam != null) {
-            // Lọc sản phẩm theo danh mục con
             int subCategoryId = Integer.parseInt(subCategoryIdParam);
             products = productServices.getProductsBySubCategory(subCategoryId);
         } else {
-            // Nếu không lọc theo danh mục con, lấy tất cả sản phẩm
             products = productServices.getAllProduct();
         }
+
         // Xử lý sắp xếp sản phẩm nếu có tham số 'select'
         if (sortBy != null) {
             switch (sortBy) {
@@ -49,7 +53,9 @@ public class CategoryController extends HttpServlet {
                     break;
                 case "newest":
                     // Sắp xếp theo sản phẩm mới nhất
-                    products.sort(Comparator.comparing((Product p) -> p.getCreatedAt() == null ? new Date(0) : p.getCreatedAt()).reversed());
+                    products.sort(Comparator.comparing((Product p) ->
+                            p.getCreatedAt() == null ? new Date(0) : p.getCreatedAt()
+                    ).reversed());
                     break;
                 case "best_selling":
                     // Sắp xếp theo sản phẩm bán chạy nhất
@@ -61,8 +67,37 @@ public class CategoryController extends HttpServlet {
             }
         }
 
-        request.setAttribute("products", products);
 
+        int page = 1; // Trang mặc định
+        int pageSize = 16; // Số sản phẩm mỗi trang
+
+        // Kiểm tra nếu tham số page có trong request
+        if (pageParam != null) {
+            page = Integer.parseInt(pageParam);
+        }
+        // Tính tổng số sản phẩm và tổng số trang
+        int totalProducts = products.size();
+        int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
+
+        // Phân trang: cắt danh sách sản phẩm theo trang
+        int fromIndex = (page - 1) * pageSize;
+        int toIndex = Math.min(fromIndex + pageSize, totalProducts);
+
+// Kiểm tra xem có sản phẩm cho trang không
+        if (fromIndex < totalProducts) {
+            List<Product> paginatedProducts = products.subList(fromIndex, toIndex); // Cắt danh sách sản phẩm theo trang
+            request.setAttribute("products", paginatedProducts);
+        } else {
+            // Nếu không có sản phẩm cho trang (trang quá lớn)
+            request.setAttribute("products", new ArrayList<>()); // Trả về một danh sách rỗng
+        }
+
+        // Đặt các thuộc tính cho JSP
+//        request.setAttribute("products", paginatedProducts);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("select", sortBy);
+        request.setAttribute("subCategoryId", subCategoryIdParam);
 
         // Chuyển hướng đến JSP để hiển thị sản phẩm
         request.getRequestDispatcher("/user/category.jsp").forward(request, response);
@@ -72,3 +107,4 @@ public class CategoryController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }
+

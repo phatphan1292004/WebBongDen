@@ -304,22 +304,29 @@
                             </div>
 
                             <div id="pagination-controls">
-                                <c:if test="${currentPage > 1}">
-                                    <a href="products?page=${currentPage - 1}&select=${param.select}&subCategoryId=${param.subCategoryId}">
-                                        Trước
-                                    </a>
-                                </c:if>
+                                <div class="pagination-buttons">
+                                    <!-- Nút "Trước" -->
+                                    <c:if test="${currentPage > 1}">
+                                        <a href="/CategoryController?page=${currentPage - 1}&select=${param.select}&subCategoryId=${param.subCategoryId}">
+                                            Trước
+                                        </a>
+                                    </c:if>
 
-                                <span>Trang ${currentPage} / ${totalPages}</span>
+                                    <!-- Hiển thị thông tin trang -->
+                                    <span>Trang ${currentPage} / ${totalPages}</span>
 
-                                <c:if test="${currentPage < totalPages}">
-                                    <a href="products?page=${currentPage + 1}&select=${param.select}&subCategoryId=${param.subCategoryId}">
-                                        Tiếp
-                                    </a>
-                                </c:if>
+                                    <!-- Nút "Tiếp" -->
+                                    <c:if test="${currentPage < totalPages}">
+                                        <a href="/CategoryController?page=${currentPage + 1}&select=${param.select}&subCategoryId=${param.subCategoryId}">
+                                            Tiếp
+                                        </a>
+                                    </c:if>
+                                </div>
+
+
                             </div>
 
-
+                        </div>
                         </div>
                 </div>
             </div>
