@@ -6,6 +6,7 @@ import com.example.webbongden.dao.model.Product;
 import com.example.webbongden.dao.model.ProductDetail;
 import com.example.webbongden.dao.model.ProductImage;
 import com.example.webbongden.dao.model.TopProduct;
+import com.example.webbongden.services.ProductServices;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Query;
 import java.util.ArrayList;
@@ -448,24 +449,31 @@ public class ProductDao {
 
 
     public static void main(String[] args) {
-        ProductDao productDao = new ProductDao();
-        List<Product> list = productDao.getAllProduct();
-        for (Product o : list){
-            System.out.println(o);
-        }
-        try {
-            int productIdToDelete = 19; // ID của sản phẩm cần xóa
-            boolean result = productDao.deleteProductById(productIdToDelete);
+        ProductServices productServices = new ProductServices();
 
-            if (result) {
-                System.out.println("Xóa sản phẩm thành công!");
-            } else {
-                System.out.println("Không tìm thấy sản phẩm để xóa!");
+        // Test phân trang
+        int page = 2;
+        int pageSize = 3;
+
+        List<Product> products = productServices.getProductsByPage(page, pageSize);
+
+        if (products != null && !products.isEmpty()) {
+            System.out.println("Số sản phẩm trên trang " + page + ": " + products.size());
+            for (Product product : products) {
+                System.out.println("ID: " + product.getId());
+                System.out.println("Tên: " + product.getProductName());
+                System.out.println("Giá: " + product.getUnitPrice());
+                System.out.println("Giảm giá: " + product.getDiscountPercent());
+                System.out.println("Hình ảnh:");
+                for (ProductImage image : product.getListImg()) {
+                    System.out.println("  - URL: " + image.getUrl() + ", Chính: " + image.isMainImage());
+                }
+                System.out.println();
             }
-        } catch (Exception e) {
-            System.err.println("Lỗi khi xóa sản phẩm: " + e.getMessage());
-            e.printStackTrace();
+        } else {
+            System.out.println("Không có sản phẩm nào được trả về.");
         }
     }
+
 }
 

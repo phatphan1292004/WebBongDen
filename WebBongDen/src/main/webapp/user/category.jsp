@@ -307,9 +307,7 @@
                                 <div class="pagination-buttons">
                                     <!-- Nút "Trước" -->
                                     <c:if test="${currentPage > 1}">
-                                        <a href="/CategoryController?page=${currentPage - 1}&select=${param.select}&subCategoryId=${param.subCategoryId}">
-                                            Trước
-                                        </a>
+                                        <a href="/WebBongDen_war/CategoryController?page=${currentPage - 1}">Trước</a>
                                     </c:if>
 
                                     <!-- Hiển thị thông tin trang -->
@@ -317,13 +315,9 @@
 
                                     <!-- Nút "Tiếp" -->
                                     <c:if test="${currentPage < totalPages}">
-                                        <a href="/CategoryController?page=${currentPage + 1}&select=${param.select}&subCategoryId=${param.subCategoryId}">
-                                            Tiếp
-                                        </a>
+                                        <a href="/WebBongDen_war/CategoryController?page=${currentPage + 1}">Tiếp</a>
                                     </c:if>
                                 </div>
-
-
                             </div>
 
                         </div>

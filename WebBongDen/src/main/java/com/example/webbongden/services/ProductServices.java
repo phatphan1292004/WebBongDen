@@ -104,4 +104,8 @@ public class ProductServices {
     public boolean editProductDetail(ProductDetail productDetail) {
         return productDao.editProductDetail(productDetail);
     }
- }
+
+    public List<Product> getProductsByPage(int page, int pageSize) {
+        return productDao.getProductsByPage(page, pageSize);
+    }
+}
