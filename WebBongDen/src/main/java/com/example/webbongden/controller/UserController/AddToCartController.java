@@ -46,7 +46,7 @@ public class AddToCartController extends HttpServlet {
 
         if (product != null) {
             // Thêm sản phẩm vào giỏ hàng
-            CartItem item = new CartItem(product.getId(), product.getProductName(), 1, product.getDiscountedPrice(), product.getImageUrl());
+            CartItem item = new CartItem(product.getId(), product.getProductName(), 1, product.getUnitPrice(),product.getDiscountedPrice(), product.getImageUrl());
             cart.addItem(item);
         }
 

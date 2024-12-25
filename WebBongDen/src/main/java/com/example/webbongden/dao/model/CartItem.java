@@ -6,19 +6,42 @@ public class CartItem {
     private int productId;
     private String productName;
     private int quantity;
+    private double unitPrice;
     private double price;
     private String imageUrl;
+    private String giftName;
 
     public CartItem() {
 
     }
 
-    public CartItem(int productId, String productName, int quantity, double price, String imageUrl) {
+    public CartItem(int productId, String productName, int quantity, double unitPrice,double price, String imageUrl) {
         this.productId = productId;
         this.productName = productName;
+        this.unitPrice = unitPrice;
         this.quantity = quantity;
         this.price = price;
         this.imageUrl = imageUrl;
+    }
+
+
+
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+
+    public String getGiftName() {
+        return giftName;
+    }
+
+    public void setGiftName(String giftName) {
+        this.giftName = giftName;
     }
 
     // Getter and Setter for productId

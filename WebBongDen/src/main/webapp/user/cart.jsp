@@ -77,9 +77,23 @@
                                 </div>
                                 <div class="product-detail">
                                     <div class="product-name"><%= item.getProductName() %></div>
+                                    <div class="gift-section" style="display: flex; gap: 10px">
+                                        <% if (item.getGiftName() != null) { %>
+                                        <p><%= item.getGiftName() %></p>
+                                        <% } else { %>
+                                        <p>Không có quà tặng.</p>
+                                        <% } %>
+                                    </div>
                                 </div>
                                 <div class="product-qp">
-                                    <div class="product-price"><%= item.getFormattedPrice() %> VND</div>
+                                    <div class="product-price">
+                                        <p>
+                                            <s><%=item.getUnitPrice()%></s>
+                                        </p>
+                                        <p>
+                                            <%= item.getFormattedPrice() %> VND
+                                        </p>
+                                    </div>
                                     <div class="quantity-selector">
                                         <form action="update-cart" method="post">
                                             <input type="hidden" name="productId" value="<%= item.getProductId() %>" />
@@ -246,6 +260,21 @@
                                     <span>Tổng tiền:</span>
                                     <span class="highlight total-amount"><%= (cart != null) ? cart.getTotalPrice() : 0 %> VND</span>
                                 </p>
+                            </div>
+
+                            <div class="gift-section">
+                                <h3>Quà tặng:</h3>
+                                <%
+                                    if (cart != null && cart.getItems() != null) {
+                                        for (CartItem item : cart.getItems()) {
+                                            if (item.getGiftName() != null) {
+                                %>
+                                <p style="font-size: 11px">- <%= item.getGiftName() %> (Sản phẩm: <%= item.getProductName() %>)</p>
+                                <%
+                                            }
+                                        }
+                                    }
+                                %>
                             </div>
                         </div>
                         <hr />
