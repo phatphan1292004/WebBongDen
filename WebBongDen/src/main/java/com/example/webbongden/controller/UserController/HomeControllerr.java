@@ -35,7 +35,7 @@ public class HomeControllerr extends HttpServlet {
         request.setAttribute("denKhacList", denKhacList);
 
         System.out.println("Forwarding to register.jsp...");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     @Override

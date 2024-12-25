@@ -59,16 +59,16 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/paginationjs/dist/pagination.css"
     />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/Detail.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/header-footer.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/Detail.css">
 </head>
 <body>
 <!-- Header -->
 
 <div class="wrapper">
     <!-- Header -->
-    <%@ include file="../reuse/header.jsp" %>
+    <jsp:include page="../reuse/header.jsp" />
     <div class="main">
         <div class="container">
             <div class="breadcrumb">
@@ -322,7 +322,7 @@
         </section>
     </div>
     <!-- footer -->
-    <%@ include file="../reuse/footer.jsp" %>
+    <jsp:include page="../reuse/footer.jsp" />
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -367,8 +367,6 @@
         }
 
     });
-
-
 </script>s
 </body>
 </html>

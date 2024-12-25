@@ -18,7 +18,7 @@
     Customer cus = (Customer) cartSession.getAttribute("customerInfo");
 %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -44,7 +44,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <%@ include file="../reuse/header.jsp" %>
+    <jsp:include page="../reuse/header.jsp" />
     <div class="main">
         <a class="direction" style="margin: 20px 140px; display: block; text-decoration: none; color: black;" href="index.html">
             <i class="fa-solid fa-arrow-left"></i>
@@ -325,18 +325,7 @@
             </div>
         </div>
     </div>
-    <%@ include file="../reuse/footer.jsp" %>
-    <div id="custom-confirm" class="custom-confirm hidden">
-        <div class="custom-confirm-content">
-            <p id="confirm-message">
-                Bạn có chắc chắn muốn thực hiện hành động này?
-            </p>
-            <div class="custom-confirm-actions">
-                <button id="confirm-ok" class="btn-ok">Đồng ý</button>
-                <button id="confirm-cancel" class="btn-cancel">Hủy</button>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="../reuse/footer.jsp" />
 </div>
 <script src="${pageContext.request.contextPath}/assets/Js/cart.js"></script>
 </body>
