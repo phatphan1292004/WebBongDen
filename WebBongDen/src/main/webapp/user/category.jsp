@@ -59,16 +59,16 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/paginationjs/dist/pagination.css"
     />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/Detail.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/header-footer.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/Detail.css">
 </head>
 <body>
 <!-- Header -->
 
 <div class="wrapper">
     <!-- Header -->
-    <jsp:include page="../reuse/header.jsp" />
+    <%@ include file="../reuse/header.jsp" %>
     <div class="main">
         <div class="container">
             <div class="breadcrumb">
@@ -322,7 +322,7 @@
         </section>
     </div>
     <!-- footer -->
-    <jsp:include page="../reuse/footer.jsp" />
+    <%@ include file="../reuse/footer.jsp" %>
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -367,6 +367,13 @@
         }
 
     });
-</script>s
+    // Hàm xử lý sự kiện khi thay đổi lựa chọn
+
+    function submitForm() {
+        var form = document.getElementById("sortingForm");
+        form.submit(); // Gửi form đi khi thay đổi lựa chọn
+    }
+
+</script>
 </body>
 </html>

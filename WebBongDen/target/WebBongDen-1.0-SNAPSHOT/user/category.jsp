@@ -257,27 +257,23 @@
                                         <!-- Sorting -->
                                         <div class="product-sorting d-flex align-items-center">
                                             <p>Sắp xếp :</p>
-                                            <form action="#" method="get">
-                                                <select name="select" id="sortByselect">
-                                                    <option
-                                                            value="value"
-                                                            onclick="sortProductsByPrice()"
-                                                    >
-                                                        Giá từ cao đến nhất
-                                                    </option>
-                                                    <option value="value">Giá từ thấp đén cao</option>
-                                                    <option value="value">Mới nhất</option>
-                                                    <option value="value">Sản phẩm bán chạy</option>
+                                            <form action="CategoryController" method="get" id="sortingForm">
+                                                <select name="select" id="sortByselect" onchange="submitForm()">
+                                                    <option value="">-- Chọn sắp xếp --</option> <!-- Thêm option mặc định không có giá trị -->
+                                                    <option value="price_desc">Giá từ cao đến thấp</option>
+                                                    <option value="price_asc">Giá từ thấp đến cao</option>
+                                                    <option value="newest">Mới nhất</option>
+                                                    <option value="best_selling">Sản phẩm bán chạy</option>
                                                 </select>
-                                                <input type="submit" class="d-none" value="" />
                                             </form>
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                            <!-- Single Product -->
                                 <c:forEach var="product" items="${products}">
                                     <div class="col-6 col-md-4 col-lg-3 mb-4">
                                         <div class="product-item">
@@ -285,16 +281,13 @@
                                                 <div class="img">
                                                     <img src="${product.imageUrl}" alt="${product.productName}" />
                                                 </div>
-
                                                 <div class="product-info">
                                                     <div class="product-name">
                                                             ${product.productName}
                                                     </div>
-
                                                     <p class="original-price">
                                                             ${String.format('%,.0f', product.unitPrice)} VND
                                                     </p>
-
                                                     <div class="price-discount">
                                                         <p class="product-price">
                                                                 ${String.format('%,.0f', product.discountedPrice)} VND
@@ -309,14 +302,26 @@
                                     </div>
                                 </c:forEach>
                             </div>
-                            <div id="product-container" class="row"></div>
+
                             <div id="pagination-controls">
-                                <button id="prev">Trước</button>
-                                <span id="pagination-info"></span>
-                                <button id="next">Tiếp</button>
+                                <div class="pagination-buttons">
+                                    <!-- Nút "Trước" -->
+                                    <c:if test="${currentPage > 1}">
+                                        <a href="/WebBongDen_war/CategoryController?page=${currentPage - 1}">Trước</a>
+                                    </c:if>
+
+                                    <!-- Hiển thị thông tin trang -->
+                                    <span>Trang ${currentPage} / ${totalPages}</span>
+
+                                    <!-- Nút "Tiếp" -->
+                                    <c:if test="${currentPage < totalPages}">
+                                        <a href="/WebBongDen_war/CategoryController?page=${currentPage + 1}">Tiếp</a>
+                                    </c:if>
+                                </div>
                             </div>
+
                         </div>
-                    </div>
+                        </div>
                 </div>
             </div>
         </section>
@@ -367,6 +372,17 @@
         }
 
     });
+<<<<<<< HEAD
 </script>s
+=======
+    // Hàm xử lý sự kiện khi thay đổi lựa chọn
+
+    function submitForm() {
+        var form = document.getElementById("sortingForm");
+        form.submit(); // Gửi form đi khi thay đổi lựa chọn
+    }
+
+</script>
+>>>>>>> origin/main
 </body>
 </html>

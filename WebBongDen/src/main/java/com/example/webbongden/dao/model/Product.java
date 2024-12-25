@@ -11,6 +11,7 @@ public class Product {
     private List<ProductImage> listImg; // Danh sách hình ảnh
     private String categoryName; // Loại sản phẩm
     private Date createdAt; // Ngày thêm sản phẩm
+    private int sales;
     //Product dùng cho Home
     public Product(int id, String productName, double unitPrice, double discountPercent,
                    List<ProductImage> listImg) {
@@ -89,6 +90,31 @@ public class Product {
             }
         }
         return listImg.get(0).getUrl();
+    }
+    // Getter và Setter cho sales
+    public int getSales() {
+        return sales;
+    }
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", unitPrice=" + unitPrice +
+                ", discountPercent=" + discountPercent +
+                ", listImg=" + listImg +
+                '}';
+    }
+    public void setSales(int sales) {
+        this.sales = sales;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
 
