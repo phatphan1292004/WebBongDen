@@ -30,7 +30,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <form id="login-form">
+    <form id="login-form" action="login" method="post">
         <div class="form-header">
             <a href="index.html" class="logo"
             ><img src="./img/logo-login.png" alt=""
@@ -43,6 +43,7 @@
                 <div class="form-field">
                     <input
                             type="text"
+                            name="username"
                             class="form-input"
                             id="cus-username"
                             placeholder=" "
@@ -56,6 +57,7 @@
                 <div class="form-field">
                     <input
                             type="password"
+                            name="password"
                             class="form-input"
                             id="cus-password"
                             placeholder=" "
@@ -63,6 +65,16 @@
                     <label for="cus-password" class="form-label">Mật khẩu</label>
                 </div>
             </div>
+            <%
+                String errorMessage = (String) request.getAttribute("errorMessage");
+                if (errorMessage != null) {
+            %>
+            <div class="error-message" style="color: red; text-align: center; margin: 10px 0;">
+                <%= errorMessage %>
+            </div>
+            <%
+                }
+            %>
             <div class="form-footer">
                 <label>
                     <div class="option_field">

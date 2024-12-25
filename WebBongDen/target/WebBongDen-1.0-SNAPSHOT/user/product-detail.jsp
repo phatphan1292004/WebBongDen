@@ -72,10 +72,10 @@
                                 >Tình trạng:  ${productDetail.getProductStatus()}</span
                                 >
                                 <span class="product-reviews"
-                                >Đánh giá: <span class="star-review"> ${productDetail.getRating()}"</span>/5</span
+                                >Đánh giá: <span class="star-review"> ${productDetail.getRating()}</span>/5</span
                                 >
                             </div>
-                            <p class="product-price">${productDetail.getDiscountedPrice()}</p>
+                            <p class="product-price">${productDetail.getFormattedDiscountedPrice()} VND</p>
 
                             <!-- Phần mã giảm giá đặt ngay dưới giá sản phẩm -->
 
@@ -95,7 +95,7 @@
                             </div>
 
                             <div class="product-detail-bottom">
-                                <button class="buy-product">MUA NGAY</button>
+                                <button class="buy-product" id="addToCart" data-id = ${productDetail.getId()}>MUA NGAY</button>
                             </div>
                             <div id="cartNotification" class="notification">
                                 Bạn đã thêm vào giỏ hàng thành công!
@@ -495,7 +495,7 @@
     </div>
     <%@ include file="../reuse/footer.jsp" %>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/assets/Js/product.js"></script>
+<script src="${pageContext.request.contextPath}/assets/Js/product.js"></script>
 <script
         type="text/javascript"
         src="https://code.jquery.com/jquery-1.11.0.min.js"

@@ -1,4 +1,3 @@
-
 package com.example.webbongden.dao;
 
 import com.example.webbongden.dao.db.JDBIConnect;
@@ -6,7 +5,6 @@ import com.example.webbongden.dao.model.Product;
 import com.example.webbongden.dao.model.ProductDetail;
 import com.example.webbongden.dao.model.ProductImage;
 import com.example.webbongden.dao.model.TopProduct;
-import com.example.webbongden.services.ProductServices;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Query;
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ public class ProductDao {
     public ProductDao() {
         this.jdbi = JDBIConnect.get();
     }
+
     public List<Product> getAllProduct() {
         String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
                 "pi.url AS image_url, pi.main_image " +
@@ -62,41 +61,6 @@ public class ProductDao {
 
             return new ArrayList<>(productMap.values());
         });
-    }
-    // lấy ds sap theo trang
-    public List<Product> getProductsByPage(int page, int pageSize) {
-        String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
-                "pi.url AS image_url, pi.main_image " +
-                "FROM products p " +
-                "LEFT JOIN product_images pi ON p.id = pi.product_id " +
-                "ORDER BY p.created_at DESC " +
-                "LIMIT :limit OFFSET :offset";
-
-        int offset = (page - 1) * pageSize;
-
-        return jdbi.withHandle(handle ->
-                handle.createQuery(sql)
-                        .bind("limit", pageSize)
-                        .bind("offset", offset)
-                        .map((rs, ctx) -> {
-                            Product product = new Product(
-                                    rs.getInt("product_id"),
-                                    rs.getString("product_name"),
-                                    rs.getDouble("unit_price"),
-                                    rs.getDouble("discount_percent"),
-                                    new ArrayList<>()
-                            );
-
-                            String imageUrl = rs.getString("image_url");
-                            if (imageUrl != null) {
-                                product.getListImg().add(new ProductImage(
-                                        imageUrl,
-                                        rs.getBoolean("main_image")
-                                ));
-                            }
-                            return product;
-                        }).list()
-        );
     }
 
     // Lấy ds sp theo Category
@@ -144,52 +108,12 @@ public class ProductDao {
             return new ArrayList<>(productMap.values());
         });
     }
-    public List<TopProduct> getTopSellingProducts() {
-        String sql = "SELECT p.product_name, " +
-                "SUM(o.quantity) AS quantity_sold, " +
-                "SUM(o.quantity * p.unit_price) AS total_revenue, " +
-                "p.stock_quantity " +
-                "FROM products p " +
-                "JOIN order_items o ON p.id = o.product_id " +
-                "GROUP BY p.id " +
-                "ORDER BY total_revenue DESC";
-
-        return jdbi.withHandle(handle ->
-                handle.createQuery(sql)
-                        .map((rs, ctx) -> new TopProduct(
-                                rs.getString("product_name"),
-                                rs.getInt("quantity_sold"),
-                                rs.getDouble("total_revenue"),
-                                rs.getInt("stock_quantity")
-                        ))
-                        .list()
-        );
-    }
-    public boolean editProductDetail(ProductDetail productDetail) {
-        String sql = "UPDATE products SET " +
-                "product_name = :productName, " +
-                "unit_price = :unitPrice, " +
-                "discount_percent = :discountPercent, " +
-                "stock_quantity = :stockQuantity, " +
-                "description = :description " +
-                "WHERE id = :id";
-
-        return jdbi.withHandle(handle ->
-                handle.createUpdate(sql)
-                        .bind("productName", productDetail.getProductName())
-                        .bind("unitPrice", productDetail.getUnitPrice())
-                        .bind("discountPercent", productDetail.getDiscountPercent())
-                        .bind("stockQuantity", productDetail.getStockQuantity())
-                        .bind("description", productDetail.getDescription())
-                        .bind("id", productDetail.getId())
-                        .execute() > 0
-        );
-    }
 
     // Lấy dssp cho trang product Admin
     public List<Product> getProductsForAdminPage() {
         String sql = "SELECT " +
                 "p.id AS id, " +
+                "p.discount_percent AS discountPercent, " +
                 "p.product_name AS productName, " +
                 "p.unit_price AS unitPrice, " +
                 "p.created_at AS createdAt, " +
@@ -207,7 +131,8 @@ public class ProductDao {
                                 rs.getString("productName"),
                                 rs.getDouble("unitPrice"),
                                 rs.getString("categoryName"),
-                                rs.getDate("createdAt")
+                                rs.getDate("createdAt"),
+                                rs.getDouble("discountPercent")
                         ))
                         .list()
         );
@@ -406,6 +331,32 @@ public class ProductDao {
         });
     }
 
+    public List<TopProduct> getTopSellingProducts() {
+        String sql = "SELECT " +
+                "p.product_name AS productName, " +
+                "SUM(od.quantity) AS quantitySold, " +
+                "SUM(od.quantity * od.unit_price) AS totalRevenue, " +
+                "p.stock_quantity AS stockQuantity " +
+                "FROM products p " +
+                "JOIN order_details od ON p.id = od.product_id " +
+                "JOIN orders o ON od.order_id = o.id " +
+                "WHERE o.order_status = 'Completed' " +
+                "GROUP BY p.id, p.product_name, p.stock_quantity " +
+                "ORDER BY quantitySold DESC " +
+                "LIMIT 5";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .map((rs, ctx) -> new TopProduct(
+                                rs.getString("productName"),
+                                rs.getInt("quantitySold"),
+                                rs.getDouble("totalRevenue"),
+                                rs.getInt("stockQuantity")
+                        ))
+                        .list()
+        );
+    }
+
     public List<Product> getProductsBySubCategory(int subCategoryId) {
         String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, " +
                 "COALESCE(p.discount_percent, 0) AS discount_percent, " +
@@ -448,32 +399,137 @@ public class ProductDao {
     }
 
 
-    public static void main(String[] args) {
-        ProductServices productServices = new ProductServices();
+    public boolean editProductDetail(ProductDetail productDetail) {
+        return jdbi.inTransaction(handle -> {
+            // Cập nhật bảng `products`
+            String productSql = "UPDATE products SET " +
+                    "product_name = :productName, " +
+                    "unit_price = :unitPrice, " +
+                    "stock_quantity = :stockQuantity, " +
+                    "product_status = :productStatus, " +
+                    "rating = :rating, " +
+                    "DESC_1 = :description, " +
+                    "warranty_period = :warrantyPeriod, " +
+                    "light_color = :lightColor, " +
+                    "material = :material, " +
+                    "voltage = :voltage, " +
+                    "usage_age = :usageAge, " +
+                    "discount_percent = :discountPercent, " +
+                    "subCategory_id = :subCategoryId " +
+                    "WHERE id = :id";
 
-        // Test phân trang
-        int page = 2;
-        int pageSize = 3;
+            int updatedProduct = handle.createUpdate(productSql)
+                    .bind("id", productDetail.getId())
+                    .bind("productName", productDetail.getProductName())
+                    .bind("unitPrice", productDetail.getUnitPrice())
+                    .bind("stockQuantity", productDetail.getStockQuantity())
+                    .bind("productStatus", productDetail.getProductStatus())
+                    .bind("rating", productDetail.getRating())
+                    .bind("description", productDetail.getDescription())
+                    .bind("warrantyPeriod", productDetail.getWarrantyPeriod())
+                    .bind("lightColor", productDetail.getLightColor())
+                    .bind("material", productDetail.getMaterial())
+                    .bind("voltage", productDetail.getVoltage())
+                    .bind("usageAge", productDetail.getUsageAge())
+                    .bind("discountPercent", productDetail.getDiscountPercent())
+                    .bind("subCategoryId", productDetail.getSubCategoryId())
+                    .execute();
 
-        List<Product> products = productServices.getProductsByPage(page, pageSize);
+            // Cập nhật bảng `product_images`
+            String imageSql = "UPDATE product_images SET url = :mainImageUrl " +
+                    "WHERE product_id = :id AND main_image = true";
 
-        if (products != null && !products.isEmpty()) {
-            System.out.println("Số sản phẩm trên trang " + page + ": " + products.size());
-            for (Product product : products) {
-                System.out.println("ID: " + product.getId());
-                System.out.println("Tên: " + product.getProductName());
-                System.out.println("Giá: " + product.getUnitPrice());
-                System.out.println("Giảm giá: " + product.getDiscountPercent());
-                System.out.println("Hình ảnh:");
-                for (ProductImage image : product.getListImg()) {
-                    System.out.println("  - URL: " + image.getUrl() + ", Chính: " + image.isMainImage());
-                }
-                System.out.println();
-            }
-        } else {
-            System.out.println("Không có sản phẩm nào được trả về.");
-        }
+            int updatedImage = handle.createUpdate(imageSql)
+                    .bind("id", productDetail.getId())
+                    .bind("mainImageUrl", productDetail.getMainImageUrl())
+                    .execute();
+
+            return updatedProduct > 0 && updatedImage > 0;
+        });
     }
 
-}
+    public Product getProductById(int id) {
+        String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
+                "pi.url AS image_url, pi.main_image " +
+                "FROM products p " +
+                "LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.main_image = TRUE " + // Lấy hình ảnh chính
+                "WHERE p.id = :id";
 
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("id", id)
+                        .map((rs, ctx) -> {
+                            // Tạo đối tượng Product từ kết quả
+                            Product product = new Product(
+                                    rs.getInt("product_id"),
+                                    rs.getString("product_name"),
+                                    rs.getDouble("unit_price"),
+                                    rs.getDouble("discount_percent"),
+                                    new ArrayList<>()
+                            );
+
+                            // Thêm hình ảnh chính nếu có
+                            String imageUrl = rs.getString("image_url");
+                            if (imageUrl != null) {
+                                product.getListImg().add(new ProductImage(imageUrl, true));
+                            }
+
+                            return product;
+                        })
+                        .findOne() // Chỉ cần lấy một kết quả
+                        .orElse(null) // Trả về null nếu không tìm thấy sản phẩm
+        );
+    }
+
+    // lấy ds sap theo trang
+    public List<Product> getProductsByPage(int page, int pageSize) {
+        String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
+                "pi.url AS image_url, pi.main_image " +
+                "FROM products p " +
+                "LEFT JOIN product_images pi ON p.id = pi.product_id " +
+                "ORDER BY p.created_at DESC " +
+                "LIMIT :limit OFFSET :offset";
+
+        int offset = (page - 1) * pageSize;
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("limit", pageSize)
+                        .bind("offset", offset)
+                        .map((rs, ctx) -> {
+                            Product product = new Product(
+                                    rs.getInt("product_id"),
+                                    rs.getString("product_name"),
+                                    rs.getDouble("unit_price"),
+                                    rs.getDouble("discount_percent"),
+                                    new ArrayList<>()
+                            );
+
+                            String imageUrl = rs.getString("image_url");
+                            if (imageUrl != null) {
+                                product.getListImg().add(new ProductImage(
+                                        imageUrl,
+                                        rs.getBoolean("main_image")
+                                ));
+                            }
+                            return product;
+                        }).list()
+        );
+    }
+
+
+    public static void main(String[] args) {
+        ProductDao productDao = new ProductDao();
+//        List<TopProduct> topProducts = productDao.getTopSellingProducts();
+//
+//        System.out.println("Top sản phẩm bán chạy:");
+//        for (TopProduct product : topProducts) {
+//            System.out.println("Tên sản phẩm: " + product.getProductName());
+//            System.out.println("Số lượng bán: " + product.getQuantitySold());
+//            System.out.println("Tổng tiền thu được: " + product.getFormattedRevenue());
+//            System.out.println("Số lượng tồn kho: " + product.getStockQuantity());
+//            System.out.println("----------------------------------");
+//        }
+        System.out.println(productDao.getCategoryQuantity());
+    }
+}

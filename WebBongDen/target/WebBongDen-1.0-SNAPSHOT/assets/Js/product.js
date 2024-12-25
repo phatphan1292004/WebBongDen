@@ -1,4 +1,3 @@
-import { cateData, subcateData, productData } from "./data.js";
 document.addEventListener('DOMContentLoaded', function() {
     $(document).ready(function(){
         $('.product-image-list').slick({
@@ -66,4 +65,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Gọi hàm sau khi trang đã được load
   toggleCategoryMenu()
+
+
+  const buyBtn = document.getElementById("addToCart");
+  if (buyBtn) { // Kiểm tra nếu nút tồn tại
+    buyBtn.addEventListener('click', function () {
+      // Lấy productId từ thuộc tính data-id
+      const productId = parseInt(buyBtn.dataset.id, 10); // Sử dụng parseInt (cơ số 10)
+
+      // Gửi request đến server
+      fetch('/WebBongDen_war/add-to-cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `productId=${productId}`,
+      })
+          .then(response => {
+            if (response.ok) {
+              alert('Sản phẩm đã được thêm vào giỏ hàng!');
+            } else {
+              alert('Có lỗi xảy ra, vui lòng thử lại!');
+            }
+          })
+          .catch(error => console.error('Error:', error));
+    });
+  } else {
+    console.error("Nút 'addToCart' không tồn tại trong DOM.");
+  }
 });

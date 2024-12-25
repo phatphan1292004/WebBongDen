@@ -22,6 +22,14 @@ public class OrderDetail {
         this.amount = amount;
     }
 
+    public OrderDetail(int productId, int quantity, double unitPrice, double itemDiscount, double amount) {
+        this.productId = productId;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.itemDiscount = itemDiscount;
+        this.amount = amount;
+    }
+
     // Getters and Setters
     public int getProductId() {
         return productId;

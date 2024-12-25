@@ -59,7 +59,7 @@
                     <span>Hỗ trợ</span>
                 </a>
 
-                <a class="info-item" href="cart.html">
+                <a class="info-item" href="/WebBongDen_war/cart">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Giỏ hàng</span>
                     <p>(<span class="quantity-product">0</span>)</p>

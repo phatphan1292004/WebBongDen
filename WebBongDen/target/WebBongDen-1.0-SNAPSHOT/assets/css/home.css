@@ -114,7 +114,6 @@ a {
 
 .header .header-right .header-user {
   border-radius: 100%;
-  display: none;
   margin-left: 20px;
   position: relative;
   cursor: pointer;

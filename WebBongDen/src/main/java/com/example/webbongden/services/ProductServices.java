@@ -105,6 +105,11 @@ public class ProductServices {
         return productDao.editProductDetail(productDetail);
     }
 
+    public Product getProductById(int productId) {
+        return productDao.getProductById(productId);
+    }
+
+
     public List<Product> getProductsByPage(int page, int pageSize) {
         return productDao.getProductsByPage(page, pageSize);
     }
