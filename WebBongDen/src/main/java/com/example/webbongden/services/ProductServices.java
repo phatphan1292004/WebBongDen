@@ -48,8 +48,8 @@ public class ProductServices {
         }
         return products;
     }
-    public List<Product> getProductsByCategory(String categoryName) {
-        return productDao.getProductsByCategory(categoryName);
+    public List<Product> getProductsByCategory(int categoryId) {
+        return productDao.getProductsByCategory(categoryId);
     }
 
     public List<Product> getListProductForAdminPage() {
@@ -112,5 +112,9 @@ public class ProductServices {
 
     public List<Product> getProductsByPage(int page, int pageSize) {
         return productDao.getProductsByPage(page, pageSize);
+    }
+
+    public List<Product> searchProductByName(String productName) {
+        return productDao.searchProductsByName(productName);
     }
 }

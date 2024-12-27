@@ -64,19 +64,19 @@ public class ProductDao {
     }
 
     // Lấy ds sp theo Category
-    public List<Product> getProductsByCategory(String categoryName) {
+    public List<Product> getProductsByCategory(int categoryId) {
         String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
                 "pi.url AS image_url, pi.main_image " +
                 "FROM products p " +
                 "JOIN sub_categories sc ON p.subCategory_id = sc.id " +
                 "JOIN categories c ON sc.category_id = c.id " +
                 "LEFT JOIN product_images pi ON p.id = pi.product_id " +
-                "WHERE c.category_name = :categoryName " +
+                "WHERE c.id = :categoryId " +
                 "ORDER BY p.created_at DESC " +
                 "LIMIT 5";
 
         return jdbi.withHandle(handle -> {
-            Query query = handle.createQuery(sql).bind("categoryName", categoryName);
+            Query query = handle.createQuery(sql).bind("categoryId", categoryId);
             Map<Integer, Product> productMap = new HashMap<>();
 
             query.map((rs, ctx) -> {
@@ -518,18 +518,72 @@ public class ProductDao {
     }
 
 
+    public List<Product> searchProductsByName(String productName) {
+        String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
+                "pi.url AS image_url, pi.main_image " +
+                "FROM products p " +
+                "LEFT JOIN product_images pi ON p.id = pi.product_id " +
+                "WHERE p.product_name LIKE :productName " + // Tìm kiếm theo tên sản phẩm
+                "ORDER BY p.created_at DESC ";
+
+        return jdbi.withHandle(handle -> {
+            Query query = handle.createQuery(sql)
+                    .bind("productName", "%" + productName + "%"); // Sử dụng LIKE với ký tự đại diện (%)
+
+            Map<Integer, Product> productMap = new HashMap<>();
+
+            query.map((rs, ctx) -> {
+                int productId = rs.getInt("product_id");
+                Product product = productMap.get(productId);
+
+                if (product == null) {
+                    product = new Product(
+                            productId,
+                            rs.getString("product_name"),
+                            rs.getDouble("unit_price"),
+                            rs.getDouble("discount_percent"),
+                            new ArrayList<>()
+                    );
+                    productMap.put(productId, product);
+                }
+
+                String imageUrl = rs.getString("image_url");
+                if (imageUrl != null) {
+                    product.getListImg().add(new ProductImage(
+                            imageUrl,
+                            rs.getBoolean("main_image")
+                    ));
+                }
+
+                return product;
+            }).list();
+
+            return new ArrayList<>(productMap.values());
+        });
+    }
+
+
+
+
     public static void main(String[] args) {
         ProductDao productDao = new ProductDao();
-//        List<TopProduct> topProducts = productDao.getTopSellingProducts();
-//
-//        System.out.println("Top sản phẩm bán chạy:");
-//        for (TopProduct product : topProducts) {
-//            System.out.println("Tên sản phẩm: " + product.getProductName());
-//            System.out.println("Số lượng bán: " + product.getQuantitySold());
-//            System.out.println("Tổng tiền thu được: " + product.getFormattedRevenue());
-//            System.out.println("Số lượng tồn kho: " + product.getStockQuantity());
-//            System.out.println("----------------------------------");
-//        }
-        System.out.println(productDao.getCategoryQuantity());
+        int categoryId = 1; // Thay bằng ID thực tế trong database
+
+        // Gọi phương thức getProductsByCategory
+        List<Product> products = productDao.getProductsByCategory(categoryId);
+
+        // In kết quả ra màn hình
+        System.out.println("Danh sách sản phẩm cho category ID " + categoryId + ":");
+        for (Product product : products) {
+            System.out.println("ID: " + product.getId());
+            System.out.println("Tên sản phẩm: " + product.getProductName());
+            System.out.println("Giá: " + product.getUnitPrice());
+            System.out.println("Giảm giá: " + product.getDiscountPercent() + "%");
+            System.out.println("Hình ảnh:");
+            for (ProductImage image : product.getListImg()) {
+                System.out.println(" - URL: " + image.getUrl() + " | Chính: " + image.isMainImage());
+            }
+            System.out.println("------------");
+        }
     }
 }

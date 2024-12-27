@@ -31,7 +31,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <%@ include file="../reuse/header.jsp" %>
+    <jsp:include page="../reuse/header.jsp" />
     <div class="main">
         <div class="container container-cus">
             <div class="sidebar-info-customer">
@@ -250,7 +250,7 @@
             </div>
         </div>
     </div>
-    <%@ include file="../reuse/footer.jsp" %>
+    <jsp:include page="../reuse/footer.jsp" />
 </div>
 </body>
 <script src="${pageContext.request.contextPath}/assets/Js/user.js" defer></script>

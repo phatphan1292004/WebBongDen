@@ -19,7 +19,7 @@ public class CategoryController extends HttpServlet {
     private static final ProductServices productServices;
 
     static {
-        productServices = new ProductServices(); // Giả sử bạn đã có ProductServices
+        productServices = new ProductServices();
     }
 
     @Override

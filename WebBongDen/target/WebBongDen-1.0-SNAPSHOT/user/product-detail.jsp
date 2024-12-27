@@ -37,7 +37,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <%@ include file="../reuse/header.jsp" %>
+    <jsp:include page="../reuse/header.jsp" />
     <div class="main">
         <div class="container">
             <div class="breadcrumb">
@@ -54,6 +54,21 @@
                     <div class="product-view">
                         <div class="product-image-list">
                             <div class="product-image">
+                                <img
+                                        src="${productDetail.getMainImageUrl()}"
+                                        alt="Đèn chùm Tiffany"
+                                />
+
+                                <img
+                                        src="${productDetail.getMainImageUrl()}"
+                                        alt="Đèn chùm Tiffany"
+                                />
+
+                                <img
+                                        src="${productDetail.getMainImageUrl()}"
+                                        alt="Đèn chùm Tiffany"
+                                />
+
                                 <img
                                         src="${productDetail.getMainImageUrl()}"
                                         alt="Đèn chùm Tiffany"
@@ -272,18 +287,17 @@
                             <!-- Duyệt qua danh sách categories -->
                             <c:forEach var="category" items="${categories}">
                                 <li class="a">
-                                    <a class="cate-item" href="#">
+                                    <a class="cate-item" href="javascript:void(0);">
                                         <p>
-                                            <span>${category.getCategoryName()}</span> <!-- Hiển thị tên danh mục -->
+                                            <span>${category.categoryName}</span>
                                         </p>
                                         <i class="fa-solid fa-caret-down"></i>
                                     </a>
                                     <ul class="subcategory-list">
-                                        <!-- Duyệt qua subCategoriesMap -->
                                         <c:forEach var="subCategory" items="${subCategoriesMap[category.id]}">
                                             <li class="sub-category-item">
-                                                <a href="#">
-                                                    <span>${subCategory.name}</span> <!-- Hiển thị tên sub-category -->
+                                                <a href="/WebBongDen_war/CategoryController?categoryId=${category.id}&subCategoryId=${subCategory.id}">
+                                                    <span>${subCategory.name}</span>
                                                 </a>
                                             </li>
                                         </c:forEach>
@@ -493,7 +507,7 @@
             </div>
         </div>
     </div>
-    <%@ include file="../reuse/footer.jsp" %>
+    <jsp:include page="../reuse/footer.jsp" />
 </div>
 <script src="${pageContext.request.contextPath}/assets/Js/product.js"></script>
 <script

@@ -1,4 +1,4 @@
-<%--<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>--%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
 <%
@@ -16,8 +16,8 @@
                 </a>
             </div>
             <div class="search-bar">
-                <form action="/Detail.html" method="GET" id="search-form">
-                    <input placeholder="Bạn cần tìm gì?" type="text" name="query" />
+                <form action="/WebBongDen_war/search" method="GET" id="search-form">
+                    <input placeholder="Bạn cần tìm gì?" type="text" name="value" />
                     <button type="submit" aria-label="Search" class="search-btn">
                         <i class="fas fa-search"></i>
                     </button>
@@ -123,7 +123,7 @@
                                     <!-- Hiển thị danh mục con -->
                                     <c:forEach var="subCategory" items="${subCategoriesMap[category.id]}">
                                         <li class="category-item">
-                                            <a href="Detail.html" class="category-link">${subCategory.name}</a>
+                                            <a href="/WebBongDen_war/CategoryController?categoryId=${category.id}&subCategoryId=${subCategory.id}" class="category-link">${subCategory.name}</a>
                                         </li>
                                     </c:forEach>
                                 </ul>
