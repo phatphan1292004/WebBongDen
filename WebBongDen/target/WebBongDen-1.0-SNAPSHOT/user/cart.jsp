@@ -95,7 +95,7 @@
                                         </p>
                                     </div>
                                     <div class="quantity-selector">
-                                        <form action="update-cart" method="post">
+                                        <form action="/WebBongDen_war/update-cart" method="post">
                                             <input type="hidden" name="productId" value="<%= item.getProductId() %>" />
                                             <button class="quantity-btn decrease" type="button" onclick="updateQuantity(this, -1)">-</button>
                                             <input
@@ -104,7 +104,6 @@
                                                     class="quantity-input"
                                                     value="<%= item.getQuantity() %>"
                                                     min="1"
-                                                    onchange="this.form.submit()"
                                             />
                                             <button class="quantity-btn increase" type="button" onclick="updateQuantity(this, 1)">+</button>
                                         </form>
@@ -128,8 +127,9 @@
                             <p class="total-price"><%= cart != null ? cart.getTotalPrice() : 0 %> VND</p>
                         </div>
                     </div>
-
-                    <button class="buy-btn" data-tab="cus-info">ĐẶT HÀNG NGAY</button>
+                    <a href="/WebBongDen_war/cart#cus-info">
+                        <button class="buy-btn" data-tab="cus-info">ĐẶT HÀNG NGAY</button>
+                    </a>
                 </div>
             </div>
             <div class="tab-content" id="cus-info">
@@ -226,7 +226,7 @@
                                     <p class="total-price"><%= cart != null ? cart.getTotalPrice() : 0 %> VND</p>
                                 </div>
                             </div>
-                            <button class="buy-btn" type="submit" data-tab="payment">ĐẶT HÀNG NGAY</button>
+                            <button class="buy-btn" id="buy-btn-tab2" type="submit" data-tab="payment">ĐẶT HÀNG NGAY</button>
                             <p style="font-size: 12px">
                                 Bạn có thể chọn hình thức thanh toán sau khi đặt hàng.
                             </p>
@@ -327,7 +327,10 @@
     </div>
     <jsp:include page="../reuse/footer.jsp" />
 </div>
-<script src="${pageContext.request.contextPath}/assets/Js/cart.js"></script>
+<script src="${pageContext.request.contextPath}/assets/Js/cart.js?v=${System.currentTimeMillis()}"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notiflix/dist/notiflix-3.2.6.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/notiflix/dist/notiflix-3.2.6.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
 

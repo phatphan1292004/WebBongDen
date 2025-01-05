@@ -106,32 +106,132 @@ document.addEventListener("DOMContentLoaded", async function () {
     switchTab(newHash);
   });
 
-  // Thêm sự kiện click cho các nút chuyển tab
-  document.querySelectorAll('.buy-btn').forEach(button => {
-    button.addEventListener('click', function () {
-      const targetTab = this.getAttribute('data-tab');
-      if (targetTab) {
-        // Thay đổi hash trong URL
-        window.location.hash = `#${targetTab}`;
-      }
-    });
-  });
+  // // Thêm sự kiện click cho các nút chuyển tab
+  // document.querySelectorAll('.buy-btn').forEach(button => {
+  //   button.addEventListener('click', function () {
+  //     const targetTab = this.getAttribute('data-tab');
+  //     if (targetTab) {
+  //       // Thay đổi hash trong URL
+  //       window.location.hash = `#${targetTab}`;
+  //     }
+  //   });
+  // });
 })
 
 function updateQuantity(button, change) {
-  // Tìm form gần nhất của nút được nhấn
   const form = button.closest('form');
-
-  // Lấy trường input số lượng từ form
   const quantityInput = form.querySelector('input[name="quantity"]');
+  const productId = form.querySelector('input[name="productId"]').value;
 
-  // Chuyển giá trị hiện tại thành số nguyên và tính giá trị mới
-  const currentValue = parseInt(quantityInput.value, 10);
-  const newValue = Math.max(1, currentValue + change); // Đảm bảo số lượng không dưới 1
-
-  // Gán giá trị mới cho input
+  // Cập nhật số lượng mới
+  const newValue = Math.max(1, parseInt(quantityInput.value, 10) + change);
   quantityInput.value = newValue;
 
-  // Gửi form để cập nhật
-  form.submit();
+  // Hiển thị loader
+  Notiflix.Loading.standard('Đang cập nhật...');
+
+  // Gửi yêu cầu AJAX
+  fetch(form.action, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `productId=${productId}&quantity=${newValue}`,
+  })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // Cập nhật tổng tiền trên giao diện
+          document.querySelector('.total-price').textContent = `${data.totalPrice.toLocaleString()} VND`;
+        } else {
+          Notiflix.Notify.failure('Cập nhật thất bại. Vui lòng thử lại.');
+        }
+      })
+      .catch(() => {
+        Notiflix.Notify.failure('Có lỗi xảy ra. Vui lòng thử lại.');
+      })
+      .finally(() => {
+        // Ẩn loader
+        Notiflix.Loading.remove();
+      });
+
+  // Gắn sự kiện cho nút buy-btn của tab thứ 2
+  document.getElementById('buy-btn-tab2').addEventListener('click', function (e) {
+    const form = this.closest('form'); // Lấy form gần nhất của nút
+    const customerName = document.getElementById('cus-name').value.trim();
+    const customerPhone = document.getElementById('cus-tele').value.trim();
+    const province = document.getElementById('province').value;
+    const district = document.getElementById('district').value;
+    const ward = document.getElementById('ward').value;
+    const streetAddress = document.getElementById('number-address').value.trim();
+
+    // Kiểm tra các trường bắt buộc
+    if (!customerName) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Vui lòng nhập họ tên.',
+      });
+      e.preventDefault();
+      return false;
+    }
+    if (!customerPhone) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Vui lòng nhập số điện thoại.',
+      });
+      e.preventDefault();
+      return false;
+    }
+    if (!province) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Vui lòng chọn Tỉnh/Thành phố.',
+      });
+      e.preventDefault();
+      return false;
+    }
+    if (!district) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Vui lòng chọn Quận/Huyện.',
+      });
+      e.preventDefault();
+      return false;
+    }
+    if (!ward) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Vui lòng chọn Phường/Xã.',
+      });
+      e.preventDefault();
+      return false;
+    }
+    if (!streetAddress) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Vui lòng nhập địa chỉ (Số nhà, tên đường).',
+      });
+      e.preventDefault();
+      return false;
+    }
+
+    // Nếu tất cả đều hợp lệ
+    Swal.fire({
+      icon: 'success',
+      title: 'Thành công!',
+      text: 'Thông tin hợp lệ, đang xử lý đặt hàng...',
+      timer: 2000,
+      showConfirmButton: false,
+    }).then(() => {
+      form.submit(); // Gửi form sau khi hiển thị thông báo thành công
+    });
+  });
 }
+
+
+
+

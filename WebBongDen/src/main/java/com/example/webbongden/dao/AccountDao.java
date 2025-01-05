@@ -59,7 +59,6 @@ public class AccountDao {
 
             // Nếu username đã tồn tại, không cho phép thêm tài khoản
             if (count > 0) {
-                System.out.println("Username đã tồn tại. Không thể thêm tài khoản mới.");
                 return false; // Trả về false nếu username đã tồn tại
             }
 

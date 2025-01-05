@@ -50,44 +50,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector("#account-table").addEventListener("click", function (event) {
         if (event.target.classList.contains("delete-account")) {
+            console.log('a');
             const accountId = event.target.dataset.id; // Lấy ID sản phẩm từ data-id
 
-            if (confirm("Bạn có chắc chắn muốn xóa tài khoản này không?")) {
-                // Gửi yêu cầu xóa qua AJAX
-                fetch("deleteAccount", {
-                    method: "POST",
-                    body: new URLSearchParams({
-                        action: "delete-account",
-                        id: accountId
+            // Hiển thị SweetAlert2 để xác nhận
+            Swal.fire({
+                title: "Bạn có chắc chắn muốn xóa tài khoản này không?",
+                text: "Hành động này không thể hoàn tác!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Xóa",
+                cancelButtonText: "Hủy",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Gửi yêu cầu xóa qua AJAX
+                    fetch("deleteAccount", {
+                        method: "POST",
+                        body: new URLSearchParams({
+                            action: "delete-account",
+                            id: accountId,
+                        }),
                     })
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Có lỗi xảy ra trong quá trình xóa!");
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.status === "success") {
-                            alert(data.message); // Hiển thị thông báo thành công
-
-                            // Tìm dòng cha của nút xóa
-                            const row = event.target.closest("tr");
-
-                            if (row) {
-                                // Sử dụng DataTables API để xóa dòng
-                                const table = $('#account-table').DataTable();
-                                table.row(row).remove().draw(false); // Giữ nguyên trang và cập nhật tổng số
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Có lỗi xảy ra trong quá trình xóa!");
                             }
-                        } else {
-                            alert(data.message); // Thông báo lỗi từ server
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        alert("Có lỗi xảy ra khi xóa sản phẩm!");
-                    });
-            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            if (data.status === "success") {
+                                Swal.fire(
+                                    "Đã xóa!",
+                                    data.message,
+                                    "success"
+                                );
+
+                                // Xóa dòng trong bảng
+                                const row = event.target.closest("tr");
+                                if (row) {
+                                    const table = $("#account-table").DataTable();
+                                    table.row(row).remove().draw(false);
+                                }
+                            } else {
+                                Swal.fire("Lỗi!", data.message, "error");
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            Swal.fire("Lỗi!", "Có lỗi xảy ra khi xóa sản phẩm!", "error");
+                        });
+                }
+            });
         }
     });
 })

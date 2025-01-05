@@ -15,10 +15,6 @@ public class AddAccountController extends HttpServlet {
     static {
         accountSevices = new AccountServices();
     }
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("admin/account-management.jsp").forward(request, response);
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,9 +38,11 @@ public class AddAccountController extends HttpServlet {
         // Gọi phương thức addAccount
         boolean success = false;
         String message = "";
+        String status = "error"; // Trạng thái mặc định là lỗi
         try {
             success = accountSevices.addAccount(account);
             if (success) {
+                status = "success";
                 message = "Thêm tài khoản thành công!";
             } else {
                 message = "Username đã tồn tại. Không thể thêm tài khoản.";

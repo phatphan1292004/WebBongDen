@@ -11,31 +11,33 @@ import java.io.IOException;
 public class UpdateCartController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
 
-        // Lấy productId và quantity từ request
         String productIdParam = request.getParameter("productId");
         String quantityParam = request.getParameter("quantity");
 
-        if (productIdParam == null || quantityParam == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Product ID or quantity is missing");
-            return;
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        try {
+            int productId = Integer.parseInt(productIdParam);
+            int quantity = Integer.parseInt(quantityParam);
+
+            if (cart != null) {
+                cart.updateQuantity(productId, quantity); // Cập nhật số lượng trong giỏ hàng
+            }
+
+            // Lấy tổng tiền sau khi cập nhật
+            double totalPrice = cart != null ? cart.getTotalPriceNumber() : 0;
+
+            // Trả về JSON chứa tổng tiền
+            response.getWriter().write("{\"success\": true, \"totalPrice\": " + totalPrice + "}");
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"success\": false, \"message\": \"Lỗi khi cập nhật\"}");
         }
-
-        int productId = Integer.parseInt(productIdParam);
-        int quantity = Integer.parseInt(quantityParam);
-
-        if (cart != null) {
-            cart.updateQuantity(productId, quantity); // Gọi phương thức cập nhật số lượng
-        }
-
-        // Chuyển hướng về trang giỏ hàng
-        response.sendRedirect("/WebBongDen_war/cart");
     }
 }
+
