@@ -41,6 +41,46 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/cart.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/header-footer.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
+    <style>
+        .empty-cart {
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .back-to-shopping-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-shopping-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .empty-cart-image {
+            max-width: 200px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .empty-cart-image:hover {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper">
@@ -51,8 +91,8 @@
             <span id="direction-cart">Mua thêm sản phẩm</span>
         </a>
         <div class="nav">
-            <div class="nav-item" data-tab="cart">Giỏ hàng</div>
-            <div class="nav-item" data-tab="order-info">Thông tin đặt hàng</div>
+            <div class="nav-item active" data-tab="cart">Giỏ hàng</div>
+            <div class="nav-item" data-tab="cus-info">Thông tin đặt hàng</div>
             <div class="nav-item" data-tab="payment">Thanh toán</div>
             <div class="nav-item" data-tab="finish">Hoàn tất</div>
         </div>
@@ -60,11 +100,17 @@
         <div class="tab-container">
             <div class="tab-content" id="cart">
                 <div class="container-top">
+                    <% if (cart == null || cart.getItems().isEmpty()) { %>
+                    <div class="empty-cart">
+                        <img src="/WebBongDen_war/assets/img/empty-cart.png" alt="Giỏ hàng trống" class="empty-cart-image">
+                        <p>Giỏ hàng của bạn trống.</p>
+                        <a href="/WebBongDen_war/home">
+                            <button class="back-to-shopping-btn">Quay lại mua hàng</button>
+                        </a>
+                    </div>
+                    <% } else { %>
                     <div class="product">
                         <ul class="list-product">
-                            <% if (cart == null || cart.getItems().isEmpty()) { %>
-                            <p>Giỏ hàng của bạn trống.</p>
-                            <% } else { %>
                             <% for (CartItem item : cart.getItems()) { %>
                             <li class="product-item">
                                 <div class="box">
@@ -111,11 +157,12 @@
                                 </div>
                             </li>
                             <% } %>
-                            <% } %>
                         </ul>
                         <div class="a"></div>
                     </div>
+                    <% } %>
                 </div>
+                <% if (cart != null && !cart.getItems().isEmpty()) { %>
                 <div class="container-bottom">
                     <div class="result">
                         <div class="b">
@@ -124,16 +171,17 @@
                         </div>
                         <div class="b">
                             <p>Tổng tiền:</p>
-                            <p class="total-price"><%= cart != null ? cart.getTotalPrice() : 0 %> VND</p>
+                            <p class="total-price"><%= cart.getTotalPrice() %> VND</p>
                         </div>
                     </div>
                     <a href="/WebBongDen_war/cart#cus-info">
                         <button class="buy-btn" data-tab="cus-info">ĐẶT HÀNG NGAY</button>
                     </a>
                 </div>
+                <% } %>
             </div>
             <div class="tab-content" id="cus-info">
-                <form action="save-cus-info" method="post">
+                <form action="save-cus-info" id ="customer-info-form" method="post">
                     <div class="cus-info">
                         <div class="container-top">
                             <div class="cus-info-item">
@@ -234,7 +282,7 @@
                     </div>
                 </form>
             </div>
-            <form method="POST" action="/WebBongDen_war/PayCartController">
+            <form method="POST" action="/WebBongDen_war/PayCartController" id="payment-form">
                 <div class="tab-content" id="payment" style="<%= (cus == null) ? "display: none;" : "" %>">
                     <div class="container-top">
                         <div class="section order-info">

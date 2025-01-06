@@ -562,8 +562,22 @@ public class ProductDao {
         });
     }
 
+    // Trừ số lượng sản phẩm trong kho
+    public void decreaseStockQuantity(int productId, int quantity) {
+        String sql = "UPDATE products SET stock_quantity = stock_quantity - :quantity " +
+                "WHERE id = :productId AND stock_quantity >= :quantity";
 
+        jdbi.useHandle(handle -> {
+            int rowsAffected = handle.createUpdate(sql)
+                    .bind("quantity", quantity)
+                    .bind("productId", productId)
+                    .execute();
 
+            if (rowsAffected == 0) {
+                throw new RuntimeException("Không đủ hàng tồn kho cho sản phẩm ID: " + productId);
+            }
+        });
+    }
 
     public static void main(String[] args) {
         ProductDao productDao = new ProductDao();

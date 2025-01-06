@@ -2,20 +2,21 @@ package com.example.webbongden.services;
 
 import com.example.webbongden.dao.InvoiceDao;
 import com.example.webbongden.dao.OrderDao;
-import com.example.webbongden.dao.model.Customer;
-import com.example.webbongden.dao.model.Invoices;
-import com.example.webbongden.dao.model.Order;
-import com.example.webbongden.dao.model.OrderDetail;
+import com.example.webbongden.dao.ShippingDao;
+import com.example.webbongden.dao.model.*;
 
+import java.util.Date;
 import java.util.List;
 
 public class OrderSevices {
     public final OrderDao orderDao;
     public final InvoiceDao invoiceDao;
+    public final ShippingDao shippingDao;
 
     public OrderSevices() {
         this.orderDao = new OrderDao();
         this.invoiceDao = new InvoiceDao();
+        this.shippingDao = new ShippingDao();
     }
 
     public int getTotalOrders() {
@@ -68,6 +69,17 @@ public class OrderSevices {
 
             // Bước 4: Tạo chi tiết đơn hàng
             orderDao.createOrderDetails(orderId, orderDetails);
+
+            //Bước 5: Tạo thông tin vận chuyển
+            Shipping shipping = new Shipping();
+            shipping.setOrderId(orderId); // ID của đơn hàng
+            shipping.setPickupDate(new Date()); // Ngày hiện tại
+            shipping.setShippingStatus("Pending"); // Trạng thái mặc định
+            shipping.setAddress(customerInfo.getAddress()); // Địa chỉ giao hàng từ thông tin khách hàng
+            shipping.setCarrier("J&T Express"); // Nhà vận chuyển mặc định
+
+            // Lưu thông tin vận chuyển
+            shippingDao.insertShipping(shipping);
 
         } catch (Exception e) {
             e.printStackTrace();

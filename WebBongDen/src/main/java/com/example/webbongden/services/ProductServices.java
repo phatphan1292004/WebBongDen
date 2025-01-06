@@ -117,4 +117,8 @@ public class ProductServices {
     public List<Product> searchProductByName(String productName) {
         return productDao.searchProductsByName(productName);
     }
+
+    public void decreaseStockQuantity(int productId, int quantity) {
+        productDao.decreaseStockQuantity(productId, quantity);
+    }
 }

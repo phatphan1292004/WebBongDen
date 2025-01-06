@@ -2,7 +2,9 @@ package com.example.webbongden.controller.UserController;
 
 import com.example.webbongden.dao.model.*;
 import com.example.webbongden.services.OrderSevices;
+import com.example.webbongden.services.ProductServices;
 import com.example.webbongden.services.PromotionService;
+import com.example.webbongden.services.ShippingServices;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -16,9 +18,11 @@ import java.util.List;
 public class PayCartController extends HttpServlet {
     private static final OrderSevices orderServices;
     private static final PromotionService promotionService;
+    private static final ProductServices productServices;
     static {
         orderServices = new OrderSevices();
         promotionService = new PromotionService();
+        productServices = new ProductServices();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,6 +57,7 @@ public class PayCartController extends HttpServlet {
             List<OrderDetail> orderDetails = new ArrayList<>();
 
             for (CartItem item : cart.getItems()) {
+                productServices.decreaseStockQuantity(item.getProductId(), item.getQuantity());
                 OrderDetail detail = new OrderDetail();
                 detail.setProductId(item.getProductId());
                 detail.setQuantity(item.getQuantity());
