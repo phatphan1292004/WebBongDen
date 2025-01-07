@@ -32,6 +32,8 @@
   />
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -48,8 +50,8 @@
             <h3>THÊM TÀI KHOẢN MỚI</h3>
             <form id="add-account-form" action="add-account" method="post">
               <div class="form-group">
-                <label for="cus_name">Tên khách hàng:</label>
-                <input type="text" id="cus_name" name="cusName" placeholder="Nhập tên khách hàng" required />
+                <label for="cusName">Tên khách hàng:</label>
+                <input type="text" id="cusName" name="cusName" placeholder="Nhập tên khách hàng" required />
               </div>
               <!-- Tên đăng nhập -->
               <div class="form-group">
@@ -94,7 +96,6 @@
                 <select id="role" name="role" required>
                   <option value="" disabled selected>Chọn vai trò</option>
                   <option value="admin">Quản trị viên</option>
-                  <option value="editor">Người chỉnh sửa</option>
                   <option value="customer">Khách hàng</option>
                 </select>
               </div>
@@ -146,208 +147,6 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<%--<script>--%>
-<%--  document.addEventListener("DOMContentLoaded", function () {--%>
-<%--    $(document).ready(function () {--%>
-<%--      const table = $("#account-table").DataTable({--%>
-<%--        ajax: {--%>
-<%--          url: "/WebBongDen_war/list-account", // URL Servlet trả về JSON--%>
-<%--          type: "GET", // Phương thức HTTP--%>
-<%--          dataSrc: "", // DataTables sẽ lấy dữ liệu từ gốc JSON--%>
-<%--          data: function (d) {--%>
-<%--            d.searchValue = $("#account-search").val(); // Truyền giá trị tìm kiếm--%>
-<%--          },--%>
-<%--        },--%>
-<%--        error: function (xhr, error, thrown) {--%>
-<%--          console.log("Error:", error);--%>
-<%--          console.log("Response Text:", xhr.responseText);--%>
-<%--        },--%>
-<%--        destroy: true, // Đảm bảo bảng được làm mới khi reload--%>
-<%--        autoWidth: false,--%>
-<%--        paging: true,--%>
-<%--        pageLength: 10,--%>
-<%--        columns: [--%>
-<%--          { data: "id" }, // ID tài khoản--%>
-<%--          { data: "username" }, // Tên người dùng--%>
-<%--          { data: "email" }, // Email--%>
-<%--          { data: "role" }, // Vai trò--%>
-<%--          {--%>
-<%--            data: null, // Hành động: Nút xem chi tiết--%>
-<%--            render: function (data, type, row) {--%>
-<%--              return `<button class="view-details" data-index="${row.customerId}">Xem chi tiết</button>`;--%>
-<%--            },--%>
-<%--          },--%>
-<%--        ],--%>
-<%--        lengthChange: false,--%>
-<%--        searching: false,--%>
-<%--        ordering: true,--%>
-<%--        info: true,--%>
-<%--        language: {--%>
-<%--          paginate: {--%>
-<%--            previous: "Trước",--%>
-<%--            next: "Tiếp",--%>
-<%--          },--%>
-<%--          info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",--%>
-<%--        },--%>
-<%--      });--%>
-<%--      $("#search-btn-account").on("click", function () {--%>
-<%--        table.ajax.reload(); // Reload lại bảng với dữ liệu lọc mới--%>
-<%--      });--%>
-<%--    })--%>
-<%--    document.querySelector("#account-table").addEventListener("click", function (event) {--%>
-<%--      // Kiểm tra xem phần tử được click có chứa class "delete-account" không--%>
-<%--      if (event.target.classList.contains("delete-account")) {--%>
-<%--        // Lấy ID tài khoản từ thuộc tính data-id--%>
-<%--        const accountId = event.target.dataset.id;--%>
-
-<%--        if (accountId) {--%>
-<%--          console.log("Account ID:", accountId); // Log ID để kiểm tra--%>
-
-<%--          // Xác nhận xóa tài khoản--%>
-<%--          if (confirm("Bạn có chắc chắn muốn xóa tài khoản này không?")) {--%>
-<%--            // Gửi yêu cầu xóa qua AJAX--%>
-<%--            fetch("deleteAccount", {--%>
-<%--              method: "POST",--%>
-<%--              headers: {--%>
-<%--                "Content-Type": "application/x-www-form-urlencoded"--%>
-<%--              },--%>
-<%--              body: new URLSearchParams({--%>
-<%--                action: "delete-account",--%>
-<%--                id: accountId--%>
-<%--              })--%>
-<%--            })--%>
-<%--                    .then(response => {--%>
-<%--                      // Kiểm tra phản hồi từ server--%>
-<%--                      if (!response.ok) {--%>
-<%--                        throw new Error("Có lỗi xảy ra trong quá trình xóa!");--%>
-<%--                      }--%>
-<%--                      return response.json();--%>
-<%--                    })--%>
-<%--                    .then(data => {--%>
-<%--                      // Kiểm tra trạng thái phản hồi--%>
-<%--                      if (data.status === "success") {--%>
-<%--                        alert(data.message); // Hiển thị thông báo thành công--%>
-
-<%--                        // Tìm dòng chứa nút xóa và xóa khỏi DataTables--%>
-<%--                        const row = event.target.closest("tr");--%>
-<%--                        if (row) {--%>
-<%--                          const table = $('#account-table').DataTable();--%>
-<%--                          table.row(row).remove().draw(false); // Xóa dòng và cập nhật lại bảng--%>
-<%--                        }--%>
-<%--                      } else {--%>
-<%--                        alert(data.message); // Hiển thị thông báo lỗi từ server--%>
-<%--                      }--%>
-<%--                    })--%>
-<%--                    .catch(error => {--%>
-<%--                      // Xử lý lỗi--%>
-<%--                      console.error("Error:", error);--%>
-<%--                      alert("Có lỗi xảy ra khi xóa tài khoản!");--%>
-<%--                    });--%>
-<%--          }--%>
-<%--        } else {--%>
-<%--          console.error("Không tìm thấy accountId!"); // Log lỗi nếu không có ID--%>
-<%--        }--%>
-<%--      } else {--%>
-<%--        console.log("Không phải nút xóa tài khoản."); // Log nếu click không phải vào nút xóa--%>
-<%--      }--%>
-<%--    });--%>
-
-
-<%--    // document.querySelector("#account-table").addEventListener("click", function (event) {--%>
-<%--    //   if (event.target.classList.contains("delete-account")) {--%>
-<%--    //     const accountId = event.target.dataset.id; // Lấy ID sản phẩm từ data-id--%>
-<%--    //--%>
-<%--    //     // Hiển thị SweetAlert2 để xác nhận--%>
-<%--    //     Swal.fire({--%>
-<%--    //       title: "Bạn có chắc chắn muốn xóa tài khoản này không?",--%>
-<%--    //       text: "Hành động này không thể hoàn tác!",--%>
-<%--    //       icon: "warning",--%>
-<%--    //       showCancelButton: true,--%>
-<%--    //       confirmButtonColor: "#3085d6",--%>
-<%--    //       cancelButtonColor: "#d33",--%>
-<%--    //       confirmButtonText: "Xóa",--%>
-<%--    //       cancelButtonText: "Hủy",--%>
-<%--    //     }).then((result) => {--%>
-<%--    //       if (result.isConfirmed) {--%>
-<%--    //         // Gửi yêu cầu xóa qua AJAX--%>
-<%--    //         fetch("deleteAccount", {--%>
-<%--    //           method: "POST",--%>
-<%--    //           body: new URLSearchParams({--%>
-<%--    //             action: "delete-account",--%>
-<%--    //             id: accountId,--%>
-<%--    //           }),--%>
-<%--    //         })--%>
-<%--    //                 .then((response) => {--%>
-<%--    //                   if (!response.ok) {--%>
-<%--    //                     throw new Error("Có lỗi xảy ra trong quá trình xóa!");--%>
-<%--    //                   }--%>
-<%--    //                   return response.json();--%>
-<%--    //                 })--%>
-<%--    //                 .then((data) => {--%>
-<%--    //                   if (data.status === "success") {--%>
-<%--    //                     Swal.fire(--%>
-<%--    //                             "Đã xóa!",--%>
-<%--    //                             data.message,--%>
-<%--    //                             "success"--%>
-<%--    //                     );--%>
-<%--    //--%>
-<%--    //                     // Xóa dòng trong bảng--%>
-<%--    //                     const row = event.target.closest("tr");--%>
-<%--    //                     if (row) {--%>
-<%--    //                       const table = $("#account-table").DataTable();--%>
-<%--    //                       table.row(row).remove().draw(false);--%>
-<%--    //                     }--%>
-<%--    //                   } else {--%>
-<%--    //                     Swal.fire("Lỗi!", data.message, "error");--%>
-<%--    //                   }--%>
-<%--    //                 })--%>
-<%--    //                 .catch((error) => {--%>
-<%--    //                   console.error("Error:", error);--%>
-<%--    //                   Swal.fire("Lỗi!", "Có lỗi xảy ra khi xóa sản phẩm!", "error");--%>
-<%--    //                 });--%>
-<%--    //       }--%>
-<%--    //     });--%>
-<%--    //   }--%>
-<%--    // });--%>
-
-<%--    document.getElementById("add-account-form").addEventListener("submit", async (event) => {--%>
-<%--      event.preventDefault(); // Ngăn hành động submit mặc định--%>
-
-<%--      try {--%>
-<%--        const formData = new FormData(event.target);--%>
-
-<%--        // Gửi yêu cầu POST đến server và nhận JSON response--%>
-<%--        const response = await fetch("add-account", {--%>
-<%--          method: "POST",--%>
-<%--          body: formData,--%>
-<%--        });--%>
-
-<%--        if (!response.ok) throw new Error("Có lỗi xảy ra trong quá trình gửi yêu cầu!");--%>
-
-<%--        const data = await response.json();--%>
-
-<%--        // Hiển thị thông báo SweetAlert--%>
-<%--        Swal.fire({--%>
-<%--          icon: data.success ? "success" : "error",--%>
-<%--          title: data.success ? "Thành công" : "Lỗi",--%>
-<%--          text: data.message,--%>
-<%--        });--%>
-
-<%--        // Reset form nếu thành công--%>
-<%--        if (data.success) event.target.reset();--%>
-<%--      } catch (error) {--%>
-<%--        console.error("Error:", error);--%>
-<%--        Swal.fire({--%>
-<%--          icon: "error",--%>
-<%--          title: "Lỗi",--%>
-<%--          text: "Không thể thêm tài khoản. Vui lòng thử lại!",--%>
-<%--        });--%>
-<%--      }--%>
-<%--    });--%>
-<%--  })--%>
-<%--</script>--%>
-
-<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/accountAdmin.js" defer></script>
+<script src="${pageContext.request.contextPath}/admin/admin_js/acAdmin.js" defer></script>
 </body>
 </html>

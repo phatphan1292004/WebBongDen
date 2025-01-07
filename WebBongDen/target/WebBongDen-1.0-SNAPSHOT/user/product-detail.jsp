@@ -26,11 +26,7 @@
             href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet"
     />
-    <link
-            rel="stylesheet"
-            type="text/css"
-            href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-    />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/header-footer.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/product.css">
@@ -58,17 +54,20 @@
                                         src="${productDetail.getMainImageUrl()}"
                                         alt="Đèn chùm Tiffany"
                                 />
-
+                            </div>
+                            <div class="product-image">
                                 <img
                                         src="${productDetail.getMainImageUrl()}"
                                         alt="Đèn chùm Tiffany"
                                 />
-
+                            </div>
+                            <div class="product-image">
                                 <img
                                         src="${productDetail.getMainImageUrl()}"
                                         alt="Đèn chùm Tiffany"
                                 />
-
+                            </div>
+                            <div class="product-image">
                                 <img
                                         src="${productDetail.getMainImageUrl()}"
                                         alt="Đèn chùm Tiffany"
@@ -509,19 +508,9 @@
     </div>
     <jsp:include page="../reuse/footer.jsp" />
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/Js/product.js"></script>
-<script
-        type="text/javascript"
-        src="https://code.jquery.com/jquery-1.11.0.min.js"
-></script>
-<script
-        type="text/javascript"
-        src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"
-></script>
-<script
-        type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-></script>
 </body>
 </html>
 
