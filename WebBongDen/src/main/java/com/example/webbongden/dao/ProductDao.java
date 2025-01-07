@@ -579,25 +579,93 @@ public class ProductDao {
         });
     }
 
+
+    // Lấy danhsach sản phẩm theo chương trình giảm giá
+    // Lấy danh sách sản phẩm theo chương trình khuyến mãi
+    public List<Product> getProductsByPromotion(int promotionId) {
+        String sql = "SELECT " +
+                "p.id AS product_id, " +
+                "p.product_name, " +
+                "p.unit_price, " +
+                "p.discount_percent, " +
+                "pi.url AS image_url, " +
+                "pi.main_image " +
+                "FROM products p " +
+                "LEFT JOIN product_images pi ON p.id = pi.product_id " +
+                "JOIN promotion_programs pp ON p.id = pp.product_id " +
+                "JOIN promotions pr ON pp.promotion_id = pr.id " +
+                "WHERE pr.id = :promotionId " +
+                "ORDER BY p.created_at DESC";
+
+        return jdbi.withHandle(handle -> {
+            Query query = handle.createQuery(sql).bind("promotionId", promotionId);
+            Map<Integer, Product> productMap = new HashMap<>();
+
+            query.map((rs, ctx) -> {
+                int productId = rs.getInt("product_id");
+                Product product = productMap.get(productId);
+
+                if (product == null) {
+                    product = new Product(
+                            productId,
+                            rs.getString("product_name"),
+                            rs.getDouble("unit_price"),
+                            rs.getDouble("discount_percent"),
+                            new ArrayList<>()
+                    );
+                    productMap.put(productId, product);
+                }
+
+                String imageUrl = rs.getString("image_url");
+                if (imageUrl != null) {
+                    product.getListImg().add(new ProductImage(
+                            imageUrl,
+                            rs.getBoolean("main_image")
+                    ));
+                }
+
+                return product;
+            }).list();
+
+            return new ArrayList<>(productMap.values());
+        });
+    }
+
     public static void main(String[] args) {
         ProductDao productDao = new ProductDao();
-        int categoryId = 1; // Thay bằng ID thực tế trong database
+        // ID của chương trình khuyến mãi cần kiểm tra
+        int promotionId = 5; // Thay đổi ID này theo dữ liệu trong database của bạn
 
-        // Gọi phương thức getProductsByCategory
-        List<Product> products = productDao.getProductsByCategory(categoryId);
+        // Gọi hàm getProductsByPromotion
+        try {
+            List<Product> products = productDao.getProductsByPromotion(promotionId);
 
-        // In kết quả ra màn hình
-        System.out.println("Danh sách sản phẩm cho category ID " + categoryId + ":");
-        for (Product product : products) {
-            System.out.println("ID: " + product.getId());
-            System.out.println("Tên sản phẩm: " + product.getProductName());
-            System.out.println("Giá: " + product.getUnitPrice());
-            System.out.println("Giảm giá: " + product.getDiscountPercent() + "%");
-            System.out.println("Hình ảnh:");
-            for (ProductImage image : product.getListImg()) {
-                System.out.println(" - URL: " + image.getUrl() + " | Chính: " + image.isMainImage());
+            // In danh sách sản phẩm ra màn hình
+            if (products.isEmpty()) {
+                System.out.println("Không có sản phẩm nào trong chương trình khuyến mãi với ID: " + promotionId);
+            } else {
+                System.out.println("Danh sách sản phẩm trong chương trình khuyến mãi ID: " + promotionId);
+                for (Product product : products) {
+                    System.out.println("Product ID: " + product.getId());
+                    System.out.println("Product Name: " + product.getProductName());
+                    System.out.println("Unit Price: " + product.getUnitPrice());
+                    System.out.println("Discount Percent: " + product.getDiscountPercent());
+
+                    if (!product.getListImg().isEmpty()) {
+                        System.out.println("Images: ");
+                        for (ProductImage image : product.getListImg()) {
+                            System.out.println("  - URL: " + image.getUrl());
+                            System.out.println("    Main Image: " + image.isMainImage());
+                        }
+                    } else {
+                        System.out.println("No images available for this product.");
+                    }
+                    System.out.println("-----------------------------------");
+                }
             }
-            System.out.println("------------");
+        } catch (Exception e) {
+            System.out.println("Lỗi khi lấy danh sách sản phẩm: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

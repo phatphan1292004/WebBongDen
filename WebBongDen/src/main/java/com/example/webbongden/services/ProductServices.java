@@ -121,4 +121,8 @@ public class ProductServices {
     public void decreaseStockQuantity(int productId, int quantity) {
         productDao.decreaseStockQuantity(productId, quantity);
     }
+
+    public List<Product> getListProductByPromotion(int promotionId) {
+        return productDao.getProductsByPromotion(promotionId);
+    }
 }

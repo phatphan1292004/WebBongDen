@@ -35,6 +35,9 @@ public class HomeControllerr extends HttpServlet {
 //        request.setAttribute("denKhacList", denKhacList);
 //
 //        System.out.println("Forwarding to register.jsp...");
+        int promotionId = 5;
+        List<Product> listPrOfPromotion = productServices.getListProductByPromotion(promotionId);
+        request.setAttribute("listPrOfPromotion", listPrOfPromotion);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

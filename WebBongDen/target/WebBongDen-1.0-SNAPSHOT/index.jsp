@@ -1325,140 +1325,34 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="container-sale-product">
                     <ul class="list-product-hot" id="list-product-sale">
-                        <li class="product-hot-item">
-                            <a href="user/product-detail.jsp">
-                                <div class="img">
-                                    <img
-                                            src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
-                                            alt=""
-                                    />
-                                </div>
+                        <c:forEach var="item" items="${listPrOfPromotion}">
+                            <li class="product-hot-item">
+                                <a href="user/product-detail.jsp">
+                                    <div class="img">
+                                        <img src="${item.imageUrl}" alt="${item.productName}" />
+                                    </div>
 
-                                <div class="product-info">
-                                    <div class="product-name">
-                                        Đèn quạt tích hợp bàn chống thấm nước trang trí sân vườn phong cách Châu Âu DQ00682
+                                    <div class="product-info">
+                                        <div class="product-name">
+                                                ${item.productName}
+                                        </div>
+                                        <p class="original-price">
+                                                ${String.format('%,.0f', item.unitPrice)} VND
+                                        </p>
+                                        <div class="price-discount">
+                                            <p class="product-price">
+                                                    ${String.format('%,.0f', item.discountedPrice)} VND
+                                            </p>
+                                            <p class="discount-percentage">
+                                                -${item.discountPercent}%
+                                            </p>
+                                        </div>
                                     </div>
-                                    <p class="original-price">2.000.000 VND</p>
-                                    <div class="price-discount">
-                                        <p class="product-price">1.800.000VND</p>
-                                        <p class="discount-percentage">-10%</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="product-hot-item">
-                            <a href="user/product-detail.jsp">
-                                <div class="img">
-                                    <img
-                                            src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
-                                            alt=""
-                                    />
-                                </div>
-
-                                <div class="product-info">
-                                    <div class="product-name">
-                                        Đèn quạt tích hợp bàn chống thấm nước trang trí sân vườn phong cách Châu Âu DQ00682
-                                    </div>
-                                    <p class="original-price">2.000.000 VND</p>
-                                    <div class="price-discount">
-                                        <p class="product-price">1.800.000VND</p>
-                                        <p class="discount-percentage">-10%</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="product-hot-item">
-                            <a href="user/product-detail.jsp">
-                                <div class="img">
-                                    <img
-                                            src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
-                                            alt=""
-                                    />
-                                </div>
-
-                                <div class="product-info">
-                                    <div class="product-name">
-                                        Đèn quạt tích hợp bàn chống thấm nước trang trí sân vườn phong cách Châu Âu DQ00682
-                                    </div>
-                                    <p class="original-price">2.000.000 VND</p>
-                                    <div class="price-discount">
-                                        <p class="product-price">1.800.000VND</p>
-                                        <p class="discount-percentage">-10%</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="product-hot-item">
-                            <a href="user/product-detail.jsp">
-                                <div class="img">
-                                    <img
-                                            src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
-                                            alt=""
-                                    />
-                                </div>
-
-                                <div class="product-info">
-                                    <div class="product-name">
-                                        Đèn quạt tích hợp bàn chống thấm nước trang trí sân vườn phong cách Châu Âu DQ00682
-                                    </div>
-                                    <p class="original-price">2.000.000 VND</p>
-                                    <div class="price-discount">
-                                        <p class="product-price">1.800.000VND</p>
-                                        <p class="discount-percentage">-10%</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="product-hot-item">
-                            <a href="user/product-detail.jsp">
-                                <div class="img">
-                                    <img
-                                            src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
-                                            alt=""
-                                    />
-                                </div>
-
-                                <div class="product-info">
-                                    <div class="product-name">
-                                        Đèn quạt tích hợp bàn chống thấm nước trang trí sân vườn phong cách Châu Âu DQ00682
-                                    </div>
-                                    <p class="original-price">2.000.000 VND</p>
-                                    <div class="price-discount">
-                                        <p class="product-price">1.800.000VND</p>
-                                        <p class="discount-percentage">-10%</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="product-hot-item">
-                            <a href="user/product-detail.jsp">
-                                <div class="img">
-                                    <img
-                                            src="https://denhoamy.vn/upload/attachment/thumb/8519den-quat-tich-hop-ban-chong-tham-nuoc-trang-tri-san-vuon-phong-cach-chau-au-dq00682-08.jpg"
-                                            alt=""
-                                    />
-                                </div>
-
-                                <div class="product-info">
-                                    <div class="product-name">
-                                        Đèn quạt tích hợp bàn chống thấm nước trang trí sân vườn phong cách Châu Âu DQ00682
-                                    </div>
-                                    <p class="original-price">2.000.000 VND</p>
-                                    <div class="price-discount">
-                                        <p class="product-price">1.800.000VND</p>
-                                        <p class="discount-percentage">-10%</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
