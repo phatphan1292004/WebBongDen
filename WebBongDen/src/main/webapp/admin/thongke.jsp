@@ -32,7 +32,6 @@
   />
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css">
-  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/admin_css/productAdmin.css">
 </head>
 <body>
 <div class="wrapper">
@@ -50,22 +49,26 @@
           <div class="chart-selection">
             <div class="left">
               <label for="statistic-type">Chọn loại thống kê:</label>
-              <select id="statistic-type">
-                <option value="monthly">Thống kê theo tháng</option>
+              <select id="statistic-type" name="statisticType">
+                <option value="monthly" selected>Thống kê theo tháng</option>
                 <option value="yearly">Thống kê theo năm</option>
               </select>
             </div>
             <div class="right">
-              <div class="input-group" id="month-input-group">
+              <div class="input-group" id="month-input-group" style="display: block;"> <!-- Mặc định hiển thị -->
                 <label for="month">Năm:</label>
                 <input
                         type="number"
                         id="month"
+                        name="year"
                         placeholder="Nhập năm"
+                        value="2025"
+                        min="2000"
+                        max="2100"
                         required
                 />
               </div>
-              <button id="submit-btn">Xem Thống Kê</button>
+              <button id="submit-btn" type="button">Xem Thống Kê</button>
             </div>
           </div>
 
@@ -78,7 +81,7 @@
     </div>
   </div>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/thongke.js" defer></script>
+<script src="${pageContext.request.contextPath}/admin/admin_js/thongke.js?version=${System.currentTimeMillis()}" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
