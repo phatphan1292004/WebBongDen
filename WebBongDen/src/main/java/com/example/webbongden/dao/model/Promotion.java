@@ -26,6 +26,13 @@ public class Promotion {
         this.promotionType = promotionType;
     }
 
+    public Promotion(String promotionName, Date endDay, double discountPercent, String promotionType) {
+        this.promotionName = promotionName;
+        this.endDay = endDay;
+        this.discountPercent = discountPercent;
+        this.promotionType = promotionType;
+    }
+
     // Getter và Setter
     public int getId() {
         return id;

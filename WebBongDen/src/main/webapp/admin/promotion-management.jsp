@@ -50,30 +50,29 @@
                     <div class="add-super-sale">
                         <!-- Khu vực thêm sản phẩm giảm giá -->
                         <div id="add-promotion-area">
-                            <h3>THÊM CHƯƠNG TRÌNH GIẢM GIÁ</h3>
-                            <form id="promotion-form">
+                            <h3>THÊM CHƯƠNG TRÌNH ĐẶC BIỆT</h3>
+                            <form id="promotion-form" method="post" action="add-promotion">
                                 <div class="form-group">
-                                    <label for="promotion-name">Tên Chương Trình:</label>
-                                    <input type="text" id="promotion-name" placeholder="Nhập tên chương trình" required />
+                                    <label for="promotionName">Tên Chương Trình:</label>
+                                    <input type="text" id="promotionName" name="promotionName" placeholder="Nhập tên chương trình" required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="promotion-description">Mô Tả:</label>
-                                    <textarea id="promotion-description" placeholder="Nhập mô tả chương trình" required></textarea>
+                                    <label for="promotionEndDate">Ngày Kết Thúc:</label>
+                                    <input type="date" id="promotionEndDate" name="promotionEndDate" required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="promotion-end-date">Ngày Kết Thúc:</label>
-                                    <input type="date" id="promotion-end-date" required />
+                                    <label for="promotionDiscount">Mức Giảm Giá (%):</label>
+                                    <input type="number" id="promotionDiscount" name="promotionDiscount" min="1" max="100" placeholder="Nhập mức giảm" required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="promotion-discount">Mức Giảm Giá (%):</label>
-                                    <input type="number" id="promotion-discount" min="1" max="100" placeholder="Nhập mức giảm" required />
+                                    <label for="promotionType">Loại Khuyến Mãi:</label>
+                                    <select id="promotionType" name="promotionType">
+                                        <option value="gift">Quà Tặng</option>
+                                        <option value="discount">Giảm Giá</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="promotion-gift">Quà Tặng:</label>
-                                    <input type="text" id="promotion-gift" placeholder="Nhập quà tặng kèm" />
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" id="add-promotion-btn">Lưu Chương Trình</button>
+                                    <button type="submit" id="add-promotion-btn">Thêm Chương Trình</button>
                                 </div>
                             </form>
                         </div>
@@ -190,8 +189,9 @@
         </div>
     </div>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/productAdmin.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/admin/admin_js/promotionAdmin.js" defer></script>
 </body>
 </html>

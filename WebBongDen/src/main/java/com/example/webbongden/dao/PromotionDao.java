@@ -27,6 +27,22 @@ public class PromotionDao {
         );
     }
 
+    //Thêm chương trình mới
+    public boolean addPromotion(Promotion promotion) {
+        String sql = "INSERT INTO promotions (promotion_name, start_day, end_day, discount_percent, promotion_type) " +
+                "VALUES (:name, NOW(), :endDate, :discount, :type)";
+
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("name", promotion.getPromotionName())
+                        .bind("endDate", promotion.getEndDay())
+                        .bind("discount", promotion.getDiscountPercent())
+                        .bind("type", promotion.getPromotionType())
+                        .execute() > 0
+        );
+    }
+
+
     public static void main(String[] args) {
         // Tạo đối tượng PromotionDao
         PromotionDao promotionDao = new PromotionDao();
