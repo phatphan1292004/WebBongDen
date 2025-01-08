@@ -79,17 +79,25 @@
 
                         <div id="add-product-to-promotion-area">
                             <h3>THÊM SẢN PHẨM VÀO CHƯƠNG TRÌNH</h3>
-                            <form id="product-to-promotion-form">
-                                <div class="form-group">
-                                    <label for="promotion-id">Chọn Chương Trình:</label>
-                                    <select id="promotion-id" required>
+                            <form id="product-to-promotion-form" method="post" action="add-product-to-promotion">
+                            <div class="form-group">
+                                    <label for="promotion-select">Chọn Chương Trình:</label>
+                                    <select id="promotion-select" name="promotionId" required>
                                         <option value="">Chọn chương trình</option>
                                         <!-- Các chương trình sẽ được thêm vào đây -->
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="product-id">ID Sản Phẩm:</label>
-                                    <input type="text" id="product-id" placeholder="Nhập ID sản phẩm" required />
+                                    <input
+                                            type="text"
+                                            id="product-id"
+                                            name="productId"
+                                            placeholder="Nhập ID sản phẩm"
+                                            required
+                                            pattern="^[0-9]+$"
+                                    title="ID sản phẩm phải là số"
+                                    />
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" id="add-product-to-promotion-btn">Thêm Sản Phẩm</button>
@@ -100,46 +108,20 @@
 
                     <!-- Danh sách sản phẩm giảm giá -->
                     <div class="list-discount">
-                        <h3>DANH SÁCH CHƯƠNG TRÌNH GIẢM GIÁ</h3>
-                        <table>
+                        <h3>DANH SÁCH CHƯƠNG TRÌNH ĐẶC BIỆT</h3>
+                        <table id="promotion-table">
                             <thead>
                             <tr>
-                                <th>ID chương trình</th>
+                                <th>Tên chương trình</th>
                                 <th>Ngày bắt đầu</th>
                                 <th>Ngày kết thúc</th>
-                                <th>Tên chương trình</th>
+                                <th>Loại chương trình</th>
                                 <th>DSSP</th>
                                 <th>Hành động</th>
                             </tr>
                             </thead>
                             <tbody id="super-sale-list">
                             <!-- Dữ liệu mẫu -->
-                            <tr>
-                                <td>CT000</td>
-                                <td>2024-11-01</td>
-                                <td>2024-11-30</td>
-                                <td>Siêu Sale Tháng 11</td>
-                                <td>
-                                    <button class="view-details">Xem chi tiết</button>
-                                </td>
-                                <td>
-                                    <button class="edit-btn">Chỉnh sửa</button>
-                                    <button class="delete-btn">Xóa</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>CT001</td>
-                                <td>2024-12-01</td>
-                                <td>2024-12-25</td>
-                                <td>Giáng Sinh Rực Rỡ</td>
-                                <td>
-                                    <button class="view-details">Xem chi tiết</button>
-                                </td>
-                                <td>
-                                    <button class="edit-btn">Chỉnh sửa</button>
-                                    <button class="delete-btn">Xóa</button>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -192,6 +174,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="${pageContext.request.contextPath}/admin/admin_js/promotionAdmin.js" defer></script>
+<script src="${pageContext.request.contextPath}/admin/admin_js/promotionAdmin.js?v=${System.currentTimeMillis()}" defer></script>
 </body>
 </html>
