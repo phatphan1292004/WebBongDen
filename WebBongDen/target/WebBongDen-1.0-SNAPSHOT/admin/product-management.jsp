@@ -32,7 +32,6 @@
   />
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css">
-  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin_css/productAdmin.css">
 </head>
 <style>
   #edit-product-btn, #save-product-btn {
@@ -57,7 +56,7 @@
 
     <div class="main-content">
       <div class="tab-content" id="product-management-content">
-        <div class="product-stats">8
+        <div class="product-stats">
           <div class="stat-card">
             <div class="card-image">
               <img src="${pageContext.request.contextPath}/assets/img/adminpage/product.png" alt="" />

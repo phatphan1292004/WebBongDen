@@ -104,9 +104,16 @@ public class OrderDao {
 
         // Lấy danh sách chi tiết đơn hàng theo orderId
         public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
-            String sql = "SELECT product_id AS productId, order_id AS orderId, quantity, " +
-                    "unit_price AS unitPrice, item_discount AS itemDiscount, amount " +
-                    "FROM order_details WHERE order_id = :orderId";
+            String sql = "SELECT od.product_id AS productId, " +
+                    "       od.order_id AS orderId, " +
+                    "       p.product_name AS productName, " +
+                    "       od.quantity AS quantity, " +
+                    "       od.unit_price AS unitPrice, " +
+                    "       od.item_discount AS itemDiscount, " +
+                    "       od.amount AS amount " +
+                    "FROM order_details od " +
+                    "JOIN products p ON od.product_id = p.id " +
+                    "WHERE od.order_id = :orderId";
 
             return jdbi.withHandle(handle ->
                     handle.createQuery(sql)
@@ -114,6 +121,7 @@ public class OrderDao {
                             .map((rs, ctx) -> new OrderDetail(
                                     rs.getInt("productId"),
                                     rs.getInt("orderId"),
+                                    rs.getString("productName"), // Lấy tên sản phẩm
                                     rs.getInt("quantity"),
                                     rs.getDouble("unitPrice"),
                                     rs.getDouble("itemDiscount"),
@@ -122,6 +130,7 @@ public class OrderDao {
                             .list()
             );
         }
+
 
     public List<Order> getOrdersByKeyword(String keyword) {
         String sql = "SELECT o.id AS orderId, c.cus_name AS customerName, " +

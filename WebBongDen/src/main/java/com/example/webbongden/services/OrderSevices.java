@@ -55,6 +55,10 @@ public class OrderSevices {
         return orderDao.getTotalRevenue();
     }
 
+    public List<OrderDetail> getOrderDetailsById(int orderId) {
+        return orderDao.getOrderDetailsByOrderId(orderId);
+    }
+
     public void createOrderAndInvoice(Invoices invoice, List<OrderDetail> orderDetails, Customer customerInfo) {
         try {
             // Bước 1: Tạo hóa đơn

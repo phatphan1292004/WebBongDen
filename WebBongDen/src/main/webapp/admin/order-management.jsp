@@ -104,10 +104,10 @@
                     </div>
                 </div>
 
-                <div class="overlay" data-index="3">
+                <div class="overlay">
                     <div class="invoice-details">
                         <div class="invoice-header">
-                            <p>CHI TIẾT HÓA ĐƠN</p>
+                            <p>CHI TIẾT ĐƠN HÀNG</p>
                             <div class="close-icon" id="close-invoice-details">
                                 <i class="fa-solid fa-xmark"></i>
                             </div>
@@ -141,41 +141,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="order-items-body">
-                                <tr>
-                                    <td>1</td>
-                                    <td>Đèn Trang Trí Hoa Mỹ</td>
-                                    <td>5</td>
-                                    <td>2,000,000 VND</td>
-                                    <td>10,000,000 VND</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Đèn Chùm Pha Lê</td>
-                                    <td>2</td>
-                                    <td>3,500,000 VND</td>
-                                    <td>7,000,000 VND</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Đèn Led Đổi Màu</td>
-                                    <td>10</td>
-                                    <td>500,000 VND</td>
-                                    <td>5,000,000 VND</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Đèn Tường Hiện Đại</td>
-                                    <td>3</td>
-                                    <td>1,200,000 VND</td>
-                                    <td>3,600,000 VND</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Đèn Bàn Gốm Sứ</td>
-                                    <td>4</td>
-                                    <td>1,000,000 VND</td>
-                                    <td>4,000,000 VND</td>
-                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -200,28 +166,12 @@
                             <th>Ngày giao dự kiến</th>
                             <th>Địa chỉ</th>
                             <th>Trạng thái</th>
-                            <th>Hóa đơn</th>
+                            <th>Chi tiết</th>
                             <th>Thao tác</th>
                         </tr>
                         </thead>
                         <tbody id="order-table-body">
-                        <tr>
-                            <td>101</td>
-                            <td>Nguyễn Văn A</td>
-                            <td>2024-12-16</td>
-                            <td>2024-12-20</td>
-                            <td>123 Đường ABC, Quận 1, TP.HCM</td>
-                            <td>Chờ xử lý</td>
-                            <td><button class="view-details">Chi tiết</button></td>
-                            <td>
-                                <button class="approve-order" onclick="approveOrder('101')">
-                                    <i class="fa-solid fa-check"></i>
-                                </button>
-                                <button class="reject-order" onclick="rejectOrder('101')">
-                                    <i class="fa-solid fa-times"></i>
-                                </button>
-                            </td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -229,8 +179,9 @@
         </div>
     </div>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/orderAdmin.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="${pageContext.request.contextPath}/admin/admin_js/orderAdmin.js?v=${System.currentTimeMillis()}" defer></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
