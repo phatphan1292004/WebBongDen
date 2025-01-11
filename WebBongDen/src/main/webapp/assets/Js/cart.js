@@ -207,6 +207,10 @@ function updateQuantity(button, change) {
         if (data.success) {
           // Cập nhật tổng tiền trên giao diện
           document.querySelector('.total-price').textContent = `${data.totalPrice.toLocaleString()} VND`;
+          const quantityElement = document.querySelector(".quantity-product");
+          if (quantityElement && data.totalQuantity) {
+            quantityElement.textContent = data.totalQuantity;
+          }
         } else {
           Notiflix.Notify.failure('Cập nhật thất bại. Vui lòng thử lại.');
         }

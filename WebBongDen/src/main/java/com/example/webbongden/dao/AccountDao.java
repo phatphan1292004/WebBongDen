@@ -16,7 +16,7 @@ public class AccountDao {
 
     // Lây tat ca tai khoan kh
     public List<Account> getAllAccounts() {
-        String sql = "SELECT id, username, email, role FROM accounts";
+        String sql = "SELECT id, username, email, created_at, role FROM accounts";
 
         return jdbi.withHandle(handle ->
                 handle.createQuery(sql)
@@ -24,6 +24,7 @@ public class AccountDao {
                                 rs.getInt("id"),
                                 rs.getString("username"),
                                 rs.getString("email"),
+                                rs.getDate("created_at"),
                                 rs.getString("role")
                         ))
                         .list()
@@ -126,6 +127,60 @@ public class AccountDao {
                         .orElse(null) // Trả về null nếu không tìm thấy
         );
     }
+
+    //Lay account theo id
+    public Account getAccountById(int accountId) {
+        String sql = "SELECT " +
+                "id, " +
+                "customer_id, " +
+                "cus_name, " +
+                "email, " +
+                "username, " +
+                "password, " +
+                "created_at, " +
+                "role " +
+                "FROM accounts " +
+                "WHERE id = :accountId";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("accountId", accountId) // Gắn giá trị ID
+                        .map((rs, ctx) -> new Account(
+                                rs.getInt("id"),
+                                rs.getInt("customer_id"),
+                                rs.getString("cus_name"),
+                                rs.getString("email"),
+                                rs.getString("username"),
+                                rs.getString("password"),
+                                rs.getDate("created_at"),
+                                rs.getString("role")
+                        ))
+                        .findOne() // Trả về kết quả đầu tiên (nếu có)
+                        .orElse(null) // Nếu không có bản ghi, trả về null
+        );
+    }
+
+    public boolean updateAccount(Account account) {
+        String sql = "UPDATE accounts " +
+                "SET cus_name = :cusName, " +
+                "username = :username, " +
+                "email = :email, " +
+                "password = :password, " +
+                "role = :role " +
+                "WHERE id = :id";
+
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("cusName", account.getCusName())
+                        .bind("username", account.getUsername())
+                        .bind("email", account.getEmail())
+                        .bind("password", account.getPassword())
+                        .bind("role", account.getRole())
+                        .bind("id", account.getId())
+                        .execute() > 0
+        );
+    }
+
 
     public static void main(String[] args) {
         AccountDao accountDao = new AccountDao();

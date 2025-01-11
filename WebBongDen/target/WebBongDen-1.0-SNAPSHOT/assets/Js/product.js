@@ -67,30 +67,91 @@ document.addEventListener('DOMContentLoaded', function() {
   toggleCategoryMenu()
 
 
-  const buyBtn = document.getElementById("addToCart");
-  if (buyBtn) { // Kiểm tra nếu nút tồn tại
-    buyBtn.addEventListener('click', function () {
-      // Lấy productId từ thuộc tính data-id
-      const productId = parseInt(buyBtn.dataset.id, 10); // Sử dụng parseInt (cơ số 10)
+  // const buyBtn = document.getElementById("addToCart");
+  // if (buyBtn) { // Kiểm tra nếu nút tồn tại
+  //   buyBtn.addEventListener('click', function () {
+  //     // Lấy productId từ thuộc tính data-id
+  //     const productId = parseInt(buyBtn.dataset.id, 10); // Sử dụng parseInt (cơ số 10)
+  //
+  //     // Gửi request đến server
+  //     fetch('/WebBongDen_war/add-to-cart', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded',
+  //       },
+  //       body: `productId=${productId}`,
+  //     })
+  //         .then(response => {
+  //           if (response.ok) {
+  //             alert('Sản phẩm đã được thêm vào giỏ hàng!');
+  //           } else {
+  //             alert('Có lỗi xảy ra, vui lòng thử lại!');
+  //           }
+  //         })
+  //         .catch(error => console.error('Error:', error));
+  //   });
+  // } else {
+  //   console.error("Nút 'addToCart' không tồn tại trong DOM.");
+  // }
+    const buyBtn = document.getElementById("addToCart");
 
-      // Gửi request đến server
-      fetch('/WebBongDen_war/add-to-cart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `productId=${productId}`,
-      })
-          .then(response => {
-            if (response.ok) {
-              alert('Sản phẩm đã được thêm vào giỏ hàng!');
-            } else {
-              alert('Có lỗi xảy ra, vui lòng thử lại!');
-            }
-          })
-          .catch(error => console.error('Error:', error));
-    });
-  } else {
-    console.error("Nút 'addToCart' không tồn tại trong DOM.");
-  }
+    if (buyBtn) { // Kiểm tra nếu nút tồn tại
+      buyBtn.addEventListener('click', function () {
+        // Lấy productId từ thuộc tính data-id
+        const productId = parseInt(buyBtn.dataset.id, 10); // Sử dụng parseInt (cơ số 10)
+
+        // Gửi request đến server
+        fetch('/WebBongDen_war/add-to-cart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `productId=${productId}`,
+        })
+            .then(response => {
+              if (response.ok) {
+                return response.json(); // Parse JSON response
+              } else {
+                throw new Error('Failed to add product to cart');
+              }
+            })
+            .then(data => {
+              if (data.status === 'success') {
+                // Hiển thị thông báo thành công bằng SweetAlert
+                Swal.fire({
+                  title: 'Thành công!',
+                  text: 'Sản phẩm đã được thêm vào giỏ hàng!',
+                  icon: 'success',
+                  timer: 1500,
+                  showConfirmButton: false
+                });
+
+                // Cập nhật số lượng sản phẩm trong giỏ hàng
+                const quantityElement = document.querySelector(".quantity-product");
+                if (quantityElement && data.cartQuantity) {
+                  quantityElement.textContent = data.cartQuantity;
+                }
+              } else {
+                // Hiển thị lỗi từ server
+                Swal.fire({
+                  title: 'Lỗi!',
+                  text: data.message || 'Không thể thêm sản phẩm vào giỏ hàng.',
+                  icon: 'error',
+                  confirmButtonText: 'OK'
+                });
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              Swal.fire({
+                title: 'Lỗi!',
+                text: 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+              });
+            });
+      });
+    } else {
+      console.error("Nút 'addToCart' không tồn tại trong DOM.");
+    }
 });

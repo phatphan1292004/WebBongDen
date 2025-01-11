@@ -60,6 +60,10 @@ public class Cart {
         return cartItems;
     }
 
+    public int getTotalQuantity() {
+        return cartItems.stream().mapToInt(CartItem::getQuantity).sum();
+    }
+
     public boolean isEmpty() {
         return cartItems.isEmpty();
     }

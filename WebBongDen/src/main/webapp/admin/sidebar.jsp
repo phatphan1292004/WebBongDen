@@ -10,11 +10,6 @@
 <head>
     <title>Title</title>
 </head>
-<style>
-    .active {
-        background-color: red;
-    }
-</style>
 <body>
 <div class="sidebar">
     <div class="nav">

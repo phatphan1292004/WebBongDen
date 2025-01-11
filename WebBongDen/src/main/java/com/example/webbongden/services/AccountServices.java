@@ -31,4 +31,12 @@ public class AccountServices {
     public Account authenticate(String username, String password) {
         return accountDao.authenticate(username, password);
     }
+
+    public Account getAccountById(int accountId) {
+        return accountDao.getAccountById(accountId);
+    }
+
+    public boolean updateAccount(Account account) {
+        return accountDao.updateAccount(account);
+    }
 }

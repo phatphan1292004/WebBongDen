@@ -158,47 +158,72 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.target.classList.contains("delete-product")) {
             const productId = event.target.dataset.id; // Lấy ID sản phẩm từ data-id
 
-            if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
-                // Gửi yêu cầu xóa qua AJAX
-                fetch("deleteProduct", {
-                    method: "POST",
-                    body: new URLSearchParams({
-                        action: "delete-product",
-                        id: productId
+            // Hiển thị hộp thoại xác nhận với SweetAlert
+            Swal.fire({
+                title: "Bạn có chắc chắn?",
+                text: "Bạn sẽ không thể khôi phục sản phẩm này!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Xóa",
+                cancelButtonText: "Hủy"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Gửi yêu cầu xóa qua AJAX
+                    fetch("deleteProduct", {
+                        method: "POST",
+                        body: new URLSearchParams({
+                            action: "delete-product",
+                            id: productId
+                        })
                     })
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Có lỗi xảy ra trong quá trình xóa!");
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.status === "success") {
-                            alert(data.message); // Hiển thị thông báo thành công
-
-                            // Tìm dòng cha của nút xóa
-                            const row = event.target.closest("tr");
-
-                            if (row) {
-                                // Sử dụng DataTables API để xóa dòng
-                                const table = $('#product-table').DataTable();
-                                table.row(row).remove().draw(false); // Giữ nguyên trang và cập nhật tổng số
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Có lỗi xảy ra trong quá trình xóa!");
                             }
-                        } else {
-                            alert(data.message); // Thông báo lỗi từ server
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        alert("Có lỗi xảy ra khi xóa sản phẩm!");
-                    });
-            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === "success") {
+                                Swal.fire({
+                                    title: "Đã xóa!",
+                                    text: data.message,
+                                    icon: "success",
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                });
+
+                                // Tìm dòng cha của nút xóa
+                                const row = event.target.closest("tr");
+
+                                if (row) {
+                                    // Sử dụng DataTables API để xóa dòng
+                                    const table = $('#product-table').DataTable();
+                                    table.row(row).remove().draw(false); // Giữ nguyên trang và cập nhật tổng số
+                                }
+                            } else {
+                                Swal.fire({
+                                    title: "Lỗi",
+                                    text: data.message,
+                                    icon: "error",
+                                    confirmButtonText: "OK"
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                            Swal.fire({
+                                title: "Lỗi",
+                                text: "Có lỗi xảy ra khi xóa sản phẩm!",
+                                icon: "error",
+                                confirmButtonText: "OK"
+                            });
+                        });
+                }
+            });
         }
     });
-
-
-
 
     document
         .getElementById("edit-product-btn")

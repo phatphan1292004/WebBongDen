@@ -17,14 +17,32 @@ public class Account {
     }
 
     // Constructor đầy đủ tham số
-    public Account(int id, int customerId, String email, String cusName, String username, String password, Date createdAt, String role) {
+    public Account(
+            int id,
+            int customerId,
+            String cusName, // Tên khách hàng
+            String email,   // Email
+            String username,
+            String password,
+            Date createdAt,
+            String role
+    ) {
         this.id = id;
         this.customerId = customerId;
-        this.email = email;
         this.cusName = cusName;
+        this.email = email;
         this.username = username;
         this.password = password;
         this.createdAt = createdAt;
+        this.role = role;
+    }
+
+
+    public Account(int id, String username, String email, java.util.Date createdAt, String role) {
+        this.id = id;
+        this.email = email;
+        this.createdAt = createdAt;
+        this.username = username;
         this.role = role;
     }
 

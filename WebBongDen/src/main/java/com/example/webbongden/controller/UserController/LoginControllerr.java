@@ -34,7 +34,7 @@ public class LoginControllerr extends HttpServlet {
 
             // Phân quyền và chuyển hướng
             if ("admin".equals(account.getRole())) {
-                response.sendRedirect("admin"); // Chuyển đến trang admin
+                response.sendRedirect("admin?page=dashboard-management"); // Chuyển đến trang admin
             } else {
                 response.sendRedirect("home"); // Chuyển đến trang user
             }

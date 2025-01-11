@@ -1,9 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="com.example.webbongden.dao.model.Cart" %>
 <%
     HttpSession httpSession  = request.getSession(false); // Lấy session hiện tại (nếu có)
     String username = (String) httpSession.getAttribute("username");
+    Cart cart = (Cart) httpSession.getAttribute("cart");
+    int totalQuantity = 0;
+
+    if (cart != null) {
+        totalQuantity = cart.getTotalQuantity(); // Giả sử bạn đã có phương thức getTotalQuantity() trong lớp Cart
+    }
 %>
 <header class="header">
     <div class="header-top">
@@ -55,7 +62,7 @@
                 <a class="info-item" href="/WebBongDen_war/cart">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Giỏ hàng</span>
-                    <p>(<span class="quantity-product">0</span>)</p>
+                    <p>(<span class="quantity-product"><%= totalQuantity %></span>)</p>
                 </a>
 
                 <%

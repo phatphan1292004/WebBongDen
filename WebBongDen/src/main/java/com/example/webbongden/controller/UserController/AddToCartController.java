@@ -17,9 +17,6 @@ public class AddToCartController extends HttpServlet {
     static {
         productService = new ProductServices();
     }
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -35,21 +32,44 @@ public class AddToCartController extends HttpServlet {
         // Lấy productId từ request
         String productIdParam = request.getParameter("productId");
         if (productIdParam == null || productIdParam.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Product ID is missing");
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("{\"status\":\"error\",\"message\":\"Product ID is missing\"}");
             return;
         }
 
-        int productId = Integer.parseInt(productIdParam);
+        try {
+            int productId = Integer.parseInt(productIdParam);
 
-        // Lấy thông tin sản phẩm từ ProductService
-        Product product = productService.getProductById(productId);
+            // Lấy thông tin sản phẩm từ ProductService
+            Product product = productService.getProductById(productId);
 
-        if (product != null) {
-            // Thêm sản phẩm vào giỏ hàng
-            CartItem item = new CartItem(product.getId(), product.getProductName(), 1, product.getUnitPrice(),product.getDiscountedPrice(), product.getImageUrl());
-            cart.addItem(item);
+            if (product != null) {
+                // Thêm sản phẩm vào giỏ hàng
+                CartItem item = new CartItem(
+                        product.getId(),
+                        product.getProductName(),
+                        1,
+                        product.getUnitPrice(),
+                        product.getDiscountedPrice(),
+                        product.getImageUrl()
+                );
+                cart.addItem(item);
+            }
+
+            // Tính tổng số lượng sản phẩm trong giỏ
+            int totalQuantity = cart.getTotalQuantity();
+
+            // Trả về phản hồi JSON thủ công
+            String jsonResponse = "{\"status\":\"success\",\"cartQuantity\":" + totalQuantity + "}";
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(jsonResponse);
+
+        } catch (NumberFormatException e) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("{\"status\":\"error\",\"message\":\"Invalid Product ID format\"}");
         }
-
-        response.setStatus(HttpServletResponse.SC_OK);
     }
 }

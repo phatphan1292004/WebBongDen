@@ -340,7 +340,7 @@ public class ProductDao {
                 "FROM products p " +
                 "JOIN order_details od ON p.id = od.product_id " +
                 "JOIN orders o ON od.order_id = o.id " +
-                "WHERE o.order_status = 'Completed' " +
+                "WHERE o.order_status = 'Pending' " +
                 "GROUP BY p.id, p.product_name, p.stock_quantity " +
                 "ORDER BY quantitySold DESC " +
                 "LIMIT 5";

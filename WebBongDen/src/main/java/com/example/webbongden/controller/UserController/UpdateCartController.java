@@ -31,9 +31,10 @@ public class UpdateCartController extends HttpServlet {
 
             // Lấy tổng tiền sau khi cập nhật
             double totalPrice = cart != null ? cart.getTotalPriceNumber() : 0;
+            int totalQuantity = cart != null ? cart.getTotalQuantity() : 0;
 
-            // Trả về JSON chứa tổng tiền
-            response.getWriter().write("{\"success\": true, \"totalPrice\": " + totalPrice + "}");
+            // Trả về JSON chứa tổng tiền và tổng số lượng
+            response.getWriter().write("{\"success\": true, \"totalPrice\": " + totalPrice + ", \"totalQuantity\": " + totalQuantity + "}");
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("{\"success\": false, \"message\": \"Lỗi khi cập nhật\"}");

@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { data: "id" }, // ID tài khoản
                 { data: "username" }, // Tên người dùng
                 { data: "email" }, // Email
+                {data: "createdAt"},
                 { data: "role" }, // Vai trò
                 {
                     data: null, // Hành động: Nút xem chi tiết
@@ -43,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 info: "Hiển thị _START_ đến _END_ của _TOTAL_ sản phẩm",
             },
         });
+
         $("#search-btn-account").on("click", function () {
             table.ajax.reload(); // Reload lại bảng với dữ liệu lọc mới
         });
@@ -100,6 +102,93 @@ document.addEventListener("DOMContentLoaded", function () {
                         });
                     }
                     console.error("Error:", xhr);
+                },
+            });
+        });
+
+        $("#account-table").on("click", ".edit-account", function () {
+            const accountId = $(this).data("id");
+            $(".overlay").addClass("active");
+            // Gửi yêu cầu AJAX để lấy thông tin tài khoản
+            $.ajax({
+                url: "/WebBongDen_war/update-account",
+                type: "GET",
+                data: { id: accountId },
+                success: function (data) {
+                    // Đổ dữ liệu vào form
+                    $("#edit-id").val(data.id);
+                    $("#edit-cusName").val(data.cusName);
+                    $("#edit-username").val(data.username);
+                    $("#edit-email").val(data.email);
+                    $("#edit-password").val(data.password);
+                    $("#edit-role").val(data.role);
+                    $("#edit-created-at").val(data.createdAt);
+
+                    // Hiển thị form chỉnh sửa
+                    $("#edit-account-form-container").show();
+                },
+                error: function (xhr) {
+                    alert("Không thể tải thông tin tài khoản. Lỗi: " + xhr.responseText);
+                },
+            });
+        });
+
+        $(".close-button").on("click", function() {
+            $(".overlay").removeClass("active");
+        });
+
+        $("#edit-account-form").on("submit", function (e) {
+            e.preventDefault(); // Ngăn hành động gửi form mặc định
+
+            // Thu thập dữ liệu từ form
+            const formData = {
+                id: $("#edit-id").val(), // ID tài khoản (readonly nên vẫn cần gửi để backend biết tài khoản nào cần cập nhật)
+                cusName: $("#edit-cusName").val(), // Tên khách hàng
+                username: $("#edit-username").val(),
+                email: $("#edit-email").val(), // Email
+                password: $("#edit-password").val(), // Mật khẩu
+                role: $("#edit-role").val(), // Vai trò
+                createdAt: $("#edit-created-at").val() // Ngày tạo (readonly, nhưng cần nếu backend kiểm tra)
+            };
+
+            console.log("Dữ liệu gửi:", formData); // Debug dữ liệu
+
+            // Gửi yêu cầu AJAX đến server để cập nhật tài khoản
+            $.ajax({
+                url: "/WebBongDen_war/update-account", // URL servlet xử lý
+                type: "POST", // Phương thức HTTP
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formData), // Dữ liệu JSON từ form
+                success: function (response) {
+                    if (response.success) {
+                        $(".overlay").removeClass('active');
+                        // Hiển thị thông báo thành công trước khi ẩn form
+                        Swal.fire({
+                            icon: "success",
+                            title: "Thành công!",
+                            text: response.message || "Cập nhật tài khoản thành công!",
+                        }).then(() => {
+                            // Chỉ ẩn form và reload DataTable sau khi người dùng bấm OK trên thông báo
+                            // Reload lại DataTable để hiển thị dữ liệu mới
+                            $("#account-table").DataTable().ajax.reload();
+                            // Reset form sau khi cập nhật
+                            $("#edit-account-form")[0].reset();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Lỗi!",
+                            text: response.message || "Cập nhật không thành công.",
+                        });
+                    }
+                },
+                error: function (xhr) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Lỗi!",
+                        text: "Có lỗi xảy ra trong quá trình gửi yêu cầu.",
+                    });
+                    console.error("Error:", xhr.responseText);
                 },
             });
         });
