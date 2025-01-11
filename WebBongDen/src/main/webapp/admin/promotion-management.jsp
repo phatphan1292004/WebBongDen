@@ -34,6 +34,64 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/admin_css/promotionAdmin.css">
 </head>
+<style>
+    /* Tổng quát: Thiết kế bảng */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .table th, .table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+    }
+
+    /* Header của bảng */
+    .table thead th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* Dòng dữ liệu */
+    .table tbody tr:nth-child(even) {
+        background-color: #f9f9f9; /* Màu nền cho dòng chẵn */
+    }
+
+    .table tbody tr:nth-child(odd) {
+        background-color: #fff; /* Màu nền cho dòng lẻ */
+    }
+
+    .table tbody tr:hover {
+        background-color: #f1f1f1; /* Hiệu ứng hover */
+    }
+
+    /* Nút xóa */
+    .btn-danger {
+        background-color: #e74c3c;
+        color: #fff;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .btn-danger:hover {
+        background-color: #c0392b; /* Màu đỏ đậm hơn khi hover */
+        transition: 0.3s;
+    }
+
+    /* Căn chỉnh các ô */
+    .table th, .table td {
+        text-align: center; /* Canh giữa nội dung */
+        vertical-align: middle;
+    }
+</style>
 <body>
 <div class="wrapper">
     <%@ include file="header.jsp" %>

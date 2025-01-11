@@ -161,5 +161,170 @@ document.getElementById("product-to-promotion-form").addEventListener("submit", 
     }
 });
 
+$(document).on('click', '.view-details', function () {
+    const promotionId = $(this).data('id'); // Lấy ID chương trình khuyến mãi từ data-id
+
+    // Gửi yêu cầu GET tới API để lấy danh sách sản phẩm
+    $.ajax({
+        url: '/WebBongDen_war/get-products-by-promotion', // API trả về danh sách sản phẩm
+        type: 'GET',
+        data: { promotionId: promotionId },
+        success: function (response) {
+            if (response.success) {
+                // Nếu thành công, hiển thị danh sách sản phẩm
+                let productTable = `
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID SP</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Giá</th>
+                                <th>Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                response.data.forEach(product => {
+                    productTable += `
+                        <tr>
+                            <td>${product.id}</td>
+                            <td>${product.productName}</td>
+                            <td>${product.unitPrice}</td>
+                            <td>
+                                <button class="btn btn-danger delete-product-inpromotion" data-id="${product.id}" data-promotion-id="${promotionId}">
+                                    Xóa
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                productTable += `
+                        </tbody>
+                    </table>
+                `;
+
+                // Hiển thị danh sách sản phẩm trong SweetAlert modal
+                Swal.fire({
+                    title: 'Danh Sách Sản Phẩm',
+                    html: productTable, // Hiển thị bảng sản phẩm
+                    showCloseButton: true,
+                    width: '1000px'
+                });
+            } else {
+                // Nếu không có sản phẩm nào
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Thông báo',
+                    text: response.message || 'Không có sản phẩm nào trong chương trình khuyến mãi.',
+                });
+            }
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Không thể tải danh sách sản phẩm.',
+            });
+        }
+    });
+});
+
+// Xóa sản phẩm khỏi chương trình khuyến mãi
+$(document).on('click', '.delete-product-inpromotion', function () {
+    const productId = $(this).data('id');
+    const promotionId = $(this).data('promotion-id');
+
+    Swal.fire({
+        title: 'Bạn có chắc chắn?',
+        text: 'Hành động này không thể hoàn tác!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Xóa',
+        cancelButtonText: 'Hủy'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Gửi yêu cầu DELETE tới API để xóa sản phẩm khỏi chương trình khuyến mãi
+            $.ajax({
+                url: '/WebBongDen_war/remove-product-from-promotion',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ promotionId: promotionId, productId: productId }),
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire(
+                            'Đã xóa!',
+                            response.message || 'Sản phẩm đã được xóa khỏi chương trình khuyến mãi.',
+                            'success'
+                        ).then(() => {
+                            // Tải lại danh sách sản phẩm
+                            $('.view-details[data-id="' + promotionId + '"]').trigger('click');
+                        });
+                    } else {
+                        Swal.fire('Lỗi!', response.message || 'Không thể xóa sản phẩm.', 'error');
+                    }
+                },
+                error: function () {
+                    Swal.fire('Lỗi!', 'Không thể kết nối với máy chủ.', 'error');
+                }
+            });
+        }
+    });
+});
+
+$(document).on("click", ".delete-promotion", function () {
+    const promotionId = $(this).data("id"); // Lấy ID chương trình khuyến mãi từ data-id
+
+    Swal.fire({
+        title: "Bạn có chắc chắn?",
+        text: "Hành động này không thể hoàn tác!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xóa",
+        cancelButtonText: "Hủy",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Gửi yêu cầu DELETE tới API để xóa chương trình khuyến mãi
+            $.ajax({
+                url: "/WebBongDen_war/delete-promotion",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ promotionId: promotionId }), // Dữ liệu JSON chứa promotionId
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire(
+                            "Đã xóa!",
+                            response.message || "Chương trình khuyến mãi đã được xóa.",
+                            "success"
+                        ).then(() => {
+                            // Reload lại DataTable để cập nhật danh sách chương trình khuyến mãi
+                            $("#promotion-table").DataTable().ajax.reload();
+                        });
+                    } else {
+                        Swal.fire(
+                            "Lỗi!",
+                            response.message || "Không thể xóa chương trình khuyến mãi.",
+                            "error"
+                        );
+                    }
+                },
+                error: function () {
+                    Swal.fire(
+                        "Lỗi!",
+                        "Không thể kết nối với máy chủ.",
+                        "error"
+                    );
+                },
+            });
+        }
+    });
+});
+
+
 
 

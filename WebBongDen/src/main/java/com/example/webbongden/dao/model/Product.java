@@ -1,5 +1,6 @@
 package com.example.webbongden.dao.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,12 @@ public class Product {
         this.discountPercent = discountPercent;
         // Khởi tạo listImg với một hình ảnh đầu tiên từ URL
         this.listImg = List.of(new ProductImage(imageUrl, true));
+    }
+
+    public Product(int id, String productName, double unitPrice) {
+        this.id = id;
+        this.productName = productName;
+        this.unitPrice = unitPrice;
     }
 
 

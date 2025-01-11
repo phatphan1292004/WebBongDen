@@ -2,6 +2,7 @@ package com.example.webbongden.dao;
 
 import com.example.webbongden.dao.db.JDBIConnect;
 import com.example.webbongden.dao.model.Promotion;
+import com.example.webbongden.dao.model.Product;
 import org.jdbi.v3.core.Jdbi;
 
 import java.util.List;
@@ -110,5 +111,46 @@ public class PromotionDao {
             System.err.println("Đã xảy ra lỗi khi lấy danh sách chương trình giảm giá:");
             e.printStackTrace();
         }
+    }
+
+    public List<Product> getProductsByPromotionId(int promotionId) {
+        String sql = "SELECT p.id, p.product_name, p.unit_price " +
+                "FROM products p " +
+                "JOIN promotion_programs pp ON p.id = pp.product_id " +
+                "WHERE pp.promotion_id = :promotionId";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("promotionId", promotionId)
+                        .map((rs, ctx) -> new Product(
+                                rs.getInt("id"),
+                                rs.getString("product_name"),
+                                rs.getDouble("unit_price")
+                        ))
+                        .list()
+        );
+    }
+
+    public boolean deleteProductFromPromotion(int promotionId, int productId) {
+        String sql = "DELETE FROM promotion_programs WHERE promotion_id = :promotionId AND product_id = :productId";
+
+        int rowsAffected = jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("promotionId", promotionId)
+                        .bind("productId", productId)
+                        .execute()
+        );
+
+        return rowsAffected > 0; // Trả về true nếu xóa thành công
+    }
+
+    public boolean deletePromotionById(int promotionId) {
+        String sql = "DELETE FROM promotions WHERE id = :promotionId";
+
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("promotionId", promotionId)
+                        .execute() > 0
+        );
     }
 }
