@@ -1,4 +1,5 @@
 <%@ page import="com.example.webbongden.dao.model.SubCategory" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -31,7 +32,7 @@
           href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
   />
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
-  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css">
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css?v=2.0">
 </head>
 <style>
   #edit-product-btn, #save-product-btn {
@@ -456,7 +457,7 @@
                   <form id="category-form">
                     <label for="category-name">Tên danh mục:</label>
                     <input type="text" id="category-name" placeholder="Tên danh mục" required />
-                    <button type="button" id="add-category-btn" class="add-category-button">Thêm Danh mục</button>
+                    <button type="submit" id="add-category-btn" class="add-category-button">Thêm Danh mục</button>
                   </form>
                 </div>
 
@@ -466,11 +467,14 @@
                   <form id="sub-category-form">
                     <label for="parent-category">Danh mục Cha:</label>
                     <select id="parent-category">
-                      <!-- Danh mục cha sẽ được tải động -->
+                      <option value="" disabled selected>Chọn danh mục cha</option>
+                      <c:forEach var="category" items="${categories}">
+                        <option value="${category.id}">${category.categoryName}</option>
+                      </c:forEach>
                     </select>
                     <label for="sub-category-name">Tên danh mục con:</label>
                     <input type="text" id="sub-category-name" placeholder="Tên danh mục con" required />
-                    <button type="button" id="add-sub-category-btn" class="add-category-button">Thêm Danh mục Con</button>
+                    <button type="submit" id="add-sub-category-btn" class="add-category-button">Thêm Danh mục Con</button>
                   </form>
                 </div>
               </div>

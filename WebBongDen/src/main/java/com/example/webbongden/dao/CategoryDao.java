@@ -76,6 +76,49 @@ public class CategoryDao {
         );
     }
 
+    // Thêm danh mục cha
+    public boolean addCategory(String categoryName) {
+        return jdbi.withHandle(handle -> {
+            // Kiểm tra xem danh mục cha đã tồn tại chưa
+            boolean exists = handle.createQuery("SELECT COUNT(*) FROM categories WHERE category_name = :categoryName")
+                    .bind("categoryName", categoryName)
+                    .mapTo(int.class)
+                    .findOne()
+                    .orElse(0) > 0;
+
+            if (exists) {
+                throw new IllegalStateException("Danh mục cha đã tồn tại.");
+            }
+
+            // Nếu chưa tồn tại, thêm mới
+            return handle.createUpdate("INSERT INTO categories (category_name) VALUES (:categoryName)")
+                    .bind("categoryName", categoryName)
+                    .execute() > 0;
+        });
+    }
+
+    // Thêm danh mục con
+    public boolean addSubCategory(int categoryId, String subCategoryName) {
+        return jdbi.withHandle(handle -> {
+            // Kiểm tra xem danh mục con đã tồn tại chưa
+            boolean exists = handle.createQuery("SELECT COUNT(*) FROM sub_categories WHERE category_id = :categoryId AND name = :subCategoryName")
+                    .bind("categoryId", categoryId)
+                    .bind("subCategoryName", subCategoryName)
+                    .mapTo(int.class)
+                    .findOne()
+                    .orElse(0) > 0;
+
+            if (exists) {
+                throw new IllegalStateException("Danh mục con đã tồn tại.");
+            }
+
+            // Nếu chưa tồn tại, thêm mới
+            return handle.createUpdate("INSERT INTO sub_categories (category_id, name) VALUES (:categoryId, :name)")
+                    .bind("categoryId", categoryId)
+                    .bind("name", subCategoryName)
+                    .execute() > 0;
+        });
+    }
 
 
     public static void main(String[] args) {

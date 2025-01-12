@@ -34,4 +34,14 @@ public class CategorySevices {
     public List<SubCategory> getAllSubCategories() {
         return categoryDao.getAllSubCategories();
     }
+
+    // Thêm danh mục cha
+    public boolean addCategory(String categoryName) {
+        return categoryDao.addCategory(categoryName);
+    }
+
+    // Thêm danh mục con
+    public boolean addSubCategory(int categoryId, String subCategoryName) {
+        return categoryDao.addSubCategory(categoryId, subCategoryName);
+    }
 }

@@ -280,53 +280,123 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Hàm xóa danh mục cha
         function deleteSubCategory(subCategoryId, categoryId) {
-            fetch(`/WebBongDen_war/subcategories/delete/${subCategoryId}`, {
-                method: "DELETE",
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("Không thể xóa danh mục con");
-                    }
-                    Swal.fire({
-                        icon: "success",
-                        title: "Thành công",
-                        text: "Danh mục con đã được xóa.",
-                        showConfirmButton: false,
-                        timer: 1000, // Hiển thị thông báo ngắn
-                    })
-                })
-                .catch((error) => {
-                    Swal.fire("Lỗi", "Không thể xóa danh mục con.", "error");
-                });
+            Swal.fire({
+                title: "Bạn có chắc chắn?",
+                text: "Bạn có muốn xóa danh mục con này không? Hành động này không thể hoàn tác!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Có",
+                cancelButtonText: "Hủy",
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    fetch(`/WebBongDen_war/subcategories/delete/${subCategoryId}`, { method: "DELETE" })
+                        .then((response) => {
+                            if (!response.ok) throw new Error("Không thể xóa danh mục con");
+                            Swal.fire({
+                                icon: "success",
+                                title: "Thành công",
+                                text: "Danh mục con đã được xóa.",
+                                showConfirmButton: false,
+                                timer: 1000,
+                            });
+                        })
+                        .catch(() => Swal.fire("Lỗi", "Không thể xóa danh mục con.", "error"));
+                }
+            });
         }
 
 
 // Hàm xóa danh mục con
         function deleteCategory(categoryId) {
-            fetch(`/WebBongDen_war/categories/delete/${categoryId}`, {
-                method: "DELETE",
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        return response.json().then((data) => {
-                            throw new Error(data.message || "Không thể xóa danh mục");
-                        });
-                    }
-                    return response.json(); // Đọc JSON từ phản hồi nếu thành công
-                })
-                .then((data) => {
-                    // Hiển thị thông báo thành công
-                    Swal.fire("Thành công", data.message || "Danh mục đã được xóa.", "success");
-                    loadCategories(); // Cập nhật lại danh sách danh mục cha
-                })
-                .catch((error) => {
-                    // Hiển thị thông báo lỗi cụ thể
-                    console.error("Lỗi khi xóa danh mục:", error);
-                    Swal.fire("Lỗi", error.message, "error");
-                });
-            $("#overlay-add-category").removeClass("active");
+            Swal.fire({
+                title: "Bạn có chắc chắn?",
+                text: "Bạn có muốn xóa danh mục này không? Hành động này không thể hoàn tác!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Có",
+                cancelButtonText: "Hủy",
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    fetch(`/WebBongDen_war/categories/delete/${categoryId}`, { method: "DELETE" })
+                        .then((response) =>
+                            response.ok
+                                ? response.json()
+                                : response.json().then((data) => Promise.reject(new Error(data.message || "Không thể xóa danh mục")))
+                        )
+                        .then((data) => {
+                            Swal.fire("Thành công", data.message || "Danh mục đã được xóa.", "success");
+                            loadCategories();
+                        })
+                        .catch((error) => {
+                            console.error("Lỗi khi xóa danh mục:", error);
+                            Swal.fire("Lỗi", error.message, "error");
+                        })
+                        .finally(() => $("#overlay-add-category").removeClass("active"));
+                }
+            });
         }
+
+        $("#category-form").on("submit", function (event) {
+            event.preventDefault(); // Ngăn chặn reload trang
+
+            const categoryName = $("#category-name").val().trim();
+            if (!categoryName) {
+                Swal.fire("Lỗi", "Tên danh mục không được để trống.", "error");
+                return;
+            }
+
+            // Gửi yêu cầu thêm danh mục cha
+            $.ajax({
+                url: "/WebBongDen_war/categories/add",
+                method: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                data: { name: categoryName },
+                success: function (response) {
+                    Swal.fire("Thành công", response.message, "success");
+                    $("#category-name").val(""); // Xóa nội dung input
+                    table.ajax.reload();
+                },
+                error: function (xhr) {
+                    const errorMessage = xhr.responseJSON?.message || "Đã xảy ra lỗi khi thêm danh mục cha.";
+                    Swal.fire("Lỗi", errorMessage, "error");
+                },
+            });
+        });
+
+        // Xử lý form thêm danh mục con
+        $("#sub-category-form").on("submit", function (event) {
+            event.preventDefault(); // Ngăn chặn reload trang
+
+            const parentId = $("#parent-category").val();
+            const subCategoryName = $("#sub-category-name").val().trim();
+
+            if (!parentId || !subCategoryName) {
+                Swal.fire("Lỗi", "Vui lòng chọn danh mục cha và nhập tên danh mục con.", "error");
+                return;
+            }
+
+            // Gửi yêu cầu thêm danh mục con
+            $.ajax({
+                url: "/WebBongDen_war/subcategories/add",
+                method: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                data: { parentId: parentId, name: subCategoryName },
+                success: function (response) {
+                    Swal.fire("Thành công", response.message, "success");
+                    $("#sub-category-name").val(""); // Xóa nội dung input
+                },
+                error: function (xhr) {
+                    const errorMessage = xhr.responseJSON?.message || "Đã xảy ra lỗi khi thêm danh mục con.";
+                    Swal.fire("Lỗi", errorMessage, "error");
+                },
+            });
+        });
     });
+
 
 
     // Hiển thị overlay
