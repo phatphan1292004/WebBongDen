@@ -475,6 +475,55 @@ public class ProductDao {
     }
 
 
+//    public boolean editProductDetail(ProductDetail productDetail) {
+//        return jdbi.inTransaction(handle -> {
+//            // Cập nhật bảng `products`
+//            String productSql = "UPDATE products SET " +
+//                    "product_name = :productName, " +
+//                    "unit_price = :unitPrice, " +
+//                    "stock_quantity = :stockQuantity, " +
+//                    "product_status = :productStatus, " +
+//                    "rating = :rating, " +
+//                    "DESC_1 = :description, " +
+//                    "warranty_period = :warrantyPeriod, " +
+//                    "light_color = :lightColor, " +
+//                    "material = :material, " +
+//                    "voltage = :voltage, " +
+//                    "usage_age = :usageAge, " +
+//                    "discount_percent = :discountPercent, " +
+//                    "subCategory_id = :subCategoryId " +
+//                    "WHERE id = :id";
+//
+//            int updatedProduct = handle.createUpdate(productSql)
+//                    .bind("id", productDetail.getId())
+//                    .bind("productName", productDetail.getProductName())
+//                    .bind("unitPrice", productDetail.getUnitPrice())
+//                    .bind("stockQuantity", productDetail.getStockQuantity())
+//                    .bind("productStatus", productDetail.getProductStatus())
+//                    .bind("rating", productDetail.getRating())
+//                    .bind("description", productDetail.getDescription())
+//                    .bind("warrantyPeriod", productDetail.getWarrantyPeriod())
+//                    .bind("lightColor", productDetail.getLightColor())
+//                    .bind("material", productDetail.getMaterial())
+//                    .bind("voltage", productDetail.getVoltage())
+//                    .bind("usageAge", productDetail.getUsageAge())
+//                    .bind("discountPercent", productDetail.getDiscountPercent())
+//                    .bind("subCategoryId", productDetail.getSubCategoryId())
+//                    .execute();
+//
+//            // Cập nhật bảng `product_images`
+//            String imageSql = "UPDATE product_images SET url = :mainImageUrl " +
+//                    "WHERE product_id = :id AND main_image = true";
+//
+//            int updatedImage = handle.createUpdate(imageSql)
+//                    .bind("id", productDetail.getId())
+//                    .bind("mainImageUrl", productDetail.getMainImageUrl())
+//                    .execute();
+//
+//            return updatedProduct > 0 && updatedImage > 0;
+//        });
+//    }
+
     public boolean editProductDetail(ProductDetail productDetail) {
         return jdbi.inTransaction(handle -> {
             // Cập nhật bảng `products`
@@ -511,18 +560,26 @@ public class ProductDao {
                     .bind("subCategoryId", productDetail.getSubCategoryId())
                     .execute();
 
-            // Cập nhật bảng `product_images`
-            String imageSql = "UPDATE product_images SET url = :mainImageUrl " +
-                    "WHERE product_id = :id AND main_image = true";
-
-            int updatedImage = handle.createUpdate(imageSql)
+            // Xóa ảnh cũ
+            String deleteImageSql = "DELETE FROM product_images WHERE product_id = :id";
+            handle.createUpdate(deleteImageSql)
                     .bind("id", productDetail.getId())
-                    .bind("mainImageUrl", productDetail.getMainImageUrl())
                     .execute();
 
-            return updatedProduct > 0 && updatedImage > 0;
+            // Thêm ảnh mới
+            String insertImageSql = "INSERT INTO product_images (product_id, url, main_image) VALUES (:productId, :url, :mainImage)";
+            for (ProductImage image : productDetail.getListImages()) {
+                handle.createUpdate(insertImageSql)
+                        .bind("productId", productDetail.getId())
+                        .bind("url", image.getUrl())
+                        .bind("mainImage", image.isMainImage())
+                        .execute();
+            }
+
+            return updatedProduct > 0;
         });
     }
+
 
     public Product getProductById(int id) {
         String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +

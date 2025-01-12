@@ -48,6 +48,7 @@ public class UserDao {
         return users;
     }
 
+
     public List<User> searchCustomerByName(String customerName) {
         String sql = "SELECT " +
                 "c.id AS customerId, " +
@@ -85,6 +86,33 @@ public class UserDao {
     }
 
     public List<Order> getPurchaseHistoryByCustomerId(String customerId) {
+        String sql = "SELECT " +
+                "o.id AS orderId, " +
+                "o.created_at AS orderDate, " +
+                "o.total_price AS totalPrice, " +
+                "o.order_status AS orderStatus " +
+                "FROM orders o " +
+                "JOIN accounts a ON o.account_id = a.id " +
+                "JOIN customers c ON a.customer_id = c.id " +
+                "WHERE c.id = :customerId";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("customerId", customerId)
+                        .map((rs, ctx) -> new Order(
+                                rs.getInt("orderId"),
+                                null,
+                                rs.getDate("orderDate"),
+                                rs.getDouble("totalPrice"),
+                                null,
+                                rs.getString("orderStatus"),
+                                null
+                        ))
+                        .list()
+        );
+    }
+
+    public List<Order> getPurchaseHistoryByCustomerId2(int customerId) {
         String sql = "SELECT " +
                 "o.id AS orderId, " +
                 "o.created_at AS orderDate, " +

@@ -1,4 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const editButton = document.getElementById("edit-image-btn");
+    const cancelEditButton = document.getElementById("cancel-edit-btn");
+    const imageSection = document.getElementById("image-section");
+    const uploadFileSection = document.getElementById("upload-file-section");
+    const imageUrlInput = document.getElementById("product-image-url");
+    const fileInput = document.getElementById("upload-product-image");
+
+    // Khi nhấn "Chỉnh sửa"
+    editButton.addEventListener("click", function () {
+        // Ẩn phần URL và nút "Chỉnh sửa"
+        imageSection.style.display = "none";
+
+        // Hiện phần upload file và nút "Hủy"
+        uploadFileSection.style.display = "flex";
+    });
+
+    // Khi nhấn "Hủy"
+    cancelEditButton.addEventListener("click", function () {
+        // Hiện lại phần URL và nút "Chỉnh sửa"
+        imageSection.style.display = "flex";
+
+        // Ẩn phần upload file
+        uploadFileSection.style.display = "none";
+
+        // Xóa file đã chọn (nếu có)
+        fileInput.value = "";
+    });
+
+
+
     $(document).ready(function () {
         const table = $("#product-table").DataTable({
             ajax: {
@@ -395,7 +425,59 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
             });
         });
+
+        $('#save-product-btn').on('click', function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi submit form mặc định
+
+            // Lấy dữ liệu từ form HTML
+            const formData = new FormData($('.details-form')[0]);
+
+            // Thêm kiểm tra dữ liệu trước khi gửi (nếu cần)
+            if (!formData.get('id') || !formData.get('productName')) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'ID sản phẩm và Tên sản phẩm không được để trống!',
+                });
+                return;
+            }
+
+            // Gửi AJAX
+            $.ajax({
+                url: '/WebBongDen_war/edit-product-detail', // URL của servlet
+                type: 'POST',
+                data: formData,
+                processData: false, // Không xử lý dữ liệu
+                contentType: false, // Để contentType mặc định
+                success: function (response) {
+                    // Xử lý khi server trả về thành công
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thành công',
+                            text: response.message,
+                        }).then(() => {
+                            window.location.reload(); // Tải lại trang hoặc chuyển hướng
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: response.message,
+                        });
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Không thể kết nối với máy chủ!',
+                    });
+                },
+            });
+        });
     });
+
 
 
 

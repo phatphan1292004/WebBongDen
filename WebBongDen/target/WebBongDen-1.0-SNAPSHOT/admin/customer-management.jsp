@@ -34,6 +34,71 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/admin_css/productAdmin.css">
 </head>
+<style>
+    /* Tổng quan cho bảng */
+    .table {
+        width: 100%;
+        border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
+        margin: 20px 0;
+        font-size: 16px;
+        text-align: left; /* Căn lề bên trái */
+        background-color: #ffffff; /* Màu nền bảng */
+        border: 1px solid #ddd; /* Đường viền bảng */
+    }
+
+    /* Đầu bảng */
+    .table thead {
+        background-color: #f8f9fa; /* Màu nền phần đầu */
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .table thead th {
+        padding: 12px 15px;
+        text-transform: uppercase; /* Chữ viết hoa */
+        font-weight: bold;
+        color: #495057;
+        border: 1px solid #ddd; /* Đường viền ô */
+    }
+
+    /* Hàng và ô trong bảng */
+    .table tbody td {
+        padding: 10px 15px;
+        border: 1px solid #ddd; /* Đường viền ô */
+        color: #343a40;
+    }
+
+    /* Hàng chẵn lẻ */
+    .table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table tbody tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+
+    /* Định dạng ô chứa số tiền */
+    .table tbody td:last-child {
+        font-weight: bold;
+        color: #d9534f; /* Màu đỏ cho tổng tiền */
+        text-align: right; /* Căn phải tổng tiền */
+    }
+
+    /* Canh giữa STT và ID */
+    .table tbody td:first-child {
+        text-align: center;
+    }
+
+    /* Tăng chiều rộng cho bảng */
+    .swal2-html-container .table {
+        width: 95%;
+        margin: 0 auto; /* Căn giữa bảng */
+    }
+
+    /* Tăng chiều rộng modal */
+    .swal2-popup {
+        width: 80%;
+    }
+</style>
 <body>
 <div class="wrapper">
     <%@ include file="header.jsp" %>
@@ -220,8 +285,9 @@
         </div>
     </div>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/cusAdmin.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="${pageContext.request.contextPath}/admin/admin_js/cusAdmin.js?v=2.0" defer></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

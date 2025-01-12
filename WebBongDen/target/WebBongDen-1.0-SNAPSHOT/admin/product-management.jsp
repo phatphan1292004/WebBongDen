@@ -185,6 +185,33 @@
   .close-overlay-btn:hover {
     background-color: #cc0000;
   }
+
+  #image-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  #image-section input {
+    width: 300px;
+    padding: 5px;
+  }
+
+  .edit-image-button,
+  .cancel-edit-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .cancel-edit-button {
+    background-color: #dc3545;
+  }
+
 </style>
 <body>
 <div class="wrapper">
@@ -595,7 +622,7 @@
               <button id="edit-product-btn" class="edit-product">
                 <i class="fa-solid fa-pen"></i> Chỉnh sửa
               </button>
-              <form class="details-form" action="edit-product-detail" method="post">
+              <form class="details-form" action="edit-product-detail" method="post" enctype="multipart/form-data">
                 <button id="save-product-btn" class="save-button" type="submit" style="display: none;">
                   <i class="fa-solid fa-pen"></i> Lưu
                 </button>
@@ -607,8 +634,33 @@
 
                 <div>
                   <strong>Hình ảnh:</strong>
-                  <span id="product-image-view"></span>
-                  <input type="text" id="edit-product-image" style="display: none" name="mainImageUrl"/>
+                  <div id="image-section">
+                    <!-- Hiển thị URL hình ảnh hiện tại -->
+                    <input
+                            type="text"
+                            id="product-image-url"
+                            name="mainImageUrl"
+                            value=""
+                            readonly
+                    />
+                    <button id="edit-image-btn" class="edit-image-button" type="button">
+                      Chỉnh sửa
+                    </button>
+                  </div>
+
+                  <!-- Input upload file ẩn mặc định -->
+                  <div id="upload-file-section" style="display: none;">
+                    <input
+                            type="file"
+                            id="upload-product-image"
+                            name="imageFiles"
+                            accept="image/*"
+                            multiple
+                    />
+                    <button id="cancel-edit-btn" class="cancel-edit-button" type="button">
+                      Hủy
+                    </button>
+                  </div>
                 </div>
 
                 <div>
@@ -620,7 +672,7 @@
                 <div>
                   <strong>Giá:</strong>
                   <span id="product-price-view"></span>
-                  <input type="text" id="edit-product-price" value="" name = unitPrice style="display: none" />
+                  <input type="text" id="edit-product-price" value="" name = "unitPrice" style="display: none" />
                 </div>
 
                 <div>

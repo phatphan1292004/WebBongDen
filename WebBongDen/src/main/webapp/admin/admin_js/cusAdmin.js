@@ -54,5 +54,68 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#search-btn-cus").on("click", function () {
             table.ajax.reload(); // Reload lại bảng với dữ liệu lọc mới
         });
+
+        $(".customer-table").on("click", ".view-details", function () {
+            const customerId = $(this).data("index");
+
+            // Gửi yêu cầu đến servlet để lấy dữ liệu đơn hàng của khách hàng
+            $.ajax({
+                url: `/WebBongDen_war/customer-orders`, // URL Servlet trả về JSON
+                type: "GET",
+                data: { customerId: customerId }, // Truyền ID khách hàng
+                success: function (orders) {
+                    // Kiểm tra nếu có dữ liệu trả về
+                    if (orders && orders.length > 0) {
+                        // Tạo HTML cho bảng hiển thị trong SweetAlert
+                        let tableHtml = `
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>ID Đơn Hàng</th>
+                                        <th>Ngày Tạo</th>
+                                        <th>Tổng Tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+                        orders.forEach((order, index) => {
+                            const formattedDate = order.formattedCreateAt || "N/A"; // Sử dụng ngày đã định dạng hoặc hiển thị "N/A" nếu không có
+
+                            tableHtml += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${order.id}</td>
+                                <td>${formattedDate}</td>
+                                <td>${order.totalPrice.toLocaleString()} VND</td>
+                            </tr>`;
+                        });
+
+                        tableHtml += `</tbody></table>`;
+
+                        // Hiển thị SweetAlert với bảng chi tiết
+                        Swal.fire({
+                            title: "Lịch sử mua hàng",
+                            html: tableHtml,
+                            width: "800px", // Tăng độ rộng của modal
+                            showCloseButton: true,
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Thông báo",
+                            text: "Không có đơn hàng nào cho khách hàng này.",
+                            icon: "warning",
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire({
+                        title: "Lỗi",
+                        text: "Không thể tải dữ liệu đơn hàng.",
+                        icon: "error",
+                    });
+                    console.error("Error:", error);
+                },
+            });
+        });
     })
 })

@@ -208,61 +208,6 @@
                         <div class="revenue-year-header">Doanh thu trong năm</div>
                         <canvas id="revenueChart"></canvas>
                     </div>
-
-                    <div class="review-customer">
-                        <div class="review-header">Đánh giá</div>
-                        <div class="review-content">
-                            <div class="review-item">
-                                <div class="img-user">
-                                    <img
-                                            src="https://images.unsplash.com/photo-1663893364107-a6ecd06cf615?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
-                                            alt="User Image"
-                                    />
-                                </div>
-                                <div class="user-info">
-                                    <h4>Sarah Graves</h4>
-                                    <p>Highly recommend</p>
-                                </div>
-                            </div>
-                            <div class="review-item">
-                                <div class="img-user">
-                                    <img
-                                            src="https://images.unsplash.com/photo-1640960543409-dbe56ccc30e2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
-                                            alt="User Image"
-                                    />
-                                </div>
-                                <div class="user-info">
-                                    <h4>Garbease sha</h4>
-                                    <p>Awesome Pro</p>
-                                </div>
-                            </div>
-
-                            <div class="review-item">
-                                <div class="img-user">
-                                    <img
-                                            src="https://images.unsplash.com/photo-1633957897986-70e83293f3ff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
-                                            alt="User Image"
-                                    />
-                                </div>
-                                <div class="user-info">
-                                    <h4>Sarah Graves</h4>
-                                    <p>Highly recommend</p>
-                                </div>
-                            </div>
-                            <div class="review-item">
-                                <div class="img-user">
-                                    <img
-                                            src="https://images.unsplash.com/photo-1636041282694-aa4e52370419?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
-                                            alt="User Image"
-                                    />
-                                </div>
-                                <div class="user-info">
-                                    <h4>Garbease sha</h4>
-                                    <p>Awesome Pro</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
