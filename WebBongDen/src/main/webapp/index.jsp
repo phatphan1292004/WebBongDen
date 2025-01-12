@@ -1501,7 +1501,7 @@
                     <div class="product-wrapper">
                         <div class="wrapper-top">
                             <div class="wrapper-category">${category.categoryName}</div>
-                            <a href="/WebBongDen_war/id=${category.id}">Xem thêm</a>
+                            <a href="/WebBongDen_war/CategoryController?categoryId=${category.id}">Xem thêm</a>
                         </div>
                         <div class="wrapper-bottom">
                             <ul class="list-product" id="list-product-${category.id}">

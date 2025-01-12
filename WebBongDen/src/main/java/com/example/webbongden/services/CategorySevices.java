@@ -44,4 +44,12 @@ public class CategorySevices {
     public boolean addSubCategory(int categoryId, String subCategoryName) {
         return categoryDao.addSubCategory(categoryId, subCategoryName);
     }
+
+    public String getCategoryNameById(int categoryId) {
+        return categoryDao.getCategoryNameById(categoryId);
+    }
+
+    public String getSubCategoryNameById(int subCategoryId) {
+        return categoryDao.getSubCategoryNameById(subCategoryId);
+    }
 }

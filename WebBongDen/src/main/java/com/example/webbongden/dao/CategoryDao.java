@@ -120,6 +120,27 @@ public class CategoryDao {
         });
     }
 
+    // Lấy tên danh mục (Category) theo ID
+    public String getCategoryNameById(int categoryId) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT category_name FROM categories WHERE id = :categoryId")
+                        .bind("categoryId", categoryId)
+                        .mapTo(String.class)
+                        .findOne() // Trả về Optional<String>
+                        .orElse(null) // Trả về null nếu không tìm thấy
+        );
+    }
+
+    // Lấy tên danh mục con (SubCategory) theo ID
+    public String getSubCategoryNameById(int subCategoryId) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT name FROM sub_categories WHERE id = :subCategoryId")
+                        .bind("subCategoryId", subCategoryId)
+                        .mapTo(String.class)
+                        .findOne() // Trả về Optional<String>
+                        .orElse(null) // Trả về null nếu không tìm thấy
+        );
+    }
 
     public static void main(String[] args) {
 

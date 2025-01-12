@@ -53,6 +53,10 @@ public class ProductServices {
         return productDao.getProductsByCategory(categoryId);
     }
 
+    public List<Product> getProductsByCategory2(int categoryId) {
+        return productDao.getProductsByCategory2(categoryId);
+    }
+
     public List<Product> getListProductForAdminPage() {
         return productDao.getProductsForAdminPage();
     }

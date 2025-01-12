@@ -8,6 +8,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1335,13 +1337,28 @@
         <div class="container">
             <div class="breadcrumb">
                 <i class="fa-solid fa-house"></i>
-                <a href="index.html">Trang chủ</a>
+                <a href="home">Trang chủ</a>
                 <span class="separator">›</span>
-                <a href="#">Sản phẩm</a>
-                <span class="separator">›</span>
-                <span>ĐÈN CHÙM CỔ ĐIỂN</span>
+
+                <!-- Nếu có categoryName và subCategoryName -->
+                <c:if test="${not empty categoryName}">
+                    <a href="CategoryController?categoryId=${categoryId}">${categoryName}</a>
+                    <span class="separator">›</span>
+                </c:if>
+
+                <!-- Nếu chỉ có subCategoryName -->
+                <c:if test="${not empty subCategoryName}">
+                    <span>${subCategoryName}</span>
+                </c:if>
+
+                <!-- Nếu không có cả categoryName và subCategoryName -->
+                <c:if test="${empty categoryName && empty subCategoryName}">
+                    <span>Sản phẩm</span>
+                </c:if>
             </div>
         </div>
+
+
         <section class="shop_grid_area section-padding-80">
             <div class="container">
                 <div class="row row1">
@@ -1514,23 +1531,30 @@
                                     >
                                         <!-- Total Products -->
                                         <div class="total-products">
-                                            <p><span>150</span> Sản phẩm được tìm thấy</p>
+                                            <p><span>${fn:length(products)}</span> Sản phẩm được tìm thấy</p>
                                         </div>
                                         <!-- Sorting -->
                                         <div class="product-sorting d-flex align-items-center">
                                             <p>Sắp xếp :</p>
                                             <form action="CategoryController" method="get" id="sortingForm">
-                                                <select name="select" id="sortByselect" onchange="submitForm()">
-                                                    <option value="">-- Chọn sắp xếp --</option> <!-- Thêm option mặc định không có giá trị -->
-                                                    <option value="price_desc">Giá từ cao đến thấp</option>
-                                                    <option value="price_asc">Giá từ thấp đến cao</option>
-                                                    <option value="newest">Mới nhất</option>
-                                                    <option value="best_selling">Sản phẩm bán chạy</option>
+                                                <!-- Giữ subCategoryId nếu có -->
+                                                <c:if test="${not empty subCategoryId}">
+                                                    <input type="hidden" name="subCategoryId" value="${subCategoryId}" />
+                                                </c:if>
+
+                                                <!-- Giữ page hiện tại -->
+                                                <input type="hidden" name="page" value="${currentPage}" />
+
+                                                <!-- Dropdown sắp xếp -->
+                                                <select name="select" id="sortByselect" onchange="updateSorting()">
+                                                    <option value="">-- Chọn sắp xếp --</option>
+                                                    <option value="price_desc" ${select == 'price_desc' ? 'selected' : ''}>Giá từ cao đến thấp</option>
+                                                    <option value="price_asc" ${select == 'price_asc' ? 'selected' : ''}>Giá từ thấp đến cao</option>
+                                                    <option value="name_asc" ${select == 'name_asc' ? 'selected' : ''}>A->Z</option>
+                                                    <option value="name_desc" ${select == 'name_desc' ? 'selected' : ''}>Z->A</option>
                                                 </select>
                                             </form>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -1565,23 +1589,31 @@
                                 </c:forEach>
                             </div>
 
-                            <div id="pagination-controls">
-                                <div class="pagination-buttons">
-                                    <!-- Nút "Trước" -->
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
                                     <c:if test="${currentPage > 1}">
-                                        <a href="/WebBongDen_war/CategoryController?page=${currentPage - 1}">Trước</a>
+                                        <li class="page-item">
+                                            <a class="page-link" data-page="${currentPage - 1}">
+                                                &laquo;
+                                            </a>
+                                        </li>
                                     </c:if>
-
-                                    <!-- Hiển thị thông tin trang -->
-                                    <span>Trang ${currentPage} / ${totalPages}</span>
-
-                                    <!-- Nút "Tiếp" -->
+                                    <c:forEach var="i" begin="1" end="${totalPages}">
+                                        <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                            <a class="page-link" data-page="${i}">
+                                                    ${i}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
                                     <c:if test="${currentPage < totalPages}">
-                                        <a href="/WebBongDen_war/CategoryController?page=${currentPage + 1}">Tiếp</a>
+                                        <li class="page-item">
+                                            <a class="page-link" data-page="${currentPage + 1}">
+                                                &raquo;
+                                            </a>
+                                        </li>
                                     </c:if>
-                                </div>
-                            </div>
-
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -1670,9 +1702,45 @@
     // Hàm xử lý sự kiện khi thay đổi lựa chọn
 
     function submitForm() {
-        var form = document.getElementById("sortingForm");
-        form.submit(); // Gửi form đi khi thay đổi lựa chọn
+            const selectElement = document.getElementById("sortByselect");
+            if (selectElement.value === "") {
+            // Nếu không có giá trị sắp xếp, không thêm tham số "select"
+            selectElement.removeAttribute("name");
+        }
+            document.getElementById("sortingForm").submit();
     }
+
+    function updateSorting() {
+        const form = document.getElementById("sortingForm");
+        const selectElement = document.getElementById("sortByselect");
+        const url = new URL(window.location.href);
+
+        // Nếu giá trị của select rỗng, xóa tham số khỏi URL
+        if (!selectElement.value) {
+            url.searchParams.delete("select");
+        } else {
+            // Nếu có giá trị, thêm hoặc cập nhật tham số
+            url.searchParams.set("select", selectElement.value);
+        }
+
+        // Đặt page về 1 khi thay đổi sắp xếp
+        url.searchParams.set("page", 1);
+
+        // Chuyển hướng tới URL mới
+        window.location.href = url.toString();
+    }
+
+    function createPageUrl(page) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('page', page); // Thêm hoặc cập nhật tham số page
+        return url.toString();
+    }
+
+    // Áp dụng vào các nút phân trang
+    document.querySelectorAll('.page-link').forEach(link => {
+        const page = link.dataset.page; // Giá trị trang từ thuộc tính data-page
+        link.href = createPageUrl(page);
+    });
 </script>
 </body>
 </html>
