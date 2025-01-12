@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 {
                     data: "imageUrl", // Hình ảnh
                     render: function (data) {
+                        // Kiểm tra nếu đường dẫn đã chứa 'assets/images/'
+
                         return `<img src="${data}" alt="Product Image" style="width: 50px; height: 50px;">`;
                     },
                 },
@@ -139,6 +141,191 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#search-btn-product").on("click", function () {
             table.ajax.reload();
         });
+
+        // Sự kiện click nút "Thêm danh mục"
+        $(".add-category").on("click", function () {
+            $("#overlay-add-category").addClass("active");
+            loadCategories(); // Tải danh sách danh mục cha khi overlay được hiển thị
+        });
+
+        $("#close-overlay-add-category").on("click", function () {
+            $("#overlay-add-category").removeClass("active");
+        });
+
+// Hàm tải danh sách danh mục cha
+        function loadCategories() {
+            fetch("/WebBongDen_war/categories")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Không thể tải danh mục cha");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    const tableBody = $("#categories-table-body");
+                    tableBody.empty(); // Xóa nội dung bảng cũ
+
+                    // Hiển thị từng danh mục cha
+                    data.forEach((category) => {
+                        const row = `
+                    <tr>
+                        <td>${category.id}</td>
+                        <td>${category.categoryName}</td>
+                        <td>
+                            <button class="view-sub-categories-btn btn btn-info" data-id="${category.id}">DanhMucCon</button>
+                        </td>
+                        <td>
+                            <button class="delete-category-btn btn btn-danger" data-id="${category.id}">Xóa</button>
+                        </td>
+                    </tr>
+                `;
+                        tableBody.append(row);
+                    });
+
+                    // Gán sự kiện cho các nút "DS Danh mục con" và "Xóa"
+                    assignCategoryEvents();
+                })
+                .catch((error) => {
+                    console.error("Lỗi khi tải danh mục:", error);
+                    Swal.fire("Lỗi", "Không thể tải danh mục.", "error");
+                });
+        }
+
+// Gán sự kiện cho các nút sau khi tải danh sách danh mục cha
+        function assignCategoryEvents() {
+            // Nút "DS Danh mục con"
+            $(".view-sub-categories-btn").off("click").on("click", function () {
+                const categoryId = $(this).data("id");
+                loadSubCategories(categoryId);
+                $("#overlay-add-category").removeClass("active");
+            });
+
+            // Nút "Xóa"
+            $(".delete-category-btn").off("click").on("click", function () {
+                const categoryId = $(this).data("id");
+                deleteCategory(categoryId);
+            });
+        }
+
+// Hàm tải danh mục con
+        function loadSubCategories(categoryId) {
+            fetch(`/WebBongDen_war/categories/subcategories?categoryId=${categoryId}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Không thể tải danh mục con");
+                    }
+                    return response.json();
+                })
+                .then((subCategories) => {
+                    // Tạo bảng danh mục con
+                    let subCategoryTable = `
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid #ddd; padding: 8px;">ID</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Tên danh mục con</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+                    // Thêm các dòng danh mục con vào bảng
+                    subCategories.forEach((subCategory) => {
+                        subCategoryTable += `
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;">${subCategory.id}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">${subCategory.name}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            <button class="delete-sub-category-btn btn btn-danger" data-id="${subCategory.id}">Xóa</button>
+                        </td>
+                    </tr>
+                `;
+                    });
+
+                    subCategoryTable += `
+                    </tbody>
+                </table>
+            `;
+
+                    // Hiển thị bảng trong SweetAlert
+                    Swal.fire({
+                        title: "Danh sách danh mục con",
+                        html: subCategoryTable,
+                        width: "800px",
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        didClose: () => {
+                            // Mở lại Overlay khi SweetAlert bị đóng
+                            $("#overlay-add-category").addClass("active");
+                        },
+                    });
+
+                    // Gán sự kiện cho các nút "Xóa" danh mục con
+                    assignSubCategoryEvents();
+                })
+                .catch((error) => {
+                    console.error("Lỗi khi tải danh mục con:", error);
+                    Swal.fire("Lỗi", "Không thể tải danh mục con.", "error");
+                });
+        }
+
+// Gán sự kiện cho nút "Xóa" danh mục con
+        function assignSubCategoryEvents() {
+            $(".delete-sub-category-btn").off("click").on("click", function () {
+                const subCategoryId = $(this).data("id");
+                deleteSubCategory(subCategoryId);
+            });
+        }
+
+// Hàm xóa danh mục cha
+        function deleteSubCategory(subCategoryId, categoryId) {
+            fetch(`/WebBongDen_war/subcategories/delete/${subCategoryId}`, {
+                method: "DELETE",
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Không thể xóa danh mục con");
+                    }
+                    Swal.fire({
+                        icon: "success",
+                        title: "Thành công",
+                        text: "Danh mục con đã được xóa.",
+                        showConfirmButton: false,
+                        timer: 1000, // Hiển thị thông báo ngắn
+                    })
+                })
+                .catch((error) => {
+                    Swal.fire("Lỗi", "Không thể xóa danh mục con.", "error");
+                });
+        }
+
+
+// Hàm xóa danh mục con
+        function deleteCategory(categoryId) {
+            fetch(`/WebBongDen_war/categories/delete/${categoryId}`, {
+                method: "DELETE",
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        return response.json().then((data) => {
+                            throw new Error(data.message || "Không thể xóa danh mục");
+                        });
+                    }
+                    return response.json(); // Đọc JSON từ phản hồi nếu thành công
+                })
+                .then((data) => {
+                    // Hiển thị thông báo thành công
+                    Swal.fire("Thành công", data.message || "Danh mục đã được xóa.", "success");
+                    loadCategories(); // Cập nhật lại danh sách danh mục cha
+                })
+                .catch((error) => {
+                    // Hiển thị thông báo lỗi cụ thể
+                    console.error("Lỗi khi xóa danh mục:", error);
+                    Swal.fire("Lỗi", error.message, "error");
+                });
+            $("#overlay-add-category").removeClass("active");
+        }
     });
 
 

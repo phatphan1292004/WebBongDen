@@ -21,6 +21,16 @@ public class CategorySevices {
         return categoryDao.getSubCategoriesByCategoryId(categoryId);
     }
 
+    public boolean deleteCategory(int categoryId) {
+        // Xóa danh mục cha
+        return categoryDao.deleteCategoryById(categoryId);
+    }
+
+    public boolean deleteSubCategory(int subCategoryId) {
+        // Xóa danh mục con
+        return categoryDao.deleteSubCategoryById(subCategoryId);
+    }
+
     public List<SubCategory> getAllSubCategories() {
         return categoryDao.getAllSubCategories();
     }

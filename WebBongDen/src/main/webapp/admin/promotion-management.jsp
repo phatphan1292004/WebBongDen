@@ -53,7 +53,7 @@
     .table thead th {
         background-color: #f4f4f4;
         font-weight: bold;
-        text-align: center;
+        text-align: left;
     }
 
     /* Dòng dữ liệu */
@@ -88,7 +88,7 @@
 
     /* Căn chỉnh các ô */
     .table th, .table td {
-        text-align: center; /* Canh giữa nội dung */
+        text-align: left; /* Canh giữa nội dung */
         vertical-align: middle;
     }
 </style>

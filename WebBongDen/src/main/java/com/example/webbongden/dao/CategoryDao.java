@@ -49,25 +49,58 @@ public class CategoryDao {
         );
     }
 
+    // Xóa danh mục cha
+    public boolean deleteCategoryById(int categoryId) {
+        return jdbi.withHandle(handle -> {
+            // Kiểm tra xem danh mục con có tồn tại hay không
+            List<Integer> subCategories = handle.createQuery("SELECT id FROM sub_categories WHERE category_id = :categoryId")
+                    .bind("categoryId", categoryId)
+                    .mapTo(Integer.class)
+                    .list();
+            if (!subCategories.isEmpty()) {
+                throw new IllegalStateException("Không thể xóa danh mục cha vì còn danh mục con.");
+            }
+            return handle.createUpdate("DELETE FROM categories WHERE id = :categoryId")
+                    .bind("categoryId", categoryId)
+                    .execute() > 0;
+        });
+    }
+
+
+    // Xóa danh mục con
+    public boolean deleteSubCategoryById(int subCategoryId) {
+        return jdbi.withHandle(handle ->
+                handle.createUpdate("DELETE FROM sub_categories WHERE id = :subCategoryId")
+                        .bind("subCategoryId", subCategoryId)
+                        .execute() > 0
+        );
+    }
+
 
 
     public static void main(String[] args) {
-        // Khởi tạo CategoryDao
+
+        // Tạo đối tượng DAO
         CategoryDao categoryDao = new CategoryDao();
 
-        // 1. Test lấy tất cả categories
-        System.out.println("===== Lấy danh sách Categories =====");
-        List<Category> categories = categoryDao.getAllCategories();
-        for (Category category : categories) {
-            System.out.println(category);
-        }
+        // ID của danh mục cha cần xóa
+        int categoryId = 7;
 
-        // 2. Test lấy tất cả subcategories theo category_id
-        System.out.println("\n===== Lấy danh sách SubCategories cho Category ID = 1 =====");
-        int testCategoryId = 1;
-        List<SubCategory> subCategories = categoryDao.getSubCategoriesByCategoryId(testCategoryId);
-        for (SubCategory subCategory : subCategories) {
-            System.out.println(subCategory);
+        try {
+            // Gọi phương thức xóa danh mục cha
+            boolean isDeleted = categoryDao.deleteCategoryById(categoryId);
+
+            if (isDeleted) {
+                System.out.println("Danh mục đã được xóa thành công.");
+            } else {
+                System.out.println("Không thể xóa danh mục.");
+            }
+        } catch (IllegalStateException e) {
+            // Trường hợp không thể xóa do có danh mục con
+            System.err.println("Lỗi: " + e.getMessage());
+        } catch (Exception e) {
+            // Trường hợp xảy ra lỗi khác
+            System.err.println("Đã xảy ra lỗi: " + e.getMessage());
         }
     }
 }

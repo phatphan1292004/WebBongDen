@@ -1,10 +1,14 @@
 package com.example.webbongden.dao.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category {
     private int id;
     private String categoryName;
     private int stockQuantity;
     private String desc1;
+    private List<SubCategory> subCategories = new ArrayList<SubCategory>();
 
     // Constructor không tham số
     public Category() {
@@ -51,6 +55,13 @@ public class Category {
         this.desc1 = desc1;
     }
 
+    public List<SubCategory> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(List<SubCategory> subCategories) {
+        this.subCategories = subCategories;
+    }
     // Phương thức toString (in ra đối tượng dưới dạng chuỗi)
     @Override
     public String toString() {

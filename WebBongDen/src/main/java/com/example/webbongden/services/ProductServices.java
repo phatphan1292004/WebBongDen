@@ -4,6 +4,7 @@ import com.example.webbongden.dao.ProductDao;
 import com.example.webbongden.dao.db.JDBIConnect;
 import com.example.webbongden.dao.model.Product;
 import com.example.webbongden.dao.model.ProductDetail;
+import com.example.webbongden.dao.model.ProductImage;
 import com.example.webbongden.dao.model.TopProduct;
 
 import java.util.Comparator;
@@ -77,14 +78,23 @@ public class ProductServices {
     }
 
     public boolean addProduct(ProductDetail product, String subCategoryName) {
+        // Xử lý logic liên quan đến hình ảnh
+        for (ProductImage image : product.getListImages()) {
+            // Kiểm tra URL có hợp lệ không
+            if (image.getUrl() == null || image.getUrl().isEmpty()) {
+                System.err.println("Lỗi: URL hình ảnh không hợp lệ!");
+                return false;
+            }
+        }
+
         try {
             return productDao.addProduct(product, subCategoryName);
         } catch (IllegalArgumentException e) {
-            // Xử lý ngoại lệ khi không tìm thấy danh mục
             System.err.println("Lỗi: " + e.getMessage());
             return false;
         }
     }
+
 
     public boolean deleteProduct(int productId) {
         return productDao.deleteProductById(productId);

@@ -46,6 +46,144 @@
   .details-form {
     margin-top: 20px;
   }
+
+  /* Form thêm danh mục */
+  .add-category-form, .add-sub-category-form {
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .add-category-form h3, .add-sub-category-form h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .add-category-form label, .add-sub-category-form label {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+
+  .add-category-form input, .add-sub-category-form input,
+  .add-category-form select, .add-sub-category-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+  }
+
+  .add-category-form button, .add-sub-category-form button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .add-category-form button:hover, .add-sub-category-form button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Bảng hiển thị danh mục */
+  #categories-table-container {
+    margin-top: 30px;
+  }
+
+  #categories-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  #categories-table thead th {
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+
+  #categories-table tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    color: #333;
+  }
+
+  #categories-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+
+  #categories-table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+  #categories-table tbody td ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  #categories-table tbody td ul li {
+    padding: 5px 0;
+    font-size: 14px;
+    color: #555;
+  }
+
+  /* Nút xóa */
+  button.delete-category-btn, button.delete-sub-category-btn {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button.delete-category-btn:hover, button.delete-sub-category-btn:hover {
+    background-color: #b02a37;
+  }
+
+  .close-overlay-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    line-height: 30px;
+    transition: background-color 0.3s;
+  }
+
+  .close-overlay-btn:hover {
+    background-color: #cc0000;
+  }
 </style>
 <body>
 <div class="wrapper">
@@ -106,15 +244,18 @@
               />
               <button id="search-btn-product">Tìm kiếm</button>
             </div>
-            <button class="add-category">
-              <i class="fa-solid fa-plus"></i>
-              Thêm loại sản phẩm
-            </button>
+            <div>
 
-            <button class="add-product">
-              <i class="fa-solid fa-plus"></i>
-              Thêm sản phẩm
-            </button>
+              <button class="add-category">
+                  <i class="fa-solid fa-plus"></i>
+                  Thêm loại sản phẩm
+              </button>
+
+              <button class="add-product">
+                <i class="fa-solid fa-plus"></i>
+                Thêm sản phẩm
+              </button>
+            </div>
           </div>
 
           <!-- Overlay và Form thêm sản phẩm -->
@@ -126,7 +267,7 @@
                   <i class="fa-solid fa-xmark"></i>
                 </button>
               </div>
-              <form id="product-form" action="add-product" method="post">
+              <form id="product-form" action="add-product" method="post" enctype="multipart/form-data">
                 <div class="form-grid">
                   <!-- Cột 1 -->
                   <div class="form-column">
@@ -197,12 +338,13 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="product-image-url">Link hình ảnh sản phẩm:</label>
+                      <label for="product-image-upload">Hình ảnh sản phẩm:</label>
                       <input
-                              type="text"
-                              id="product-image-url"
-                              name="imageUrl"
-                              placeholder="Nhập link hình ảnh"
+                              type="file"
+                              id="product-image-upload"
+                              name="productImages"
+                              multiple
+                              accept="image/*"
                               required
                       />
                     </div>
@@ -303,74 +445,56 @@
 
           <div class="overlay" id="overlay-add-category" data-index="1">
             <div class="categories-container">
-              <!-- Nút Đóng lại -->
-              <div class="top-actions">
-                <i class="fa-solid fa-xmark"></i>
-              </div>
+              <!-- Nút Close -->
+              <button class="close-overlay-btn" id="close-overlay-add-category">X</button>
+              <h1>Quản lý Danh mục</h1>
 
-              <div class="categories-content">
-                <!-- Danh sách danh mục -->
-                <div class="categories-list">
-                  <h3>Danh sách danh mục</h3>
-                  <ul id="category-list">
-                    <!-- Các danh mục -->
-                  </ul>
+              <!-- Form Thêm Danh mục Cha -->
+              <div style="display: flex; justify-content: space-between">
+                <div class="add-category-form">
+                  <h3>Thêm Danh mục Cha</h3>
+                  <form id="category-form">
+                    <label for="category-name">Tên danh mục:</label>
+                    <input type="text" id="category-name" placeholder="Tên danh mục" required />
+                    <button type="button" id="add-category-btn" class="add-category-button">Thêm Danh mục</button>
+                  </form>
                 </div>
 
-                <!-- Form thêm danh mục -->
-                <div class="add-category-form">
-                  <h3>Thêm danh mục mới</h3>
-                  <form id="category-form">
-                    <label for="category-id">ID:</label>
-                    <input
-                            type="text"
-                            id="category-id"
-                            class="form-input"
-                            required
-                    />
-
-                    <label for="category-name">Tên danh mục:</label>
-                    <input
-                            type="text"
-                            id="category-name"
-                            class="form-input"
-                            required
-                    />
-
-                    <label for="parent-category">Danh mục cha:</label>
-                    <input
-                            type="text"
-                            id="parent-category"
-                            class="form-input"
-                    />
-
-                    <label for="stock-quantity">Số lượng tồn:</label>
-                    <input
-                            type="number"
-                            id="stock-quantity"
-                            class="form-input"
-                            required
-                    />
-
-                    <label for="category-desc">Mô tả:</label>
-                    <textarea
-                            id="category-desc"
-                            class="form-textarea"
-                            rows="3"
-                    ></textarea>
-
-                    <button
-                            type="button"
-                            id="add-category-btn"
-                            class="add-category-button"
-                    >
-                      Thêm danh mục
-                    </button>
+                <!-- Form Thêm Danh mục Con -->
+                <div class="add-sub-category-form">
+                  <h3>Thêm Danh mục Con</h3>
+                  <form id="sub-category-form">
+                    <label for="parent-category">Danh mục Cha:</label>
+                    <select id="parent-category">
+                      <!-- Danh mục cha sẽ được tải động -->
+                    </select>
+                    <label for="sub-category-name">Tên danh mục con:</label>
+                    <input type="text" id="sub-category-name" placeholder="Tên danh mục con" required />
+                    <button type="button" id="add-sub-category-btn" class="add-category-button">Thêm Danh mục Con</button>
                   </form>
                 </div>
               </div>
+
+              <!-- Bảng hiển thị Danh mục -->
+              <div id="categories-table-container">
+                <h3>Danh sách Danh mục</h3>
+                <table id="categories-table" class="display" style="width: 100%;">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tên Danh mục</th>
+                    <th>DS Danh mục con</th>
+                    <th>Thao tác</th>
+                  </tr>
+                  </thead>
+                  <tbody id="categories-table-body">
+                  <!-- Danh mục cha sẽ được tải động -->
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
+
 
           <!-- Bảng danh sách sản phẩm -->
           <div class="tab-container">
