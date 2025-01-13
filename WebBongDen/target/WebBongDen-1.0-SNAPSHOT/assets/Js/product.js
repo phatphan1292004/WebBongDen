@@ -67,32 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
   toggleCategoryMenu()
 
 
-  // const buyBtn = document.getElementById("addToCart");
-  // if (buyBtn) { // Kiểm tra nếu nút tồn tại
-  //   buyBtn.addEventListener('click', function () {
-  //     // Lấy productId từ thuộc tính data-id
-  //     const productId = parseInt(buyBtn.dataset.id, 10); // Sử dụng parseInt (cơ số 10)
-  //
-  //     // Gửi request đến server
-  //     fetch('/WebBongDen_war/add-to-cart', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //       body: `productId=${productId}`,
-  //     })
-  //         .then(response => {
-  //           if (response.ok) {
-  //             alert('Sản phẩm đã được thêm vào giỏ hàng!');
-  //           } else {
-  //             alert('Có lỗi xảy ra, vui lòng thử lại!');
-  //           }
-  //         })
-  //         .catch(error => console.error('Error:', error));
-  //   });
-  // } else {
-  //   console.error("Nút 'addToCart' không tồn tại trong DOM.");
-  // }
+
     const buyBtn = document.getElementById("addToCart");
 
     if (buyBtn) { // Kiểm tra nếu nút tồn tại
@@ -154,4 +129,50 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       console.error("Nút 'addToCart' không tồn tại trong DOM.");
     }
+
+  document.querySelector(".submit-review-btn").addEventListener("click", function (event) {
+    event.preventDefault(); // Ngăn chặn form submit mặc định
+
+    // Lấy dữ liệu từ form
+    const productId = document.getElementById("product-id").value;
+    const accountId = document.getElementById("account-id").value;
+    const content = document.getElementById("comment-content").value;
+    const rating = document.getElementById("rating").value;
+
+    // Kiểm tra dữ liệu
+    if (!content.trim()) {
+      Swal.fire("Lỗi", "Vui lòng nhập nội dung bình luận.", "error");
+      return;
+    }
+
+    // Tạo object để gửi dưới dạng JSON
+    const reviewData = {
+      productId: parseInt(productId),
+      accountId: parseInt(accountId),
+      content: content,
+      rating: parseInt(rating),
+    };
+
+    // Gửi dữ liệu qua Fetch
+    fetch("/WebBongDen_war/review", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Đặt header là JSON
+      },
+      body: JSON.stringify(reviewData), // Chuyển dữ liệu sang JSON
+    })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            Swal.fire("Thành công", "Bình luận của bạn đã được gửi!", "success").then(() => {
+              location.reload(); // Reload lại trang
+            });
+          } else {
+            Swal.fire("Lỗi", data.message || "Không thể gửi bình luận.", "error");
+          }
+        })
+        .catch(() => {
+          Swal.fire("Lỗi", "Không thể gửi bình luận.", "error");
+        });
+  });
 });

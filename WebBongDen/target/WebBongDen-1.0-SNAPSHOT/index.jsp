@@ -1329,7 +1329,7 @@
                     <ul class="list-product-hot" id="list-product-sale">
                         <c:forEach var="item" items="${listPrOfPromotion}">
                             <li class="product-hot-item">
-                                <a href="user/product-detail.jsp">
+                                <a href="home/product-detail?id=${item.id}">
                                     <div class="img">
                                         <img src="${item.imageUrl}" alt="${item.productName}" />
                                     </div>

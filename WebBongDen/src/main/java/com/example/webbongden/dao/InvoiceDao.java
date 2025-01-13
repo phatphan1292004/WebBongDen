@@ -15,7 +15,8 @@ public class InvoiceDao {
     public InvoiceDao() {
         this.jdbi = JDBIConnect.get();
     }
-
+//    String sql = "INSERT INTO invoices (promotion_id, account_id, created_at, total_price, payment_status) " +
+//            "VALUES (:promotionId, :accountId, :createdAt, :totalPrice, :paymentStatus)";
     // Hàm tạo hóa đơn
     public int createInvoice(Invoices invoice) {
         String sql = "INSERT INTO invoices (promotion_id, account_id, created_at, total_price, payment_status) " +
@@ -23,9 +24,9 @@ public class InvoiceDao {
 
         return jdbi.withHandle(handle ->
                 handle.createUpdate(sql)
-                        .bind("promotionId", invoice.getPromotionId())
+                        .bind("promotionId", invoice.getPromotionId() == 0 ? null : invoice.getPromotionId()) // Đưa NULL nếu promotionId là 0
                         .bind("accountId", invoice.getAccountId())
-                        .bind("createdAt", new java.sql.Date(invoice.getCreatedAt().getTime())) // Chuyển sang kiểu Date của SQL
+                        .bind("createdAt", new java.sql.Date(invoice.getCreatedAt().getTime()))
                         .bind("totalPrice", invoice.getTotalPrice())
                         .bind("paymentStatus", invoice.getPaymentStatus())
                         .executeAndReturnGeneratedKeys("id")

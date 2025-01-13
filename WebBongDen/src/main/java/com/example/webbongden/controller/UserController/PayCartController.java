@@ -53,7 +53,7 @@ public class PayCartController extends HttpServlet {
             invoice.setTotalPrice(cart.getTotalPriceNumber());
             invoice.setPaymentStatus("Pending");
 
-            Integer promotionId = null; // Để lưu promotionId (nếu có)
+            int promotionId = 0; // Để lưu promotionId (nếu có)
             List<OrderDetail> orderDetails = new ArrayList<>();
 
             for (CartItem item : cart.getItems()) {
@@ -68,7 +68,7 @@ public class PayCartController extends HttpServlet {
                 // Kiểm tra khuyến mãi
                 Promotion gift = promotionService.getPromotionById(item.getProductId());
                 if (gift != null) {
-                    if (promotionId == null) {
+                    if (promotionId != 0) {
                         promotionId = gift.getId(); // Lưu promotionId đầu tiên tìm được
                     }
                 }

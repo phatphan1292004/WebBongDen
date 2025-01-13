@@ -181,6 +181,20 @@ public class AccountDao {
         );
     }
 
+    public String getCustomerNameByAccountId(int accountId) {
+        String sql = "SELECT cus_name " +
+                "FROM accounts " +
+                "WHERE id = :accountId";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("accountId", accountId)
+                        .mapTo(String.class)
+                        .findOne()
+                        .orElse(null) // Trả về null nếu không tìm thấy
+        );
+    }
+
 
     public static void main(String[] args) {
         AccountDao accountDao = new AccountDao();

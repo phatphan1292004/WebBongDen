@@ -25,7 +25,7 @@ public class CategoryDao {
     // Lấy danh sách tất cả categories
     public List<Category> getAllCategories() {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT id, category_name, stock_quantity, DESC_1 FROM categories")
+                handle.createQuery("SELECT id, category_name FROM categories")
                         .mapToBean(Category.class)
                         .list()
         );

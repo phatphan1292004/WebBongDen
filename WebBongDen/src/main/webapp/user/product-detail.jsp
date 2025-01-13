@@ -1,3 +1,7 @@
+<%@ page import="com.example.webbongden.dao.model.Account" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -5,8 +9,11 @@
   Time: 10:20 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    HttpSession accountSession = request.getSession();
+    Account account = (Account) accountSession.getAttribute("account");
+    int accountId = account != null ? account.getId() : -1; // -1 nếu chưa đăng nhập
+%>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -408,99 +415,61 @@
 
         <div class="container">
             <div class="review-product">
-                <!-- Tiêu đề phần đánh giá sản phẩm -->
+                <!-- Title -->
                 <h2>KHÁCH HÀNG NÓI VỀ SẢN PHẨM</h2>
 
-                <!-- Thông báo nếu chưa có đánh giá -->
-                <div class="review-notice">
-                    <p>Trở thành người đầu tiên đánh giá về sản phẩm.</p>
-                </div>
+                <!-- Review Submission Form -->
+                <form id="review-form" method="post">
+                    <!-- Hidden inputs -->
+                    <input type="hidden" id="product-id" name="productId" value="${productDetail.getId()}" />
+                    <input type="hidden" id="account-id" name="accountId" value="${account != null ? account.getId() : ''}" />
 
-                <!-- Phần danh sách đánh giá -->
-                <div class="review-ratings">
-                    <div class="rating-item">
-                        <i class="fa-solid fa-star"></i>
+                    <!-- Bình luận -->
+                    <div class="review-input">
+                        <textarea id="comment-content" name="content" placeholder="Nhập nội dung bình luận"></textarea>
+                        <div class="rating-selection">
+                            <label for="rating">Chọn đánh giá:</label>
+                            <select id="rating" name="rating">
+                                <option value="1">1 Sao</option>
+                                <option value="2">2 Sao</option>
+                                <option value="3">3 Sao</option>
+                                <option value="4">4 Sao</option>
+                                <option value="5">5 Sao</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-review-btn">Gửi bình luận</button>
                     </div>
-                    <div class="rating-item">
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="rating-item">
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="rating-item">
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="rating-item">
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                </div>
+                </form>
 
-                <!-- Phần nhập bình luận -->
-                <div class="review-input">
-                    <textarea placeholder="Nhập nội dung bình luận"></textarea>
-                    <button class="submit-review-btn">Gửi bình luận</button>
-                </div>
-
-                <!-- Phần hiển thị bình luận -->
+                <!-- Display Comments Section -->
                 <div class="comments-section">
                     <div class="comments-header">
-                        <h3>3 Bình luận</h3>
+                        <h3 id="comment-count">0 Bình luận</h3>
                         <p>Đánh giá của khách hàng về sản phẩm</p>
                     </div>
-
-                    <div class="comment">
-                        <div class="comment-header">
-                            <div class="avatar">
-                                <img
-                                        src="https://www.w3schools.com/w3images/avatar2.png"
-                                        alt="Avatar Nguyễn Văn A"
-                                />
+                    <div id="comments-list">
+                        <c:forEach var="review" items="${reviews}">
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <div class="avatar">
+                                        <img
+                                                src="https://www.w3schools.com/w3images/avatar2.png"
+                                                alt="Avatar"
+                                        />
+                                    </div>
+                                    <div class="comment-info">
+                                        <span class="username">${review.getCusName()}</span>
+<%--                                        <span class="comment-date">${review.}</span>--%>
+                                    </div>
+                                </div>
+                                <p class="comment-content">${review.getContent()}</p>
+                                <div class="rating">
+                                    <c:forEach var="star" begin="1" end="${review.getRating()}">
+                                        <i class="fa-solid fa-star"></i>
+                                    </c:forEach>
+                                </div>
                             </div>
-                            <div class="comment-info">
-                                <span class="username">Nguyễn Văn A</span>
-                                <span class="comment-date">02/11/2024</span>
-                            </div>
-                        </div>
-                        <p class="comment-content">
-                            Sản phẩm tuyệt vời, tôi rất hài lòng với chất lượng và giá cả!
-                        </p>
-                    </div>
-
-                    <div class="comment">
-                        <div class="comment-header">
-                            <div class="avatar">
-                                <img
-                                        src="https://www.w3schools.com/w3images/avatar2.png"
-                                        alt="Avatar Trần Thị B"
-                                />
-                            </div>
-                            <div class="comment-info">
-                                <span class="username">Trần Thị B</span>
-                                <span class="comment-date">01/11/2024</span>
-                            </div>
-                        </div>
-                        <p class="comment-content">
-                            Chất lượng sản phẩm tốt, giao hàng nhanh chóng, nhưng tôi nghĩ
-                            giá hơi cao.
-                        </p>
-                    </div>
-
-                    <div class="comment">
-                        <div class="comment-header">
-                            <div class="avatar">
-                                <img
-                                        src="https://www.w3schools.com/w3images/avatar2.png"
-                                        alt="Avatar Lê Thị C"
-                                />
-                            </div>
-                            <div class="comment-info">
-                                <span class="username">Lê Thị C</span>
-                                <span class="comment-date">30/10/2024</span>
-                            </div>
-                        </div>
-                        <p class="comment-content">
-                            Sản phẩm như mô tả, tôi sẽ mua thêm lần sau.
-                        </p>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
