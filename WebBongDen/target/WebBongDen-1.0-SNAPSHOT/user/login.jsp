@@ -30,6 +30,19 @@
 </head>
 <body>
 <div class="wrapper">
+    <!-- Hiển thị thông báo lỗi nếu có -->
+    <c:if test="${not empty errorMessage}">
+        <p id="responseMessage1" style="color: red;">
+                ${errorMessage}
+        </p>
+    </c:if>
+
+    <!-- Hiển thị thông báo thành công nếu có -->
+    <c:if test="${not empty successMessage}">
+        <p id="responseMessage2" style="color: green;">
+                ${successMessage}
+        </p>
+    </c:if>
     <form id="login-form" action="login" method="post">
         <div class="form-header">
             <a href="index.html" class="logo"
@@ -87,7 +100,7 @@
             </div>
             <div class="login_signup">
                 Bạn chưa có tài khoản?
-                <a href="register.html" id="signup">Đăng kí ngay!</a>
+                <a href="${pageContext.request.contextPath}/register" id="signup">Đăng ký ngay!</a>
             </div>
         </div>
     </form>
@@ -98,7 +111,7 @@
             style="display: none"
     >
         <p>KHÔI PHỤC MẬT KHẨU</p>
-        <form action="#">
+        <form action="reset-password" id="reset-password-form" method="post">
             <div class="input-group">
                 <label for="reset-email">Nhập email của bạn</label>
                 <input
@@ -110,14 +123,14 @@
                 />
             </div>
             <div class="group-btn">
-                <button type="submit" onclick="responseMassage()">
+                <button type="submit">
                     Gửi Yêu Cầu Đặt Lại Mật Khẩu
                 </button>
                 <p>
                     Bạn đã nhớ mật khẩu?
                     <span
-                            class="back-to-login"
-                            onclick="showLogin()"
+                            id="back-to-login"
+
                             style="color: #4288e5"
                     >
                 Quay lại trang đăng nhập
@@ -125,7 +138,6 @@
                 </p>
             </div>
         </form>
-        <p id="responseMessage"></p>
     </div>
 </div>
 <div id="notification" class="notification">
@@ -133,4 +145,25 @@
 </div>
 </body>
 <script src="${pageContext.request.contextPath}/assets/Js/login.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const forgotPasswordLink = document.querySelector(".forgot-pw");
+        const forgotPasswordForm = document.getElementById("forgot-password-form");
+        const loginForm = document.getElementById("login-form");
+        const backToLogin = document.getElementById("back-to-login");
+
+        // Hiển thị form quên mật khẩu và ẩn form đăng nhập
+        forgotPasswordLink.addEventListener("click", function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định (chuyển trang)
+            loginForm.style.display = "none";
+            forgotPasswordForm.style.display = "block";
+        });
+
+        // Quay lại form đăng nhập
+        backToLogin.addEventListener("click", function () {
+            forgotPasswordForm.style.display = "none";
+            loginForm.style.display = "block";
+        });
+    });
+</script>
 </html>
