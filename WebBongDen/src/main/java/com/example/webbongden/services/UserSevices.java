@@ -35,4 +35,8 @@ public class UserSevices {
         // Gọi phương thức từ DAO để lấy dữ liệu
         return userDao.getCustomerTypes();
     }
+
+    public User getBasicInfoByUsername(String username) {
+        return userDao.getBasicInfoByUsername(username);
+    }
 }

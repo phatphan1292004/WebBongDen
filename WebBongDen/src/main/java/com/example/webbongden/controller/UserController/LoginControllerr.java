@@ -1,16 +1,23 @@
 package com.example.webbongden.controller.UserController;
 
 import com.example.webbongden.dao.model.Account;
+import com.example.webbongden.dao.model.Order;
+import com.example.webbongden.dao.model.User;
 import com.example.webbongden.services.AccountServices;
+import com.example.webbongden.services.OrderSevices;
+import com.example.webbongden.services.UserSevices;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "LoginControllerr", value = "/login")
 public class LoginControllerr extends HttpServlet {
     private final AccountServices  accountService = new AccountServices();
+    private final UserSevices userSevices = new UserSevices();
+    private final OrderSevices orderSevices = new OrderSevices();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,13 +31,16 @@ public class LoginControllerr extends HttpServlet {
 
         // Xác thực tài khoản
         Account account = accountService.authenticate(username, password);
-
+        User user = userSevices.getBasicInfoByUsername(username);
+        List<Order> orders = orderSevices.getOrdersByUsername(username);
         if (account != null) {
             // Lưu thông tin tài khoản vào session
             HttpSession session = request.getSession();
             session.setAttribute("account", account);
             session.setAttribute("username", account.getUsername());
             session.setAttribute("role", account.getRole());
+            session.setAttribute("userInfo", user);
+            session.setAttribute("orders", orders);
 
             // Phân quyền và chuyển hướng
             if ("admin".equals(account.getRole())) {

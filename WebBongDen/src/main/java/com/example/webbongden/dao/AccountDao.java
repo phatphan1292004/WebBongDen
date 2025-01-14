@@ -130,7 +130,7 @@ public class AccountDao {
 //    }
 
     public Account authenticate(String username) {
-        String sql = "SELECT id, username, password, role FROM accounts WHERE username = :username";
+        String sql = "SELECT id, email, username, password, role FROM accounts WHERE username = :username";
 
         return jdbi.withHandle(handle ->
                 handle.createQuery(sql)
@@ -274,6 +274,17 @@ public class AccountDao {
         );
     }
     public boolean updatePassword(String email, String hashedPassword) {
+        String sql = "UPDATE accounts SET password = :password WHERE email = :email";
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("password", hashedPassword)
+                        .bind("email", email)
+                        .execute() > 0
+        );
+    }
+
+    //User
+    public boolean updatePassword2(String email, String hashedPassword) {
         String sql = "UPDATE accounts SET password = :password WHERE email = :email";
         return jdbi.withHandle(handle ->
                 handle.createUpdate(sql)

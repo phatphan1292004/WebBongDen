@@ -112,4 +112,25 @@ public class AccountServices {
             return false;
         }
     }
+
+    //User
+    public boolean changePassword(String username, String oldPassword, String newPassword) {
+        // Lấy tài khoản từ DAO dựa trên username
+        Account account = accountDao.authenticate(username);
+
+        if (account == null) {
+            return false; // Tài khoản không tồn tại
+        }
+
+        // Kiểm tra mật khẩu cũ
+        if (!checkPassword(oldPassword, account.getPassword())) {
+            return false; // Mật khẩu cũ không chính xác
+        }
+
+        // Hash mật khẩu mới
+        String hashedPassword = hashPassword(newPassword);
+
+        // Cập nhật mật khẩu mới
+        return accountDao.updatePassword(account.getEmail(), hashedPassword);
+    }
 }

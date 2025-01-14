@@ -59,6 +59,11 @@ public class OrderSevices {
         return orderDao.getOrderDetailsByOrderId(orderId);
     }
 
+    //User
+    public List<Order> getOrdersByUsername(String username) {
+        return orderDao.getOrdersByUsername(username);
+    }
+
     public void createOrderAndInvoice(Invoices invoice, List<OrderDetail> orderDetails, Customer customerInfo) {
         try {
             // Bước 1: Tạo hóa đơn

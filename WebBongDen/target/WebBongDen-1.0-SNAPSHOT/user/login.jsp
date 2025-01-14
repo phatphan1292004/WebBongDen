@@ -140,9 +140,6 @@
         </form>
     </div>
 </div>
-<div id="notification" class="notification">
-    <p id="notification-message"></p>
-</div>
 </body>
 <script src="${pageContext.request.contextPath}/assets/Js/login.js"></script>
 <script>

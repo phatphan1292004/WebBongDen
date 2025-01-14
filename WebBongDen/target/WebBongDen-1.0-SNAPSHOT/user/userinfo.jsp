@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.example.webbongden.dao.model.Order" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 12/15/2024
@@ -66,7 +67,7 @@
                             </li>
                             <li onclick="logout()">
                                 <i class="fa-solid fa-right-from-bracket"></i>
-                                <a href="#" id="logoutLink">Đăng xuất</a>
+                                <a href="/WebBongDen_war/LogoutController" id="logoutLink">Đăng xuất</a>
                             </li>
                         </ul>
                     </nav>
@@ -85,46 +86,38 @@
                         <div class="user-name dlex">
                             <label for="username">Họ tên:</label>
                             <div>
-                                <input type="text" id="username" name="username" required />
+                                <input type="text" id="username" name="username" required value="${userInfo.customerName}"/>
                             </div>
                         </div>
 
-                        <div class="sex dlex">
-                            <label class="lableSex">Giới tính:</label>
+                        <div class="email-cus dlex">
+                            <label for="email">Email:</label>
                             <div>
-                                <input type="radio" name="gender" id="male" /> Nam
-                                <input type="radio" name="gender" id="female" /> Nữ
+                                <input type="text" id="email" name="email" value="${userInfo.email}" readonly/>
                             </div>
                         </div>
 
                         <div class="phone-cus dlex">
                             <label for="phone">Số điện thoại:</label>
                             <div>
-                                <input type="tel" id="phone" name="phone" />
+                                <input type="tel" id="phone" name="phone" value="${userInfo.phone}"/>
                             </div>
                         </div>
 
                         <div class="phone-cus dlex">
                             <label for="address">Địa chỉ:</label>
                             <div>
-                                <input type="text" id="address" name="address" />
+                                <input type="text" id="address" name="address" value="${userInfo.address}"/>
                             </div>
                         </div>
 
-                        <div class="bYear dlex">
-                            <label>Ngày sinh:</label>
-                            <div class="DMY">
-                                <select id="day">
-                                    <option value="date">Ngày</option>
-                                </select>
-                                <select id="month">
-                                    <option value="month">Tháng</option>
-                                </select>
-                                <select id="year">
-                                    <option value="year">Năm</option>
-                                </select>
+                        <div class="create-date-cus dlex">
+                            <label for="create-date">Ngày tạo:</label>
+                            <div>
+                                <input type="text" id="create-date" name="create-date" value="${userInfo.createdAt}" readonly/>
                             </div>
                         </div>
+
 
                         <div class="info-btn">
                             <div class="submit">
@@ -145,52 +138,46 @@
                     <div class="order_header">
                         <h2>ĐƠN HÀNG ĐÃ ĐẶT</h2>
                     </div>
-                    <div class="filter_bar">
-                        <div>
-                            <span>Lọc: </span>
-                            <select id="order-status">
-                                <option value="all">Tất cả</option>
-                                <option value="new">Mới</option>
-                                <option value="processing">Đang xử lý</option>
-                                <option value="shipping">Đang vận chuyển</option>
-                                <option value="completed">Hoàn thành</option>
-                            </select>
-                        </div>
-                        <div class="search_bar">
-                            <input
-                                    type="text"
-                                    placeholder="Tìm đơn hàng theo Mã đơn hàng"
-                            />
-                            <span>|</span>
-                            <div>
-                                <button>Tìm</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div id="noOrders" class="no_orders">
-
-                      <p>Quý khách chưa có đơn hàng nào.</p>
-
-                      <p>Quý khách chưa có đơn hàng nào.</p>
-
-                      <button>Tiếp tục mua hàng</button>
-                    </div> -->
 
                     <div class="order-table-container" id="orderTableContainer">
+                        <%
+                            // Lấy danh sách orders từ request hoặc session
+                            List<Order> orders = (List<Order>) session.getAttribute("orders");
+
+                            // Kiểm tra nếu danh sách đơn hàng không rỗng
+                            if (orders != null && !orders.isEmpty()) {
+                        %>
                         <table class="order-table">
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Tên SP</th>
-                                <th>Giá</th>
-                                <th>SL</th>
                                 <th>Ngày đặt</th>
                                 <th>Tổng tiền</th>
-                                <th>Thao tác</th>
+                                <th>Trạng thái</th>
                             </tr>
                             </thead>
-                            <tbody id="orderTableBody"></tbody>
+                            <tbody>
+                            <%
+                                for (Order order : orders) {
+                            %>
+                            <tr>
+                                <td><%= order.getId() %></td>
+                                <td><%= order.getCreatedAt() %></td>
+                                <td><%= order.getTotalPrice() %></td>
+                                <td><%= order.getOrderStatus() %></td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                            </tbody>
                         </table>
+                        <%
+                        } else {
+                        %>
+                        <p>Không có đơn hàng nào.</p>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
 
@@ -207,45 +194,35 @@
                             người khác
                         </div>
                     </div>
-                    <form class="change_password_form">
+                    <form class="change_password_form" action="changePassword" method="POST">
                         <div class="dlex">
                             <label for="oldPassword">Mật khẩu cũ:</label>
                             <div>
-                                <input
-                                        type="password"
-                                        id="oldPassword"
-                                        placeholder="Nhập mật khẩu hiện tại"
-                                        required
-                                />
+                                <input type="password" id="oldPassword" name="oldPassword" placeholder="Nhập mật khẩu hiện tại" required />
                             </div>
                         </div>
 
                         <div class="dlex">
                             <label for="newPassword">Mật khẩu mới:</label>
                             <div>
-                                <input
-                                        type="password"
-                                        id="newPassword"
-                                        placeholder="Nhập mật khẩu mới"
-                                        required
-                                />
+                                <input type="password" id="newPassword" name="newPassword" placeholder="Nhập mật khẩu mới" required />
                             </div>
                         </div>
 
                         <div class="dlex">
                             <label for="confirm_password">Nhập lại mật khẩu:</label>
                             <div>
-                                <input
-                                        type="password"
-                                        id="confirm_password"
-                                        placeholder="Nhập lại mật khẩu mới"
-                                        required
-                                />
+                                <input type="password" id="confirm_password" name="confirmPassword" placeholder="Nhập lại mật khẩu mới" required />
                             </div>
                         </div>
                         <button class="submit" type="submit">Xác nhận</button>
                     </form>
-                    <p id="message" class="message"></p>
+                    <c:if test="${not empty successMessage}">
+                        <p style="color: green;">${successMessage}</p>
+                    </c:if>
+                    <c:if test="${not empty errorMessage}">
+                        <p style="color: red;">${errorMessage}</p>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -253,6 +230,6 @@
     <jsp:include page="../reuse/footer.jsp" />
 </div>
 </body>
-<script src="${pageContext.request.contextPath}/assets/Js/user.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/Js/user.js?v=2.0" defer></script>
 </html>
 

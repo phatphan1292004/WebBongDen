@@ -189,35 +189,90 @@ public class UserDao {
         );
     }
 
+    //=====Làm login====
+    public User getBasicInfoByUsername(String username) {
+        String sql = "SELECT " +
+                "c.cus_name AS customerName, " +
+                "a.email AS email, " +
+                "c.phone AS phoneNumber, " +
+                "c.address AS address, " +
+                "a.created_at AS registrationDate " +
+                "FROM customers c " +
+                "JOIN accounts a ON c.id = a.customer_id " +
+                "WHERE a.username = :username";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("username", username) // Gắn giá trị username vào câu truy vấn
+                        .map((rs, ctx) -> new User(
+                                null, // Không cần ID khách hàng
+                                rs.getString("customerName"),
+                                rs.getString("email"),
+                                rs.getString("phoneNumber"),
+                                rs.getString("address"),
+                                rs.getDate("registrationDate"),
+                                null // Không cần lịch sử mua hàng
+                        ))
+                        .findOne() // Trả về một kết quả duy nhất
+                        .orElse(null)
+        );
+    }
+
     public static void main(String[] args) {
-        // Tạo đối tượng UserDao
+        // Tạo một đối tượng UserDao
         UserDao userDao = new UserDao();
 
-        // Test phương thức lấy danh sách thông tin khách hàng
-        System.out.println("Danh sách thông tin khách hàng:");
-        List<User> userList = userDao.getCustomerAccountInfo();
-        for (User user : userList) {
-            System.out.println("ID Khách hàng: " + user.getCustomerId());
-            System.out.println("Tên khách hàng: " + user.getCustomerName());
+        // Tên đăng nhập cần kiểm tra
+        String username = "pvp1292004";
+
+        // Gọi phương thức getBasicInfoByUsername
+        User user = userDao.getBasicInfoByUsername(username);
+
+        // Kiểm tra kết quả và in ra màn hình
+        if (user != null) {
+            System.out.println("Thông tin người dùng:");
+            System.out.println("Tên: " + user.getCustomerName());
             System.out.println("Email: " + user.getEmail());
             System.out.println("Số điện thoại: " + user.getPhone());
             System.out.println("Địa chỉ: " + user.getAddress());
-            System.out.println("Ngày đăng ký: " + user.getCreatedAt());
-
-            // In lịch sử mua hàng nếu có
-            System.out.println("Lịch sử mua hàng:");
-            List<Order> purchaseHistory = userDao.getPurchaseHistoryByCustomerId(user.getCustomerId());
-            if (purchaseHistory != null && !purchaseHistory.isEmpty()) {
-                for (Order order : purchaseHistory) {
-                    System.out.println("  - Mã đơn hàng: " + order.getId());
-                    System.out.println("    Ngày đặt hàng: " + order.getCreatedAt());
-                    System.out.println("    Tổng tiền: " + order.getTotalPrice());
-                    System.out.println("    Trạng thái: " + order.getOrderStatus());
-                }
-            } else {
-                System.out.println("  Không có lịch sử mua hàng.");
-            }
-            System.out.println("---------------------------------------------------");
+            System.out.println("Ngày tạo tài khoản: " + user.getCreatedAt());
+        } else {
+            System.out.println("Không tìm thấy người dùng với tên đăng nhập: " + username);
         }
     }
+
+
+
+
+//public static void main(String[] args) {
+//        // Tạo đối tượng UserDao
+//        UserDao userDao = new UserDao();
+//
+//        // Test phương thức lấy danh sách thông tin khách hàng
+//        System.out.println("Danh sách thông tin khách hàng:");
+//        List<User> userList = userDao.getCustomerAccountInfo();
+//        for (User user : userList) {
+//            System.out.println("ID Khách hàng: " + user.getCustomerId());
+//            System.out.println("Tên khách hàng: " + user.getCustomerName());
+//            System.out.println("Email: " + user.getEmail());
+//            System.out.println("Số điện thoại: " + user.getPhone());
+//            System.out.println("Địa chỉ: " + user.getAddress());
+//            System.out.println("Ngày đăng ký: " + user.getCreatedAt());
+//
+//            // In lịch sử mua hàng nếu có
+//            System.out.println("Lịch sử mua hàng:");
+//            List<Order> purchaseHistory = userDao.getPurchaseHistoryByCustomerId(user.getCustomerId());
+//            if (purchaseHistory != null && !purchaseHistory.isEmpty()) {
+//                for (Order order : purchaseHistory) {
+//                    System.out.println("  - Mã đơn hàng: " + order.getId());
+//                    System.out.println("    Ngày đặt hàng: " + order.getCreatedAt());
+//                    System.out.println("    Tổng tiền: " + order.getTotalPrice());
+//                    System.out.println("    Trạng thái: " + order.getOrderStatus());
+//                }
+//            } else {
+//                System.out.println("  Không có lịch sử mua hàng.");
+//            }
+//            System.out.println("---------------------------------------------------");
+//        }
+//    }
 }

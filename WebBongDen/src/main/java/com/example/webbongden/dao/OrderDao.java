@@ -256,56 +256,56 @@ public class OrderDao {
         });
     }
 
-    public static void main(String[] args) {
-//        // Khởi tạo đối tượng OrderDao
-//        OrderDao orderDao = new OrderDao();
-//
-//        // Tìm kiếm đơn hàng với từ khóa
-//        String keyword = "Pending"; // Thay từ khóa ở đây để kiểm tra (VD: "Nguyễn Văn A" hoặc "Shipped")
-//        List<Order> orders = orderDao.filterOrderByStatus(keyword);
-//
-//        // In kết quả
-//        System.out.println("Kết quả tìm kiếm cho từ khóa: " + keyword);
-//        if (orders.isEmpty()) {
-//            System.out.println("Không tìm thấy đơn hàng nào phù hợp!");
-//        } else {
-//            for (Order order : orders) {
-//                System.out.println("Order ID: " + order.getId());
-//                System.out.println("Customer Name: " + order.getCustomerName());
-//                System.out.println("Order Date: " + order.getCreatedAt());
-//                System.out.println("Total Price: " + order.getTotalPrice());
-//                System.out.println("Address: " + order.getAddress());
-//                System.out.println("Status: " + order.getOrderStatus());
-//
-//                // In chi tiết đơn hàng nếu có
-//                List<OrderDetail> orderDetails = order.getOrderDetails();
-//                if (orderDetails != null && !orderDetails.isEmpty()) {
-//                    System.out.println("Order Details:");
-//                    for (OrderDetail detail : orderDetails) {
-//                        System.out.println("\tProduct ID: " + detail.getProductId());
-//                        System.out.println("\tQuantity: " + detail.getQuantity());
-//                        System.out.println("\tUnit Price: " + detail.getUnitPrice());
-//                        System.out.println("\tDiscount: " + detail.getItemDiscount());
-//                        System.out.println("\tAmount: " + detail.getAmount());
-//                    }
-//                } else {
-//                    System.out.println("No order details found for this order.");
-//                }
-//                System.out.println("------------------------------");
-//            }
-//        }
-        OrderDao orderDao = new OrderDao();
-        System.out.println(orderDao.totalOrderInLastedMonth());
-        List<Order> orders = orderDao.getOrdersInLastMonth();
+    public List<Order> getOrdersByUsername(String username) {
+        String sql = "SELECT " +
+                "o.id AS orderId, " +
+                "o.created_at AS orderDate, " +
+                "o.order_status AS orderStatus, " + // Lấy trạng thái đơn hàng
+                "o.total_price AS totalPrice " +
+                "FROM accounts a " +
+                "JOIN orders o ON a.id = o.account_id " +
+                "WHERE a.username = :username " +
+                "ORDER BY o.created_at DESC";
 
-        // Hiển thị kết quả
-        System.out.println("Danh sách đơn hàng trong tháng trước:");
-        for (Order order : orders) {
-            System.out.println("ID: " + order.getId());
-            System.out.println("Tên khách hàng: " + order.getCustomerName());
-            System.out.println("Ngày đặt: " + order.getCreatedAt());
-            System.out.println("Trạng thái: " + order.getOrderStatus());
-            System.out.println("-----------------------");
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("username", username) // Gắn giá trị username vào câu truy vấn
+                        .map((rs, ctx) -> new Order(
+                                rs.getInt("orderId"),
+                                null,
+                                rs.getDate("orderDate"),
+                                rs.getDouble("totalPrice"),
+                                null, // Không dùng tổng số lượng
+                                rs.getString("orderStatus"), // Lấy trạng thái đơn hàng
+                                null
+                        ))
+                        .list()
+        );
+    }
+
+
+    public static void main(String[] args) {
+        // Tạo một đối tượng UserDao (được giả định là chứa phương thức getOrdersByUsername)
+        OrderDao userDao = new OrderDao();
+
+        // Nhập tên đăng nhập cần kiểm tra
+        String username = "pvp1292004";
+
+        // Gọi phương thức getOrdersByUsername
+        List<Order> orders = userDao.getOrdersByUsername(username);
+
+        // In thông tin kết quả
+        if (orders != null && !orders.isEmpty()) {
+            System.out.println("Danh sách đơn hàng của tài khoản username: " + username);
+            for (Order order : orders) {
+                System.out.println("ID Đơn hàng: " + order.getId());
+                System.out.println("Ngày đặt hàng: " + order.getCreatedAt());
+                System.out.println("Tổng tiền: " + order.getTotalPrice());
+                System.out.println("Trạng thái: " + order.getOrderStatus());
+                System.out.println("-----------------------------------------");
+            }
+        } else {
+            System.out.println("Không tìm thấy đơn hàng nào cho tài khoản username: " + username);
         }
     }
 }

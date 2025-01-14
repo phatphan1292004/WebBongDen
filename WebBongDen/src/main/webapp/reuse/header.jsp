@@ -83,12 +83,12 @@
                         <div class="dropdown-content">
                             <div class="dropdown-item">
                                 <i class="fa fa-user"></i>
-                                <a href="user.html">Thông tin cá nhân</a>
+                                <a href="/WebBongDen_war/userinfo">Thông tin cá nhân</a>
                             </div>
 
                             <div class="dropdown-item">
                                 <i class="fa-regular fa-eye"></i>
-                                <a href="user.html">Đơn hàng gần đây</a>
+                                <a href="/WebBongDen_war/userinfo">Đơn hàng gần đây</a>
                             </div>
                         </div>
                         <div class="dropdown-footer">
