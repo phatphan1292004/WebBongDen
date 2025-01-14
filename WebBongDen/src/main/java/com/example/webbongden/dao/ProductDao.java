@@ -773,6 +773,67 @@ public class ProductDao {
         });
     }
 
+    //ProductViewDetail
+    public int getSoldQuantity(int productId) {
+        String sql = "SELECT SUM(quantity) FROM order_details WHERE product_id = ?";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind(0, productId)
+                        .mapTo(Integer.class)
+                        .findOne()
+                        .orElse(0)
+        );
+    }
+
+    public int getStockQuantity(int productId) {
+        String sql = "SELECT stock_quantity FROM products WHERE id = ?";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind(0, productId)
+                        .mapTo(Integer.class)
+                        .findOne()
+                        .orElse(0)
+        );
+    }
+
+    public double getProductRating(int productId) {
+        String sql = "SELECT AVG(rating) FROM reviews WHERE product_id = ?";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind(0, productId)
+                        .mapTo(Double.class)
+                        .findOne()
+                        .orElse(0.0)
+        );
+    }
+
+    public int getReviewsCount(int productId) {
+        String sql = "SELECT COUNT(*) FROM reviews WHERE product_id = ?";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind(0, productId)
+                        .mapTo(Integer.class)
+                        .findOne()
+                        .orElse(0)
+        );
+    }
+
+    public List<String> getAllProductUrls(int productId) {
+        String sql = "SELECT pi.url " +
+                "FROM product_images pi " +
+                "JOIN products p ON pi.product_id = p.id " +
+                "WHERE pi.url IS NOT NULL AND pi.product_id = :productId";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("productId", productId) // Gắn giá trị productId vào query
+                        .mapTo(String.class) // Map kết quả trực tiếp sang danh sách String
+                        .list()
+        );
+    }
+
+
+
     public static void main(String[] args) {
         ProductDao productDao = new ProductDao();
 

@@ -1330,7 +1330,7 @@
                         <ul class="list-product-hot">
                             <c:forEach var="product" items="${promotion.products}">
                                 <li class="product-hot-item">
-                                    <a href="home/product-detail?id=${product.id}">
+                                    <a href="product-detail?id=${product.id}">
                                         <div class="img">
                                             <img src="${product.listImg[0].url}" alt="${product.productName}" />
                                         </div>
@@ -1508,7 +1508,7 @@
                             <ul class="list-product" id="list-product-${category.id}">
                                 <c:forEach var="product" items="${productsByCategoryMap[category.id]}">
                                     <li class="product-item">
-                                        <a href="home/product-detail?id=${product.id}">
+                                        <a href="product-detail?id=${product.id}">
                                             <div class="img">
                                                 <img src="${product.imageUrl}" alt="${product.productName}" />
                                             </div>

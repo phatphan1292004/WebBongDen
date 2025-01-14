@@ -212,6 +212,21 @@
     background-color: #dc3545;
   }
 
+  .cancel-button {
+    background-color: #ff4d4d; /* Màu đỏ nổi bật */
+    color: white; /* Màu chữ */
+    border: none; /* Loại bỏ viền */
+    border-radius: 4px; /* Bo góc */
+    padding: 10px 20px; /* Khoảng cách trong nút */
+    font-size: 14px; /* Kích thước chữ */
+    cursor: pointer; /* Hiển thị con trỏ khi hover */
+    display: inline-flex; /* Canh giữa icon và text */
+    align-items: center; /* Canh giữa icon và text */
+    float: right;
+    gap: 8px; /* Khoảng cách giữa icon và text */
+    margin-right: 10px;
+  }
+
 </style>
 <body>
 <div class="wrapper">
@@ -577,45 +592,6 @@
           </div>
 
           <div class="details-main">
-            <!-- Phần thông tin thống kê -->
-            <div class="stats-container">
-              <div class="stat-box">
-                <div class="stat-image">
-                  <img src="./img/adminpage/sales.png" alt="" />
-                </div>
-                <div class="stat-text">
-                  <p>Số lượng bán được</p>
-                  <%--                                    <span id="sold-quantity">${productViewDetail.soldQuantity}</span>--%>
-                </div>
-              </div>
-              <div class="stat-box">
-                <div class="stat-image">
-                  <img src="./img/adminpage/inventory.png" alt="" />
-                </div>
-                <div class="stat-text">
-                  <p>Số lượng tồn kho</p>
-                  <span id="stock-quantity-product">${productViewDetail.stockQuantity}</span>
-                </div>
-              </div>
-              <div class="stat-box">
-                <div class="stat-image">
-                  <img src="./img/adminpage/star.png" alt="" />
-                </div>
-                <div class="stat-text">
-                  <p>Rating</p>
-                  <span id="product-rating">${productViewDetail.rating}</span>
-                </div>
-              </div>
-              <div class="stat-box">
-                <div class="stat-image">
-                  <img src="./img/adminpage/chat.png" alt="" />
-                </div>
-                <div class="stat-text">
-                  <p>Đánh giá</p>
-                  <%--                                    <span id="product-reviews">${productViewDetail.reviewsCount} đánh giá</span>--%>
-                </div>
-              </div>
-            </div>
 
             <!-- Phần chi tiết sản phẩm -->
             <div class="details-content">
@@ -625,6 +601,10 @@
               <form class="details-form" action="edit-product-detail" method="post" enctype="multipart/form-data">
                 <button id="save-product-btn" class="save-button" type="submit" style="display: none;">
                   <i class="fa-solid fa-pen"></i> Lưu
+                </button>
+
+                <button id="cancel-product-btn" class="cancel-button" type="button" style="display: none;">
+                  <i class="fa-solid fa-cancel"></i> Hủy
                 </button>
                 <div>
                   <strong>Id:</strong>
@@ -636,31 +616,38 @@
                   <strong>Hình ảnh:</strong>
                   <div id="image-section">
                     <!-- Hiển thị URL hình ảnh hiện tại -->
-                    <input
-                            type="text"
-                            id="product-image-url"
-                            name="mainImageUrl"
-                            value=""
-                            readonly
-                    />
-                    <button id="edit-image-btn" class="edit-image-button" type="button">
-                      Chỉnh sửa
-                    </button>
-                  </div>
-
-                  <!-- Input upload file ẩn mặc định -->
-                  <div id="upload-file-section" style="display: none;">
+<%--                    <input--%>
+<%--                            type="text"--%>
+<%--                            id="product-image-url"--%>
+<%--                            name="mainImageUrl"--%>
+<%--                            value=""--%>
+<%--                            readonly--%>
+<%--                    />--%>
                     <input
                             type="file"
                             id="upload-product-image"
-                            name="imageFiles"
+                           name="imageFiles"
                             accept="image/*"
-                            multiple
-                    />
-                    <button id="cancel-edit-btn" class="cancel-edit-button" type="button">
-                      Hủy
-                    </button>
+                            multiple/>
+
+<%--                    <button id="edit-image-btn" class="edit-image-button" type="button">--%>
+<%--                      Chỉnh sửa--%>
+<%--                    </button>--%>
                   </div>
+
+<%--                  <!-- Input upload file ẩn mặc định -->--%>
+<%--                  <div id="upload-file-section" style="display: none;">--%>
+<%--                    <input--%>
+<%--                            type="file"--%>
+<%--                            id="upload-product-image"--%>
+<%--                            name="imageFiles"--%>
+<%--                            accept="image/*"--%>
+<%--                            multiple--%>
+<%--                    />--%>
+<%--                    <button id="cancel-edit-btn" class="cancel-edit-button" type="button">--%>
+<%--                      Hủy--%>
+<%--                    </button>--%>
+<%--                  </div>--%>
                 </div>
 
                 <div>

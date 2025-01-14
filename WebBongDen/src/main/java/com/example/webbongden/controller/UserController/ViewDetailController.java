@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ViewDetailController", value = "/home/product-detail")
+@WebServlet(name = "ViewDetailController", value = "/product-detail")
 public class ViewDetailController extends HttpServlet {
     private static final ProductServices productServices;
     private static final ReviewService reviewService;
@@ -33,6 +33,7 @@ public class ViewDetailController extends HttpServlet {
 
             ProductDetail productDetail = productServices.getProductDetailById(productId);
             List<Review> reviews = reviewService.getReviewsByProductId(productId);
+            List<String> listImg = productServices.getAllProductUrls(productId);
             
             if (productDetail == null) {
                 response.sendRedirect("/home?error=product_not_found");
@@ -42,6 +43,7 @@ public class ViewDetailController extends HttpServlet {
             // Set product details in the request scope
             request.setAttribute("reviews", reviews);
             request.setAttribute("productDetail", productDetail);
+            request.setAttribute("listImg", listImg);
 
             // Forward to the product detail JSP
             request.getRequestDispatcher("/user/product-detail.jsp").forward(request, response);

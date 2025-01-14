@@ -1563,7 +1563,7 @@
                                 <c:forEach var="product" items="${products}">
                                     <div class="col-6 col-md-4 col-lg-3 mb-4">
                                         <div class="product-item">
-                                            <a href="home/product-detail?id=${product.id}">
+                                            <a href="product-detail?id=${product.id}">
                                                 <div class="img">
                                                     <img src="${product.imageUrl}" alt="${product.productName}" />
                                                 </div>

@@ -19,4 +19,8 @@ public class RevenueServices {
     public List<Map<String, Object>> getYearlyRevenue() {
         return revenueDao.getYearlyRevenueForLast5Years();
     }
+
+    public Map<String, Double> getRevenueByPeriodInMonth() {
+        return revenueDao.getRevenueByPeriodInMonth();
+    }
 }

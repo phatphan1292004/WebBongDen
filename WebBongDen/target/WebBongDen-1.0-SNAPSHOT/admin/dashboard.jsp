@@ -194,7 +194,7 @@
                         </table>
                     </div>
 
-                    <div class="customer-chart">
+                    <div class="customer-chart" data-chart='${customerPieChart}'>
                         <div class="cus-chart-header">
                             <p>Khách hàng</p>
                             Đơn vị tính: %
@@ -203,9 +203,9 @@
                     </div>
                 </div>
 
-                <div class="card-container2">
+                <div class="card-container2" data-revenue='${revenueChartData}'>
                     <div class="revenue-year">
-                        <div class="revenue-year-header">Doanh thu trong năm</div>
+                        <div class="revenue-year-header">Doanh thu trong tháng</div>
                         <canvas id="revenueChart"></canvas>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
         </div>
     </div>
 </div>
-<script type="module" src="${pageContext.request.contextPath}/admin/admin_js/dashboardAdmin.js" defer></script>
+<script src="${pageContext.request.contextPath}/admin/admin_js/dashboardAdmin.js?v=2.0" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>

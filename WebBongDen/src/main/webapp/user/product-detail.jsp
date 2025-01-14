@@ -56,30 +56,11 @@
                 <div class="left-container">
                     <div class="product-view">
                         <div class="product-image-list">
-                            <div class="product-image">
-                                <img
-                                        src="${productDetail.getMainImageUrl()}"
-                                        alt="Đèn chùm Tiffany"
-                                />
-                            </div>
-                            <div class="product-image">
-                                <img
-                                        src="${productDetail.getMainImageUrl()}"
-                                        alt="Đèn chùm Tiffany"
-                                />
-                            </div>
-                            <div class="product-image">
-                                <img
-                                        src="${productDetail.getMainImageUrl()}"
-                                        alt="Đèn chùm Tiffany"
-                                />
-                            </div>
-                            <div class="product-image">
-                                <img
-                                        src="${productDetail.getMainImageUrl()}"
-                                        alt="Đèn chùm Tiffany"
-                                />
-                            </div>
+                            <c:forEach var="imageUrl" items="${listImg}">
+                                <div class="product-image">
+                                    <img src="${imageUrl}" alt="Hình ảnh sản phẩm" />
+                                </div>
+                            </c:forEach>
                         </div>
 
                         <div class="product-detail">

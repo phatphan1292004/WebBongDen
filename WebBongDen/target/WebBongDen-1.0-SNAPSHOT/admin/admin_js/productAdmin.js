@@ -7,25 +7,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const fileInput = document.getElementById("upload-product-image");
 
     // Khi nhấn "Chỉnh sửa"
-    editButton.addEventListener("click", function () {
-        // Ẩn phần URL và nút "Chỉnh sửa"
-        imageSection.style.display = "none";
-
-        // Hiện phần upload file và nút "Hủy"
-        uploadFileSection.style.display = "flex";
-    });
-
-    // Khi nhấn "Hủy"
-    cancelEditButton.addEventListener("click", function () {
-        // Hiện lại phần URL và nút "Chỉnh sửa"
-        imageSection.style.display = "flex";
-
-        // Ẩn phần upload file
-        uploadFileSection.style.display = "none";
-
-        // Xóa file đã chọn (nếu có)
-        fileInput.value = "";
-    });
+    // editButton.addEventListener("click", function () {
+    //     // Ẩn phần URL và nút "Chỉnh sửa"
+    //     imageSection.style.display = "none";
+    //
+    //     // Hiện phần upload file và nút "Hủy"
+    //     uploadFileSection.style.display = "flex";
+    // });
+    //
+    // // Khi nhấn "Hủy"
+    // cancelEditButton.addEventListener("click", function () {
+    //     // Hiện lại phần URL và nút "Chỉnh sửa"
+    //     imageSection.style.display = "flex";
+    //
+    //     // Ẩn phần upload file
+    //     uploadFileSection.style.display = "none";
+    //
+    //     // Xóa file đã chọn (nếu có)
+    //     fileInput.value = "";
+    // });
 
 
 
@@ -587,6 +587,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Hiển thị nút Lưu, Ẩn nút Chỉnh sửa
             document.getElementById("save-product-btn").style.display = "block";
+            document.getElementById("cancel-product-btn").style.display = "block";
             document.getElementById("edit-product-btn").style.display = "none";
         });
 
@@ -623,4 +624,34 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("save-product-btn").style.display = "none";
             document.getElementById("edit-product-btn").style.display = "block";
         });
+
+    //Khi ấn hủy
+    document.getElementById("cancel-product-btn").addEventListener("click", function () {
+        const detailsContent = document.querySelector(".details-content");
+        const spans = detailsContent.querySelectorAll("span");
+        const inputs = detailsContent.querySelectorAll("input, textarea");
+
+        // Phục hồi giá trị ban đầu từ thuộc tính `data-original`
+        inputs.forEach((input) => {
+            const originalValue = input.getAttribute("data-original");
+            if (originalValue !== null) {
+                input.value = originalValue;
+            }
+        });
+
+        // Hiển thị lại các phần tử span (view) và ẩn các input (edit)
+        spans.forEach((span) => {
+            span.style.display = "inline";
+        });
+        inputs.forEach((input) => {
+            input.style.display = "none";
+        });
+
+        document.getElementById("edit-product-category").style.display = "none";
+
+        // Hiển thị nút Chỉnh sửa, Ẩn nút Lưu và Hủy
+        document.getElementById("save-product-btn").style.display = "none";
+        document.getElementById("cancel-product-btn").style.display = "none";
+        document.getElementById("edit-product-btn").style.display = "block";
+    });
 });

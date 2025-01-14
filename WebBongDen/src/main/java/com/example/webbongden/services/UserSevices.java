@@ -6,6 +6,7 @@ import com.example.webbongden.dao.model.Order;
 import com.example.webbongden.dao.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 public class UserSevices {
     public final UserDao userDao;
@@ -28,5 +29,10 @@ public class UserSevices {
 
     public List<Order> getPurchaseHistoryByCustomerId2(int customerId) {
         return userDao.getPurchaseHistoryByCustomerId2(customerId);
+    }
+
+    public Map<String, Integer> getCustomerTypes() {
+        // Gọi phương thức từ DAO để lấy dữ liệu
+        return userDao.getCustomerTypes();
     }
 }

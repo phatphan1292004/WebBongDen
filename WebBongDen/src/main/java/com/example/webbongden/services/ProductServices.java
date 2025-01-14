@@ -2,10 +2,7 @@ package com.example.webbongden.services;
 
 import com.example.webbongden.dao.ProductDao;
 import com.example.webbongden.dao.db.JDBIConnect;
-import com.example.webbongden.dao.model.Product;
-import com.example.webbongden.dao.model.ProductDetail;
-import com.example.webbongden.dao.model.ProductImage;
-import com.example.webbongden.dao.model.TopProduct;
+import com.example.webbongden.dao.model.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -115,5 +112,9 @@ public class ProductServices {
 
     public List<Product> getListProductByPromotion(int promotionId) {
         return productDao.getProductsByPromotion(promotionId);
+    }
+
+    public List<String> getAllProductUrls(int productId) {
+        return productDao.getAllProductUrls(productId);
     }
 }

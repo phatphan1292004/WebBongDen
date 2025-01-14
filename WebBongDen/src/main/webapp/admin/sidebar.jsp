@@ -57,10 +57,12 @@
         </a>
     </div>
 
-    <div class="sidebar-bottom" id="sign-up">
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-        <p>Đăng xuất</p>
-    </div>
+    <a href="/WebBongDen_war/LogoutController" id="login-header-btn" style="display: block">
+        <div class="sidebar-bottom" id="sign-up">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <p>Đăng xuất</p>
+        </div>
+    </a>
 </div>
 <script>
     const listNav = document.querySelectorAll(".nav-link");

@@ -5,7 +5,9 @@ import com.example.webbongden.dao.model.Order;
 import com.example.webbongden.dao.model.User;
 import org.jdbi.v3.core.Jdbi;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserDao {
     private final Jdbi jdbi;
@@ -159,6 +161,31 @@ public class UserDao {
                 handle.createQuery(sql)
                         .mapTo(int.class) // Map kết quả COUNT(*) về kiểu int
                         .one() // Lấy duy nhất một giá trị
+        );
+    }
+
+    public Map<String, Integer> getCustomerTypes() {
+        String sql = "SELECT " +
+                "    CASE " +
+                "        WHEN order_count = 1 THEN 'Khách hàng mới' " +
+                "        WHEN order_count BETWEEN 2 AND 5 THEN 'Khách hàng thường xuyên' " +
+                "        ELSE 'Khách hàng khác' " +
+                "    END AS customer_type, " +
+                "    COUNT(*) AS total_customers " +
+                "FROM ( " +
+                "    SELECT account_id, COUNT(*) AS order_count " +
+                "    FROM orders " +
+                "    GROUP BY account_id " +
+                ") AS order_summary " +
+                "GROUP BY customer_type";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapToMap()
+                        .reduce(new HashMap<>(), (map, row) -> {
+                            map.put(row.get("customer_type").toString(), Integer.parseInt(row.get("total_customers").toString()));
+                            return map;
+                        })
         );
     }
 

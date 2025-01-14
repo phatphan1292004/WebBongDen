@@ -3,6 +3,7 @@ package com.example.webbongden.dao;
 import com.example.webbongden.dao.db.JDBIConnect;
 import org.jdbi.v3.core.Jdbi;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,26 @@ public class RevenueDao {
                         .mapToMap()
                         .list());
     }
+
+    public Map<String, Double> getRevenueByPeriodInMonth() {
+        String sql = "SELECT " +
+                "    CONCAT(DATE_FORMAT(created_at, '%d-%m-%Y'), ' - ', DATE_FORMAT(DATE_ADD(created_at, INTERVAL 4 DAY), '%d-%m-%Y')) AS period, " +
+                "    SUM(total_price) AS revenue " +
+                "FROM orders " +
+                "WHERE MONTH(created_at) = MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE()) " +
+                "GROUP BY FLOOR((DAY(created_at) - 1) / 5) " +
+                "ORDER BY created_at";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapToMap()
+                        .reduce(new HashMap<>(), (map, row) -> {
+                            map.put(row.get("period").toString(), Double.parseDouble(row.get("revenue").toString()));
+                            return map;
+                        })
+        );
+    }
+
 
 
     public static void main(String[] args) {
