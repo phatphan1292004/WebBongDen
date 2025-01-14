@@ -124,4 +124,3 @@ public class Product {
         this.createdAt = createdAt;
     }
 }
-

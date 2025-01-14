@@ -1,16 +1,11 @@
 package com.example.webbongden.dao;
 
 import com.example.webbongden.dao.db.JDBIConnect;
-import com.example.webbongden.dao.model.Product;
-import com.example.webbongden.dao.model.ProductDetail;
-import com.example.webbongden.dao.model.ProductImage;
-import com.example.webbongden.dao.model.TopProduct;
+import com.example.webbongden.dao.model.*;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Query;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 public class ProductDao {
     private final Jdbi jdbi;
@@ -614,6 +609,19 @@ public class ProductDao {
         );
     }
 
+    public boolean isProductInStock(int productId) {
+        String query = "SELECT stock_quantity > 0 FROM products WHERE id = :productId";
+
+        // Thực hiện truy vấn và trả về kết quả boolean
+        return jdbi.withHandle(handle ->
+                handle.createQuery(query)
+                        .bind("productId", productId)
+                        .mapTo(Boolean.class)
+                        .findOne()
+                        .orElse(false) // Trả về false nếu không có bản ghi nào
+        );
+    }
+
     // lấy ds sap theo trang
     public List<Product> getProductsByPage(int page, int pageSize) {
         String sql = "SELECT p.id AS product_id, p.product_name, p.unit_price, p.discount_percent, " +
@@ -713,7 +721,8 @@ public class ProductDao {
     }
 
 
-    // Lấy danhsach sản phẩm theo chương trình giảm giá
+
+
     // Lấy danh sách sản phẩm theo chương trình khuyến mãi
     public List<Product> getProductsByPromotion(int promotionId) {
         String sql = "SELECT " +

@@ -56,7 +56,7 @@ window.addEventListener("load", function () {
     $(".list-product-hot").slick({
       infinite: true,
       slidesToShow: 5,
-      slidesToScroll: 1,
+      slidesToScroll: 2,
       autoplay: true,
       autoplaySpeed: 2000,
       prevArrow: `<button type='button' class='slick-prev slick-arrow'><i class="fa-solid fa-angle-left"></i></button>`,
@@ -93,5 +93,39 @@ window.addEventListener("load", function () {
         },
       ],
     });
+  });
+
+  const countdownTimers = document.querySelectorAll(".countdown-timer");
+
+  countdownTimers.forEach(timer => {
+    const endTime = new Date(timer.getAttribute("data-end-time")).getTime();
+    const promotionId = timer.querySelector("p").id.split("-")[1]; // Lấy ID của promotion
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endTime - now;
+
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById(`days-${promotionId}`).textContent = days;
+        document.getElementById(`hours-${promotionId}`).textContent = hours;
+        document.getElementById(`minutes-${promotionId}`).textContent = minutes;
+        document.getElementById(`seconds-${promotionId}`).textContent = seconds;
+      } else {
+        // Countdown đã hết
+        document.getElementById(`days-${promotionId}`).textContent = "00";
+        document.getElementById(`hours-${promotionId}`).textContent = "00";
+        document.getElementById(`minutes-${promotionId}`).textContent = "00";
+        document.getElementById(`seconds-${promotionId}`).textContent = "00";
+      }
+    }
+
+    // Cập nhật countdown mỗi giây
+    updateCountdown(); // Cập nhật ngay khi trang được load
+    setInterval(updateCountdown, 1000);
   });
 });

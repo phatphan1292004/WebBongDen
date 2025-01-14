@@ -1299,64 +1299,65 @@
             </div>
         </div>
 
-        <!-- Sale sốc -->
-        <div class="container">
-            <div class="container-sale">
-                <div class="container-sale-header">
-                    <div class="sale-info">
-                        <h2>SIÊU SALE - GIẢM SỐC!</h2>
-                    </div>
-                    <div class="countdown-timer">
-                        <div class="time-box">
-                            <p id="days">00</p>
-                            <span>Ngày</span>
-                        </div>
-                        <div class="time-box">
-                            <p id="hours">00</p>
-                            <span>Giờ</span>
-                        </div>
-                        <div class="time-box">
-                            <p id="minutes">00</p>
-                            <span>Phút</span>
-                        </div>
-                        <div class="time-box">
-                            <p id="seconds">00</p>
-                            <span>Giây</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-sale-product">
-                    <ul class="list-product-hot" id="list-product-sale">
-                        <c:forEach var="item" items="${listPrOfPromotion}">
-                            <li class="product-hot-item">
-                                <a href="home/product-detail?id=${item.id}">
-                                    <div class="img">
-                                        <img src="${item.imageUrl}" alt="${item.productName}" />
-                                    </div>
 
-                                    <div class="product-info">
-                                        <div class="product-name">
-                                                ${item.productName}
+        <c:forEach var="promotion" items="${listPromotion}">
+            <div class="container">
+                <div class="container-sale">
+                    <div class="container-sale-header">
+                        <div class="sale-info">
+                            <h2>${promotion.promotionName}</h2>
+                        </div>
+                        <div class="countdown-timer" data-end-time="${promotion.endDay}">
+                            <div class="time-box">
+                                <p id="days-${promotion.id}">00</p>
+                                <span>Ngày</span>
+                            </div>
+                            <div class="time-box">
+                                <p id="hours-${promotion.id}">00</p>
+                                <span>Giờ</span>
+                            </div>
+                            <div class="time-box">
+                                <p id="minutes-${promotion.id}">00</p>
+                                <span>Phút</span>
+                            </div>
+                            <div class="time-box">
+                                <p id="seconds-${promotion.id}">00</p>
+                                <span>Giây</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-sale-product">
+                        <ul class="list-product-hot">
+                            <c:forEach var="product" items="${promotion.products}">
+                                <li class="product-hot-item">
+                                    <a href="home/product-detail?id=${product.id}">
+                                        <div class="img">
+                                            <img src="${product.listImg[0].url}" alt="${product.productName}" />
                                         </div>
-                                        <p class="original-price">
-                                                ${String.format('%,.0f', item.unitPrice)} VND
-                                        </p>
-                                        <div class="price-discount">
-                                            <p class="product-price">
-                                                    ${String.format('%,.0f', item.discountedPrice)} VND
+                                        <div class="product-info">
+                                            <div class="product-name">
+                                                    ${product.productName}
+                                            </div>
+                                            <p class="original-price">
+                                                    ${String.format('%,.0f', product.unitPrice)} VND
                                             </p>
-                                            <p class="discount-percentage">
-                                                -${item.discountPercent}%
-                                            </p>
+                                            <div class="price-discount">
+                                                <p class="product-price">
+                                                        ${String.format('%,.0f', product.unitPrice * (1 - product.discountPercent / 100))} VND
+                                                </p>
+                                                <p class="discount-percentage">
+                                                    -${product.discountPercent}%
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </c:forEach>
-                    </ul>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </c:forEach>
 
         <!-- BestSeller - Products -->
         <div class="container">
@@ -1998,7 +1999,7 @@
     <!-- Footer -->
     <jsp:include page="/reuse/footer.jsp" />
 </div>
-<script type="module" src="assets/Js/home.js"></script>
+<script src="assets/Js/home.js?v=2.0"></script>
 <script
         type="text/javascript"
         src="https://code.jquery.com/jquery-1.11.0.min.js"

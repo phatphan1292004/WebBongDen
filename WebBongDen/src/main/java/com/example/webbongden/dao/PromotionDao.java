@@ -1,11 +1,16 @@
 package com.example.webbongden.dao;
 
 import com.example.webbongden.dao.db.JDBIConnect;
+import com.example.webbongden.dao.model.ProductImage;
 import com.example.webbongden.dao.model.Promotion;
 import com.example.webbongden.dao.model.Product;
 import org.jdbi.v3.core.Jdbi;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PromotionDao {
     private final Jdbi jdbi;
@@ -85,34 +90,6 @@ public class PromotionDao {
         });
     }
 
-
-    public static void main(String[] args) {
-        PromotionDao promotionDao = new PromotionDao();
-        try {
-            // Lấy danh sách tất cả chương trình giảm giá không liên kết với sản phẩm
-            List<Promotion> promotions = promotionDao.getPromotionsWithoutProduct();
-
-            // In ra danh sách các chương trình
-            if (!promotions.isEmpty()) {
-                System.out.println("Danh sách các chương trình giảm giá không liên kết với sản phẩm:");
-                for (Promotion promotion : promotions) {
-                    System.out.println("ID: " + promotion.getId());
-                    System.out.println("Tên chương trình: " + promotion.getPromotionName());
-                    System.out.println("Ngày bắt đầu: " + promotion.getStartDay());
-                    System.out.println("Ngày kết thúc: " + promotion.getEndDay());
-                    System.out.println("Loại khuyến mãi: " + promotion.getPromotionType());
-                    System.out.println("Phần trăm giảm giá: " + promotion.getDiscountPercent());
-                    System.out.println("---------------------------");
-                }
-            } else {
-                System.out.println("Không có chương trình giảm giá nào không liên kết với sản phẩm.");
-            }
-        } catch (Exception e) {
-            System.err.println("Đã xảy ra lỗi khi lấy danh sách chương trình giảm giá:");
-            e.printStackTrace();
-        }
-    }
-
     public List<Product> getProductsByPromotionId(int promotionId) {
         String sql = "SELECT p.id, p.product_name, p.unit_price " +
                 "FROM products p " +
@@ -129,6 +106,82 @@ public class PromotionDao {
                         ))
                         .list()
         );
+    }
+
+    public List<Promotion> getAllPromotionsWithProducts() {
+        String sql = "SELECT " +
+                "pr.id AS promotion_id, " +
+                "pr.promotion_name, " +
+                "pr.start_day, " +
+                "pr.end_day, " +
+                "pr.discount_percent AS promotion_discount_percent, " +
+                "pr.promotion_type, " +
+                "p.id AS product_id, " +
+                "p.product_name, " +
+                "p.unit_price, " +
+                "p.discount_percent AS product_discount_percent, " +
+                "pi.url AS image_url, " +
+                "pi.main_image " +
+                "FROM promotions pr " +
+                "JOIN promotion_programs pp ON pr.id = pp.promotion_id " +
+                "JOIN products p ON pp.product_id = p.id " +
+                "LEFT JOIN product_images pi ON p.id = pi.product_id " +
+                "ORDER BY pr.id, p.created_at DESC";
+
+        return jdbi.withHandle(handle -> {
+            Map<Integer, Promotion> promotionMap = new LinkedHashMap<>();
+
+            handle.createQuery(sql)
+                    .map((rs, ctx) -> {
+                        int promotionId = rs.getInt("promotion_id");
+                        Promotion promotion = promotionMap.get(promotionId);
+
+                        // Nếu chương trình khuyến mãi chưa tồn tại, tạo mới
+                        if (promotion == null) {
+                            promotion = new Promotion(
+                                    promotionId,
+                                    rs.getString("promotion_name"),
+                                    Date.valueOf(rs.getDate("start_day").toLocalDate()), // Chuyển đổi LocalDate -> Date
+                                    Date.valueOf(rs.getDate("end_day").toLocalDate()),   // Chuyển đổi LocalDate -> Date
+                                    rs.getDouble("promotion_discount_percent"),
+                                    rs.getString("promotion_type"),
+                                    new ArrayList<>()
+                            );
+                            promotionMap.put(promotionId, promotion);
+                        }
+
+                        // Xử lý sản phẩm
+                        int productId = rs.getInt("product_id");
+                        Product product = promotion.getProducts().stream()
+                                .filter(p -> p.getId() == productId)
+                                .findFirst()
+                                .orElse(null);
+
+                        if (product == null) {
+                            product = new Product(
+                                    productId,
+                                    rs.getString("product_name"),
+                                    rs.getDouble("unit_price"),
+                                    rs.getDouble("product_discount_percent"),
+                                    new ArrayList<>()
+                            );
+                            promotion.getProducts().add(product);
+                        }
+
+                        // Xử lý hình ảnh sản phẩm
+                        String imageUrl = rs.getString("image_url");
+                        if (imageUrl != null) {
+                            product.getListImg().add(new ProductImage(
+                                    imageUrl,
+                                    rs.getBoolean("main_image")
+                            ));
+                        }
+
+                        return promotion;
+                    }).list();
+
+            return new ArrayList<>(promotionMap.values());
+        });
     }
 
     public boolean deleteProductFromPromotion(int promotionId, int productId) {

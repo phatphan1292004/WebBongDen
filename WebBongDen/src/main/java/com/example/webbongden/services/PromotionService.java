@@ -42,4 +42,9 @@ public class PromotionService {
     public boolean deletePromotionById(int promotionId) {
         return promotionDao.deletePromotionById(promotionId);
     }
+
+    public List<Promotion> getAllPromotionsWithProducts() {
+        return promotionDao.getAllPromotionsWithProducts();
+    }
+
 }

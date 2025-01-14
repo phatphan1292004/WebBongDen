@@ -1,7 +1,9 @@
 package com.example.webbongden.controller.UserController;
 
 import com.example.webbongden.dao.model.Product;
+import com.example.webbongden.dao.model.Promotion;
 import com.example.webbongden.services.ProductServices;
+import com.example.webbongden.services.PromotionService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -11,11 +13,9 @@ import java.util.List;
 
 @WebServlet(name = "HomeControllerr", value = "/home")
 public class HomeControllerr extends HttpServlet {
-    private static final ProductServices productServices;
+    private static final PromotionService promotionService = new PromotionService();
 
-    static {
-        productServices = new ProductServices();
-    }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,9 +35,8 @@ public class HomeControllerr extends HttpServlet {
 //        request.setAttribute("denKhacList", denKhacList);
 //
 //        System.out.println("Forwarding to register.jsp...");
-        int promotionId = 1;
-        List<Product> listPrOfPromotion = productServices.getListProductByPromotion(promotionId);
-        request.setAttribute("listPrOfPromotion", listPrOfPromotion);
+        List<Promotion> listPromotion = promotionService.getAllPromotionsWithProducts();
+        request.setAttribute("listPromotion", listPromotion);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

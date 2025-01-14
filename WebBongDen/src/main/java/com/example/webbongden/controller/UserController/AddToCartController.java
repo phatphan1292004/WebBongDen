@@ -40,7 +40,12 @@ public class AddToCartController extends HttpServlet {
 
         try {
             int productId = Integer.parseInt(productIdParam);
-
+            if (!productService.isProductInStock(productId)) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("{\"status\":\"error\",\"message\":\"Sản phẩm này đã hết hàng.\"}");
+                return;
+            }
             // Lấy thông tin sản phẩm từ ProductService
             Product product = productService.getProductById(productId);
 

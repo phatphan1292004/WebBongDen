@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
               if (response.ok) {
                 return response.json(); // Parse JSON response
               } else {
+                console.log(response)
                 throw new Error('Failed to add product to cart');
               }
             })
