@@ -3,6 +3,7 @@ package com.example.webbongden.dao;
 import com.example.webbongden.dao.db.JDBIConnect;
 import com.example.webbongden.dao.model.Account;
 import org.jdbi.v3.core.Jdbi;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 
@@ -115,18 +116,31 @@ public class AccountDao {
     }
 
     //Kiểm tra tài khoản có trong Database k
-    public Account authenticate(String username, String password) {
-        String sql = "SELECT id, username, password, role FROM accounts WHERE username = :username AND password = :password";
+//    public Account authenticate(String username, String password) {
+//        String sql = "SELECT id, username, password, role FROM accounts WHERE username = :username AND password = :password";
+//
+//        return jdbi.withHandle(handle ->
+//                handle.createQuery(sql)
+//                        .bind("username", username)
+//                        .bind("password", password)
+//                        .mapToBean(Account.class)
+//                        .findOne() // Trả về Optional<Account>
+//                        .orElse(null) // Trả về null nếu không tìm thấy
+//        );
+//    }
+
+    public Account authenticate(String username) {
+        String sql = "SELECT id, username, password, role FROM accounts WHERE username = :username";
 
         return jdbi.withHandle(handle ->
                 handle.createQuery(sql)
                         .bind("username", username)
-                        .bind("password", password)
                         .mapToBean(Account.class)
-                        .findOne() // Trả về Optional<Account>
-                        .orElse(null) // Trả về null nếu không tìm thấy
+                        .findOne()
+                        .orElse(null) // Trả về null nếu không tìm thấy tài khoản
         );
     }
+
 
     //Lay account theo id
     public Account getAccountById(int accountId) {
@@ -195,33 +209,89 @@ public class AccountDao {
         );
     }
 
+    public boolean addAccountUser(Account account) {
+        return jdbi.inTransaction(handle -> {
+            // Kiểm tra xem username đã tồn tại trong bảng accounts hay chưa
+            String checkUsernameSql = "SELECT COUNT(*) FROM accounts WHERE username = :username";
+            Integer count = handle.createQuery(checkUsernameSql)
+                    .bind("username", account.getUsername())
+                    .mapTo(Integer.class)
+                    .one();
+
+            // Nếu username đã tồn tại, không cho phép thêm tài khoản
+            if (count > 0) {
+                return false; // Trả về false nếu username đã tồn tại
+            }
+
+            // Kiểm tra khách hàng đã tồn tại trong bảng customers hay chưa
+            String findCustomerSql = "SELECT id FROM customers WHERE cus_name = :cusName";
+            Integer customerId = handle.createQuery(findCustomerSql)
+                    .bind("cusName", account.getCusName())
+                    .mapTo(Integer.class)
+                    .findOne()
+                    .orElse(null);
+
+            // Nếu khách hàng chưa tồn tại, thêm mới
+            if (customerId == null) {
+                String addCustomerSql = "INSERT INTO customers (cus_name) VALUES (:cusName)";
+                customerId = handle.createUpdate(addCustomerSql)
+                        .bind("cusName", account.getCusName())
+                        .executeAndReturnGeneratedKeys("id")
+                        .mapTo(Integer.class)
+                        .findOne()
+                        .orElse(null);
+
+                // Nếu không thể tạo khách hàng, ném ngoại lệ
+                if (customerId == null) {
+                    throw new IllegalStateException("Không thể thêm khách hàng mới.");
+                }
+            }
+
+            // Thêm tài khoản với customer_id, role mặc định là "user"
+            String sql = "INSERT INTO accounts (username, email, password, role, customer_id, cus_name, created_at) " +
+                    "VALUES (:username, :email, :password, :role, :customerId, :cusName, NOW())";
+
+            int rowsAffected = handle.createUpdate(sql)
+                    .bind("username", account.getUsername())    // Gán giá trị username
+                    .bind("email", account.getEmail())          // Gán giá trị email
+                    .bind("password", account.getPassword())    // Gán giá trị password (hash trước nếu cần)
+                    .bind("role", "user")                       // Gán role mặc định là "user"
+                    .bind("customerId", customerId)             // Gán giá trị customer_id (sử dụng từ bảng customers)
+                    .bind("cusName", account.getCusName())      // Gán giá trị cus_name
+                    .execute();
+
+            return rowsAffected > 0; // Trả về true nếu thêm tài khoản thành công
+        });
+    }
+
+    public boolean checkEmailExists(String email) {
+        String sql = "SELECT COUNT(*) FROM accounts WHERE email = :email";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("email", email)
+                        .mapTo(Integer.class)
+                        .one() > 0
+        );
+    }
+    public boolean updatePassword(String email, String hashedPassword) {
+        String sql = "UPDATE accounts SET password = :password WHERE email = :email";
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("password", hashedPassword)
+                        .bind("email", email)
+                        .execute() > 0
+        );
+    }
+
+
 
     public static void main(String[] args) {
-        AccountDao accountDao = new AccountDao();
+        String plainPassword = "admin123";
 
-        // Tạo một tài khoản mới để kiểm tra
-        Account newAccount = new Account(
-                "pvp1292004@example.com",  // Email
-                "Phan Văn Phát",             // Tên khách hàng (cus_name)
-                "pvp1292004",              // Tên đăng nhập (username)
-                "hashedPassword123",    // Mật khẩu đã hash
-                "admin",                // Vai trò (role)
-                0                       // customer_id sẽ được xử lý tự động
-        );
+        // Tạo mật khẩu đã băm
+        String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 
-        // Gọi phương thức addAccount
-        try {
-            boolean result = accountDao.addAccount(newAccount);
-
-            // In kết quả
-            if (result) {
-                System.out.println("Thêm tài khoản thành công!");
-            } else {
-                System.out.println("Thêm tài khoản thất bại.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Đã xảy ra lỗi khi thêm tài khoản: " + e.getMessage());
-        }
+        // In ra mật khẩu đã băm
+        System.out.println("Hashed Password: " + hashedPassword);
     }
 }
