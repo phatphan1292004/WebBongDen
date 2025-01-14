@@ -11,6 +11,7 @@ public class Account {
     private String password; // Mật khẩu
     private Date createdAt; // Ngày tạo tài khoản
     private String role; // Vai trò của tài khoản
+    private String rePassword;
 
     // Constructor không tham số
     public Account() {
@@ -60,6 +61,14 @@ public class Account {
         this.password = password;
         this.role = role;
         this.customerId = customerId;
+    }
+
+    public String getRePassword() {
+        return rePassword;
+    }
+
+    public void setRePassword(String rePassword) {
+        this.rePassword = rePassword;
     }
 
     // Getter và Setter cho từng thuộc tính
@@ -142,4 +151,3 @@ public class Account {
                 '}';
     }
 }
-
