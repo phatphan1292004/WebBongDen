@@ -34,6 +34,7 @@ public class ViewDetailController extends HttpServlet {
             ProductDetail productDetail = productServices.getProductDetailById(productId);
             List<Review> reviews = reviewService.getReviewsByProductId(productId);
             List<String> listImg = productServices.getAllProductUrls(productId);
+            String breadCum = productServices.getCategoryNameByProductId(productId);
             
             if (productDetail == null) {
                 response.sendRedirect("/home?error=product_not_found");
@@ -44,6 +45,7 @@ public class ViewDetailController extends HttpServlet {
             request.setAttribute("reviews", reviews);
             request.setAttribute("productDetail", productDetail);
             request.setAttribute("listImg", listImg);
+            request.setAttribute("breadCum", breadCum);
 
             // Forward to the product detail JSP
             request.getRequestDispatcher("/user/product-detail.jsp").forward(request, response);

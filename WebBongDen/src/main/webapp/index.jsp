@@ -1332,7 +1332,7 @@
                                 <li class="product-hot-item">
                                     <a href="product-detail?id=${product.id}">
                                         <div class="img">
-                                            <img src="${product.listImg[0].url}" alt="${product.productName}" />
+                                            <img src="${product.imageUrl}" alt="${product.productName}" />
                                         </div>
                                         <div class="product-info">
                                             <div class="product-name">
@@ -1364,135 +1364,40 @@
             <div class="product-wrapper">
                 <div class="wrapper-title">SẢN PHẨM BÁN CHẠY</div>
                 <ul class="list-product-hot">
-                    <li class="product-hot-item">
-                        <a href="">
-                            <div class="img">
-                                <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/8709den-chum-tiffany-trang-tri-noi-that-dc03776-04.jpg"
-                                        alt=""
-                                />
-                            </div>
+                    <c:forEach var="product" items="${listHotProduct}">
+                        <li class="product-hot-item">
+                            <a href="product-detail?id=${product.id}">
+                                <div class="img">
+                                    <div class="img">
+                                        <img src="${product.imageUrl}" alt="${product.productName}" />
+                                    </div>
+                                </div>
 
-                            <div class="product-info">
-                                <div class="product-name">
-                                    Đèn chùm Tiffany trang trí nội thất DC03776
-                                </div>
-                                <p class="original-price">3.000.000 VND</p>
-                                <div class="price-discount">
-                                    <p class="product-price">2.000.000 VND</p>
-                                    <p class="discount-percentage">-33%</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="product-hot-item">
-                        <a href="">
-                            <div class="img">
-                                <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/8709den-chum-tiffany-trang-tri-noi-that-dc03776-04.jpg"
-                                        alt=""
-                                />
-                            </div>
+                                <div class="product-info">
+                                    <div class="product-name">
+                                            ${product.productName}
+                                    </div>
 
-                            <div class="product-info">
-                                <div class="product-name">
-                                    Đèn chùm Tiffany trang trí nội thất DC03776
-                                </div>
-                                <p class="original-price">3.000.000 VND</p>
-                                <div class="price-discount">
-                                    <p class="product-price">2.000.000 VND</p>
-                                    <p class="discount-percentage">-33%</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="product-hot-item">
-                        <a href="">
-                            <div class="img">
-                                <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/8709den-chum-tiffany-trang-tri-noi-that-dc03776-04.jpg"
-                                        alt=""
-                                />
-                            </div>
+                                    <p class="original-price">
+                                            ${String.format('%,.0f', product.unitPrice)} VND
+                                    </p>
 
-                            <div class="product-info">
-                                <div class="product-name">
-                                    Đèn chùm Tiffany trang trí nội thất DC03776
+                                    <div class="price-discount">
+                                        <p class="product-price">
+                                                ${String.format('%,.0f', product.discountedPrice)} VND
+                                        </p>
+                                        <p class="discount-percentage">
+                                            -${product.discountPercent}%
+                                        </p>
+                                    </div>
                                 </div>
-                                <p class="original-price">3.000.000 VND</p>
-                                <div class="price-discount">
-                                    <p class="product-price">2.000.000 VND</p>
-                                    <p class="discount-percentage">-33%</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="product-hot-item">
-                        <a href="">
-                            <div class="img">
-                                <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/8709den-chum-tiffany-trang-tri-noi-that-dc03776-04.jpg"
-                                        alt=""
-                                />
-                            </div>
-
-                            <div class="product-info">
-                                <div class="product-name">
-                                    Đèn chùm Tiffany trang trí nội thất DC03776
-                                </div>
-                                <p class="original-price">3.000.000 VND</p>
-                                <div class="price-discount">
-                                    <p class="product-price">2.000.000 VND</p>
-                                    <p class="discount-percentage">-33%</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="product-hot-item">
-                        <a href="">
-                            <div class="img">
-                                <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/8709den-chum-tiffany-trang-tri-noi-that-dc03776-04.jpg"
-                                        alt=""
-                                />
-                            </div>
-
-                            <div class="product-info">
-                                <div class="product-name">
-                                    Đèn chùm Tiffany trang trí nội thất DC03776
-                                </div>
-                                <p class="original-price">3.000.000 VND</p>
-                                <div class="price-discount">
-                                    <p class="product-price">2.000.000 VND</p>
-                                    <p class="discount-percentage">-33%</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="product-hot-item">
-                        <a href="">
-                            <div class="img">
-                                <img
-                                        src="https://denhoamy.vn/upload/attachment/thumb/8709den-chum-tiffany-trang-tri-noi-that-dc03776-04.jpg"
-                                        alt=""
-                                />
-                            </div>
-
-                            <div class="product-info">
-                                <div class="product-name">
-                                    Đèn chùm Tiffany trang trí nội thất DC03776
-                                </div>
-                                <p class="original-price">3.000.000 VND</p>
-                                <div class="price-discount">
-                                    <p class="product-price">2.000.000 VND</p>
-                                    <p class="discount-percentage">-33%</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                            </a>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>
+
 
         <!-- Home Products -->
 

@@ -18,7 +18,7 @@
             <!-- Hamburger icon for opening sidebar -->
             <div style="display: flex; align-items: center">
                 <i class="fa-solid fa-bars" id="menu-toggle"></i>
-                <a href="index.html" class="logo">
+                <a href="/WebBongDen_war/home" class="logo">
                     <img src="./assets/img/logo2.png" alt="Description">
                 </a>
             </div>
@@ -115,9 +115,9 @@
 
     <nav class="navbar">
         <ul class="navbar-list">
-            <li><a href="index.html">TRANG CHỦ</a></li>
+            <li><a href="/WebBongDen_war/home">TRANG CHỦ</a></li>
             <li class="dropdown">
-                <a href="Detail.html"
+                <a href="/WebBongDen_war/CategoryController"
                 >DANH MỤC
                     <i class="fa-solid fa-caret-down"></i>
                 </a>

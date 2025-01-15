@@ -14,6 +14,7 @@ import java.util.List;
 @WebServlet(name = "HomeControllerr", value = "/home")
 public class HomeControllerr extends HttpServlet {
     private static final PromotionService promotionService = new PromotionService();
+    private static final ProductServices productServices = new ProductServices();
 
 
 
@@ -36,7 +37,9 @@ public class HomeControllerr extends HttpServlet {
 //
 //        System.out.println("Forwarding to register.jsp...");
         List<Promotion> listPromotion = promotionService.getAllPromotionsWithProducts();
+        List<Product> listHotProduct = productServices.getBestSellingProducts();
         request.setAttribute("listPromotion", listPromotion);
+        request.setAttribute("listHotProduct", listHotProduct);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

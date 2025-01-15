@@ -31,16 +31,16 @@
 <body>
 <div class="wrapper">
     <!-- Hiển thị thông báo lỗi nếu có -->
-    <c:if test="${not empty errorMessage}">
+    <c:if test="${not empty errorMessageReset}">
         <p id="responseMessage1" style="color: red;">
-                ${errorMessage}
+                ${errorMessageReset}
         </p>
     </c:if>
 
     <!-- Hiển thị thông báo thành công nếu có -->
-    <c:if test="${not empty successMessage}">
+    <c:if test="${not empty successMessageReset}">
         <p id="responseMessage2" style="color: green;">
-                ${successMessage}
+                ${successMessageReset}
         </p>
     </c:if>
     <form id="login-form" action="login" method="post">

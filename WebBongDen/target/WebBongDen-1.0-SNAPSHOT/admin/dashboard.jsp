@@ -51,7 +51,9 @@
                                 <div class="top-card-title">
                                     <p>Tổng doanh thu</p>
                                 </div>
-                                <div class="value">${totalRevenue}</div>
+                                <div class="value">
+                                    <fmt:formatNumber value="${totalRevenue}" type="number" pattern="#,###.00"/>
+                                </div>
                             </div>
 
                             <div class="bottom-card">

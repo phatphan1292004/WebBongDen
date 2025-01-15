@@ -31,8 +31,8 @@
             href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
     />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/admin_css/promotionAdmin.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin.css?v=2.1">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/admin_css/promotionAdmin.css?v=2.0">
 </head>
 <style>
     /* Tổng quát: Thiết kế bảng */

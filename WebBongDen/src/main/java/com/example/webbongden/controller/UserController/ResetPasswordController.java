@@ -18,14 +18,14 @@ public class ResetPasswordController extends HttpServlet {
 
         // Kiểm tra email có tồn tại trong hệ thống không
         if (email == null || email.isEmpty()) {
-            request.setAttribute("errorMessage", "Email không hợp lệ.");
+            request.setAttribute("errorMessageReset", "Email không hợp lệ.");
             request.getRequestDispatcher("/user/login.jsp").forward(request, response); // Chuyển hướng về form reset password
             return;
         }
 
         if (!accountServices.checkEmailExists(email)) {
             // Trả về thông báo lỗi nếu email không tồn tại
-            request.setAttribute("errorMessage", "Email không tồn tại.");
+            request.setAttribute("errorMessageReset", "Email không tồn tại.");
             request.getRequestDispatcher("/user/login.jsp").forward(request, response); // Chuyển hướng về form reset password
             return;
         }
@@ -39,12 +39,12 @@ public class ResetPasswordController extends HttpServlet {
             // Gửi email chứa mật khẩu tạm thời
             boolean isEmailSent = accountServices.sendTemporaryPasswordEmail(email, temporaryPassword);
             if (isEmailSent) {
-                request.setAttribute("successMessage", "Mật khẩu tạm thời đã được gửi đến email của bạn.");
+                request.setAttribute("successMessageReset", "Mật khẩu tạm thời đã được gửi đến email của bạn.");
             } else {
-                request.setAttribute("errorMessage", "Có lỗi xảy ra khi gửi email.");
+                request.setAttribute("errorMessageReset", "Có lỗi xảy ra khi gửi email.");
             }
         } else {
-            request.setAttribute("errorMessage", "Không thể cập nhật mật khẩu.");
+            request.setAttribute("errorMessageReset", "Không thể cập nhật mật khẩu.");
         }
 
         // Chuyển hướng lại về trang reset-password.jsp với thông báo

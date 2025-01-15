@@ -11,6 +11,7 @@ document.getElementById("promotion-form").addEventListener("submit", async funct
     console.log("Form Data:", formData);
 
     try {
+        // Nếu ngày hợp lệ, tiếp tục gửi dữ liệu
         const response = await fetch("/WebBongDen_war/add-promotion", {
             method: "POST",
             headers: {
@@ -268,7 +269,7 @@ $(document).on('click', '.delete-product-inpromotion', function () {
                     }
                 },
                 error: function () {
-                    Swal.fire('Lỗi!', 'Không thể kết nối với máy chủ.', 'error');
+                    Swal.fire('Lỗi!', 'Bạn phaỉ xóa sản phẩm trong chương trình trước.', 'error');
                 }
             });
         }

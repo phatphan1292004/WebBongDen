@@ -45,12 +45,11 @@
         <div class="container">
             <div class="breadcrumb">
                 <i class="fa-solid fa-house"></i>
-                <a href="index.html">Trang chủ</a>
+                <a href="/WebBongDen_war/home">Trang chủ</a>
                 <span class="separator">›</span>
-                <a href="#">Sản phẩm</a>
-                <span class="separator">›</span>
-                <span>ĐÈN CHÙM CỔ ĐIỂN</span>
+                <span>${breadCum}</span>
             </div>
+
 
             <div class="product-info-container">
                 <div class="left-container">

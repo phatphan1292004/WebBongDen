@@ -33,7 +33,7 @@ public class CategoryController extends HttpServlet {
         String categoryIdParam = request.getParameter("categoryId");
 
         int page = 1;
-        int pageSize = 4; // Số sản phẩm mỗi trang
+        int pageSize = 16; // Số sản phẩm mỗi trang
 
         // Xử lý tham số page
         if (pageParam != null) {

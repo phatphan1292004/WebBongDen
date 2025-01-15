@@ -52,6 +52,7 @@ public class Product {
     }
 
 
+
     // Tính giá sau khi giảm
     public double getDiscountedPrice() {
         return unitPrice - (unitPrice * discountPercent / 100);

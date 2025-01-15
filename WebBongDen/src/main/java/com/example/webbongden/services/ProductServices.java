@@ -117,4 +117,12 @@ public class ProductServices {
     public List<String> getAllProductUrls(int productId) {
         return productDao.getAllProductUrls(productId);
     }
+
+    public List<Product> getBestSellingProducts() {
+        return  productDao.getBestSellingProducts();
+    }
+
+    public String getCategoryNameByProductId(int productId) {
+        return productDao.getCategoryNameByProductId(productId);
+    }
 }

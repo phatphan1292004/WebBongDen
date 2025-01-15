@@ -138,10 +138,11 @@ public class OrderDao {
         String sql = "SELECT o.id AS orderId, c.cus_name AS customerName, " +
                 "o.created_at AS orderDate, " +
                 "o.total_price AS totalPrice, " +
-                "c.address AS address, o.order_status AS status " +
+                "s.address AS shippingAddress, o.order_status AS status " + // Lấy địa chỉ từ bảng shipping
                 "FROM orders o " +
                 "JOIN accounts a ON o.account_id = a.id " +
                 "JOIN customers c ON a.customer_id = c.id " +
+                "JOIN shipping s ON o.id = s.order_id "+
                 "WHERE (:keyword IS NULL OR c.cus_name LIKE :keyword OR o.order_status LIKE :keyword)";
 
         return jdbi.withHandle(handle ->
@@ -152,7 +153,7 @@ public class OrderDao {
                                 rs.getString("customerName"),
                                 rs.getDate("orderDate"),
                                 rs.getDouble("totalPrice"),
-                                rs.getString("address"),
+                                rs.getString("shippingAddress"),
                                 rs.getString("status"),
                                 getOrderDetailsByOrderId(rs.getInt("orderId")) // Lấy danh sách chi tiết đơn hàng
                         ))
@@ -175,11 +176,13 @@ public class OrderDao {
         String sql = "SELECT o.id AS orderId, c.cus_name AS customerName, " +
                 "o.created_at AS orderDate, " +
                 "o.total_price AS totalPrice, " +
-                "c.address AS address, o.order_status AS status " +
+                "s.address AS shippingAddress, o.order_status AS status " + // Lấy địa chỉ từ bảng shipping
                 "FROM orders o " +
                 "JOIN accounts a ON o.account_id = a.id " +
                 "JOIN customers c ON a.customer_id = c.id " +
+                "JOIN shipping s ON o.id = s.order_id "+
                 "WHERE (:keyword IS NULL OR o.order_status LIKE :keyword)";
+
 
         return jdbi.withHandle(handle ->
                 handle.createQuery(sql)
@@ -189,7 +192,7 @@ public class OrderDao {
                                 rs.getString("customerName"),
                                 rs.getDate("orderDate"),
                                 rs.getDouble("totalPrice"),
-                                rs.getString("address"),
+                                rs.getString("shippingAddress"),
                                 rs.getString("status"),
                                 getOrderDetailsByOrderId(rs.getInt("orderId")) // Lấy danh sách chi tiết đơn hàng
                         ))

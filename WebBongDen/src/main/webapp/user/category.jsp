@@ -1529,10 +1529,7 @@
                                     <div
                                             class="product-topbar d-flex align-items-center justify-content-between"
                                     >
-                                        <!-- Total Products -->
-                                        <div class="total-products">
-                                            <p><span>${fn:length(products)}</span> Sản phẩm được tìm thấy</p>
-                                        </div>
+
                                         <!-- Sorting -->
                                         <div class="product-sorting d-flex align-items-center">
                                             <p>Sắp xếp :</p>
