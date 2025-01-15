@@ -192,6 +192,7 @@ public class UserDao {
     //=====Làm login====
     public User getBasicInfoByUsername(String username) {
         String sql = "SELECT " +
+                "c.id AS customerId, " + // Thêm ID khách hàng
                 "c.cus_name AS customerName, " +
                 "a.email AS email, " +
                 "c.phone AS phoneNumber, " +
@@ -205,7 +206,7 @@ public class UserDao {
                 handle.createQuery(sql)
                         .bind("username", username) // Gắn giá trị username vào câu truy vấn
                         .map((rs, ctx) -> new User(
-                                null, // Không cần ID khách hàng
+                                rs.getString("customerId"), // Lấy ID khách hàng
                                 rs.getString("customerName"),
                                 rs.getString("email"),
                                 rs.getString("phoneNumber"),
@@ -217,6 +218,21 @@ public class UserDao {
                         .orElse(null)
         );
     }
+
+
+    public boolean updateCustomerInfo(int customerId, String cusName, String address, String phone) {
+        String sql = "UPDATE customers SET cus_name = :cusName, address = :address, phone = :phone WHERE id = :customerId";
+
+        return jdbi.withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bind("cusName", cusName) // Gắn giá trị mới cho tên khách hàng
+                    .bind("address", address) // Gắn giá trị mới cho địa chỉ
+                    .bind("phone", phone)     // Gắn giá trị mới cho số điện thoại
+                    .bind("customerId", customerId) // Gắn giá trị ID khách hàng
+                    .execute() > 0; // Trả về true nếu cập nhật thành công
+        });
+    }
+
 
     public static void main(String[] args) {
         // Tạo một đối tượng UserDao

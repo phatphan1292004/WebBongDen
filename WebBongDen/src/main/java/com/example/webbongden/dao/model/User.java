@@ -23,6 +23,13 @@ public class User {
         this.orderHistory = orderHistory;
     }
 
+    public User(String customerId, String customerName, String phone, String address) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.phone = phone;
+        this.address = address;
+    }
+
     // Getter và Setter
     public String getCustomerId() {
         return customerId;

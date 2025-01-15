@@ -1,4 +1,4 @@
-package com.example.webbongden.controller;
+package com.example.webbongden.controller.UserController;
 
 import com.example.webbongden.dao.model.Product;
 import com.example.webbongden.services.ProductServices;

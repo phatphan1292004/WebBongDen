@@ -39,4 +39,13 @@ public class UserSevices {
     public User getBasicInfoByUsername(String username) {
         return userDao.getBasicInfoByUsername(username);
     }
+
+    public boolean updateCustomerInfo(int customerId, String cusName, String address, String phone) {
+        if (cusName == null || cusName.isEmpty() || address == null || phone == null || phone.length() != 10) {
+            // Kiểm tra dữ liệu đầu vào, trả về false nếu không hợp lệ
+            return false;
+        }
+        return userDao.updateCustomerInfo(customerId, cusName, address, phone);
+    }
+
 }

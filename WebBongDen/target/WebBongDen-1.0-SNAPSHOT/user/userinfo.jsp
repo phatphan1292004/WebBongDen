@@ -30,6 +30,15 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/user.css">
 </head>
+<style>
+    .info-btn button {
+        width: 120px;
+        padding: 5px 0;
+        background-color: red;
+        color: white;
+        border-radius: 4px;
+    }
+</style>
 <body>
 <div class="wrapper">
     <jsp:include page="../reuse/header.jsp" />
@@ -41,7 +50,7 @@
                             src="./img/b79144e03dc4996ce319ff59118caf65.jpg"
                             alt="avatarUser"
                     />
-                    <p class="customer-name">TRẦN CÔNG LÝ</p>
+                    <p class="customer-name">${userInfo.customerName}</p>
                 </div>
                 <div class="menu-user">
                     <nav>
@@ -79,14 +88,14 @@
                         id="information_account"
                         class="content_section"
                 >
-                    <div class="information_header">
+                    <div class="information_header" id="userInfo" data-customer-id="${userInfo.customerId}">
                         <h2>THÔNG TIN TÀI KHOẢN</h2>
                     </div>
                     <form class="info-form">
                         <div class="user-name dlex">
                             <label for="username">Họ tên:</label>
                             <div>
-                                <input type="text" id="username" name="username" required value="${userInfo.customerName}"/>
+                                <input type="text" id="username" name="username" required readonly value="${userInfo.customerName}"/>
                             </div>
                         </div>
 
@@ -100,14 +109,14 @@
                         <div class="phone-cus dlex">
                             <label for="phone">Số điện thoại:</label>
                             <div>
-                                <input type="tel" id="phone" name="phone" value="${userInfo.phone}"/>
+                                <input type="tel" id="phone" name="phone" value="${userInfo.phone}" readonly/>
                             </div>
                         </div>
 
                         <div class="phone-cus dlex">
                             <label for="address">Địa chỉ:</label>
                             <div>
-                                <input type="text" id="address" name="address" value="${userInfo.address}"/>
+                                <input type="text" id="address" name="address" value="${userInfo.address}" readonly/>
                             </div>
                         </div>
 
@@ -120,13 +129,13 @@
 
 
                         <div class="info-btn">
-                            <div class="submit">
-                                <button type="button" id="save-info">Lưu</button>
-                            </div>
 
-                            <div class="submit">
+                                <button type="submit" id="save-info">Lưu</button>
+
+
+
                                 <button type="button" id="edit-info">Sửa thông tin</button>
-                            </div>
+
                         </div>
                     </form>
                     <p id="saveMessage" style="display: none; color: green">
@@ -230,6 +239,71 @@
     <jsp:include page="../reuse/footer.jsp" />
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="${pageContext.request.contextPath}/assets/Js/user.js?v=2.0" defer></script>
+<script>
+    document.getElementById('edit-info').addEventListener('click', function () {
+        // Lấy tất cả các input cần chỉnh sửa
+        const inputs = document.querySelectorAll('.info-form input:not([id="email"]):not([id="create-date"])');
+
+        // Bật chế độ chỉnh sửa
+        inputs.forEach(input => {
+            input.readOnly = false; // Tắt chế độ readonly
+            input.classList.add('editable'); // Thêm lớp để có thể thay đổi kiểu dáng (nếu cần)
+        });
+
+        // Hiển thị nút lưu và ẩn nút sửa
+        document.getElementById('edit-info').style.display = 'none';
+        document.getElementById('save-info').style.display = 'inline-block';
+    });
+
+    // Khi lưu thông tin
+    document.getElementById('save-info').addEventListener('click', function (e) {
+        e.preventDefault();
+
+        // Lấy ID khách hàng từ thuộc tính data
+        const customerId = document.getElementById('userInfo').getAttribute('data-customer-id');
+
+        // Thu thập dữ liệu từ các input
+        const formData = {
+            customerId: customerId,
+            cusName: document.getElementById('username').value,
+            address: document.getElementById('address').value,
+            phone: document.getElementById('phone').value,
+        };
+
+        console.log(formData); // Kiểm tra dữ liệu trước khi gửi
+
+        // Gửi AJAX để cập nhật thông tin
+        $.ajax({
+            url: '/WebBongDen_war/edit-cus-info',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire('Thành công!', 'Thông tin của bạn đã được cập nhật.', 'success');
+
+                    // Đặt lại trạng thái readonly sau khi lưu
+                    const inputs = document.querySelectorAll('.info-form input:not([id="email"]):not([id="create-date"])');
+                    inputs.forEach(input => {
+                        input.readOnly = true; // Bật lại chế độ readonly
+                        input.classList.remove('editable'); // Xóa lớp editable
+                    });
+
+                    // Ẩn nút lưu và hiển thị nút sửa
+                    document.getElementById('save-info').style.display = 'none';
+                    document.getElementById('edit-info').style.display = 'inline-block';
+                } else {
+                    Swal.fire('Thất bại!', 'Không thể cập nhật thông tin. Vui lòng thử lại.', 'error');
+                }
+            },
+            error: function () {
+                Swal.fire('Lỗi!', 'Đã xảy ra lỗi khi cập nhật thông tin.', 'error');
+            }
+        });
+    });
+</script>
 </html>
 

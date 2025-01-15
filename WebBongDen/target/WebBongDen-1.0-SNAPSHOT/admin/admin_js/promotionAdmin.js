@@ -11,25 +11,6 @@ document.getElementById("promotion-form").addEventListener("submit", async funct
     console.log("Form Data:", formData);
 
     try {
-        // Lấy giá trị ngày kết thúc từ formData
-        const endDate = new Date(formData.endDate + "T00:00:00");
-        const currentDate = new Date();
-        currentDate.setHours(0, 0, 0, 0);
-
-        console.log("End Date (Locale):", endDate.toLocaleDateString());
-        console.log("Current Date (Locale):", currentDate.toLocaleDateString());
-
-        if (endDate < currentDate) {
-            Swal.fire({
-                icon: "error",
-                title: "Lỗi!",
-                text: "Ngày kết thúc không được nhỏ hơn ngày hiện tại!",
-                confirmButtonText: "OK",
-            });
-            return;
-        }
-
-
         // Nếu ngày hợp lệ, tiếp tục gửi dữ liệu
         const response = await fetch("/WebBongDen_war/add-promotion", {
             method: "POST",
