@@ -227,6 +227,48 @@
     margin-right: 10px;
   }
 
+  .alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    z-index: 9999;
+    animation: fadeIn 0.5s ease-in-out; /* Hiệu ứng xuất hiện */
+  }
+
+  .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+
+  /* Hiệu ứng xuất hiện */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .view-sub-categorie-btn {
+      background-color: dodgerblue;
+      padding: 5px 10px;
+      color: white;
+  }
 </style>
 <body>
 <div class="wrapper">
@@ -355,7 +397,7 @@
                       <label for="product-status">Trạng thái sản phẩm:</label>
                       <select id="product-status" name="productStatus" required>
                         <option value="">Chọn trạng thái</option>
-                        <option value="Available">Còn hàng</option>
+                        <option value="Available" selected>Còn hàng</option>
                         <option value="Unavailable">Hết hàng</option>
                       </select>
                     </div>
@@ -756,9 +798,31 @@
     </div>
   </div>
 </div>
+<c:if test="${not empty message}">
+  <div class="alert alert-success">
+      ${message}
+  </div>
+</c:if>
+
+<c:if test="${not empty error}">
+  <div class="alert alert-danger">
+      ${error}
+  </div>
+</c:if>
 <script src="${pageContext.request.contextPath}/admin/admin_js/productAdmin.js?v=${System.currentTimeMillis()}" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+  // Tự động ẩn thông báo sau 3 giây
+  setTimeout(() => {
+    const alertBox = document.querySelector('.alert');
+    if (alertBox) {
+      alertBox.style.transition = 'opacity 0.5s ease-out'; // Hiệu ứng mờ dần
+      alertBox.style.opacity = '0';
+      setTimeout(() => alertBox.remove(), 500); // Xóa phần tử sau khi mờ dần
+    }
+  }, 3000);
+</script>
 </body>
 </html>

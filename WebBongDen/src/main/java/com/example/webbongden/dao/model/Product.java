@@ -14,6 +14,8 @@ public class Product {
     private Date createdAt; // Ngày thêm sản phẩm
     private int sales;
     //Product dùng cho Home
+
+    public Product() {}
     public Product(int id, String productName, double unitPrice, double discountPercent,
                    List<ProductImage> listImg) {
         this.id = id;

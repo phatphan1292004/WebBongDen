@@ -910,6 +910,72 @@ public class ProductDao {
     }
 
 
+    public List<Product> getRelatedProducts(int productId) {
+        String sql = """
+        SELECT 
+            p.id AS product_id, 
+            p.product_name, 
+            p.unit_price, 
+            p.discount_percent, 
+            MAX(CASE WHEN pi.main_image = 1 THEN pi.url ELSE NULL END) AS main_image_url, 
+            GROUP_CONCAT(pi.url) AS all_images 
+        FROM products p
+        LEFT JOIN product_images pi ON p.id = pi.product_id
+        WHERE p.subCategory_id = (
+            SELECT subCategory_id 
+            FROM products 
+            WHERE id = :productId
+        ) 
+        AND p.id != :productId
+        GROUP BY p.id
+        ORDER BY p.id
+        LIMIT 4
+    """;
+
+        return jdbi.withHandle(handle -> {
+            Query query = handle.createQuery(sql).bind("productId", productId);
+
+            return query.map((rs, ctx) -> {
+                // Lấy thông tin sản phẩm
+                int productIdFromDb = rs.getInt("product_id");
+                String productName = rs.getString("product_name");
+                double unitPrice = rs.getDouble("unit_price");
+                double discountPercent = rs.getDouble("discount_percent");
+
+                // Lấy URL của hình ảnh chính
+                String mainImageUrl = rs.getString("main_image_url");
+
+                // Lấy danh sách URL của tất cả hình ảnh
+                String allImages = rs.getString("all_images");
+                List<ProductImage> productImages = new ArrayList<>();
+
+                // Xử lý hình ảnh chính
+                if (mainImageUrl != null) {
+                    productImages.add(new ProductImage(mainImageUrl, true));
+                }
+
+                // Xử lý hình ảnh phụ
+                if (allImages != null && !allImages.isEmpty()) {
+                    String[] urls = allImages.split(",");
+                    for (String url : urls) {
+                        if (url != null && !url.equals(mainImageUrl)) { // Loại trừ hình ảnh chính
+                            productImages.add(new ProductImage(url.trim(), false));
+                        }
+                    }
+                }
+
+                // Tạo đối tượng Product
+                return new Product(
+                        productIdFromDb,
+                        productName,
+                        unitPrice,
+                        discountPercent,
+                        productImages // Danh sách ProductImage
+                );
+            }).list();
+        });
+    }
+
 
     public static void main(String[] args) {
         // Khởi tạo dịch vụ sản phẩm

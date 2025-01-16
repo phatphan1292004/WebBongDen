@@ -100,10 +100,12 @@ public class AddProductController extends HttpServlet {
 
         // Xử lý phản hồi
         if (isAdded) {
-            response.sendRedirect("admin/product-management.jsp?message=" + URLEncoder.encode("Thêm sản phẩm thành công!", "UTF-8"));
+            request.setAttribute("message", "Thêm sản phẩm thành công!");
         } else {
-            response.sendRedirect("admin/product-management.jsp?error=" + URLEncoder.encode("Thêm sản phẩm thất bại!", "UTF-8"));
+            request.setAttribute("error", "Thêm sản phẩm thất bại!");
         }
+
+        request.getRequestDispatcher("admin/product-management.jsp").forward(request, response);
     }
 
     private String extractFileName(Part part) {

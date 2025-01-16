@@ -125,4 +125,8 @@ public class ProductServices {
     public String getCategoryNameByProductId(int productId) {
         return productDao.getCategoryNameByProductId(productId);
     }
+
+    public List<Product> fetchRelatedProducts(int productId) {
+        return productDao.getRelatedProducts(productId);
+    }
 }

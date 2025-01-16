@@ -1,5 +1,6 @@
 package com.example.webbongden.controller.UserController;
 
+import com.example.webbongden.dao.model.Product;
 import com.example.webbongden.dao.model.ProductDetail;
 import com.example.webbongden.dao.model.Review;
 import com.example.webbongden.services.ProductServices;
@@ -35,6 +36,8 @@ public class ViewDetailController extends HttpServlet {
             List<Review> reviews = reviewService.getReviewsByProductId(productId);
             List<String> listImg = productServices.getAllProductUrls(productId);
             String breadCum = productServices.getCategoryNameByProductId(productId);
+            List<Product> relatedProducts = productServices.fetchRelatedProducts(productId);
+
             
             if (productDetail == null) {
                 response.sendRedirect("/home?error=product_not_found");
@@ -46,6 +49,7 @@ public class ViewDetailController extends HttpServlet {
             request.setAttribute("productDetail", productDetail);
             request.setAttribute("listImg", listImg);
             request.setAttribute("breadCum", breadCum);
+            request.setAttribute("relatedProducts", relatedProducts);
 
             // Forward to the product detail JSP
             request.getRequestDispatcher("/user/product-detail.jsp").forward(request, response);
