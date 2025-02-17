@@ -346,7 +346,7 @@
           <!-- Overlay và Form thêm sản phẩm -->
           <div class="overlay" id="overlay-add-product" data-index="0">
             <div class="add-product-form" id="add-product-form">
-              <div class="form-header">
+              <div class="form-header" style="display: flex; justify-content: space-between">
                 <p>Thêm sản phẩm mới</p>
                 <button class="close-btn" id="close-form">
                   <i class="fa-solid fa-xmark"></i>

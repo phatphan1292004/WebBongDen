@@ -27,6 +27,7 @@ public class AddToCartController extends HttpServlet {
         if (cart == null) {
             cart = new Cart();
             session.setAttribute("cart", cart);
+
         }
 
         // Lấy productId từ request
